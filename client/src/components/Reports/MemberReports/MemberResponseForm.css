@@ -1,0 +1,24 @@
+.member-form-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-top: 17px;
+}
+
+.member-form-subtitle {
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.3;
+  padding: 10px 20px 0 0;
+}
+
+.member-report-input {
+  margin-top: 15px;
+}
+
+.member-form-submit {
+  display: block;
+  display: none;
+  margin: auto;
+  /* margin-top: 30px;
+  margin-bottom: 30px; */
+}

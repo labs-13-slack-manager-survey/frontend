@@ -1,0 +1,53 @@
+.redirect-container {
+  margin: auto;
+  margin-top: 150px;
+  width: 50%;
+}
+
+.redirect-container-title {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.redirect-container-subtitle {
+  text-align: center;
+}
+
+.redirect-flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.redirect-icon {
+  height: 50px;
+  width: 50px;
+}
+
+.redirect-title {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.chrome {
+  background: url('./assets/chrome-brands.svg') center no-repeat;
+  background-size: 40px;
+  margin: auto;
+}
+
+.edge {
+  background: url('./assets/edge-brands.svg') center no-repeat;
+  background-size: 40px;
+  margin: auto;
+}
+
+.firefox {
+  background: url('./assets/firefox-brands.svg') center no-repeat;
+  background-size: 40px;
+  margin: auto;
+}
+
+.safari {
+  background: url('./assets/safari-brands.svg') center no-repeat;
+  background-size: 40px;
+  margin: auto;
+}

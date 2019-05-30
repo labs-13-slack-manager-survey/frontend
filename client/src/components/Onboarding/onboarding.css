@@ -1,0 +1,119 @@
+.onboarding {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	height: 800px;
+}
+
+.onboardingCard {
+	margin: 24px;
+	max-width: 400px;
+	width: 95%;
+}
+
+.onboardingCard h3 {
+	text-align: center;
+}
+
+.onboardingCard button {
+	text-align: center;
+	margin: 10px auto;
+}
+
+.onboarding button {
+	margin: 10px;
+}
+
+.onboarding-back {
+	width: 56px;
+}
+
+.onboarding-card-content {
+	margin: 24px;
+	display: flex;
+	flex-direction: column;
+}
+.create-team-buttons {
+	display: flex;
+}
+
+.landing-buttons {
+	text-align: center;
+}
+
+.landing-buttons p,
+button {
+	text-align: center;
+}
+
+.userCard {
+	max-height: 100%;
+	height: 1000px;
+}
+
+.userCard img {
+	width: 300px;
+	height: 300px;
+	border-radius: 50%;
+}
+
+.profileCard {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.userCard input {
+	border-radius: 3px;
+}
+.userCard div h3 {
+	font-size: 40px;
+	margin: 40px auto;
+	text-align: center;
+}
+
+.errorCard {
+	position: relative;
+	left: 25%;
+	top: 200px;
+}
+.errorJoinCard {
+	/* margin: 200px 40%; */
+	position: relative;
+	left: 25%;
+	top: 200px;
+}
+.onboarding .bp3-button-text {
+	text-align: center;
+}
+
+.onboarding .bp3-text-overflow-ellipsis {
+	color: #fefefe;
+}
+
+.onboarding h2 {
+	font-size: 2.4rem;
+	margin-bottom: 100px;
+}
+.onboarding h4 {
+	font-size: 1.2rem;
+	margin-bottom: 20px;
+}
+
+.errorModal h4 {
+	font-size: 1.6rem;
+	margin: 20px 0;
+}
+.errorModal button {
+	border: none;
+	background-color: white;
+	width: 40px;
+	margin-left: 175px;
+}
+
+#input-label {
+	text-align: center;
+	margin-left: 10px;
+}

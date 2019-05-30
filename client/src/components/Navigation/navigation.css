@@ -1,0 +1,27 @@
+/* .navigation {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+} */
+
+.nav-header {
+	color: white;
+}
+
+.nav-links {
+	display: flex;
+	justify-content: space-between;
+	width: 95%;
+}
+
+@media (min-width: 550px) {
+	.narrow-nav {
+		display: none
+	}
+}
+
+@media (max-width: 550px) {
+	.wide-nav {
+		display: none
+	}
+}
