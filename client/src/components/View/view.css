@@ -1,0 +1,28 @@
+.view {
+	display: flex;
+	justify-content: space-evenly;
+	margin: auto;
+	max-width: 800px;
+}
+
+
+
+
+@media(max-width: 800px){
+	.view {
+		flex-direction: column;
+		align-items: center;
+		padding: 12px;
+	}
+	.view .reportsDash {
+		width: 100%;
+		padding-bottom: 1rem;
+		margin: 0;
+	}
+	.view .teamDashboard {
+		width: 100%;
+		margin: 0;
+	}
+	
+}
+

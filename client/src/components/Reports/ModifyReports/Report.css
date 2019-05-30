@@ -1,0 +1,138 @@
+h3 {
+	font-weight: 400;
+	margin: 10px 0;
+}
+
+p {
+	font-size: 14px;
+	margin-top: 20px;
+	font-style: italic;
+}
+
+.days-flex {
+	display: flex;
+	height: 30px;
+	justify-content: space-around;
+	max-width: 500px;
+	margin: 30px 0;
+	font-size: 20px;
+	font-weight: 400;
+}
+
+.schedule-title {
+	font-size: 20px;
+}
+
+.report-time {
+	margin: 20px 0;
+	margin-bottom: 10px;
+}
+
+.day {
+	border: 1px solid #5294e2;
+	border-radius: 5px;
+	cursor: pointer;
+	line-height: 30px;
+	text-align: center;
+	width: 35px;
+}
+
+.delete-icon {
+	width: 30px;
+	height: 30px;
+}
+
+.selected {
+	border: 2px solid #5475ee;
+	color: white;
+	background-color: #5475ee;
+}
+
+.question-flex {
+	display: flex;
+	margin-top: 10px;
+	max-width: 500px;
+}
+
+.question {
+	max-width: 500px;
+	width: 90%;
+	font-size: 20px;
+	margin: 10px 0;
+}
+
+.question-button {
+	cursor: pointer;
+	width: 50px;
+}
+
+.enter-question {
+	display: flex;
+}
+
+.create-report {
+	max-width: 600px;
+	margin: 20px auto;
+}
+
+.edit-report {
+	max-width: 600px;
+	width: 100%;
+	margin: 20px auto;
+}
+
+.report-name {
+	max-width: 500px;
+	width: 100%;
+	font-size: 20px;
+	margin: 30px 0;
+}
+
+.report-margin {
+	margin-top: 20px;
+}
+
+.slack-dropdown {
+	margin: 20px 0;
+}
+
+.button-block {
+	margin: 10px 0;
+	display: block;
+}
+
+.input-field {
+	max-width: 500px;
+	width: 100%;
+	margin: 10px 0;
+}
+
+.margin-fix {
+	margin-bottom: 10px;
+}
+
+.schedule-card {
+	margin: 10px 0;
+}
+
+.schedule-card-content {
+	margin: 24px;
+}
+
+.divider {
+	margin: 30px 0;
+}
+
+.submit-button {
+	margin: 20px;
+}
+
+.top-input {
+	max-width: 500px;
+	width: 100%;
+	margin: 10px 0;
+	margin-top: 30px;
+}
+.MuiButton-outlinedPrimary-95 {
+	margin: 30px auto;
+}

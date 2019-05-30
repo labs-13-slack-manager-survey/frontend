@@ -1,0 +1,132 @@
+.reportsCard {
+	width: 100%;
+	margin: 10px 0;
+}
+
+.single-report-content {
+	margin: 24px;
+}
+
+.reports-header {
+	padding: 24px;
+	margin-top: 24px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	/* border: 1px solid red; */
+}
+
+.header-arrow {
+	margin: 0 12px 0 0;
+}
+
+.reports-header-buttons {
+	display: flex;
+	align-items: center;
+}
+
+.reports-card-title {
+	font-size: 24px;
+	font-weight: 500;
+}
+
+.reports-card-schedule {
+	font-size: 18px;
+	font-weight: 300;
+	margin-top: 30px;
+	margin-bottom: 12px;
+}
+
+.reports-card-flex {
+	display: flex;
+}
+
+.reports-card-flex-icon {
+	line-height: 20px;
+	padding-left: 3px;
+	padding-top: 5px;
+	width: 30px;
+	vertical-align: center;
+	margin-right: 20px;
+	color: #5475ee;
+}
+
+.reports-card-time {
+	line-height: 20px;
+	padding-left: 3px;
+	padding-top: 5px;
+	width: 30px;
+	vertical-align: center;
+}
+
+.reports-card-flex-days {
+	display: flex;
+	flex: 1;
+	justify-content: space-between;
+	line-height: 20px;
+	max-width: 335px;
+	vertical-align: center;
+}
+
+.single-report-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	margin: 24px;
+}
+
+.single-report-buttons {
+	display: flex;
+	justify-content: space-between;
+	width: 100px;
+	margin: 10px;
+}
+
+.whitespace {
+	margin-bottom: 30px;
+}
+
+.flex {
+	display: flex;
+	justify-content: space-around;
+}
+
+.flex div {
+	width: 40%;
+}
+
+.reportsCard .bp3-button {
+	margin: 10px;
+	width: 100%;
+	color: #5475ee;
+}
+
+.link-condensed {
+	display: block;
+	width: 40%;
+}
+
+.createReportCard {
+	display: flex;
+	flex-direction: column;
+	height: 170px;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.slack-icon {
+	display: block;
+	margin: auto;
+	margin-top: 20px;
+	width: 140px;
+}
+
+#display-link {
+	display: none;
+}
+
+#display-edit {
+	display: none;
+}

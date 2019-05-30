@@ -1,0 +1,21 @@
+.login-card {
+	max-width: 400px;
+	width: 100%;
+	margin: 20px auto;
+}
+
+.login-card h2 {
+	text-align: center;
+	margin: 20px 0;
+	font-size: 40px;
+	font-weight: bolder;
+}
+
+.login-card p {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.firebase-card {
+	margin: 50px 0;
+}
