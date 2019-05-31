@@ -39,7 +39,7 @@ function App() {
 			{/* Navigation */}
 			<Route path="/" component={Navigation} />
 
-			{/* Marketing Pages*/}
+			{/* Marketing Pages */}
 			<Route exact path="/" component={MarketingPage} />
 			<Route exact path="/team" component={DevTeam} />
 

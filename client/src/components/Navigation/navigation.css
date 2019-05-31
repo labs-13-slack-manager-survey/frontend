@@ -14,6 +14,32 @@
 	width: 95%;
 }
 
+.horizontalMenuBar {
+	height: 50px; 
+	background-color: none; 
+	border-bottom: 2px solid #F5F5F5;
+	width: 100%;
+	position: sticky; 
+	top: 0;
+}
+
+.verticalBar { 
+	position: absolute; 
+	width: 50px;
+	height: 100%;
+	background-color: none;
+	border-right: 2px solid #F5F5F5;
+	top: 0;
+
+}
+
+.logo {
+	height: 40px;
+	width: 40px;
+	margin-left: 4px; 
+	margin-top: 4px;
+}
+
 @media (min-width: 550px) {
 	.narrow-nav {
 		display: none
