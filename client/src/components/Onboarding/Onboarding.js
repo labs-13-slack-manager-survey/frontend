@@ -14,7 +14,6 @@ class Onboarding extends Component {
 		this.state = {
 			joinToggle: false,
 			createToggle: false,
-			joinCode: '',
 			singleEmail: '',
 			emails: [],
 			teamId: null,
@@ -50,29 +49,26 @@ class Onboarding extends Component {
 			);
 		};
 
-		const joinId = length => {
-			return Math.round(
-				Math.pow(36, length + 1) - Math.random() * Math.pow(36, length)
-			)
-				.toString(36)
-				.slice(1);
-		};
+		// const joinId = length => {
+		// 	return Math.round(
+		// 		Math.pow(36, length + 1) - Math.random() * Math.pow(36, length)
+		// 	)
+		// 		.toString(36)
+		// 		.slice(1);
+		// };
 
 		const randId = await teamId(8);
-		const joinCode = await joinId(6);
 
 		//create an object to send to mail api
 		const mailObject = {
 			//email singular to ensure consistency with adding an new user email on the dashboard
-			email: this.state.emails,
-			joinCode: joinCode
+			email: this.state.emails
 		};
 
 		try {
 			const updated = await axiosWithAuth().put(`${baseURL}/users/`, {
 				teamId: randId,
 				roles: 'admin',
-				joinCode
 			});
 			localStorage.setItem('token', updated.data.token);
 
@@ -104,7 +100,7 @@ class Onboarding extends Component {
 			this.props.history.push('/dashboard');
 		} catch (err) {
 			this.setState({
-				error: 'There was an issue joining this team. Check your join code.',
+				error: 'There was an issue joining this team. Please contact the devs.',
 				errorModal: true
 			});
 		}
