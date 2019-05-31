@@ -49,13 +49,13 @@ class Onboarding extends Component {
 			);
 		};
 
-		const joinId = length => {
-			return Math.round(
-				Math.pow(36, length + 1) - Math.random() * Math.pow(36, length)
-			)
-				.toString(36)
-				.slice(1);
-		};
+		// const joinId = length => {
+		// 	return Math.round(
+		// 		Math.pow(36, length + 1) - Math.random() * Math.pow(36, length)
+		// 	)
+		// 		.toString(36)
+		// 		.slice(1);
+		// };
 
 		const randId = await teamId(8);
 
@@ -100,7 +100,7 @@ class Onboarding extends Component {
 			this.props.history.push('/dashboard');
 		} catch (err) {
 			this.setState({
-				error: 'There was an issue joining this team. Check your join code.',
+				error: 'There was an issue joining this team. Please contact the devs.',
 				errorModal: true
 			});
 		}

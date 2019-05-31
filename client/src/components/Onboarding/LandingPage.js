@@ -9,14 +9,15 @@ import './onboarding.css';
 const LandingPage = props => {
 	return (
 		<Card className="onboarding">
-			<h2>Welcome to Stand-Em-Ups!</h2>
+			<h2>Welcome to the future of Team Management!</h2>
 			<Card raised={true} className="onboardingCard">
 				<div className="onboarding-card-content">
-					<h3>Create your team!</h3>
+					{/* <h3>Create your team!</h3> */}
 					<div className="landing-buttons">
 						<Button
+						className="btn"
 							color="primary"
-							variant="outlined"
+							variant="contained"
 							onClick={props.createToggle}
 						>
 							Create Team
