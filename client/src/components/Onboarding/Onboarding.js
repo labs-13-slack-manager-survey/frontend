@@ -58,20 +58,17 @@ class Onboarding extends Component {
 		};
 
 		const randId = await teamId(8);
-		const joinCode = await joinId(6);
 
 		//create an object to send to mail api
 		const mailObject = {
 			//email singular to ensure consistency with adding an new user email on the dashboard
-			email: this.state.emails,
-			joinCode: joinCode
+			email: this.state.emails
 		};
 
 		try {
 			const updated = await axiosWithAuth().put(`${baseURL}/users/`, {
 				teamId: randId,
 				roles: 'admin',
-				joinCode
 			});
 			localStorage.setItem('token', updated.data.token);
 
