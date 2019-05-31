@@ -34,7 +34,6 @@ import NewUserRoute from "./auth/NewUserRoute";
 import "./App.css";
 
 function App() {
-<<<<<<< HEAD
   return (
     <div>
       {/* Navigation */}
@@ -67,40 +66,6 @@ function App() {
       <Route path="/" component={Footer} />
     </div>
   );
-=======
-	return (
-		<div>
-			{/* Navigation */}
-			<Route path="/" component={Navigation} />
-
-			{/* Marketing Pages */}
-			<Route exact path="/" component={MarketingPage} />
-			<Route exact path="/team" component={DevTeam} />
-
-			{/* Login */}
-			<Route path="/login" component={Login} />
-
-			{/* Onboarding */}
-			<NewUserRoute exact path="/onboarding" component={Onboarding} />
-
-			{/* Dashboard */}
-			<PrivateRoute exact path="/dashboard" component={View} />
-
-			{/* Reports */}
-			<PrivateRoute path="/dashboard/reports" component={ReportsDash} />
-
-			{/* Profile */}
-			<PrivateRoute exact path="/dashboard/profile" component={Profile} />
-
-			{/* Slack Connection */}
-			<Route exact path="/slack" component={Slack} />
-			<Route exact path="/slack/auth" component={SlackRedirect} />
-			
-			{/* Footer */}
-			<Route path="/" component={Footer} />
-		</div>
-	);
->>>>>>> de7ebcc525e30d16a259452be1bd9e4bb3d3c33d
 }
 
 export default App;
