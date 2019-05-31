@@ -13,7 +13,7 @@ const Slack = props => {
 			</h3> */}
       {!slackToken && (
         <a
-          href={`https://slack.com/oauth/authorize?scope=incoming-webhook,commands,bot,channels:write&client_id=648547424101.650773244214&redirect_uri=${slackURL}`}
+          href={`https://slack.com/oauth/authorize?client_id=648547424101.650773244214&scope=incoming-webhook,bot,channels:read,chat:write:bot,chat:write:user,im:write,emoji:read,commands,users:read,users:read.email&redirect_uri=${slackURL}`}
           className="slack-icon"
         >
           <img

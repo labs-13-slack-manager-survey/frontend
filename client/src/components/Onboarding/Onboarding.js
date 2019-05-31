@@ -24,7 +24,6 @@ class Onboarding extends Component {
 
   // toggles
   joinToggle = e => {
-    this.setState({ joinToggle: !this.state.joinToggle });
     this.setState({ createToggle: false });
   };
   createToggle = () => {
@@ -35,18 +34,6 @@ class Onboarding extends Component {
     this.setState({ createToggle: false });
     this.setState({ joinToggle: false });
   };
-
-  // change handler
-  changeHandler = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
-
-  // called when a user clicks 'create team' button in CreateTeam.js
-  createTeam = async emails => {
-    const teamId = length => {
-      return Math.round(
-        Math.pow(9, length + 1) - Math.random() * Math.pow(9, length)
-      );
     };
 
     const joinId = length => {
@@ -86,7 +73,6 @@ class Onboarding extends Component {
         errorModal: true
       });
     }
-  };
 
   // On submit to join a team by join code
   // Sets the user's teamId to match the manager's
@@ -160,6 +146,6 @@ class Onboarding extends Component {
       />
     );
   }
-}
+
 
 export default Onboarding;
