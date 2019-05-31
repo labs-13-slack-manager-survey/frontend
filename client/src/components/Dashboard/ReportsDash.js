@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 
 // component imports
+import ChooseReport from "../Reports/ModifyReports/ChooseReport";
 import CreateReport from "../Reports/ModifyReports/CreateReport";
 import Reports from "../Reports/Reports";
 import EditReport from "../Reports/ModifyReports/EditReport";
@@ -41,6 +42,16 @@ class ReportsDash extends Component {
                 role={this.props.role}
                 reports={this.state.reports}
                 archiveReport={this.archiveReport}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/dashboard/reports/choose"
+            render={props => (
+              <ChooseReport
+                {...props}
+                setResponseAsState={this.setResponseAsState}
               />
             )}
           />
