@@ -41,6 +41,7 @@ const styles = {
 
 class Navigation extends React.Component {
 	handleLogout = e => {
+		console.log("logged out")
 		e.preventDefault();
 		localStorage.removeItem('firebaseui::rememberedAccounts');
 		localStorage.removeItem('token');
@@ -60,20 +61,26 @@ class Navigation extends React.Component {
 			<>
 				{/* <AppBar position="static" className={classes.appBar}> */}
 				<div className = "horizontalMenuBar">
-				
-						<NavLink
-							// if user is logged in, icon takes them to dashboard, otherwise go to marketing page
-							to={loggedIn ? '/dashboard' : '/'}
-							className={classes.logoLink}
-						>
-							<img className="logo" src = {Logo} />
-		
-						</NavLink>
-						<div className="nav-links">
-							<div>
-								<NavLink to="/dashboard">
+					<div className="left-horizontal">
+							<NavLink
+								// if user is logged in, icon takes them to dashboard, otherwise go to marketing page
+								to={loggedIn ? '/dashboard' : '/'}
+								className={classes.logoLink}
+							>
+								<img className="logo" src = {Logo} />
+			
+							</NavLink>
+							<div>slackr</div>
+						</div>
+						 <div className="horizontal-buttons">
+							<button className = "menu-bar-add-poll"><span>+</span> Add Poll</button>
+							<button className = "menu-bar-add-team">+ Add Team</button>
+						 </div>
+						{/* <div className="nav-links"> */}
+							{/* <div> */}
+								{/* <NavLink to="/dashboard"> */}
 									{/* style here highlights which tab user is currently on */}
-									<Button
+									{/* <Button
 										style={
 											this.props.history.location.pathname === '/dashboard'
 												? { color: 'white' }
@@ -82,9 +89,9 @@ class Navigation extends React.Component {
 										className={classes.grow}
 									>
 										<Icon>home</Icon>
-									</Button>
-								</NavLink>
-								<NavLink to="/dashboard/profile">
+									</Button> */}
+								{/* </NavLink> */}
+								{/* <NavLink to="/dashboard/profile">
 									<Button
 										style={
 											this.props.history.location.pathname ===
@@ -95,9 +102,9 @@ class Navigation extends React.Component {
 									>
 										<Icon>account_circle</Icon>
 									</Button>
-								</NavLink>
-							</div>
-							{/* login/logout operator */}
+								</NavLink> */}
+							{/* </div>  */}
+							{/* login/logout operator
 							{!loggedIn ? (
 								<NavLink to="/login">
 									<Button className={classes.grow}>Login</Button>
@@ -107,19 +114,43 @@ class Navigation extends React.Component {
 									<Button className={classes.grow}>Logout</Button>
 								</NavLink>
 							)}
-						</div>
+						</div> */}
 		
 
 				</div>
 				<div className = "verticalBar">
+					{loggedIn ? (
 					<div className = "vert-buttons">
-						<img className = "menu-icon" src={Teams} />
-						<img className = "menu-icon" src={Stats} />
+					<div className = "menu-button">
+							<img className = "menu-icon" src={Teams} />
+							<div className ="button-label">teams</div>
+						</div>
+						<div className = "menu-button">
+							<img className = "menu-icon" src={Stats} />
+							<div className ="button-label">stats</div>
+						</div>
 					</div>
-					<div className = "vert-buttons">
-						<img className = "menu-icon" src={User} />
-						<img className = "menu-icon" src={Logout} />
-					</div>
+					): (
+						<div className = "empty-buttons"/>
+					)}
+						{loggedIn ? (
+							<>
+							<div className = "vert-buttons">
+								<NavLink to="/dashboard/profile" className = "menu-button">
+									<img className = "menu-icon" src={User} />
+									<div className ="button-label">user</div>
+								</NavLink>
+								<NavLink to="/login" onClick = {this.handleLogout} className = "menu-button">
+									<img className = "menu-icon" src={Logout} />
+									<div className ="button-label">logout</div>
+								</NavLink> </div> </>
+							) : (
+								<NavLink to="/login" onClick = {this.handleLogout} className = "menu-button">
+									<img className = "menu-icon" src={Logout} />
+									<div className ="button-label">login</div>
+							</NavLink>
+						)}
+							
 				</div>
 			</>
 		);
