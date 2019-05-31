@@ -32,6 +32,7 @@ class CreateTeam extends Component {
 							placeholder="Press 'Enter' after each email"
 						/>
 						<Button
+						
 							color="primary"
 							variant="contained"
 							onClick={this.props.createTeam}
@@ -62,9 +63,6 @@ class CreateTeam extends Component {
 					>
 						<Icon>arrow_back</Icon>
 					</Fab>
-					<Button variant="outlined" onClick={this.props.joinToggle}>
-						Join an Existing Team
-					</Button>
 				</div>
 			</div>
 		);
