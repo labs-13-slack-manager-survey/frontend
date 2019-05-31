@@ -1,8 +1,7 @@
 import React from 'react';
 import {
 	Card,
-	Button,
-	Divider
+	Button
 } from '@material-ui/core';
 
 import './onboarding.css';

@@ -14,7 +14,6 @@ class Onboarding extends Component {
 		this.state = {
 			joinToggle: false,
 			createToggle: false,
-			joinCode: '',
 			singleEmail: '',
 			emails: [],
 			teamId: null,
