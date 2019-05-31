@@ -204,7 +204,6 @@ class CreateReport extends Component {
   };
 
   renderManagerQuestions = () => {
-    console.log(this.state.managerQuestions);
     if (this.state.managerQuestions === "yes") {
       return (
         <section className="schedule-card-content">
