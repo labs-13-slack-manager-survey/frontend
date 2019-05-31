@@ -17,11 +17,7 @@ import {
   Icon,
   TextField,
   MenuItem,
-  withStyles,
-  Radio,
-  RadioGroup,
-  FormControlLabel,
-  FormLabel
+  withStyles
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import { TimePicker } from "material-ui-pickers";
@@ -46,14 +42,14 @@ const styles = theme => ({
   }
 });
 
-class CreateReport extends Component {
+class CreatePoll extends Component {
   state = {
     // Main Report State
-    reportName: "Daily Standup",
+    reportName: "Sentiment Poll",
     schedule: [],
     scheduleTime: "8:0",
     timePickDate: new Date("2000-01-01T08:00:00"),
-    message: "Please fill out your report by the end of the day!",
+    message: "Please respond to the poll ASAP.",
     errorMessage: "",
     questions: [],
     slackChannelId: null,
@@ -203,57 +199,6 @@ class CreateReport extends Component {
       .catch(err => console.log(err));
   };
 
-  renderManagerQuestions = () => {
-    if (this.state.managerQuestions === "yes") {
-      return (
-        <section className="schedule-card-content">
-          <h3 className="schedule-title">Manager Questions</h3>
-          <Divider className="divider" variant="fullWidth" />
-          <section>
-            {this.state.questions.map(question => (
-              <article className="question-flex" key={question}>
-                <p className="question">{question}</p>
-                <Fab
-                  size="small"
-                  color="secondary"
-                  onClick={e => this.removeQuestion(e, question)}
-                >
-                  <Icon>delete_icon</Icon>
-                </Fab>
-              </article>
-            ))}
-          </section>
-          <section className="enter-question">
-            <FormControl className="input-field" required>
-              <InputLabel htmlFor="report-question">
-                Enter a question...
-              </InputLabel>
-              <Input
-                id="report-question"
-                required
-                className="input-field"
-                type="text"
-                name="question"
-                value={this.state.question}
-                onChange={this.enterQuestionsHandler}
-              />
-            </FormControl>
-            <Fab
-              size="small"
-              style={{ display: "block", margin: "10px 0" }}
-              color="primary"
-              onClick={this.questionsHandler}
-              disabled={this.state.question.length === 0 ? true : false}
-              type="submit"
-            >
-              <AddIcon />
-            </Fab>
-          </section>
-        </section>
-      );
-    }
-  };
-
   render() {
     const { classes } = this.props;
 
@@ -263,29 +208,6 @@ class CreateReport extends Component {
           <Icon>arrow_back</Icon>
         </Fab>
         <form className="create-report">
-          {/* Checks if admin wants manager questions answered */}
-          <Card raised={true} className="schedule-card">
-            <section>
-              <FormControl>
-                <FormLabel component="legend">
-                  Would you like the manager to answer questions?
-                </FormLabel>
-                <RadioGroup
-                  name="managerQuestions"
-                  onChange={this.changeHandler}
-                >
-                  <FormControlLabel
-                    value="yes"
-                    control={<Radio />}
-                    label="Yes"
-                  />
-                  <FormControlLabel value="no" control={<Radio />} label="No" />
-                </RadioGroup>
-                {this.renderManagerQuestions()}
-              </FormControl>
-            </section>
-          </Card>
-
           <Card raised={true} className="schedule-card">
             <section className="schedule-card-content">
               <h3 className="schedule-title">Report Information</h3>
@@ -394,7 +316,7 @@ class CreateReport extends Component {
           </Card>
           <Card raised={true} className="schedule-card">
             <section className="schedule-card-content">
-              <h3 className="schedule-title">Standup Questions</h3>
+              <h3 className="schedule-title">Poll Questions</h3>
               <Divider className="divider" variant="fullWidth" />
               <section>
                 {this.state.questions.map(question => (
@@ -454,4 +376,4 @@ class CreateReport extends Component {
   }
 }
 
-export default withStyles(styles)(CreateReport);
+export default withStyles(styles)(CreatePoll);
