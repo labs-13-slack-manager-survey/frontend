@@ -25,7 +25,6 @@ class Profile extends Component {
 		archivedReports: [],
 		openArchivedReports: false,
 		openEditUser: false,
-		showJoinCode: false,
 		openInactiveUsers: false
 	};
 	render() {
@@ -114,27 +113,6 @@ class Profile extends Component {
 						<div className="profileForms">
 							<h3>Admin Controls</h3>
 							<div className="admin-controls">
-								<div className="join-code">
-									<Button
-										style={{ margin: '10px 0' }}
-										id="edit-user-button"
-										variant="outlined"
-										color="primary"
-										onClick={this.showJoinCode}
-									>
-										Join Code
-									</Button>
-									{this.state.showJoinCode === true ? (
-										<TextField
-											style={{ maxWidth: '105px' }}
-											label="Join Code"
-											value={this.state.profileInfo.joinCode}
-											margin="normal"
-											variant="outlined"
-											disabled
-										/>
-									) : null}
-								</div>
 								<div className="deactivated-users">
 									<Button
 										style={{ margin: '10px 0' }}
@@ -328,9 +306,7 @@ class Profile extends Component {
 	openUserEdit = () => {
 		this.setState({ openEditUser: !this.state.openEditUser });
 	};
-	showJoinCode = () => {
-		this.setState({ showJoinCode: !this.state.showJoinCode });
-	};
+	
 
 	viewInactiveUsers = () => {
 		this.setState({ openInactiveUsers: !this.state.openInactiveUsers });
