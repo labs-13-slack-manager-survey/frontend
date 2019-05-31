@@ -14,6 +14,7 @@ class Onboarding extends Component {
     this.state = {
       joinToggle: false,
       createToggle: false,
+      joinCode: "",
       singleEmail: "",
       emails: [],
       teamId: null,
@@ -24,47 +25,70 @@ class Onboarding extends Component {
 
   // toggles
   joinToggle = e => {
-    this.setState({ createToggle: false });
+    this.setState((prevState, prevProps) => ({
+      joinToggle: !this.state.joinToggle
+    }));
+    this.setState((prevState, prevProps) => ({ createToggle: false }));
   };
   createToggle = () => {
-    this.setState({ createToggle: !this.state.createToggle });
-    this.setState({ joinToggle: false });
+    this.setState((prevState, prevProps) => ({
+      createToggle: !this.state.createToggle
+    }));
+    this.setState((prevState, prevProps) => ({ joinToggle: false }));
   };
   toggleAllOff = () => {
-    this.setState({ createToggle: false });
-    this.setState({ joinToggle: false });
+    this.setState((prevState, prevProps) => ({ createToggle: false }));
+    this.setState((prevState, prevProps) => ({ joinToggle: false }));
   };
-    };
 
-    const joinId = length => {
+  // change handler
+  changeHandler = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  // called when a user clicks 'create team' button in CreateTeam.js
+  createTeam = async emails => {
+    console.log("create Team button clicked");
+    const teamId = length => {
       return Math.round(
-        Math.pow(36, length + 1) - Math.random() * Math.pow(36, length)
-      )
-        .toString(36)
-        .slice(1);
+        Math.pow(9, length + 1) - Math.random() * Math.pow(9, length)
+      );
     };
+    // const joinId = length => {
+    //   return Math.round(
+    //     Math.pow(36, length + 1) - Math.random() * Math.pow(36, length)
+    //   )
+    //     .toString(36)
+    //     .slice(1);
+    // };
+    // // create teamId
+    const randId = teamId(8);
+    // // create joincode
+    // const joinCode = joinId(6);
 
-    const randId = await teamId(8);
+    // //create an object to send to mail api
 
-    //create an object to send to mail api
-    const mailObject = {
-      //email singular to ensure consistency with adding an new user email on the dashboard
-      email: this.state.emails
-    };
+    // const mailObject = {
+    //   //email singular to ensure consistency with adding an new user email on the dashboard
+    //   email: this.state.emails,
+    //   joinCode: joinCode
+    // };
 
     try {
+      //add teamID and joincode to user in DB, setting roles to admin
       const updated = await axiosWithAuth().put(`${baseURL}/users/`, {
-        teamId: randId,
+        // teamId: randId,
         roles: "admin"
+        // joinCode
       });
       localStorage.setItem("token", updated.data.token);
-
-      // if the user's entered emails, make the post call to the email endpoint
-      if (mailObject.email[0]) {
-        await axiosWithAuth().post(`${baseURL}/email`, mailObject);
-      }
+      // if the user entered emails, make the post call to the email endpoint
+      // if (mailObject.email[0]) {
+      //   await axiosWithAuth().post(`${baseURL}/email`, mailObject);
+      // }
 
       //redirect back to dashboard after team creation
+      console.log("pushing to dashboard");
       this.props.history.push("/dashboard");
     } catch (error) {
       this.setState({
@@ -73,6 +97,7 @@ class Onboarding extends Component {
         errorModal: true
       });
     }
+  };
 
   // On submit to join a team by join code
   // Sets the user's teamId to match the manager's
@@ -86,7 +111,7 @@ class Onboarding extends Component {
       this.props.history.push("/dashboard");
     } catch (err) {
       this.setState({
-        error: "There was an issue joining this team. Please contact the devs.",
+        error: "There was an issue joining this team. Check your join code.",
         errorModal: true
       });
     }
@@ -112,8 +137,9 @@ class Onboarding extends Component {
   };
 
   render() {
+    console.log("Onboarding here");
     // Landing Page - all booleans false
-    return !this.state.joinToggle && !this.state.createToggle ? (
+    return !this.state.createToggle ? (
       <LandingPage
         joinToggle={this.joinToggle}
         createToggle={this.createToggle}
@@ -146,6 +172,6 @@ class Onboarding extends Component {
       />
     );
   }
-
+}
 
 export default Onboarding;
