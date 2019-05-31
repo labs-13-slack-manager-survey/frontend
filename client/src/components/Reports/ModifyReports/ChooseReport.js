@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { withStyles, Card, Button, Divider } from "@material-ui/core";
+import {
+  withStyles,
+  Card,
+  Button,
+  Divider,
+  Fab,
+  Icon
+} from "@material-ui/core";
 
 const styles = theme => ({
   container: {
@@ -20,26 +27,33 @@ const styles = theme => ({
 class ChooseReport extends Component {
   render() {
     return (
-      <Card raised={true} className="create-report">
-        <section className="schedule-card-content">
-          <h3 className="schedule-title">What report do you want to create?</h3>
-          <Divider className="divider" variant="fullWidth" />
-          <section>
-            <Link to="/dashboard/reports/new">
-              <Button variant="outlined" style={{ marginTop: "20px" }}>
-                Create Standup Survey
-              </Button>
-            </Link>
+      <div className="create-report">
+        <Fab onClick={() => this.props.history.goBack()} color="default">
+          <Icon>arrow_back</Icon>
+        </Fab>
+        <Card raised={true} className="create-report">
+          <section className="schedule-card-content">
+            <h3 className="schedule-title">
+              What report do you want to create?
+            </h3>
+            <Divider className="divider" variant="fullWidth" />
+            <section>
+              <Link to="/dashboard/reports/new">
+                <Button variant="outlined" style={{ marginTop: "20px" }}>
+                  Create Standup Survey
+                </Button>
+              </Link>
+            </section>
+            <section>
+              <Link to="/dashboard/reports/createPoll">
+                <Button variant="outlined" style={{ marginTop: "20px" }}>
+                  Create Sentiment Poll
+                </Button>
+              </Link>
+            </section>
           </section>
-          <section>
-            <Link to="/dashboard/reports/createSentiment">
-              <Button variant="outlined" style={{ marginTop: "20px" }}>
-                Create Sentiment Poll
-              </Button>
-            </Link>
-          </section>
-        </section>
-      </Card>
+        </Card>
+      </div>
     );
   }
 }
