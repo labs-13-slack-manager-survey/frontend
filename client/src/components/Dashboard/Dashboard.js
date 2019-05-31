@@ -53,8 +53,7 @@ export class Dashboard extends Component {
 	}
 
 	componentDidMount() {
-		// get user's joinCode from token and setState accordingly. Necessary to invite new team members.
-		// const joinCode = jwt_decode(localStorage.getItem('token')).joinCode;
+		
 
 		this.setState({
 		
@@ -142,7 +141,6 @@ export class Dashboard extends Component {
 		//create mailObject to post to sendgrid API
 		const mailObject = {
 			email: this.state.newMemberEmail,
-			// joinCode: this.state.joinCode
 		};
 		//sendgrid endpoint on our back end
 		const endpoint = `${baseURL}/email`;
