@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { Link } from "react-router-dom";
 import { withStyles, Card, Button, Divider } from "@material-ui/core";
 
 const styles = theme => ({
@@ -25,14 +25,18 @@ class ChooseReport extends Component {
           <h3 className="schedule-title">What report do you want to create?</h3>
           <Divider className="divider" variant="fullWidth" />
           <section>
-            <Button variant="outlined" style={{ marginTop: "20px" }}>
-              Create Standup Survey
-            </Button>
+            <Link to="/dashboard/reports/new">
+              <Button variant="outlined" style={{ marginTop: "20px" }}>
+                Create Standup Survey
+              </Button>
+            </Link>
           </section>
           <section>
-            <Button variant="outlined" style={{ marginTop: "20px" }}>
-              Create Sentiment Poll
-            </Button>
+            <Link to="/dashboard/reports/createSentiment">
+              <Button variant="outlined" style={{ marginTop: "20px" }}>
+                Create Sentiment Poll
+              </Button>
+            </Link>
           </section>
         </section>
       </Card>
