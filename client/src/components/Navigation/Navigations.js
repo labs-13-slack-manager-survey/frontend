@@ -111,7 +111,16 @@ class Navigation extends React.Component {
 		
 
 				</div>
-				<div className = "verticalBar"></div>
+				<div className = "verticalBar">
+					<div className = "vert-buttons">
+						<img className = "menu-icon" src={Teams} />
+						<img className = "menu-icon" src={Stats} />
+					</div>
+					<div className = "vert-buttons">
+						<img className = "menu-icon" src={User} />
+						<img className = "menu-icon" src={Logout} />
+					</div>
+				</div>
 			</>
 		);
 	}

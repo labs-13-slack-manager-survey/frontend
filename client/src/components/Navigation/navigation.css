@@ -30,7 +30,26 @@
 	background-color: none;
 	border-right: 2px solid #F5F5F5;
 	top: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	padding-top: 70px;
+	padding-bottom: 20px;
+}
 
+.vert-buttons{
+	width:50px; 
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between; 
+	align-items: center;
+	height: 60px;
+}
+
+.menu-icon {
+	width: 20px;
+	height: 20px;
 }
 
 .logo {
