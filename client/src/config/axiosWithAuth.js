@@ -5,7 +5,7 @@ export const slackURL = process.env.REACT_APP_SLACK_URL;
 
 export function axiosWithAuth() {
   const token = localStorage.getItem("token");
-  console.log("axioswithauth");
+  console.log(token);
 
   return axios.create({
     headers: {
