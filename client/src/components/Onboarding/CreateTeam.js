@@ -19,18 +19,19 @@ function Transition(props) {
 
 class CreateTeam extends Component {
   render() {
+    console.log("createteam here");
     return (
       <div className="onboarding">
         <Card raised={true} className="onboardingCard">
           <div className="onboarding-card-content">
-            {/* <h3>Add Team Members by Email</h3>
-						<ChipInput
-							label="Email"
-							variant="outlined"
-							defaultValue={[]}
-							onChange={chips => this.props.handleChipChange(chips)}
-							placeholder="Press 'Enter' after each email"
-						/> */}
+            <h3>Add Team Members by Email</h3>
+            <ChipInput
+              label="Email"
+              variant="outlined"
+              defaultValue={[]}
+              onChange={chips => this.props.handleChipChange(chips)}
+              placeholder="Press 'Enter' after each email"
+            />
             <Button
               color="primary"
               variant="contained"
@@ -62,6 +63,9 @@ class CreateTeam extends Component {
           >
             <Icon>arrow_back</Icon>
           </Fab>
+          <Button variant="outlined" onClick={this.props.joinToggle}>
+            Join an Existing Team
+          </Button>
         </div>
       </div>
     );

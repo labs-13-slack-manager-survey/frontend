@@ -12,8 +12,9 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
           return <Redirect to="/login" />;
         }
         const decoded = jwt_decode(token);
+        console.log(decoded);
 
-        if (!decoded.teamId) {
+        if (!decoded) {
           return <Redirect to="/onboarding" />;
         }
         return <Component {...props} />;
