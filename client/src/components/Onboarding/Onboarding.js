@@ -54,38 +54,38 @@ class Onboarding extends Component {
         Math.pow(9, length + 1) - Math.random() * Math.pow(9, length)
       );
     };
-    // const joinId = length => {
-    //   return Math.round(
-    //     Math.pow(36, length + 1) - Math.random() * Math.pow(36, length)
-    //   )
-    //     .toString(36)
-    //     .slice(1);
-    // };
-    // // create teamId
+    const joinId = length => {
+      return Math.round(
+        Math.pow(36, length + 1) - Math.random() * Math.pow(36, length)
+      )
+        .toString(36)
+        .slice(1);
+    };
+    // create teamId
     const randId = teamId(8);
-    // // create joincode
-    // const joinCode = joinId(6);
+    // create joincode
+    const joinCode = joinId(6);
 
-    // //create an object to send to mail api
+    //create an object to send to mail api
 
-    // const mailObject = {
-    //   //email singular to ensure consistency with adding an new user email on the dashboard
-    //   email: this.state.emails,
-    //   joinCode: joinCode
-    // };
+    const mailObject = {
+      //email singular to ensure consistency with adding an new user email on the dashboard
+      email: this.state.emails,
+      joinCode: joinCode
+    };
 
     try {
       //add teamID and joincode to user in DB, setting roles to admin
       const updated = await axiosWithAuth().put(`${baseURL}/users/`, {
-        // teamId: randId,
-        roles: "admin"
-        // joinCode
+        teamId: randId,
+        roles: "admin",
+        joinCode
       });
       localStorage.setItem("token", updated.data.token);
       // if the user entered emails, make the post call to the email endpoint
-      // if (mailObject.email[0]) {
-      //   await axiosWithAuth().post(`${baseURL}/email`, mailObject);
-      // }
+      if (mailObject.email[0]) {
+        await axiosWithAuth().post(`${baseURL}/email`, mailObject);
+      }
 
       //redirect back to dashboard after team creation
       console.log("pushing to dashboard");
