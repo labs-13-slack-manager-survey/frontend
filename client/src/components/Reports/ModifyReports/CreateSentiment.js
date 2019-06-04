@@ -55,6 +55,7 @@ class CreateSentiment extends Component {
     slackChannelId: null,
     slackAuthorized: false,
     managerQuestions: "no",
+    isSentiment: true,
     // Temporary State
     channels: [],
     question: "",

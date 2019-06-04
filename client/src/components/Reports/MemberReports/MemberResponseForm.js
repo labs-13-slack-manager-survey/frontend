@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { axiosWithAuth, baseURL } from '../../../config/axiosWithAuth';
 
-import ReportInput from './ReportInput';
+import SentimentInput from './SentimentInput';
 
 // style imports
 import Button from '@material-ui/core/Button';
@@ -25,7 +25,7 @@ class MemberResponseForm extends Component {
 				<h1 className="member-form-title">{this.state.reportName}</h1>
 				<p className="member-form-subtitle">{this.state.reportMessage}</p>
 				{this.state.questions.map((q, i) => (
-					<ReportInput
+					<SentimentInput
 						question={q.question}
 						response={q.response}
 						handleChange={this.handleChange}
