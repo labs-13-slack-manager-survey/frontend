@@ -42,7 +42,7 @@ class Reports extends Component {
             slackModal: true
           });
         } else {
-          this.props.history.push("dashboard/reports/new");
+          this.props.history.push("dashboard/reports/choose");
         }
       })
       .catch(err => {

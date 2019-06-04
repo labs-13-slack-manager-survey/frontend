@@ -45,7 +45,7 @@ class ChooseReport extends Component {
               </Link>
             </section>
             <section>
-              <Link to="/dashboard/reports/createPoll">
+              <Link to="/dashboard/reports/createSentiment">
                 <Button variant="outlined" style={{ marginTop: "20px" }}>
                   Create Sentiment Poll
                 </Button>
