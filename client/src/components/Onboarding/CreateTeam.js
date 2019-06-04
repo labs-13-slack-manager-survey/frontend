@@ -19,7 +19,6 @@ function Transition(props) {
 
 class CreateTeam extends Component {
   render() {
-    console.log("createteam here");
     return (
       <div className="onboarding">
         <Card raised={true} className="onboardingCard">
@@ -63,9 +62,9 @@ class CreateTeam extends Component {
           >
             <Icon>arrow_back</Icon>
           </Fab>
-          {/* <Button variant="outlined" onClick={this.props.joinToggle}>
+          <Button variant="outlined" onClick={this.props.joinToggle}>
             Join an Existing Team
-          </Button> */}
+          </Button>
         </div>
       </div>
     );

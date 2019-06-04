@@ -16,15 +16,25 @@ import {
   Fab,
   Icon,
   TextField,
-  MenuItem,
   withStyles,
   Radio,
   RadioGroup,
   FormControlLabel,
-  FormLabel
+  FormLabel,
+  Menu
 } from "@material-ui/core";
-import AddIcon from "@material-ui/icons/Add";
+
+//importing things from material-ui
+import MenuItem from "@material-ui/core/MenuItem";
 import { TimePicker } from "material-ui-pickers";
+import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
+
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+} from 'styled-dropdown-component';
+
 
 import "./Report.css";
 
@@ -55,11 +65,29 @@ class CreateReport extends Component {
     timePickDate: new Date("2000-01-01T08:00:00"),
     message: "Please fill out your report by the end of the day!",
     errorMessage: "",
+      //array of listed survey questions
+      listSurveyQuestions:[
+        "Test survey question one dropdown",
+        "Test survey question Two dropdown",
+        "Test survey question Three dropdown"
+      ],
     questions: [],
     slackChannelId: null,
     slackAuthorized: false,
     managerQuestions: "no",
     isSentiment: false, 
+     //array for listing manager questions
+    listManagerQuestions:[
+      "Test manager question one dropdown",
+      "Test manager question two dropdown",
+      "test manager question three dropdown"
+    ],
+    //button shown before clicking to see drop down menu of questions
+    dropDownMenu:[
+      "select question One",
+      "select question Two",
+      "select question Three"
+    ],
     // Temporary State
     channels: [],
     question: "",
@@ -71,7 +99,8 @@ class CreateReport extends Component {
       "Friday",
       "Saturday",
       "Sunday"
-    ]
+    ],
+    hidden: true
   };
 
   changeHandler = e => {
@@ -189,6 +218,8 @@ class CreateReport extends Component {
       scheduleTime,
       message,
       questions: JSON.stringify(questions),
+      //add questions selected for manager here,
+      //add questions selected for report here,
       slackChannelId,
       slackChannelName,
       created_at: new Date()
@@ -204,60 +235,40 @@ class CreateReport extends Component {
       .catch(err => console.log(err));
   };
 
+  handleButton = e =>{
+    e.preventDefault();
+  }
+
+  handleOpenCloseDropdown() {
+    this.setState({
+      hidden: !this.state.hidden,
+    });
+}
+
   renderManagerQuestions = () => {
     if (this.state.managerQuestions === "yes") {
       return (
-        <section className="schedule-card-content">
-          <h3 className="schedule-title">Manager Questions</h3>
-          <Divider className="divider" variant="fullWidth" />
-          <section>
-            {this.state.questions.map(question => (
-              <article className="question-flex" key={question}>
-                <p className="question">{question}</p>
-                <Fab
-                  size="small"
-                  color="secondary"
-                  onClick={e => this.removeQuestion(e, question)}
-                >
-                  <Icon>delete_icon</Icon>
-                </Fab>
-              </article>
-            ))}
-          </section>
-          <section className="enter-question">
-            <FormControl className="input-field" required>
-              <InputLabel htmlFor="report-question">
-                Enter a question...
-              </InputLabel>
-              <Input
-                id="report-question"
-                required
-                className="input-field"
-                type="text"
-                name="question"
-                value={this.state.question}
-                onChange={this.enterQuestionsHandler}
-              />
-            </FormControl>
-            <Fab
-              size="small"
-              style={{ display: "block", margin: "10px 0" }}
-              color="primary"
-              onClick={this.questionsHandler}
-              disabled={this.state.question.length === 0 ? true : false}
-              type="submit"
-            >
-              <AddIcon />
-            </Fab>
-          </section>
-        </section>
+        <>
+      <PopupState variant="popover" popupId="demo-popup-menu">
+      {popupState => (
+        <React.Fragment>
+          <Button variant="contained" {...bindTrigger(popupState)}>
+            Select Manager Questions
+          </Button>
+          <Menu {...bindMenu(popupState)}>
+            <MenuItem onClick={popupState.close}>Engineering Manager</MenuItem>
+            <MenuItem onClick={popupState.close}>Scrum Master</MenuItem>
+          </Menu>
+        </React.Fragment>
+        
+      )}
+    </PopupState>
+    </>
       );
     }
   };
-
   render() {
     const { classes } = this.props;
-
     return (
       <div className="create-report">
         <Fab onClick={() => this.props.history.goBack()} color="default">
@@ -276,17 +287,17 @@ class CreateReport extends Component {
                   onChange={this.changeHandler}
                 >
                   <FormControlLabel
+                  className="yesNoButton"
                     value="yes"
                     control={<Radio />}
                     label="Yes"
                   />
-                  <FormControlLabel value="no" control={<Radio />} label="No" />
+                  <FormControlLabel value="no" className="yesNoButton" control={<Radio />} label="No" />
                 </RadioGroup>
-                {this.renderManagerQuestions()}
+              {this.renderManagerQuestions()}
               </FormControl>
             </section>
           </Card>
-
           <Card raised={true} className="schedule-card">
             <section className="schedule-card-content">
               <h3 className="schedule-title">Report Information</h3>
@@ -398,44 +409,26 @@ class CreateReport extends Component {
               <h3 className="schedule-title">Standup Questions</h3>
               <Divider className="divider" variant="fullWidth" />
               <section>
-                {this.state.questions.map(question => (
-                  <article className="question-flex" key={question}>
-                    <p className="question">{question}</p>
-                    <Fab
-                      size="small"
-                      color="secondary"
-                      onClick={e => this.removeQuestion(e, question)}
-                    >
-                      <Icon>delete_icon</Icon>
-                    </Fab>
-                  </article>
-                ))}
-              </section>
-              <section className="enter-question">
-                <FormControl className="input-field" required>
-                  <InputLabel htmlFor="report-question">
-                    Enter a question...
-                  </InputLabel>
-                  <Input
-                    id="report-question"
-                    required
-                    className="input-field"
-                    type="text"
-                    name="question"
-                    value={this.state.question}
-                    onChange={this.enterQuestionsHandler}
-                  />
-                </FormControl>
-                <Fab
-                  size="small"
-                  style={{ display: "block", margin: "10px 0" }}
-                  color="primary"
-                  onClick={this.questionsHandler}
-                  disabled={this.state.question.length === 0 ? true : false}
-                  type="submit"
-                >
-                  <AddIcon />
-                </Fab>
+
+              <div>
+            {this.state.dropDownMenu.map(question=>(
+              <div style={{display:'block',margin:'10px'}} key={question} onClick={e=>e.preventDefault}> 
+              <div>
+                <p>
+                  {question}
+                  {this.state.listSurveyQuestions.map(manQuestion=>(
+                    < a style={{display:'block',margin:'10px'}} >{manQuestion}</a>
+                  ))}
+                </p>
+              </div>
+              </div>
+            ))}
+            </div>
+
+
+            
+
+            
               </section>
             </section>
           </Card>

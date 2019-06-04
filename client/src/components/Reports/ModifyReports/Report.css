@@ -112,7 +112,9 @@ p {
 }
 
 .schedule-card {
+	z-index: 999;
 	margin: 10px 0;
+	padding-bottom: 4rem;
 }
 
 .schedule-card-content {
@@ -136,3 +138,54 @@ p {
 .MuiButton-outlinedPrimary-95 {
 	margin: 30px auto;
 }
+
+/* ------------------------- */
+
+.dropbtn {
+	background-color: #3498DB;
+	color: white;
+	padding: 16px;
+	font-size: 16px;
+	border: none;
+	cursor: pointer;
+  }
+  
+  .dropbtn:hover, .dropbtn:focus {
+	background-color: #2980B9;
+  }
+  
+  .dropdown {
+	position: relative;
+	display: inline-block;
+  }
+  /* this is making each question display:none */
+  .dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f1f1f1;
+	min-width: 160px;
+	overflow: auto;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 1;
+  }
+  
+  .dropdown-content a {
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+  }
+  
+  .dropdown a:hover {background-color: #ddd;}
+  
+  .show {display: block}
+
+
+  .yesNoButton{
+	 display: flex;
+	 flex-direction: row;
+  }
+
+  .btnnn{
+	  display:none;
+  }
