@@ -112,7 +112,9 @@ p {
 }
 
 .schedule-card {
+	z-index: 999;
 	margin: 10px 0;
+	padding-bottom: 4rem;
 }
 
 .schedule-card-content {
