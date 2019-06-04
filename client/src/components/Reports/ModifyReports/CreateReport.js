@@ -229,6 +229,11 @@ class CreateReport extends Component {
       .catch(err => console.log(err));
   };
 
+  handleButton = e =>{
+    e.preventDefault();
+  }
+
+
   renderManagerQuestions = () => {
     if (this.state.managerQuestions === "yes") {
       return (
@@ -239,14 +244,17 @@ class CreateReport extends Component {
 
             <div>
             {this.state.dropDownMenu.map(question=>(
-              <div style={{display:'block',margin:'10px'}} key={question} onClick={e=>e.preventDefault}> 
+              <div style={{display:'block',margin:'10px'}} key={question}> 
               <div>
-                <p>
+                {/* button will need to have a className of dropButton */}
+                <button className="dropbtn" onClick={this.handleButton} >
                   {question}
                   {this.state.listManagerQuestions.map(manQuestion=>(
-                    < a style={{display:'block',margin:'10px'}} >{manQuestion}</a>
+                    <div id="myDropDown" className="dropdown-content">
+                      <a>{manQuestion}</a>
+                    </div>
                   ))}
-                </p>
+                </button>
               </div>
               </div>
             ))}
