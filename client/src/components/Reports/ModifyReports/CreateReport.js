@@ -26,6 +26,7 @@ import {
 //importing things from material-ui
 import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
+import popover from "@material-ui/core/Popover"
 import AddIcon from "@material-ui/icons/Add";
 
 import { TimePicker } from "material-ui-pickers";
@@ -61,19 +62,19 @@ class CreateReport extends Component {
     errorMessage: "",
       //array of listed survey questions
       listSurveyQuestions:[
-        "Test survey question one",
-        "Test survey question Two",
-        "Test survey question Three"
+        "Test survey question one dropdown",
+        "Test survey question Two dropdown",
+        "Test survey question Three dropdown"
       ],
     questions: [],
     slackChannelId: null,
     slackAuthorized: false,
     managerQuestions: "no",
      //array for listing manager questions
-     listManagerQuestions:[
-      "Test manager question one",
-      "Test manager question two",
-      "test manager question three"
+    listManagerQuestions:[
+      "Test manager question one dropdown",
+      "Test manager question two dropdown",
+      "test manager question three dropdown"
     ],
     // Temporary State
     channels: [],
@@ -204,6 +205,8 @@ class CreateReport extends Component {
       scheduleTime,
       message,
       questions: JSON.stringify(questions),
+      //add questions selected for manager here,
+      //add questions selected for report here,
       slackChannelId,
       slackChannelName,
       created_at: new Date()
@@ -226,9 +229,12 @@ class CreateReport extends Component {
           <h3 className="schedule-title">Manager Questions</h3>
           <Divider className="divider" variant="fullWidth" />
           <section>
-            <button>List of questions</button>
             <MenuList>
-            {this.state.listManagerQuestions.map(question=>(<MenuItem key={question}> {question} </MenuItem>))}
+            {this.state.listManagerQuestions.map(question=>(
+              <button style={{display:'block',margin:'5px'}} key={question} onClick={e=>e.preventDefault}> 
+                {question} 
+              </button>
+            ))}
             </MenuList>
           </section>
         </section>
@@ -379,9 +385,13 @@ class CreateReport extends Component {
               <h3 className="schedule-title">Standup Questions</h3>
               <Divider className="divider" variant="fullWidth" />
               <section>
-
-                <button>List of questions</button>
-                {this.state.listSurveyQuestions.map(question=>(<p key={question}>{question}</p>))}
+                <MenuList>
+                  {this.state.listSurveyQuestions.map(question=>(
+                    <button style={{display:'block', margin:'5px'}}  key={question} onClick={e=>e.preventDefault}> 
+                      {question} 
+                    </button>
+                  ))}
+                </MenuList>
               </section>
             </section>
           </Card>
