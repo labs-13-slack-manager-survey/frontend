@@ -12,7 +12,8 @@ class MemberResponseForm extends Component {
 		clientInfo: '',
 		reportName: '',
 		reportMessage: '',
-		questions: []
+		questions: [],
+		isSentiment: false,
 	};
 
 	render() {
@@ -30,6 +31,7 @@ class MemberResponseForm extends Component {
 						response={q.response}
 						handleChange={this.handleChange}
 						key={i}
+						isSentiment={this.state.isSentiment}
 					/>
 				))}
 				<Button
@@ -49,14 +51,16 @@ class MemberResponseForm extends Component {
 		axiosWithAuth()
 			.get(endpoint)
 			.then(res => {
-				const { reportName, message, questions } = res.data.report;
+				console.log(res.data.report);
+				const { reportName, message, questions, isSentiment } = res.data.report;
 				this.setState({
 					reportName,
 					reportMessage: message,
 					questions: questions.map(q => ({
 						question: q,
 						response: ''
-					}))
+					})), 
+					isSentiment: isSentiment, 
 				});
 			})
 			.catch(err => console.log(err));
