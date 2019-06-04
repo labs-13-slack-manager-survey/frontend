@@ -15,7 +15,7 @@
 }
 
 .horizontalMenuBar {
-	height: 50px; 
+	height: 70px; 
 	background-color: none; 
 	border-bottom: 2px solid #F5F5F5;
 	width: 100%;
@@ -25,6 +25,7 @@
 	flex-direction: row; 
 	justify-content: space-between; 
 	align-items: center;
+	padding-right: 25px;
 }
 
 .left-horizontal {
@@ -78,7 +79,7 @@ span {
 .verticalBar { 
 	position: fixed;
 	left: 0; 
-	width: 50px;
+	width: 70px;
 	height: 100%;
 	background-color: none;
 	border-right: 2px solid #F5F5F5;
@@ -87,28 +88,31 @@ span {
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
-	padding-top: 70px;
+	padding-top: 90px;
 	padding-bottom: 20px;
 }
 
 
 .vert-buttons{
-	width:50px; 
+	width: 70px; 
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between; 
 	align-items: center;
-	height: 90px;
+	height: 100px;
 }
 
 .empty-buttons{
 	width: 50px;
 	height: 90px;
 }
+
+
 .menu-icon {
-	width: 20px;
-	height: 20px;
+	width: 25px;
+	height: 25px;
 }
+
 
 .menu-logout-button{
 	height: 45px;
@@ -120,6 +124,7 @@ span {
 	flex-direction: column; 
 }
 
+
 .button-label {
 	font-size: 10px; 
 	color: #9B9B9B;
@@ -127,10 +132,10 @@ span {
 }
 
 .logo {
-	height: 40px;
-	width: 40px;
-	margin-left: 4px; 
+	height: 50px;
+	margin-left: 8px; 
 	margin-top: 4px;
+	padding-right: 35px;
 }
 
 @media (min-width: 550px) {

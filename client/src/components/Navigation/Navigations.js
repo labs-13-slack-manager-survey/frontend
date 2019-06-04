@@ -74,7 +74,7 @@ class Navigation extends React.Component {
 						</div>
 						 <div className="horizontal-buttons">
 							<button className = "menu-bar-add-poll"><span>+</span> Add Poll</button>
-							<button className = "menu-bar-add-team">+ Add Team</button>
+							
 						 </div>
 						{/* <div className="nav-links"> */}
 							{/* <div> */}
