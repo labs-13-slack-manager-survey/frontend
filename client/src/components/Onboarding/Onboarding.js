@@ -78,7 +78,7 @@ class Onboarding extends Component {
       //add teamID and joincode to user in DB, setting roles to admin
       const updated = await axiosWithAuth().put(`${baseURL}/users/`, {
         teamId: randId,
-        roles: "admin",
+        roles: "member",
         joinCode
       });
       localStorage.setItem("token", updated.data.token);
