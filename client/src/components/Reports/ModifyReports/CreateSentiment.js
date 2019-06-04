@@ -171,14 +171,17 @@ class CreateSentiment extends Component {
       if (channel.id === this.state.slackChannelId)
         slackChannelName = channel.name;
     });
+
     const {
       reportName,
       schedule,
       scheduleTime,
       message,
       questions,
-      slackChannelId
+      slackChannelId,
+      isSentiment
     } = this.state;
+
     const report = {
       reportName,
       schedule: JSON.stringify(schedule),
@@ -187,8 +190,10 @@ class CreateSentiment extends Component {
       questions: JSON.stringify(questions),
       slackChannelId,
       slackChannelName,
-      created_at: new Date()
+      created_at: new Date(),
+      isSentiment
     };
+
     const endpoint = `${baseURL}/reports`;
     axiosWithAuth()
       .post(endpoint, report)

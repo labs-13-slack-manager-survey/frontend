@@ -59,7 +59,7 @@ class CreateReport extends Component {
     slackChannelId: null,
     slackAuthorized: false,
     managerQuestions: "no",
-    isSentiment: true, 
+    isSentiment: false, 
     // Temporary State
     channels: [],
     question: "",
