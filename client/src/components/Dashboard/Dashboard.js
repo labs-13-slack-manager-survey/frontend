@@ -15,7 +15,6 @@ export class Dashboard extends Component {
   state = {
     users: [],
     newMemberEmail: "",
-    joinCode: "",
     isLoading: true,
     message: "",
     active: true,
@@ -54,6 +53,7 @@ export class Dashboard extends Component {
   }
 
   componentDidMount() {
+<<<<<<< HEAD
     // get user's joinCode from token and setState accordingly. Necessary to invite new team members.
     const joinCode = jwt_decode(localStorage.getItem("token")).joinCode;
     console.log(joinCode);
@@ -65,6 +65,13 @@ export class Dashboard extends Component {
       .get(`${baseURL}/users/team`)
       .then(res => {
         console.log(res);
+=======
+    this.setState({});
+
+    axiosWithAuth()
+      .get(`${baseURL}/users/team`)
+      .then(res => {
+>>>>>>> 77fb8da87e05106560448a57631b85052d56b7fe
         this.setState({ users: res.data.users });
 
         if (this.state.users.length > 0) {
@@ -142,8 +149,7 @@ export class Dashboard extends Component {
     e.preventDefault();
     //create mailObject to post to sendgrid API
     const mailObject = {
-      email: this.state.newMemberEmail,
-      joinCode: this.state.joinCode
+      email: this.state.newMemberEmail
     };
     console.log(mailObject);
     //sendgrid endpoint on our back end
