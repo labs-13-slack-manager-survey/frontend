@@ -403,16 +403,19 @@ class CreateReport extends Component {
 
               <div>
             {this.state.dropDownMenu.map(question=>(
-              <div style={{display:'block',margin:'5px'}} key={question} onClick={e=>e.preventDefault}> 
+              <div style={{display:'block',margin:'10px'}} key={question} onClick={e=>e.preventDefault}> 
               <div>
-                <a>
-                {question}
-             
-                </a>
+                <p>
+                  {question}
+                  {this.state.listSurveyQuestions.map(manQuestion=>(
+                    < a style={{display:'block',margin:'10px'}} >{manQuestion}</a>
+                  ))}
+                </p>
               </div>
               </div>
             ))}
             </div>
+
             
               </section>
             </section>
