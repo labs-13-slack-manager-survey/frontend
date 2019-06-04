@@ -70,6 +70,7 @@ class CreateReport extends Component {
     slackChannelId: null,
     slackAuthorized: false,
     managerQuestions: "no",
+    isSentiment: false, 
      //array for listing manager questions
     listManagerQuestions:[
       "Test manager question one dropdown",
