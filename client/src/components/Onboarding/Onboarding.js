@@ -77,9 +77,9 @@ class Onboarding extends Component {
     try {
       //add teamID and joincode to user in DB, setting roles to admin
       const updated = await axiosWithAuth().put(`${baseURL}/users/`, {
-        // teamId: randId,
-        roles: "member"
-        // joinCode
+        teamId: randId,
+        roles: "member",
+        joinCode
       });
       localStorage.setItem("token", updated.data.token);
       // if the user entered emails, make the post call to the email endpoint
