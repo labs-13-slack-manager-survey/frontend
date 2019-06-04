@@ -76,6 +76,12 @@ class CreateReport extends Component {
       "Test manager question two dropdown",
       "test manager question three dropdown"
     ],
+    //button shown before clicking to see drop down menu of questions
+    dropDownMenu:[
+      "select question One",
+      "select question Two",
+      "select question Three"
+    ],
     // Temporary State
     channels: [],
     question: "",
@@ -229,13 +235,22 @@ class CreateReport extends Component {
           <h3 className="schedule-title">Manager Questions</h3>
           <Divider className="divider" variant="fullWidth" />
           <section>
-            <MenuList>
-            {this.state.listManagerQuestions.map(question=>(
-              <button style={{display:'block',margin:'5px'}} key={question} onClick={e=>e.preventDefault}> 
-                {question} 
-              </button>
+
+            <div>
+            {this.state.dropDownMenu.map(question=>(
+              <div style={{display:'block',margin:'10px'}} key={question} onClick={e=>e.preventDefault}> 
+              <div>
+                <p>
+                  {question}
+                  {this.state.listManagerQuestions.map(manQuestion=>(
+                    < a style={{display:'block',margin:'10px'}} >{manQuestion}</a>
+                  ))}
+                </p>
+              </div>
+              </div>
             ))}
-            </MenuList>
+            </div>
+
           </section>
         </section>
       );
@@ -385,13 +400,20 @@ class CreateReport extends Component {
               <h3 className="schedule-title">Standup Questions</h3>
               <Divider className="divider" variant="fullWidth" />
               <section>
-                <MenuList>
-                  {this.state.listSurveyQuestions.map(question=>(
-                    <button style={{display:'block', margin:'5px'}}  key={question} onClick={e=>e.preventDefault}> 
-                      {question} 
-                    </button>
-                  ))}
-                </MenuList>
+
+              <div>
+            {this.state.dropDownMenu.map(question=>(
+              <div style={{display:'block',margin:'5px'}} key={question} onClick={e=>e.preventDefault}> 
+              <div>
+                <a>
+                {question}
+             
+                </a>
+              </div>
+              </div>
+            ))}
+            </div>
+            
               </section>
             </section>
           </Card>
