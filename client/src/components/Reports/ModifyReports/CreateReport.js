@@ -248,20 +248,22 @@ class CreateReport extends Component {
   renderManagerQuestions = () => {
     if (this.state.managerQuestions === "yes") {
       return (
-        <Dropdown>
-        <Button
-          secondary
-          dropdownToggle
-          onClick={() => this.handleOpenCloseDropdown()}
-        >
-          Dropdown Button
-        </Button>
-        <DropdownMenu hidden={this.state.hidden}>
-          <DropdownItem>Action</DropdownItem>
-          <DropdownItem>Another action</DropdownItem>
-          <DropdownItem>Something else here</DropdownItem>
-        </DropdownMenu>
-      </Dropdown>
+        <>
+      <PopupState variant="popover" popupId="demo-popup-menu">
+      {popupState => (
+        <React.Fragment>
+          <Button variant="contained" {...bindTrigger(popupState)}>
+            Select Manager Questions
+          </Button>
+          <Menu {...bindMenu(popupState)}>
+            <MenuItem onClick={popupState.close}>Engineering Manager</MenuItem>
+            <MenuItem onClick={popupState.close}>Scrum Master</MenuItem>
+          </Menu>
+        </React.Fragment>
+        
+      )}
+    </PopupState>
+    </>
       );
     }
   };
@@ -293,30 +295,9 @@ class CreateReport extends Component {
                   <FormControlLabel value="no" className="yesNoButton" control={<Radio />} label="No" />
                 </RadioGroup>
               {this.renderManagerQuestions()}
-
-     <Dropdown className="btnnn">
-        <Button
-          secondary
-          dropdownToggle
-          onClick={() => this.handleOpenCloseDropdown()}
-        >
-          Dropdown Button
-        </Button>
-        <DropdownMenu hidden={this.state.hidden}>
-          <DropdownItem>Action</DropdownItem>
-          <DropdownItem>Another action</DropdownItem>
-          <DropdownItem>Something else here</DropdownItem>
-        </DropdownMenu>
-      </Dropdown>
-
-
-
               </FormControl>
             </section>
           </Card>
-
-
-
           <Card raised={true} className="schedule-card">
             <section className="schedule-card-content">
               <h3 className="schedule-title">Report Information</h3>
