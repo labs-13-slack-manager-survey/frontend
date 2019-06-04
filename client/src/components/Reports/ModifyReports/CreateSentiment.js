@@ -42,7 +42,7 @@ const styles = theme => ({
   }
 });
 
-class CreatePoll extends Component {
+class CreateSentiment extends Component {
   state = {
     // Main Report State
     reportName: "Sentiment Poll",
@@ -55,6 +55,7 @@ class CreatePoll extends Component {
     slackChannelId: null,
     slackAuthorized: false,
     managerQuestions: "no",
+    isSentiment: true,
     // Temporary State
     channels: [],
     question: "",
@@ -173,14 +174,17 @@ class CreatePoll extends Component {
       if (channel.id === this.state.slackChannelId)
         slackChannelName = channel.name;
     });
+
     const {
       reportName,
       schedule,
       scheduleTime,
       message,
       questions,
-      slackChannelId
+      slackChannelId,
+      isSentiment
     } = this.state;
+
     const report = {
       reportName,
       schedule: JSON.stringify(schedule),
@@ -189,8 +193,10 @@ class CreatePoll extends Component {
       questions: JSON.stringify(questions),
       slackChannelId,
       slackChannelName,
-      created_at: new Date()
+      created_at: new Date(),
+      isSentiment
     };
+
     const endpoint = `${baseURL}/reports`;
     axiosWithAuth()
       .post(endpoint, report)
@@ -379,4 +385,4 @@ class CreatePoll extends Component {
   }
 }
 
-export default withStyles(styles)(CreatePoll);
+export default withStyles(styles)(CreateSentiment);

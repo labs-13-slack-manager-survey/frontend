@@ -4,7 +4,7 @@ import { Route, Switch } from "react-router-dom";
 // component imports
 import ChooseReport from "../Reports/ModifyReports/ChooseReport";
 import CreateReport from "../Reports/ModifyReports/CreateReport";
-import CreatePoll from "../Reports/ModifyReports/CreatePoll";
+import CreateSentiment from "../Reports/ModifyReports/CreateSentiment";
 import Reports from "../Reports/Reports";
 import EditReport from "../Reports/ModifyReports/EditReport";
 import SingleReportResults from "../Reports/MemberReports/ReportResults";
@@ -68,9 +68,9 @@ class ReportsDash extends Component {
           />
           <Route
             exact
-            path="/dashboard/reports/createPoll"
+            path="/dashboard/reports/createSentiment"
             render={props => (
-              <CreatePoll
+              <CreateSentiment
                 {...props}
                 setResponseAsState={this.setResponseAsState}
               />
