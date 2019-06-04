@@ -36,13 +36,6 @@ import {
 } from 'styled-dropdown-component';
 
 
-import {
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-} from 'styled-dropdown-component';
-
-
 import "./Report.css";
 
 // this component does what it says - admin can create a new report
