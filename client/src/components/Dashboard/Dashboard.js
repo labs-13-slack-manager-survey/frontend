@@ -19,7 +19,8 @@ export class Dashboard extends Component {
     message: "",
     active: true,
     modal: false,
-    anchorEl: null
+    anchorEl: null,
+    joinCode: ""
   };
   render() {
     if (this.state.isLoading) {
@@ -141,7 +142,8 @@ export class Dashboard extends Component {
     e.preventDefault();
     //create mailObject to post to sendgrid API
     const mailObject = {
-      email: this.state.newMemberEmail
+      email: this.state.newMemberEmail,
+      joinCode: this.state.joinCode
     };
     console.log(mailObject);
     //sendgrid endpoint on our back end

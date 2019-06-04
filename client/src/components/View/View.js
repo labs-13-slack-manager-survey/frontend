@@ -13,11 +13,10 @@ import { Card } from "@blueprintjs/core";
 class View extends Component {
   state = {
     roles: "member",
-    active: true,
+    active: true
   };
 
   componentDidMount() {
-    console.log("yo its me in VIEW");
     const roles = jwt_decode(localStorage.getItem("token")).roles;
     const endpoint = `${baseURL}/users/byuser`;
     axiosWithAuth()
@@ -33,7 +32,6 @@ class View extends Component {
       });
   }
   render() {
-    console.log("View render");
     // If user's account is inactive, they cannot see the dashboard
     return this.state.active ? (
       <div className="view">
