@@ -156,7 +156,7 @@ p {
 	position: relative;
 	display: inline-block;
   }
-  
+  /* this is making each question display:none */
   .dropdown-content {
 	display: none;
 	position: absolute;
@@ -176,4 +176,14 @@ p {
   
   .dropdown a:hover {background-color: #ddd;}
   
-  .show {display: block;}
+  .show {display: block}
+
+
+  .yesNoButton{
+	 display: flex;
+	 flex-direction: row;
+  }
+
+  .btnnn{
+	  display:none;
+  }
