@@ -13,7 +13,7 @@ import { Card } from "@blueprintjs/core";
 class View extends Component {
   state = {
     roles: "member",
-    active: true
+    active: true,
   };
 
   componentDidMount() {

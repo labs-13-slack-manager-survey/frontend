@@ -93,7 +93,7 @@ class Reports extends Component {
                 disabled={this.props.role !== "admin" ? true : false}
                 onClick={this.slackAuthCheck}
               >
-                {this.props.role !== "admin" ? <Icon>lock</Icon> : <AddIcon />}
+                {this.props.role !== "member" ? <Icon>lock</Icon> : <AddIcon />}
               </Fab>
             </Link>
           </div>
