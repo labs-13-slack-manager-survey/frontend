@@ -42,7 +42,7 @@ const styles = theme => ({
   }
 });
 
-class CreatePoll extends Component {
+class CreateSentiment extends Component {
   state = {
     // Main Report State
     reportName: "Sentiment Poll",
@@ -376,4 +376,4 @@ class CreatePoll extends Component {
   }
 }
 
-export default withStyles(styles)(CreatePoll);
+export default withStyles(styles)(CreateSentiment);
