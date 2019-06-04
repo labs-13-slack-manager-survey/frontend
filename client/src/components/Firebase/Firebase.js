@@ -9,6 +9,8 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 
+import "../Login/login.css";
+
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN
@@ -50,7 +52,11 @@ class Firebase extends Component {
       }
     };
     return (
-      <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+      <StyledFirebaseAuth
+        uiConfig={uiConfig}
+        firebaseAuth={firebase.auth()}
+        className="buttons"
+      />
     );
   }
 }
