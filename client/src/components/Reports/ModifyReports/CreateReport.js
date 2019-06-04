@@ -16,14 +16,18 @@ import {
   Fab,
   Icon,
   TextField,
-  MenuItem,
   withStyles,
   Radio,
   RadioGroup,
   FormControlLabel,
-  FormLabel
+  FormLabel,
 } from "@material-ui/core";
+
+//importing things from material-ui
+import MenuItem from "@material-ui/core/MenuItem";
+import MenuList from "@material-ui/core/MenuList";
 import AddIcon from "@material-ui/icons/Add";
+
 import { TimePicker } from "material-ui-pickers";
 
 import "./Report.css";
@@ -223,7 +227,9 @@ class CreateReport extends Component {
           <Divider className="divider" variant="fullWidth" />
           <section>
             <button>List of questions</button>
-            {this.state.listManagerQuestions.map(question=>(<p key={question}>{question}</p>))}
+            <MenuList>
+            {this.state.listManagerQuestions.map(question=>(<MenuItem key={question}> {question} </MenuItem>))}
+            </MenuList>
           </section>
         </section>
       );
@@ -373,6 +379,7 @@ class CreateReport extends Component {
               <h3 className="schedule-title">Standup Questions</h3>
               <Divider className="divider" variant="fullWidth" />
               <section>
+
                 <button>List of questions</button>
                 {this.state.listSurveyQuestions.map(question=>(<p key={question}>{question}</p>))}
               </section>
