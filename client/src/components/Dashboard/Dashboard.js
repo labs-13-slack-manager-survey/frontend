@@ -96,7 +96,6 @@ export class Dashboard extends Component {
     };
     //create an array with everyone but the user the function's been called on
     const newUsers = this.state.users.filter(user => user.id !== id);
-
     axiosWithAuth()
       .put(endpoint, editedUser)
       .then(res => {
