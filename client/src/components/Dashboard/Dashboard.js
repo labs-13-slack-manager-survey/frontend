@@ -15,12 +15,12 @@ export class Dashboard extends Component {
   state = {
     users: [],
     newMemberEmail: "",
-    joinCode: "",
     isLoading: true,
     message: "",
     active: true,
     modal: false,
-    anchorEl: null
+    anchorEl: null,
+    joinCode: ""
   };
   render() {
     if (this.state.isLoading) {
@@ -55,16 +55,16 @@ export class Dashboard extends Component {
 
   componentDidMount() {
     // get user's joinCode from token and setState accordingly. Necessary to invite new team members.
-    // const joinCode = jwt_decode(localStorage.getItem('token')).joinCode;
+    const joinCode = jwt_decode(localStorage.getItem("token")).joinCode;
+    console.log(joinCode);
 
-    // this.setState({
-    // 	joinCode: joinCode
-    // });
-    console.log("yo it mounted");
+    this.setState({
+      joinCode: joinCode
+    });
     axiosWithAuth()
       .get(`${baseURL}/users/team`)
       .then(res => {
-        console.log("hey", res);
+        console.log(res);
         this.setState({ users: res.data.users });
 
         if (this.state.users.length > 0) {
@@ -145,6 +145,7 @@ export class Dashboard extends Component {
       email: this.state.newMemberEmail,
       joinCode: this.state.joinCode
     };
+    console.log(mailObject);
     //sendgrid endpoint on our back end
     const endpoint = `${baseURL}/email`;
 

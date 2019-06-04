@@ -25,20 +25,16 @@ class Onboarding extends Component {
 
   // toggles
   joinToggle = e => {
-    this.setState((prevState, prevProps) => ({
-      joinToggle: !this.state.joinToggle
-    }));
-    this.setState((prevState, prevProps) => ({ createToggle: false }));
+    this.setState({ joinToggle: !this.state.joinToggle });
+    this.setState({ createToggle: false });
   };
   createToggle = () => {
-    this.setState((prevState, prevProps) => ({
-      createToggle: !this.state.createToggle
-    }));
-    this.setState((prevState, prevProps) => ({ joinToggle: false }));
+    this.setState({ createToggle: !this.state.createToggle });
+    this.setState({ joinToggle: false });
   };
   toggleAllOff = () => {
-    this.setState((prevState, prevProps) => ({ createToggle: false }));
-    this.setState((prevState, prevProps) => ({ joinToggle: false }));
+    this.setState({ createToggle: false });
+    this.setState({ joinToggle: false });
   };
 
   // change handler
@@ -48,12 +44,12 @@ class Onboarding extends Component {
 
   // called when a user clicks 'create team' button in CreateTeam.js
   createTeam = async emails => {
-    console.log("create Team button clicked");
     const teamId = length => {
       return Math.round(
         Math.pow(9, length + 1) - Math.random() * Math.pow(9, length)
       );
     };
+
     const joinId = length => {
       return Math.round(
         Math.pow(36, length + 1) - Math.random() * Math.pow(36, length)
@@ -61,13 +57,11 @@ class Onboarding extends Component {
         .toString(36)
         .slice(1);
     };
-    // create teamId
-    const randId = teamId(8);
-    // create joincode
-    const joinCode = joinId(6);
+
+    const randId = await teamId(8);
+    const joinCode = await joinId(6);
 
     //create an object to send to mail api
-
     const mailObject = {
       //email singular to ensure consistency with adding an new user email on the dashboard
       email: this.state.emails,
@@ -75,20 +69,19 @@ class Onboarding extends Component {
     };
 
     try {
-      //add teamID and joincode to user in DB, setting roles to admin
       const updated = await axiosWithAuth().put(`${baseURL}/users/`, {
         teamId: randId,
         roles: "admin",
         joinCode
       });
       localStorage.setItem("token", updated.data.token);
-      // if the user entered emails, make the post call to the email endpoint
+
+      // if the user's entered emails, make the post call to the email endpoint
       if (mailObject.email[0]) {
         await axiosWithAuth().post(`${baseURL}/email`, mailObject);
       }
 
       //redirect back to dashboard after team creation
-      console.log("pushing to dashboard");
       this.props.history.push("/dashboard");
     } catch (error) {
       this.setState({
@@ -137,9 +130,8 @@ class Onboarding extends Component {
   };
 
   render() {
-    console.log("Onboarding here");
     // Landing Page - all booleans false
-    return !this.state.createToggle ? (
+    return !this.state.joinToggle && !this.state.createToggle ? (
       <LandingPage
         joinToggle={this.joinToggle}
         createToggle={this.createToggle}
