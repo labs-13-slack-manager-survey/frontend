@@ -51,10 +51,22 @@ class CreatePoll extends Component {
     timePickDate: new Date("2000-01-01T08:00:00"),
     message: "Please respond to the poll ASAP.",
     errorMessage: "",
+      //array of listed survey questions
+      listSurveyQuestions:[
+        "Test survey question one",
+        "Test survey question Two",
+        "Test survey question Three"
+      ],
     questions: [],
     slackChannelId: null,
     slackAuthorized: false,
     managerQuestions: "no",
+      //array for listing manager questions
+      listManagerQuestions:[
+        "Test manager question one",
+        "Test manager question two",
+        "test manager question three"
+      ],
     // Temporary State
     channels: [],
     question: "",
@@ -105,6 +117,7 @@ class CreatePoll extends Component {
       });
   };
 
+  //function for questions
   enterQuestionsHandler = e => {
     e.preventDefault();
     const code = e.keyCode || e.which;
@@ -120,6 +133,7 @@ class CreatePoll extends Component {
     }
   };
 
+  //function for questions
   questionsHandler = e => {
     e.preventDefault();
     this.setState(prevState => ({
@@ -128,6 +142,7 @@ class CreatePoll extends Component {
     }));
   };
 
+    //function for questions
   removeQuestion = (e, question) => {
     e.preventDefault();
     this.setState(prevState => ({
