@@ -1,0 +1,13 @@
+.slider { 
+    height: 60px;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+}
+
+.slider-label{
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-between;
+    margin-top: -30px; 
+}
