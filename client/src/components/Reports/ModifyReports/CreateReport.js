@@ -55,10 +55,22 @@ class CreateReport extends Component {
     timePickDate: new Date("2000-01-01T08:00:00"),
     message: "Please fill out your report by the end of the day!",
     errorMessage: "",
+      //array of listed survey questions
+      listSurveyQuestions:[
+        "Test survey question one",
+        "Test survey question Two",
+        "Test survey question Three"
+      ],
     questions: [],
     slackChannelId: null,
     slackAuthorized: false,
     managerQuestions: "no",
+     //array for listing manager questions
+     listManagerQuestions:[
+      "Test manager question one",
+      "Test manager question two",
+      "test manager question three"
+    ],
     // Temporary State
     channels: [],
     question: "",
@@ -210,44 +222,8 @@ class CreateReport extends Component {
           <h3 className="schedule-title">Manager Questions</h3>
           <Divider className="divider" variant="fullWidth" />
           <section>
-            {this.state.questions.map(question => (
-              <article className="question-flex" key={question}>
-                <p className="question">{question}</p>
-                <Fab
-                  size="small"
-                  color="secondary"
-                  onClick={e => this.removeQuestion(e, question)}
-                >
-                  <Icon>delete_icon</Icon>
-                </Fab>
-              </article>
-            ))}
-          </section>
-          <section className="enter-question">
-            <FormControl className="input-field" required>
-              <InputLabel htmlFor="report-question">
-                Enter a question...
-              </InputLabel>
-              <Input
-                id="report-question"
-                required
-                className="input-field"
-                type="text"
-                name="question"
-                value={this.state.question}
-                onChange={this.enterQuestionsHandler}
-              />
-            </FormControl>
-            <Fab
-              size="small"
-              style={{ display: "block", margin: "10px 0" }}
-              color="primary"
-              onClick={this.questionsHandler}
-              disabled={this.state.question.length === 0 ? true : false}
-              type="submit"
-            >
-              <AddIcon />
-            </Fab>
+            <button>List of questions</button>
+            {this.state.listManagerQuestions.map(question=>(<p key={question}>{question}</p>))}
           </section>
         </section>
       );
@@ -397,44 +373,8 @@ class CreateReport extends Component {
               <h3 className="schedule-title">Standup Questions</h3>
               <Divider className="divider" variant="fullWidth" />
               <section>
-                {this.state.questions.map(question => (
-                  <article className="question-flex" key={question}>
-                    <p className="question">{question}</p>
-                    <Fab
-                      size="small"
-                      color="secondary"
-                      onClick={e => this.removeQuestion(e, question)}
-                    >
-                      <Icon>delete_icon</Icon>
-                    </Fab>
-                  </article>
-                ))}
-              </section>
-              <section className="enter-question">
-                <FormControl className="input-field" required>
-                  <InputLabel htmlFor="report-question">
-                    Enter a question...
-                  </InputLabel>
-                  <Input
-                    id="report-question"
-                    required
-                    className="input-field"
-                    type="text"
-                    name="question"
-                    value={this.state.question}
-                    onChange={this.enterQuestionsHandler}
-                  />
-                </FormControl>
-                <Fab
-                  size="small"
-                  style={{ display: "block", margin: "10px 0" }}
-                  color="primary"
-                  onClick={this.questionsHandler}
-                  disabled={this.state.question.length === 0 ? true : false}
-                  type="submit"
-                >
-                  <AddIcon />
-                </Fab>
+                <button>List of questions</button>
+                {this.state.listSurveyQuestions.map(question=>(<p key={question}>{question}</p>))}
               </section>
             </section>
           </Card>
