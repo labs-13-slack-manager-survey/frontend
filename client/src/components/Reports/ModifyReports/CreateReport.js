@@ -16,14 +16,19 @@ import {
   Fab,
   Icon,
   TextField,
-  MenuItem,
   withStyles,
   Radio,
   RadioGroup,
   FormControlLabel,
-  FormLabel
+  FormLabel,
 } from "@material-ui/core";
+
+//importing things from material-ui
+import MenuItem from "@material-ui/core/MenuItem";
+import MenuList from "@material-ui/core/MenuList";
+import popover from "@material-ui/core/Popover"
 import AddIcon from "@material-ui/icons/Add";
+
 import { TimePicker } from "material-ui-pickers";
 
 import "./Report.css";
@@ -55,11 +60,29 @@ class CreateReport extends Component {
     timePickDate: new Date("2000-01-01T08:00:00"),
     message: "Please fill out your report by the end of the day!",
     errorMessage: "",
+      //array of listed survey questions
+      listSurveyQuestions:[
+        "Test survey question one dropdown",
+        "Test survey question Two dropdown",
+        "Test survey question Three dropdown"
+      ],
     questions: [],
     slackChannelId: null,
     slackAuthorized: false,
     managerQuestions: "no",
     isSentiment: false, 
+     //array for listing manager questions
+    listManagerQuestions:[
+      "Test manager question one dropdown",
+      "Test manager question two dropdown",
+      "test manager question three dropdown"
+    ],
+    //button shown before clicking to see drop down menu of questions
+    dropDownMenu:[
+      "select question One",
+      "select question Two",
+      "select question Three"
+    ],
     // Temporary State
     channels: [],
     question: "",
@@ -189,6 +212,8 @@ class CreateReport extends Component {
       scheduleTime,
       message,
       questions: JSON.stringify(questions),
+      //add questions selected for manager here,
+      //add questions selected for report here,
       slackChannelId,
       slackChannelName,
       created_at: new Date()
@@ -211,44 +236,22 @@ class CreateReport extends Component {
           <h3 className="schedule-title">Manager Questions</h3>
           <Divider className="divider" variant="fullWidth" />
           <section>
-            {this.state.questions.map(question => (
-              <article className="question-flex" key={question}>
-                <p className="question">{question}</p>
-                <Fab
-                  size="small"
-                  color="secondary"
-                  onClick={e => this.removeQuestion(e, question)}
-                >
-                  <Icon>delete_icon</Icon>
-                </Fab>
-              </article>
+
+            <div>
+            {this.state.dropDownMenu.map(question=>(
+              <div style={{display:'block',margin:'10px'}} key={question} onClick={e=>e.preventDefault}> 
+              <div>
+                <p>
+                  {question}
+                  {this.state.listManagerQuestions.map(manQuestion=>(
+                    < a style={{display:'block',margin:'10px'}} >{manQuestion}</a>
+                  ))}
+                </p>
+              </div>
+              </div>
             ))}
-          </section>
-          <section className="enter-question">
-            <FormControl className="input-field" required>
-              <InputLabel htmlFor="report-question">
-                Enter a question...
-              </InputLabel>
-              <Input
-                id="report-question"
-                required
-                className="input-field"
-                type="text"
-                name="question"
-                value={this.state.question}
-                onChange={this.enterQuestionsHandler}
-              />
-            </FormControl>
-            <Fab
-              size="small"
-              style={{ display: "block", margin: "10px 0" }}
-              color="primary"
-              onClick={this.questionsHandler}
-              disabled={this.state.question.length === 0 ? true : false}
-              type="submit"
-            >
-              <AddIcon />
-            </Fab>
+            </div>
+
           </section>
         </section>
       );
@@ -398,44 +401,23 @@ class CreateReport extends Component {
               <h3 className="schedule-title">Standup Questions</h3>
               <Divider className="divider" variant="fullWidth" />
               <section>
-                {this.state.questions.map(question => (
-                  <article className="question-flex" key={question}>
-                    <p className="question">{question}</p>
-                    <Fab
-                      size="small"
-                      color="secondary"
-                      onClick={e => this.removeQuestion(e, question)}
-                    >
-                      <Icon>delete_icon</Icon>
-                    </Fab>
-                  </article>
-                ))}
-              </section>
-              <section className="enter-question">
-                <FormControl className="input-field" required>
-                  <InputLabel htmlFor="report-question">
-                    Enter a question...
-                  </InputLabel>
-                  <Input
-                    id="report-question"
-                    required
-                    className="input-field"
-                    type="text"
-                    name="question"
-                    value={this.state.question}
-                    onChange={this.enterQuestionsHandler}
-                  />
-                </FormControl>
-                <Fab
-                  size="small"
-                  style={{ display: "block", margin: "10px 0" }}
-                  color="primary"
-                  onClick={this.questionsHandler}
-                  disabled={this.state.question.length === 0 ? true : false}
-                  type="submit"
-                >
-                  <AddIcon />
-                </Fab>
+
+              <div>
+            {this.state.dropDownMenu.map(question=>(
+              <div style={{display:'block',margin:'10px'}} key={question} onClick={e=>e.preventDefault}> 
+              <div>
+                <p>
+                  {question}
+                  {this.state.listSurveyQuestions.map(manQuestion=>(
+                    < a style={{display:'block',margin:'10px'}} >{manQuestion}</a>
+                  ))}
+                </p>
+              </div>
+              </div>
+            ))}
+            </div>
+
+            
               </section>
             </section>
           </Card>

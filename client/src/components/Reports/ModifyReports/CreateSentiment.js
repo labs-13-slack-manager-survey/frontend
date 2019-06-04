@@ -106,6 +106,7 @@ class CreateSentiment extends Component {
       });
   };
 
+  //function for questions
   enterQuestionsHandler = e => {
     e.preventDefault();
     const code = e.keyCode || e.which;
@@ -121,6 +122,7 @@ class CreateSentiment extends Component {
     }
   };
 
+  //function for questions
   questionsHandler = e => {
     e.preventDefault();
     this.setState(prevState => ({
@@ -129,6 +131,7 @@ class CreateSentiment extends Component {
     }));
   };
 
+    //function for questions
   removeQuestion = (e, question) => {
     e.preventDefault();
     this.setState(prevState => ({
