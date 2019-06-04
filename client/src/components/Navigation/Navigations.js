@@ -12,21 +12,21 @@ import Stats from '../../images/icons/stats.png';
 import Logout from '../../images/icons/logout.png';
 
 const styles = {
-	root: {
-		flexGrow: 1,
-		color: 'white'
-	},
-	grow: {
-		flexGrow: 1,
-		color: 'white'
-	},
-	menuButton: {
-		marginLeft: 0,
-		marginRight: 0
-	},
-	logoLink: {
-		borderRight: '1px solid #FFF'
-	},
+	// root: {
+	// 	flexGrow: 1,
+	// 	color: 'white'
+	// },
+	// grow: {
+	// 	flexGrow: 1,
+	// 	color: 'white'
+	// },
+	// menuButton: {
+	// 	marginLeft: 0,
+	// 	marginRight: 0
+	// },
+	// logoLink: {
+	// 	borderRight: '1px solid #FFF'
+	// },
 	// appBar: {
 	// 	height: 50,
 	// 	backgroundColor: 'white',
@@ -74,7 +74,7 @@ class Navigation extends React.Component {
 						</div>
 						 <div className="horizontal-buttons">
 							<button className = "menu-bar-add-poll"><span>+</span> Add Poll</button>
-							<button className = "menu-bar-add-team">+ Add Team</button>
+							
 						 </div>
 						{/* <div className="nav-links"> */}
 							{/* <div> */}

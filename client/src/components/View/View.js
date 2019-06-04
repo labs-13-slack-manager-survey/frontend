@@ -13,24 +13,24 @@ import { Card } from "@blueprintjs/core";
 class View extends Component {
   state = {
     roles: "member",
-    active: true
+    active: true,
   };
 
   componentDidMount() {
     console.log("yo its me in VIEW");
-    // const roles = jwt_decode(localStorage.getItem("token")).roles;
-    // const endpoint = `${baseURL}/users/byuser`;
-    // axiosWithAuth()
-    //   .get(endpoint)
-    //   .then(res =>
-    //     this.setState({
-    //       active: res.data.user.active,
-    //       roles: roles
-    //     })
-    //   )
-    //   .catch(err => {
-    //     console.log(err.response.data);
-    //   });
+    const roles = jwt_decode(localStorage.getItem("token")).roles;
+    const endpoint = `${baseURL}/users/byuser`;
+    axiosWithAuth()
+      .get(endpoint)
+      .then(res =>
+        this.setState({
+          active: res.data.user.active,
+          roles: roles
+        })
+      )
+      .catch(err => {
+        console.log(err.response.data);
+      });
   }
   render() {
     console.log("View render");
