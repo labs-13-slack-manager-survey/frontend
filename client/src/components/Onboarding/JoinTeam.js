@@ -24,7 +24,29 @@ const JoinTeam = props => {
 	return (
 		<div className="onboarding">
 			<Card raised={true} className="onboardingCard">
-				<div className="onboarding-card-content">>
+				<div className="onboarding-card-content">
+					<h3> Enter Join Code (provided by your manger):</h3>
+					<FormControl id="input-label">
+						<InputLabel htmlFor="custom-css-standard-input">
+							Join Code
+						</InputLabel>
+						<Input
+							id="custom-css-standard-input"
+							style={{
+								width: '200px',
+								margin: '10px 0',
+								color: blue[500],
+								underline: {
+									'&:after': {
+										borderBottomColor: blue[500]
+									}
+								}
+							}}
+							type="text"
+							name="joinCode"
+							onChange={props.changeHandler}
+						/>
+					</FormControl>
 					<Button
 						color="primary"
 						variant="contained"
