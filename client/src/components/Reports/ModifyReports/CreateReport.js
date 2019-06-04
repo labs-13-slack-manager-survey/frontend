@@ -25,11 +25,14 @@ import {
 
 //importing things from material-ui
 import MenuItem from "@material-ui/core/MenuItem";
-import MenuList from "@material-ui/core/MenuList";
-import popover from "@material-ui/core/Popover"
-import AddIcon from "@material-ui/icons/Add";
-
 import { TimePicker } from "material-ui-pickers";
+
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+} from 'styled-dropdown-component';
+
 
 import "./Report.css";
 
@@ -94,7 +97,8 @@ class CreateReport extends Component {
       "Friday",
       "Saturday",
       "Sunday"
-    ]
+    ],
+    hidden: true
   };
 
   changeHandler = e => {
@@ -229,38 +233,38 @@ class CreateReport extends Component {
       .catch(err => console.log(err));
   };
 
+  handleButton = e =>{
+    e.preventDefault();
+  }
+
+  handleOpenCloseDropdown() {
+    this.setState({
+      hidden: !this.state.hidden,
+    });
+}
+
   renderManagerQuestions = () => {
     if (this.state.managerQuestions === "yes") {
       return (
-        <section className="schedule-card-content">
-          <h3 className="schedule-title">Manager Questions</h3>
-          <Divider className="divider" variant="fullWidth" />
-          <section>
-
-            <div>
-            {this.state.dropDownMenu.map(question=>(
-              <div style={{display:'block',margin:'10px'}} key={question} onClick={e=>e.preventDefault}> 
-              <div>
-                <p>
-                  {question}
-                  {this.state.listManagerQuestions.map(manQuestion=>(
-                    < a style={{display:'block',margin:'10px'}} >{manQuestion}</a>
-                  ))}
-                </p>
-              </div>
-              </div>
-            ))}
-            </div>
-
-          </section>
-        </section>
+        <Dropdown>
+        <Button
+          secondary
+          dropdownToggle
+          onClick={() => this.handleOpenCloseDropdown()}
+        >
+          Dropdown Button
+        </Button>
+        <DropdownMenu hidden={this.state.hidden}>
+          <DropdownItem>Action</DropdownItem>
+          <DropdownItem>Another action</DropdownItem>
+          <DropdownItem>Something else here</DropdownItem>
+        </DropdownMenu>
+      </Dropdown>
       );
     }
   };
-
   render() {
     const { classes } = this.props;
-
     return (
       <div className="create-report">
         <Fab onClick={() => this.props.history.goBack()} color="default">
@@ -279,16 +283,37 @@ class CreateReport extends Component {
                   onChange={this.changeHandler}
                 >
                   <FormControlLabel
+                  className="yesNoButton"
                     value="yes"
                     control={<Radio />}
                     label="Yes"
                   />
-                  <FormControlLabel value="no" control={<Radio />} label="No" />
+                  <FormControlLabel value="no" className="yesNoButton" control={<Radio />} label="No" />
                 </RadioGroup>
-                {this.renderManagerQuestions()}
+              {this.renderManagerQuestions()}
+
+     <Dropdown className="btnnn">
+        <Button
+          secondary
+          dropdownToggle
+          onClick={() => this.handleOpenCloseDropdown()}
+        >
+          Dropdown Button
+        </Button>
+        <DropdownMenu hidden={this.state.hidden}>
+          <DropdownItem>Action</DropdownItem>
+          <DropdownItem>Another action</DropdownItem>
+          <DropdownItem>Something else here</DropdownItem>
+        </DropdownMenu>
+      </Dropdown>
+
+
+
               </FormControl>
             </section>
           </Card>
+
+
 
           <Card raised={true} className="schedule-card">
             <section className="schedule-card-content">
