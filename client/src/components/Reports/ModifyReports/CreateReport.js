@@ -483,7 +483,7 @@ render() {
 
         {/* Checks if admin wants manager questions answered */}
         <Card raised={true} className="schedule-card">
-          <section>
+          <section className="schedule-card-content">
             <FormControl>
               <FormLabel component="legend">
                 Would you like the manager to answer questions?
