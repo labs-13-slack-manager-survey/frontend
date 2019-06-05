@@ -21,7 +21,7 @@ class ReportResults extends Component {
 		filteredResponse: [],
 		clickedResponder: null,
 		responders: [],
-		completed: false
+		completed: false,
 	};
 
 	render() {
@@ -31,6 +31,7 @@ class ReportResults extends Component {
 			month: 'long',
 			day: 'numeric'
 		};
+	
 
 		return (
 			<main className="report-results-container">
@@ -107,19 +108,19 @@ class ReportResults extends Component {
 													<h3 className="response-container-main-name">
 														{response.fullName}
 													</h3>
+					
 													{response.questions.map(
 														({ question, answer, id }) => (
 															<div key={id}>
 																<h6 className="response-container-main-question">
 																	{question}
 																</h6>
-																<p className="response-container-main-answer">
-																	{answer}
-																</p>
+																{response.sentimentRange != null && <h3>{response.sentimentRange}</h3>}
+																{response.sentimentRange=null && <p className="response-container-main-answer">{response.answer}</p>}
+
 															</div>
 														)
 													)}
-													<h3>{response.sentimentRange}</h3>
 												</div>
 											</div>
 										</Card>
