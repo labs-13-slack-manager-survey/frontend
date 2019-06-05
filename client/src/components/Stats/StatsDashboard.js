@@ -24,7 +24,7 @@ class StatsDashboard extends Component {
           </div>
         </div>
         <div className="sideDashboard">
-          <TodayPoll />
+          <TodayPoll average={3.8} />
           <Calendar />
         </div>
       </div>
