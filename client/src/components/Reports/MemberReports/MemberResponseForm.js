@@ -14,7 +14,6 @@ class MemberResponseForm extends Component {
     reportMessage: "",
     questions: [],
     isSentiment: false,
-    sentimentVal: 3
   };
 
   render() {
@@ -30,10 +29,12 @@ class MemberResponseForm extends Component {
           <ReportInput
             question={q.question}
             response={q.response}
+            sentimentRange={q.sentimentRange}
             handleChange={this.handleChange}
             key={i}
             isSentiment={this.state.isSentiment}
-            sentimentVal={this.state.sentimentVal}
+            handleSentiment={this.handleSentiment}
+            
           />
         ))}
         <Button
@@ -64,42 +65,66 @@ class MemberResponseForm extends Component {
           message,
           questions,
           isSentiment,
-          sentimentRange
         } = res.data.report;
         this.setState({
           reportName,
           reportMessage: message,
           questions: questions.map(q => ({
             question: q,
-            response: ""
+            response: "",
+            sentimentRange: 3,
           })),
           isSentiment: isSentiment,
-          sentimentVal: sentimentRange
+          // sentimentRange: sentimentRange
         });
       })
       .catch(err => console.log(err));
   }
+    //   this.setState(prevState => ({
+    //     ...prevState,
+    //     questions: prevState.questions.map(
+    //       q => (q.question !== question ? q : aObj) // qObj
+    //     )
+    //   }));
+  handleSentiment = (event, value, question) => {
+    const sObj = {question, sentimentRange: value}
+    console.log(sObj)
+    this.setState( prevState => ({ 
+      ...prevState,
+      questions: prevState.questions.map( q =>
+         q.question !== question ? q:sObj)
+      }));
+    console.log(this.state.questions)
+  }
 
   handleChange = (e, question) => {
+    console.log(question)
     // const qObj = { question, response: e.target.value };
-    // const sObj = {question, sentimentVal: e.target.value};
-    console.log(question);
-    if (this.state.isSentiment) {
-      this.setState(prevState => ({
-        ...prevState,
-        sentimentVal: question,
-        questions: prevState.questions.map(q =>
-          q.question !== question ? q : null
-        )
-      }));
-    } else {
-      this.setState(prevState => ({
-        ...prevState,
-        questions: prevState.questions.map(
-          q => (q.question !== question ? q : null) // qObj
-        )
-      }));
-    }
+    const sObj = {question, sentimentRange: e.target.value};
+    console.log(sObj)
+    // console.log(question);
+    // if (this.state.isSentiment) {
+    //   // this.setState(prevState => ({
+    //   //   ...prevState,
+    //   //   sentimentRange: question,
+    //   //   questions: prevState.questions.map(q =>
+    //   //     q.question !== question ? q : null
+    //   //   )
+    //   // }));
+    //   this.setState(prevState => ({
+    //     ...prevState,
+    //     questions: prevState.questions.map(
+    //       q => (q.question !== question? q : sObj)
+    //     )
+    //   }));
+    // } else {
+    //   this.setState(prevState => ({
+    //     ...prevState,
+    //     questions: prevState.questions.map(
+    //       q => (q.question !== question ? q : aObj) // qObj
+    //     )
+    //   }));
+    // }
   };
 
   submitReport = () => {
@@ -112,7 +137,7 @@ class MemberResponseForm extends Component {
             return {
               question: val.question,
               response: "test",
-              sentimentVal: this.state.sentimentVal
+              sentimentRange: this.state.sentimentRange
             };
           })
         )
@@ -123,7 +148,7 @@ class MemberResponseForm extends Component {
             questions: prevState.questions.map(q => ({
               question: q.question,
               response: "",
-              sentimentVal: 3
+              sentimentRange: 3
             }))
           }));
         })

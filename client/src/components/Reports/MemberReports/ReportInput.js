@@ -38,12 +38,17 @@ const StyledSlider = withStyles({
 })(Slider);
 
 class ReportInput extends React.Component {
+	state = {
+		value: 3,
+	}
 	
-	// handleChange = (event, sentimentVal) => {
-	// 	this.setState({ this.props.sentimentVal });
-	// 	console.log(this.props.sentimentVal)
+	// handleChange = (event, sentimentRange) => {
+	// 	this.setState({ this.props.sentimentRange });
+	// 	console.log(this.props.sentimentRange)
 	// };
-
+	handleChange = (event, value ) => {
+		console.log(value)
+	}
 	render () {
 
 		return (		
@@ -53,12 +58,22 @@ class ReportInput extends React.Component {
 					<>
 					<StyledSlider
 						className = "slider"
-						value = {this.props.sentimentVal} 
+						value = {this.props.sentimentRange} 
+						min={1}
+						max={5}
+						step={1}
+						// onChange={e => this.props.handleChange(e, this.props.question)}
+						onChange = {(e, v) => this.props.handleSentiment(e, v, this.props.question)}
+						/> 
+
+					{/* <StyledSlider
+						className = "slider"
+						value = {this.props.sentimentRange} 
 						min={1}
 						max={5}
 						step={1}
 						onChange={(e, v) => this.props.handleChange(e, v)}
-						/> 
+						/>  */}
 					<div className="slider-label">
 						<p>1</p>
 						<p>2</p>
@@ -66,6 +81,15 @@ class ReportInput extends React.Component {
 						<p>4</p>	
 						<p>5</p>
 					</div>	
+					<TextField
+						fullWidth={true}
+						onChange={e => this.props.handleChange(e, this.props.question)}
+						margin="normal"
+						multiline={true}
+						name="response"
+						value={this.props.response}
+						variant="outlined"
+					/>
 					</>
 						)
 					 : 
