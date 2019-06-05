@@ -180,6 +180,7 @@ updateSchedule = day => {
     schedule: includes ? schedule.filter(d => d !== day) : [...schedule, day]
   });
 };
+
 selectWeekdays = () => {
   this.setState({
     schedule: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
@@ -412,7 +413,7 @@ RenderSurveyQuestions = () => {
     {popupState => (
       <React.Fragment>
         <Button variant="contained" {...bindTrigger(popupState)}>
-          Select question one
+          Select Survey Template
         </Button>
         <Menu {...bindMenu(popupState)} onClick={this.aQuestion}>
     {this.state.questionExperience.map((type,index)=>(<MenuItem key={index} onClick={popupState.close} value={index}> {type}  </MenuItem>  ))}
@@ -597,7 +598,6 @@ render() {
           color="primary"
           type="submit"
           onClick={this.addReport}
-          disabled={this.state.questions.length === 0 ? true : false}
         >
           Create Report
         </Button>
