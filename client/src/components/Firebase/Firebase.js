@@ -25,10 +25,12 @@ class Firebase extends Component {
       signInSuccessUrl: "/onboarding",
       signInOptions: [
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-        firebase.auth.GithubAuthProvider.PROVIDER_ID
+        firebase.auth.GithubAuthProvider.PROVIDER_ID,
+        firebase.auth.FacebookAuthProvider.PROVIDER_ID
       ],
       callbacks: {
         signInSuccessWithAuthResult: ({ user }) => {
+          //redirect to custom API with the data we get from a success firebase auth
           axios
             .post(`${baseURL}/auth/firebase`, {
               user,
