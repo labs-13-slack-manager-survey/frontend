@@ -359,9 +359,10 @@ renderManagerQuestions = () => {
 
 {/* conditionally rendering manager questions to reflect who is manager */}
         {this.state.managerType === 0 ?
+        //questions for Engineering manager
         <div >
           <br/>
-          <h6>As an Engineering manager,What is your weekly goal</h6>
+          <h6>As an Engineering manager,What is your weekly goal?</h6>
           <input
             id="report-question"
             className="input-field"
@@ -371,7 +372,7 @@ renderManagerQuestions = () => {
             //value={this.state.managerQuestionResponse}
             onChange={this.handleSubmission}
           />
-            <h6>As an Engineering manager,What is your weekly goal</h6>
+            <h6>What features should be Priority?</h6>
           <input
             id="report-question"
             className="input-field"
@@ -381,7 +382,7 @@ renderManagerQuestions = () => {
             //value={this.state.managerQuestionResponse}
             onChange={this.handleSubmission}
           />
-            <h6>As an Engineering manager,What is your weekly goal</h6>
+            <h6>Are there any new project details that the team should know?</h6>
           <input
             id="report-question"
             className="input-field"
@@ -393,9 +394,10 @@ renderManagerQuestions = () => {
           />
         </div>
         : 
+        //questions for marketing manager
         <div>
           <br/>
-          <h6>As a Project Manager,What is your weekly goal</h6>
+          <h6>What is the weekly sales goal?</h6>
           <input
             id="report-question"
             className="input-field"
@@ -405,7 +407,7 @@ renderManagerQuestions = () => {
             //value={this.state.managerQuestionResponse}
             onChange={this.handleSubmission}
           />
-           <h6>As a Project Manager,What is your weekly goal</h6>
+           <h6>IS their any important customer feedback?</h6>
           <input
             id="report-question"
             className="input-field"
@@ -415,7 +417,7 @@ renderManagerQuestions = () => {
             //value={this.state.managerQuestionResponse}
             onChange={this.handleSubmission}
           />
-           <h6>As a Project Manager,What is your weekly goal</h6>
+           <h6>How are you feeling about the current state of team moral?</h6>
           <input
             id="report-question"
             className="input-field"
@@ -448,22 +450,6 @@ RenderSurveyQuestions = () => {
         <Menu {...bindMenu(popupState)} onClick={this.aQuestion}>
     {this.state.questionExperience.map((type,index)=>(<MenuItem key={index} onClick={popupState.close} value={index}> {type}  </MenuItem>  ))}
         </Menu>
-
-{/* conditionally rendering questions, WE CAN USE THE SATE ARRAY questionExperience TO ADD NEW QUESTIONS! */}
-        {this.state.aQuestion === 0 ?
-        <div >
-          <br/>
-          <h6>marketing team question 1</h6>
-          <h6>marketing team question 2</h6>
-          <h6>marketing team question 3</h6>
-        </div>
-        : 
-        <div>
-          <br/>
-          <h6>dev team question 1</h6>
-          <h6>dev team question 2</h6>
-          <h6>dev team question 3</h6>
-        </div>}
       </React.Fragment>
     )}
   </PopupState>
@@ -483,7 +469,7 @@ render() {
 
         {/* Checks if admin wants manager questions answered */}
         <Card raised={true} className="schedule-card">
-          <section>
+          <section className="schedule-card-content">
             <FormControl>
               <FormLabel component="legend">
                 Would you like the manager to answer questions?
