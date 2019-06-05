@@ -47,7 +47,6 @@ class SentimentChart extends Component {
   render() {
     return (
       <div>
-        <h2>Chart</h2>
         <canvas id="sentimentChart" ref={this.chartRef} />
       </div>
     );

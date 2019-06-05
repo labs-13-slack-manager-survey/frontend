@@ -13,16 +13,20 @@ class StatsDashboard extends Component {
     return (
       <div className="dashboard">
         <h2>Stats Dashboard</h2>
-        <SentimentChart />
-        <SentimentAvg />
-        <div className="dataSquares">
-          {/* Dummy Data */}
-          <DataSquare text="Number of Teams" data="8" />
-          <DataSquare text="Total Poll Responses" data="1715/1824" />
-          <DataSquare text="Total Response Rate" data="76%" />
+        <div className="mainDashboard">
+          <SentimentChart />
+          <SentimentAvg />
+          <div className="dataSquares">
+            {/* Dummy Data */}
+            <DataSquare text="Number of Teams" data="8" />
+            <DataSquare text="Total Poll Responses" data="1715/1824" />
+            <DataSquare text="Total Response Rate" data="76%" />
+          </div>
         </div>
-        <TodayPoll />
-        <Calendar />
+        <div className="sideDashboard">
+          <TodayPoll />
+          <Calendar />
+        </div>
       </div>
     );
   }
