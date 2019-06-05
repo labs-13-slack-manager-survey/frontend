@@ -4,7 +4,7 @@ import SentimentChart from "./SentimentChart";
 import SentimentAvg from "./SentimentAvg";
 import DataSquare from "./DataSquare";
 import TodayPoll from "./TodayPoll";
-import Calendar from "./Calendar";
+import PollCalendar from "./PollCalendar";
 
 import "./StatsDashboard.css";
 
@@ -25,7 +25,7 @@ class StatsDashboard extends Component {
         </div>
         <div className="sideDashboard">
           <TodayPoll average={3.8} />
-          <Calendar />
+          <PollCalendar />
         </div>
       </div>
     );
