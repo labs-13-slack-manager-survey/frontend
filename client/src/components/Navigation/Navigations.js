@@ -73,8 +73,9 @@ class Navigation extends React.Component {
 							<div>slackr</div>
 						</div>
 						 <div className="horizontal-buttons">
-							<button className = "menu-bar-add-poll" tag={Link} to="https://slackrs-app.netlify.com/dashboard/reports/choose"><span>+</span> Add Poll</button>
-							
+						 <NavLink to="/dashboard/reports/choose">
+							<button className = "menu-bar-add-poll"><span>+</span> Add Poll</button>
+							</NavLink>
 						 </div>
 						{/* <div className="nav-links"> */}
 							{/* <div> */}
