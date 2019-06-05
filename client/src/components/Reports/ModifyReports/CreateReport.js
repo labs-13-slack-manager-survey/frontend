@@ -340,11 +340,51 @@ renderManagerQuestions = () => {
             //value={this.state.managerQuestionResponse}
             onChange={this.handleSubmission}
           />
+            <h6>As an Engineering manager,What is your weekly goal</h6>
+          <input
+            id="report-question"
+            className="input-field"
+            type="text"
+            name="managerQuestionResponse"
+            placeholder="Enter your response here"
+            //value={this.state.managerQuestionResponse}
+            onChange={this.handleSubmission}
+          />
+            <h6>As an Engineering manager,What is your weekly goal</h6>
+          <input
+            id="report-question"
+            className="input-field"
+            type="text"
+            name="managerQuestionResponse"
+            placeholder="Enter your response here"
+            //value={this.state.managerQuestionResponse}
+            onChange={this.handleSubmission}
+          />
         </div>
         : 
         <div>
           <br/>
           <h6>As a Project Manager,What is your weekly goal</h6>
+          <input
+            id="report-question"
+            className="input-field"
+            type="text"
+            name="managerQuestionResponse"
+            placeholder="Enter your response here"
+            //value={this.state.managerQuestionResponse}
+            onChange={this.handleSubmission}
+          />
+           <h6>As a Project Manager,What is your weekly goal</h6>
+          <input
+            id="report-question"
+            className="input-field"
+            type="text"
+            name="managerQuestionResponse"
+            placeholder="Enter your response here"
+            //value={this.state.managerQuestionResponse}
+            onChange={this.handleSubmission}
+          />
+           <h6>As a Project Manager,What is your weekly goal</h6>
           <input
             id="report-question"
             className="input-field"
@@ -382,61 +422,17 @@ RenderSurveyQuestions = () => {
         {this.state.aQuestion === 0 ?
         <div >
           <br/>
-          <h6>marketing</h6>
+          <h6>marketing team question 1</h6>
+          <h6>marketing team question 2</h6>
+          <h6>marketing team question 3</h6>
         </div>
         : 
         <div>
           <br/>
-          <h6>dev</h6>
+          <h6>dev team question 1</h6>
+          <h6>dev team question 2</h6>
+          <h6>dev team question 3</h6>
         </div>}
-     
-        {/* <div style={{display:"block"}}>
-          <Button variant="contained" {...bindTrigger(popupState)}>
-            Select Stand Up Question one
-          </Button>
-          <Menu {...bindMenu(popupState)}>
-            {this.state.listSurveyQuestions.map((questions,index)=>(
-              <MenuItem key={index} onClick={this.QuestionOne} value={questions}> 
-                {questions} 
-              </MenuItem> 
-            ))}
-          </Menu>
-        </div>
-
-    
-     
-        <div style={{display:"block"}}>
-
-          <Button variant="contained" {...bindTrigger(popupState)}>
-            Select Stand Up Question two
-          </Button>
-          <Menu {...bindMenu(popupState)}>
-            {this.state.listSurveyQuestions.map((questions,index)=>(
-              <MenuItem key={index} onClick={this.QuestionTwo} value={questions}> 
-                {questions} 
-              </MenuItem> 
-            ))}
-          </Menu>
-        </div>
-        <br/>
-          {this.state.questionOne}
-        <br/>
-
-        <div style={{display:"block"}}>
-          <Button variant="contained" {...bindTrigger(popupState)}>
-            Select Stand Up Question three
-          </Button>
-          <Menu {...bindMenu(popupState)}>
-            {this.state.listSurveyQuestions.map((questions,index)=>(
-              <MenuItem key={index} onClick={this.QuestionThree} value={questions}> 
-                {questions} 
-              </MenuItem> 
-            ))}
-          </Menu>
-        </div>
-        <br/>
-          {this.state.questionOne}
-        <br/> */}
       </React.Fragment>
     )}
   </PopupState>
