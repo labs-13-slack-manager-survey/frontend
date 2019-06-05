@@ -54,7 +54,7 @@ class MemberResponseForm extends Component {
 			.get(endpoint)
 			.then(res => {
 				console.log(res.data.report);
-				const { reportName, message, questions, isSentiment } = res.data.report;
+				const { reportName, message, questions, isSentiment, sentimentRange } = res.data.report;
 				this.setState({
 					reportName,
 					reportMessage: message,
@@ -63,6 +63,7 @@ class MemberResponseForm extends Component {
 						response: ''
 					})), 
 					isSentiment: isSentiment, 
+					sentimentVal: sentimentRange,
 				});
 			})
 			.catch(err => console.log(err));

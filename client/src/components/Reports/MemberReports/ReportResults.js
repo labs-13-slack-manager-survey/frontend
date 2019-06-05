@@ -119,6 +119,7 @@ class ReportResults extends Component {
 															</div>
 														)
 													)}
+													<h3>{response.sentimentRange}</h3>
 												</div>
 											</div>
 										</Card>
@@ -136,6 +137,7 @@ class ReportResults extends Component {
 		axiosWithAuth()
 			.get(`${baseURL}/responses/${this.props.match.params.reportId}`)
 			.then(res => {
+				console.log(res)
 				const filtered = res.data[0].responses.filter(
 					response => response.userId === userId
 				);
