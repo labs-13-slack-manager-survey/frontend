@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import Chart from "./Chart";
+import SentimentChart from "./SentimentChart";
 import SentimentAvg from "./SentimentAvg";
 import DataSquare from "./DataSquare";
 import TodayPoll from "./TodayPoll";
@@ -12,8 +12,8 @@ class StatsDashboard extends Component {
   render() {
     return (
       <div className="dashboard">
-        <h2>Stats</h2>
-        <Chart />
+        <h2>Stats Dashboard</h2>
+        <SentimentChart />
         <SentimentAvg />
         <DataSquare />
         <TodayPoll />
