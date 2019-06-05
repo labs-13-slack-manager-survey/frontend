@@ -11,6 +11,9 @@ import Onboarding from "./components/Onboarding/Onboarding";
 import View from "./components/View/View";
 import ReportsDash from "./components/Dashboard/ReportsDash";
 
+// Stats Dashboard
+import StatsDashboard from "./components/Stats/StatsDashboard";
+
 // Profile Page
 import Profile from "./components/Profile/Profile";
 
@@ -51,6 +54,9 @@ function App() {
 
       {/* Dashboard */}
       <PrivateRoute exact path="/dashboard" component={View} />
+
+      {/* Stats Dashboard */}
+      <Route path="/dashboard/stats" component={StatsDashboard} />
 
       {/* Reports */}
       <PrivateRoute path="/dashboard/reports" component={ReportsDash} />

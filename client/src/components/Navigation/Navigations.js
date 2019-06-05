@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 // style imports
 import './navigation.css';
@@ -73,8 +73,9 @@ class Navigation extends React.Component {
 							<div>slackr</div>
 						</div>
 						 <div className="horizontal-buttons">
+						 <NavLink to="/dashboard/reports/choose">
 							<button className = "menu-bar-add-poll"><span>+</span> Add Poll</button>
-							
+							</NavLink>
 						 </div>
 						{/* <div className="nav-links"> */}
 							{/* <div> */}
