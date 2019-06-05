@@ -66,15 +66,20 @@ state = {
       "Scrum master",
     ],
   questions: [],
+  questionOne: "",
+  questionTwo: "",
+  questionThree:"",
   slackChannelId: null,
   slackAuthorized: false,
   managerQuestions: "no",
   isSentiment: false,
   //array for listing manager questions
   listSurveyQuestions:[
-    "Test Survey questions dropdown",
-    "Test Survey questions dropdown",
-    "Test Survey questions  dropdown"
+    "How did you feel about yesterday?",
+    "What are you going to be working on today?",
+    "Did you have any blockers yesterday?",
+    "How are you feeling about your contribution so far?",
+    "Are you happy with your teams contribution to this sprint?"
   ],
   //button shown before clicking to see drop down menu of questions
   dropDownMenu:[
@@ -95,7 +100,7 @@ state = {
     "Sunday"
   ],
   hidden: true,
-  dummyTest:0
+  managerType:0
 };
 
 changeHandler = e => {
@@ -249,17 +254,52 @@ e.preventDefault();
 
 console.log(e.target)
 console.log(e.target.value)
-this.setState({dummyTest:e.target.value})
+this.setState({managerType:e.target.value})
 
 
 //the value that is coming in is a string
 }
 
-QuestionType = e =>{
-e.preventDefault();
+QuestionOne = e =>{
+  e.preventDefault();
 
-console.log(e.target)
-console.log(e.target.value)
+  const answer = e.nativeEvent.target.outerText;
+
+  console.log("VALUE++++",e.nativeEvent.target.outerText)
+  console.log("STATE++++",this.state.questionOne)
+
+  this.setState({questionOne:e.nativeEvent.target.outerText})
+
+  console.log(" NEW STATE++++",this.state.questionOne)
+
+
+//need to set the state for the question that was picked
+}
+QuestionTwo = e =>{
+  e.preventDefault();
+
+  const answer = e.nativeEvent.target.outerText;
+
+  console.log("VALUE++++",e.nativeEvent.target.outerText)
+  console.log("STATE++++",this.state.questionOne)
+
+  this.setState({questionTwo:answer})
+
+
+
+//need to set the state for the question that was picked
+}
+QuestionThree = e =>{
+  e.preventDefault();
+
+  const answer = e.nativeEvent.target.outerText;
+
+  console.log("VALUE++++",e.nativeEvent.target.outerText)
+  console.log("STATE++++",this.state.questionOne)
+
+  this.setState({questionThree:answer})
+
+
 
 //need to set the state for the question that was picked
 }
@@ -276,12 +316,12 @@ renderManagerQuestions = () => {
           Select Manager Questions
         </Button>
         <Menu {...bindMenu(popupState)} onClick={this.mangerType}>
-    {this.state.typeOfManager.map((type,index)=>(<MenuItem key={index}onClick={popupState.close} value={index}> {type}  </MenuItem>  ))}
+    {this.state.typeOfManager.map((type,index)=>(<MenuItem key={index} onClick={popupState.close} value={index}> {type}  </MenuItem>  ))}
         </Menu>
 
 {/* conditionally rendering manager questions to reflect who is manager */}
-        {this.state.dummyTest === 0 ?
-        <div>
+        {this.state.managerType === 0 ?
+        <div >
            <br/>
           <h6>As an Engineering manager how to you feel about your team</h6>
           <input
@@ -322,32 +362,53 @@ RenderSurveyQuestions = () => {
     <PopupState variant="popover" popupId="demo-popup-menu">
     {popupState => (
       <React.Fragment>
+     
         <div style={{display:"block"}}>
           <Button variant="contained" {...bindTrigger(popupState)}>
             Select Stand Up Question one
           </Button>
-          <Menu {...bindMenu(popupState)} onClick={this.QuestionType}>
-              {this.state.listSurveyQuestions.map((questions,index)=>(<MenuItem key={index}onClick={popupState.close} value={questions}> {questions}  </MenuItem>  ))}
+          <Menu {...bindMenu(popupState)}>
+            {this.state.listSurveyQuestions.map((questions,index)=>(
+              <MenuItem key={index} onClick={this.QuestionOne} value={questions}> 
+                {questions} 
+              </MenuItem> 
+            ))}
           </Menu>
         </div>
-      <br/>
+    
+     
         <div style={{display:"block"}}>
+
           <Button variant="contained" {...bindTrigger(popupState)}>
             Select Stand Up Question two
           </Button>
-          <Menu {...bindMenu(popupState)} onClick={this.QuestionType}>
-              {this.state.listSurveyQuestions.map((questions,index)=>(<MenuItem key={index}onClick={popupState.close} value={questions}> {questions}  </MenuItem>  ))}
+          <Menu {...bindMenu(popupState)}>
+            {this.state.listSurveyQuestions.map((questions,index)=>(
+              <MenuItem key={index} onClick={this.QuestionTwo} value={questions}> 
+                {questions} 
+              </MenuItem> 
+            ))}
           </Menu>
         </div>
         <br/>
+          {this.state.questionOne}
+        <br/>
+
         <div style={{display:"block"}}>
           <Button variant="contained" {...bindTrigger(popupState)}>
             Select Stand Up Question three
           </Button>
-          <Menu {...bindMenu(popupState)} onClick={this.QuestionType}>
-              {this.state.listSurveyQuestions.map((questions,index)=>(<MenuItem key={index}onClick={popupState.close} value={questions}> {questions}  </MenuItem>  ))}
+          <Menu {...bindMenu(popupState)}>
+            {this.state.listSurveyQuestions.map((questions,index)=>(
+              <MenuItem key={index} onClick={this.QuestionThree} value={questions}> 
+                {questions} 
+              </MenuItem> 
+            ))}
           </Menu>
         </div>
+        <br/>
+          {this.state.questionOne}
+        <br/>
       </React.Fragment>
     )}
   </PopupState>
