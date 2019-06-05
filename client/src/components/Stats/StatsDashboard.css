@@ -1,0 +1,25 @@
+.dashboard {
+  margin: 20px auto;
+  width: 1000px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.mainDashboard {
+  width: 68%;
+  margin-right: 2%;
+}
+
+.sideDashboard {
+  width: 30%;
+}
+
+h2 {
+  width: 100%;
+  text-align: center;
+}
+
+.dataSquares {
+  margin: 20px 0;
+  display: flex;
+}
