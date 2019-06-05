@@ -53,6 +53,9 @@ menu: {
 
 class CreateReport extends Component {
 state = {
+  //Questions for survey with new menu
+  questionExperience: [ "Marketing Team",
+                        "Dev Team"],
   // Main Report State
   reportName: "Daily Standup",
   schedule: [],
@@ -255,12 +258,13 @@ mangerType = e =>{
   this.setState({managerType:e.target.value})
 }
 
-//this handles submissions for the manager questions
-handleSubmission = e =>{
+aQuestion = e =>{
   e.preventDefault();
-  console.log(e.target.value)
-  this.setState=({[e.target.name]:e.target.value})
+  this.setState({aQuestion:e.target.value})
 }
+
+
+
 
 
 QuestionOne = e =>{
@@ -367,8 +371,26 @@ RenderSurveyQuestions = () => {
     <PopupState variant="popover" popupId="demo-popup-menu">
     {popupState => (
       <React.Fragment>
+        <Button variant="contained" {...bindTrigger(popupState)}>
+          Select question one
+        </Button>
+        <Menu {...bindMenu(popupState)} onClick={this.aQuestion}>
+    {this.state.questionExperience.map((type,index)=>(<MenuItem key={index} onClick={popupState.close} value={index}> {type}  </MenuItem>  ))}
+        </Menu>
+
+{/* conditionally rendering questions, WE CAN USE THE SATE ARRAY questionExperience TO ADD NEW QUESTIONS! */}
+        {this.state.aQuestion === 0 ?
+        <div >
+          <br/>
+          <h6>marketing</h6>
+        </div>
+        : 
+        <div>
+          <br/>
+          <h6>dev</h6>
+        </div>}
      
-        <div style={{display:"block"}}>
+        {/* <div style={{display:"block"}}>
           <Button variant="contained" {...bindTrigger(popupState)}>
             Select Stand Up Question one
           </Button>
@@ -380,6 +402,7 @@ RenderSurveyQuestions = () => {
             ))}
           </Menu>
         </div>
+
     
      
         <div style={{display:"block"}}>
@@ -413,7 +436,7 @@ RenderSurveyQuestions = () => {
         </div>
         <br/>
           {this.state.questionOne}
-        <br/>
+        <br/> */}
       </React.Fragment>
     )}
   </PopupState>
@@ -430,6 +453,7 @@ render() {
         <Icon>arrow_back</Icon>
       </Fab>
       <form className="create-report">
+
         {/* Checks if admin wants manager questions answered */}
         <Card raised={true} className="schedule-card">
           <section>
@@ -559,6 +583,7 @@ render() {
             </section>
           </section>
         </Card>
+
         <Card raised={true} className="schedule-card">
           <section className="schedule-card-content">
             <h3 className="schedule-title">Standup Questions</h3>
@@ -569,6 +594,7 @@ render() {
             </section>
           </section>
         </Card>
+
         <Button
           style={{ display: "block", marginTop: "30px" }}
           variant="contained"
