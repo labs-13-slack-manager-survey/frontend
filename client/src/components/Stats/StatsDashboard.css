@@ -2,3 +2,8 @@
   margin: 20px auto;
   width: 800px;
 }
+
+.dataSquares {
+  margin: 20px 0;
+  display: flex;
+}

@@ -15,7 +15,12 @@ class StatsDashboard extends Component {
         <h2>Stats Dashboard</h2>
         <SentimentChart />
         <SentimentAvg />
-        <DataSquare />
+        <div className="dataSquares">
+          {/* Dummy Data */}
+          <DataSquare text="Number of Teams" data="8" />
+          <DataSquare text="Total Poll Responses" data="1715/1824" />
+          <DataSquare text="Total Response Rate" data="76%" />
+        </div>
         <TodayPoll />
         <Calendar />
       </div>
