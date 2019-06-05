@@ -38,15 +38,11 @@ const StyledSlider = withStyles({
 })(Slider);
 
 class ReportInput extends React.Component {
-	//starting value for the poll
-	state = {
-		sentimentVal: 3, 
-	}
 	
-	handleChange = (event, sentimentVal) => {
-		this.setState({ sentimentVal });
-		console.log(this.state.sentimentVal)
-	};
+	// handleChange = (event, sentimentVal) => {
+	// 	this.setState({ this.props.sentimentVal });
+	// 	console.log(this.props.sentimentVal)
+	// };
 
 	render () {
 
@@ -57,11 +53,11 @@ class ReportInput extends React.Component {
 					<>
 					<StyledSlider
 						className = "slider"
-						value = {this.state.sentimentVal} 
+						value = {this.props.sentimentVal} 
 						min={1}
 						max={5}
 						step={1}
-						onChange={this.handleChange}
+						onChange={(e, v) => this.props.handleChange(e, v)}
 						/> 
 					<div className="slider-label">
 						<p>1</p>
