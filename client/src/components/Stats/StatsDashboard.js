@@ -12,7 +12,7 @@ class StatsDashboard extends Component {
   render() {
     return (
       <div className="dashboard">
-        <h2>Stats Dashboard</h2>
+        <h2 style={{ marginBottom: "40px" }}>Stats Dashboard</h2>
         <div className="mainDashboard">
           <SentimentChart />
           <SentimentAvg />
