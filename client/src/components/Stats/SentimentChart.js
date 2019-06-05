@@ -13,6 +13,7 @@ class SentimentChart extends Component {
     const myChartRef = this.chartRef.current.getContext("2d");
     new Chart(myChartRef, {
       type: "bar",
+      // Currently just hard-coded dummy data
       data: {
         labels: [
           "6/3/19",
