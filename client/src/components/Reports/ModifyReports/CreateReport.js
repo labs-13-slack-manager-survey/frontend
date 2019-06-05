@@ -279,9 +279,11 @@ renderManagerQuestions = () => {
     {this.state.typeOfManager.map((type,index)=>(<MenuItem key={index}onClick={popupState.close} value={index}> {type}  </MenuItem>  ))}
         </Menu>
 
+{/* conditionally rendering manager questions to reflect who is manager */}
         {this.state.dummyTest === 0 ?
         <div>
-          <p>As an Engineering manager how to you feel about your team</p>
+           <br/>
+          <h6>As an Engineering manager how to you feel about your team</h6>
           <input
             id="report-question"
             className="input-field"
@@ -291,8 +293,10 @@ renderManagerQuestions = () => {
             onChange={this.enterQuestionsHandler}
             />
         </div>
-          : <div>
-          <p>As a Manager how to you feel about your team</p>
+        : 
+        <div>
+          <br/>
+          <h6>As a Manager how to you feel about your team</h6>
           <input
             id="report-question"
             className="input-field"
@@ -318,12 +322,32 @@ RenderSurveyQuestions = () => {
     <PopupState variant="popover" popupId="demo-popup-menu">
     {popupState => (
       <React.Fragment>
-        <Button variant="contained" {...bindTrigger(popupState)}>
-          Select Stand Up Questions
-        </Button>
-        <Menu {...bindMenu(popupState)} onClick={this.QuestionType}>
-            {this.state.listSurveyQuestions.map((questions,index)=>(<MenuItem key={index}onClick={popupState.close} value={questions}> {questions}  </MenuItem>  ))}
-        </Menu>
+        <div style={{display:"block"}}>
+          <Button variant="contained" {...bindTrigger(popupState)}>
+            Select Stand Up Question one
+          </Button>
+          <Menu {...bindMenu(popupState)} onClick={this.QuestionType}>
+              {this.state.listSurveyQuestions.map((questions,index)=>(<MenuItem key={index}onClick={popupState.close} value={questions}> {questions}  </MenuItem>  ))}
+          </Menu>
+        </div>
+      <br/>
+        <div style={{display:"block"}}>
+          <Button variant="contained" {...bindTrigger(popupState)}>
+            Select Stand Up Question two
+          </Button>
+          <Menu {...bindMenu(popupState)} onClick={this.QuestionType}>
+              {this.state.listSurveyQuestions.map((questions,index)=>(<MenuItem key={index}onClick={popupState.close} value={questions}> {questions}  </MenuItem>  ))}
+          </Menu>
+        </div>
+        <br/>
+        <div style={{display:"block"}}>
+          <Button variant="contained" {...bindTrigger(popupState)}>
+            Select Stand Up Question three
+          </Button>
+          <Menu {...bindMenu(popupState)} onClick={this.QuestionType}>
+              {this.state.listSurveyQuestions.map((questions,index)=>(<MenuItem key={index}onClick={popupState.close} value={questions}> {questions}  </MenuItem>  ))}
+          </Menu>
+        </div>
       </React.Fragment>
     )}
   </PopupState>
