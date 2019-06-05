@@ -86,22 +86,24 @@ class MemberResponseForm extends Component {
     //       q => (q.question !== question ? q : aObj) // qObj
     //     )
     //   }));
+
+    //handling the submit for sentiment functions 
   handleSentiment = (event, value, question) => {
     const sObj = {question, sentimentRange: value}
-    console.log(sObj)
+    // console.log(sObj)
     this.setState( prevState => ({ 
       ...prevState,
       questions: prevState.questions.map( q =>
          q.question !== question ? q:sObj)
       }));
-    console.log(this.state.questions)
+    // console.log(this.state.questions)
   }
 
   handleChange = (e, question) => {
     console.log(question)
-    // const qObj = { question, response: e.target.value };
-    const sObj = {question, sentimentRange: e.target.value};
-    console.log(sObj)
+    const qObj = { question, response: e.target.value };
+    // const sObj = {question, sentimentRange: e.target.value};
+    // console.log(sObj)
     // console.log(question);
     // if (this.state.isSentiment) {
     //   // this.setState(prevState => ({
@@ -118,28 +120,27 @@ class MemberResponseForm extends Component {
     //     )
     //   }));
     // } else {
-    //   this.setState(prevState => ({
-    //     ...prevState,
-    //     questions: prevState.questions.map(
-    //       q => (q.question !== question ? q : aObj) // qObj
-    //     )
-    //   }));
-    // }
-  };
+      this.setState(prevState => ({
+        ...prevState,
+        questions: prevState.questions.map(
+          q => (q.question !== question ? q : qObj) // qObj
+        )
+       }));
+    };
 
   submitReport = () => {
     const endpoint = `${baseURL}/responses/${this.props.match.params.reportId}`;
     if (this.state.isSentiment) {
       axiosWithAuth()
         .post(
-          endpoint,
-          this.state.questions.map(val => {
-            return {
-              question: val.question,
-              response: "test",
-              sentimentRange: this.state.sentimentRange
-            };
-          })
+          endpoint, this.state.questions
+          // this.state.questions.map(val => {
+          //   return {
+          //     question: val.question,
+          //     response: "test",
+          //     sentimentRange: this.state.sentimentRange
+          //   };
+          // })
         )
         .then(res => {
           this.props.updateWithUserResponse(res);
