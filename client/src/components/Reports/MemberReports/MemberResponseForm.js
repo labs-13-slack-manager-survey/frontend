@@ -13,7 +13,8 @@ class MemberResponseForm extends Component {
     reportName: "",
     reportMessage: "",
     questions: [],
-    isSentiment: false
+    isSentiment: false,
+    sentimentVal: 0
   };
 
   render() {
@@ -32,6 +33,7 @@ class MemberResponseForm extends Component {
             handleChange={this.handleChange}
             key={i}
             isSentiment={this.state.isSentiment}
+            sentimentVal={this.state.sentimentVal}
           />
         ))}
         <Button
@@ -57,7 +59,13 @@ class MemberResponseForm extends Component {
       .get(endpoint)
       .then(res => {
         console.log(res.data.report);
-        const { reportName, message, questions, isSentiment } = res.data.report;
+        const {
+          reportName,
+          message,
+          questions,
+          isSentiment,
+          sentimentRange
+        } = res.data.report;
         this.setState({
           reportName,
           reportMessage: message,
@@ -65,40 +73,81 @@ class MemberResponseForm extends Component {
             question: q,
             response: ""
           })),
-          isSentiment: isSentiment
+          isSentiment: isSentiment,
+          sentimentVal: sentimentRange
         });
       })
       .catch(err => console.log(err));
   }
 
   handleChange = (e, question) => {
-    const qObj = { question, response: e.target.value };
-    this.setState(prevState => ({
-      ...prevState,
-      questions: prevState.questions.map(q =>
-        q.question !== question ? q : qObj
-      )
-    }));
+    // const qObj = { question, response: e.target.value };
+    // const sObj = {question, sentimentVal: e.target.value};
+    console.log(question);
+    if (this.state.isSentiment) {
+      this.setState(prevState => ({
+        ...prevState,
+        sentimentVal: question,
+        questions: prevState.questions.map(q =>
+          q.question !== question ? q : null
+        )
+      }));
+    } else {
+      this.setState(prevState => ({
+        ...prevState,
+        questions: prevState.questions.map(
+          q => (q.question !== question ? q : null) // qObj
+        )
+      }));
+    }
   };
 
   submitReport = () => {
     const endpoint = `${baseURL}/responses/${this.props.match.params.reportId}`;
-
-    axiosWithAuth()
-      .post(endpoint, this.state.questions)
-      .then(res => {
-        this.props.updateWithUserResponse(res);
-        this.setState(prevState => ({
-          ...prevState,
-          questions: prevState.questions.map(q => ({
-            question: q.question,
-            response: ""
-          }))
-        }));
-      })
-      .catch(err => {
-        console.log(err.response.data);
-      });
+    if (this.state.isSentiment) {
+      axiosWithAuth()
+        .post(
+          endpoint,
+          this.state.questions.map(val => {
+            return {
+              question: val.question,
+              response: "test",
+              sentimentVal: this.state.sentimentVal
+            };
+          })
+        )
+        .then(res => {
+          this.props.updateWithUserResponse(res);
+          this.setState(prevState => ({
+            ...prevState,
+            questions: prevState.questions.map(q => ({
+              question: q.question,
+              response: "",
+              sentimentVal: 3
+            }))
+          }));
+        })
+        .catch(err => {
+          console.log(err.response.data);
+        });
+    } else {
+      console.log(this.state.questions);
+      axiosWithAuth()
+        .post(endpoint, this.state.questions)
+        .then(res => {
+          this.props.updateWithUserResponse(res);
+          this.setState(prevState => ({
+            ...prevState,
+            questions: prevState.questions.map(q => ({
+              question: q.question,
+              response: ""
+            }))
+          }));
+        })
+        .catch(err => {
+          console.log(err.response.data);
+        });
+    }
   };
 }
 
