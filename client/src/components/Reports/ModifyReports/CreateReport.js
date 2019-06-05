@@ -65,6 +65,7 @@ state = {
       "Engineering Manager",
       "Scrum master",
     ],
+  managerQuestionResponse:"",
   questions: [],
   questionOne: "",
   questionTwo: "",
@@ -250,15 +251,17 @@ this.state({selectedItem:index})
 }
 
 mangerType = e =>{
-e.preventDefault();
-
-console.log(e.target)
-console.log(e.target.value)
-this.setState({managerType:e.target.value})
-
-
-//the value that is coming in is a string
+  e.preventDefault();
+  this.setState({managerType:e.target.value})
 }
+
+//this handles submissions for the manager questions
+handleSubmission = e =>{
+  e.preventDefault();
+  console.log(e.target.value)
+  this.setState=({[e.target.name]:e.target.value})
+}
+
 
 QuestionOne = e =>{
   e.preventDefault();
@@ -322,29 +325,31 @@ renderManagerQuestions = () => {
 {/* conditionally rendering manager questions to reflect who is manager */}
         {this.state.managerType === 0 ?
         <div >
-           <br/>
-          <h6>As an Engineering manager how to you feel about your team</h6>
+          <br/>
+          <h6>As an Engineering manager,What is your weekly goal</h6>
           <input
             id="report-question"
             className="input-field"
             type="text"
-            name="question"
-           // value={this.state.managerQuestionResponse}
-            onChange={this.enterQuestionsHandler}
-            />
+            name="managerQuestionResponse"
+            placeholder="Enter your response here"
+            //value={this.state.managerQuestionResponse}
+            onChange={this.handleSubmission}
+          />
         </div>
         : 
         <div>
           <br/>
-          <h6>As a Manager how to you feel about your team</h6>
+          <h6>As a Project Manager,What is your weekly goal</h6>
           <input
             id="report-question"
             className="input-field"
             type="text"
-            name="question"
-           // value={this.state.managerQuestionResponse}
-            onChange={this.enterQuestionsHandler}
-            />
+            name="managerQuestionResponse"
+            placeholder="Enter your response here"
+            //value={this.state.managerQuestionResponse}
+            onChange={this.handleSubmission}
+          />
         </div>}
       </React.Fragment>
     
