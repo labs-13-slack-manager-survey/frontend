@@ -14,7 +14,7 @@ class MemberResponseForm extends Component {
     reportMessage: "",
     questions: [],
     isSentiment: false,
-    sentimentVal: 0
+    sentimentVal: 3
   };
 
   render() {
