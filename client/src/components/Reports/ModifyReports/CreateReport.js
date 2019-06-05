@@ -28,7 +28,7 @@ Menu
 import MenuItem from "@material-ui/core/MenuItem";
 import { TimePicker } from "material-ui-pickers";
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
-
+import AddIcon from '@material-ui/icons/Add';
 
 
 import "./Report.css";
@@ -53,6 +53,9 @@ menu: {
 
 class CreateReport extends Component {
 state = {
+  //Questions for survey with new menu
+  questionExperience: [ "Marketing Team",
+                        "Dev Team"],
   // Main Report State
   reportName: "Daily Standup",
   schedule: [],
@@ -65,6 +68,7 @@ state = {
       "Engineering Manager",
       "Scrum master",
     ],
+  managerQuestionResponse:"",
   questions: [],
   questionOne: "",
   questionTwo: "",
@@ -176,6 +180,7 @@ updateSchedule = day => {
     schedule: includes ? schedule.filter(d => d !== day) : [...schedule, day]
   });
 };
+
 selectWeekdays = () => {
   this.setState({
     schedule: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
@@ -250,15 +255,48 @@ this.state({selectedItem:index})
 }
 
 mangerType = e =>{
-e.preventDefault();
-
-console.log(e.target)
-console.log(e.target.value)
-this.setState({managerType:e.target.value})
-
-
-//the value that is coming in is a string
+  e.preventDefault();
+  this.setState({managerType:e.target.value})
 }
+
+aQuestion = e =>{
+  e.preventDefault();
+  this.setState({aQuestion:e.target.value})
+}
+
+enterQuestionsHandler = e => {
+  e.preventDefault();
+  const code = e.keyCode || e.which;
+  if (code === 13) {
+    this.setState(prevState => ({
+      questions: [...prevState.questions, this.state.question],
+      question: ""
+    }));
+  } else {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
+};
+
+questionsHandler = e => {
+  e.preventDefault();
+  this.setState(prevState => ({
+    questions: [...prevState.questions, this.state.question],
+    question: ""
+  }));
+};
+
+removeQuestion = (e, question) => {
+  e.preventDefault();
+  this.setState(prevState => ({
+    questions: prevState.questions.filter(q => q !== question)
+  }));
+};
+
+
+
+
 
 QuestionOne = e =>{
   e.preventDefault();
@@ -322,29 +360,71 @@ renderManagerQuestions = () => {
 {/* conditionally rendering manager questions to reflect who is manager */}
         {this.state.managerType === 0 ?
         <div >
-           <br/>
-          <h6>As an Engineering manager how to you feel about your team</h6>
+          <br/>
+          <h6>As an Engineering manager,What is your weekly goal</h6>
           <input
             id="report-question"
             className="input-field"
             type="text"
-            name="question"
-           // value={this.state.managerQuestionResponse}
-            onChange={this.enterQuestionsHandler}
-            />
+            name="managerQuestionResponse"
+            placeholder="Enter your response here"
+            //value={this.state.managerQuestionResponse}
+            onChange={this.handleSubmission}
+          />
+            <h6>As an Engineering manager,What is your weekly goal</h6>
+          <input
+            id="report-question"
+            className="input-field"
+            type="text"
+            name="managerQuestionResponse"
+            placeholder="Enter your response here"
+            //value={this.state.managerQuestionResponse}
+            onChange={this.handleSubmission}
+          />
+            <h6>As an Engineering manager,What is your weekly goal</h6>
+          <input
+            id="report-question"
+            className="input-field"
+            type="text"
+            name="managerQuestionResponse"
+            placeholder="Enter your response here"
+            //value={this.state.managerQuestionResponse}
+            onChange={this.handleSubmission}
+          />
         </div>
         : 
         <div>
           <br/>
-          <h6>As a Manager how to you feel about your team</h6>
+          <h6>As a Project Manager,What is your weekly goal</h6>
           <input
             id="report-question"
             className="input-field"
             type="text"
-            name="question"
-           // value={this.state.managerQuestionResponse}
-            onChange={this.enterQuestionsHandler}
-            />
+            name="managerQuestionResponse"
+            placeholder="Enter your response here"
+            //value={this.state.managerQuestionResponse}
+            onChange={this.handleSubmission}
+          />
+           <h6>As a Project Manager,What is your weekly goal</h6>
+          <input
+            id="report-question"
+            className="input-field"
+            type="text"
+            name="managerQuestionResponse"
+            placeholder="Enter your response here"
+            //value={this.state.managerQuestionResponse}
+            onChange={this.handleSubmission}
+          />
+           <h6>As a Project Manager,What is your weekly goal</h6>
+          <input
+            id="report-question"
+            className="input-field"
+            type="text"
+            name="managerQuestionResponse"
+            placeholder="Enter your response here"
+            //value={this.state.managerQuestionResponse}
+            onChange={this.handleSubmission}
+          />
         </div>}
       </React.Fragment>
     
@@ -362,53 +442,28 @@ RenderSurveyQuestions = () => {
     <PopupState variant="popover" popupId="demo-popup-menu">
     {popupState => (
       <React.Fragment>
-     
-        <div style={{display:"block"}}>
-          <Button variant="contained" {...bindTrigger(popupState)}>
-            Select Stand Up Question one
-          </Button>
-          <Menu {...bindMenu(popupState)}>
-            {this.state.listSurveyQuestions.map((questions,index)=>(
-              <MenuItem key={index} onClick={this.QuestionOne} value={questions}> 
-                {questions} 
-              </MenuItem> 
-            ))}
-          </Menu>
-        </div>
-    
-     
-        <div style={{display:"block"}}>
+        <Button variant="contained" {...bindTrigger(popupState)}>
+          Select Survey Template
+        </Button>
+        <Menu {...bindMenu(popupState)} onClick={this.aQuestion}>
+    {this.state.questionExperience.map((type,index)=>(<MenuItem key={index} onClick={popupState.close} value={index}> {type}  </MenuItem>  ))}
+        </Menu>
 
-          <Button variant="contained" {...bindTrigger(popupState)}>
-            Select Stand Up Question two
-          </Button>
-          <Menu {...bindMenu(popupState)}>
-            {this.state.listSurveyQuestions.map((questions,index)=>(
-              <MenuItem key={index} onClick={this.QuestionTwo} value={questions}> 
-                {questions} 
-              </MenuItem> 
-            ))}
-          </Menu>
+{/* conditionally rendering questions, WE CAN USE THE SATE ARRAY questionExperience TO ADD NEW QUESTIONS! */}
+        {this.state.aQuestion === 0 ?
+        <div >
+          <br/>
+          <h6>marketing team question 1</h6>
+          <h6>marketing team question 2</h6>
+          <h6>marketing team question 3</h6>
         </div>
-        <br/>
-          {this.state.questionOne}
-        <br/>
-
-        <div style={{display:"block"}}>
-          <Button variant="contained" {...bindTrigger(popupState)}>
-            Select Stand Up Question three
-          </Button>
-          <Menu {...bindMenu(popupState)}>
-            {this.state.listSurveyQuestions.map((questions,index)=>(
-              <MenuItem key={index} onClick={this.QuestionThree} value={questions}> 
-                {questions} 
-              </MenuItem> 
-            ))}
-          </Menu>
-        </div>
-        <br/>
-          {this.state.questionOne}
-        <br/>
+        : 
+        <div>
+          <br/>
+          <h6>dev team question 1</h6>
+          <h6>dev team question 2</h6>
+          <h6>dev team question 3</h6>
+        </div>}
       </React.Fragment>
     )}
   </PopupState>
@@ -425,6 +480,7 @@ render() {
         <Icon>arrow_back</Icon>
       </Fab>
       <form className="create-report">
+
         {/* Checks if admin wants manager questions answered */}
         <Card raised={true} className="schedule-card">
           <section>
@@ -553,24 +609,64 @@ render() {
               />
             </section>
           </section>
-        </Card>
-        <Card raised={true} className="schedule-card">
-          <section className="schedule-card-content">
-            <h3 className="schedule-title">Standup Questions</h3>
-            <Divider className="divider" variant="fullWidth" />
-            <section>
-              {/*----------This will change display based on if user checked manager questions------- */}
-              {this.RenderSurveyQuestions()}
+</Card>
+
+<Card raised={true} className="schedule-card">
+            <section className="schedule-card-content">
+              <h3 className="schedule-title">Standup Questions</h3>
+              <Divider className="divider" variant="fullWidth" />
+              <section>
+                {this.state.questions.map(question => (
+                  <article className="question-flex" key={question}>
+                    <p className="question">{question}</p>
+                    <Fab
+                      size="small"
+                      color="secondary"
+                      onClick={e => this.removeQuestion(e, question)}
+                    >
+                      <Icon>delete_icon</Icon>
+                    </Fab>
+                  </article>
+                ))}
+              </section>
+              <section className="enter-question">
+                <FormControl className="input-field" required>
+                  <InputLabel htmlFor="report-question">
+                    Enter a question...
+                  </InputLabel>
+                  <Input
+                    id="report-question"
+                    required
+                    className="input-field"
+                    type="text"
+                    name="question"
+                    value={this.state.question}
+                    onChange={this.enterQuestionsHandler}
+                  />
+                </FormControl>
+                <Fab
+                  size="small"
+                  style={{ display: "block", margin: "10px 0" }}
+                  color="primary"
+                  onClick={this.questionsHandler}
+                  disabled={this.state.question.length === 0 ? true : false}
+                  type="submit"
+                >
+                  <AddIcon />
+                </Fab>
+              </section>
             </section>
-          </section>
-        </Card>
+          </Card>
+
+
+      
+
         <Button
           style={{ display: "block", marginTop: "30px" }}
           variant="contained"
           color="primary"
           type="submit"
           onClick={this.addReport}
-          disabled={this.state.questions.length === 0 ? true : false}
         >
           Create Report
         </Button>
