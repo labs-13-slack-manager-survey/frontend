@@ -43,6 +43,7 @@ class ReportsDash extends Component {
                 role={this.props.role}
                 reports={this.state.reports}
                 archiveReport={this.archiveReport}
+                getReports = {this.getReports}
               />
             )}
           />
@@ -116,18 +117,19 @@ class ReportsDash extends Component {
       .catch(err => console.log(err));
   };
 
-  archiveReport = id => {
-    const endpoint = `${baseURL}/reports/${id}`;
-    const updatedReport = {
-      active: false
-    };
-    axiosWithAuth()
-      .put(endpoint, updatedReport)
-      .then(res => {
-        this.getReports();
-      })
-      .catch(err => console.log(err));
-  };
+  // archiveReport = id => {
+  //   const endpoint = `${baseURL}/reports/${id}`;
+  //   console.log(id)
+  //   const updatedReport = {
+  //     active: false
+  //   };
+  //   axiosWithAuth()
+  //     .put(endpoint, updatedReport)
+  //     .then(res => {
+  //       this.getReports();
+  //     })
+  //     .catch(err => console.log(err));
+  // };
 
   setResponseAsState = reports => {
     this.setState({
