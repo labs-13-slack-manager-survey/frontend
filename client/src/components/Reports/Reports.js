@@ -53,11 +53,32 @@ class Reports extends Component {
       });
   };
 
+  ConsoleCheck = (id) => {
+    console.log(id)
+  }
+
   handleClose = () => {
     this.setState({
       slackModal: false
     });
   };
+
+  archiveReport = id => {
+    console.log('archive report')
+    const endpoint = `${baseURL}/reports/${id}`;
+    console.log(id)
+    const updatedReport = {
+      active: false
+    };
+    axiosWithAuth()
+      .put(endpoint, updatedReport)
+      .then(res => {
+        this.props.getReports();
+        this.handleArchive(); 
+      })
+      .catch(err => console.log(err));
+  };
+
 
   handleArchive = () => {
     this.setState({
@@ -127,9 +148,10 @@ class Reports extends Component {
               role={this.props.role}
               key={report.id}
               report={report}
-              archiveReport={this.props.archiveReport}
+              archiveReport={this.archiveReport}
               archiveModal={this.state.archiveModal}
               handleArchive={this.handleArchive}
+              ConsoleCheck = {this.ConsoleCheck}
             />
           ))}
         </div>

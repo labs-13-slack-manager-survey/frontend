@@ -86,7 +86,10 @@ const SingleReport = props => {
 						<Button onClick={() => props.archiveReport(props.report.id)}>
 							Yes
 						</Button>
-						<Button onClick={() => props.handleArchive()}>No</Button>
+						<Button onClick={() => 
+							props.ConsoleCheck(props.report.id)
+							// props.handleArchive()
+							}>No</Button>
 					</Dialog>
 				</div>
 			</div>

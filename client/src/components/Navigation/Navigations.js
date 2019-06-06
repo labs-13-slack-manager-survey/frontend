@@ -24,9 +24,9 @@ const styles = {
 	// 	marginLeft: 0,
 	// 	marginRight: 0
 	// },
-	logoLink: {
-		borderRight: '1px solid #FFF',
-	},
+	// logoLink: {
+	// 	borderRight: '1px solid #FFF'
+	// },
 	// appBar: {
 	// 	height: 50,
 	// 	backgroundColor: 'white',
@@ -65,18 +65,17 @@ class Navigation extends React.Component {
 							<NavLink
 								// if user is logged in, icon takes them to dashboard, otherwise go to marketing page
 								to={loggedIn ? '/slackr/dashboard' : '/'}
-								className={classes.logoLink}
-							>
-								<div className= "logo-container"></div><img className="logo" src = {Logo} /></div>
-
+								className={classes.logoLink}>
+								<img className="logo" src = {Logo} />
+			
 							</NavLink>
-							<div className="app-name">slackr</div>
+							<div>slackr</div>
 						</div>
 						 <div className="horizontal-buttons">
-						 <NavLink to="/slackr/dashboard/reports/choose">
-							<button className = "menu-bar-add-poll"><span>+</span> New Poll</button>
-							</NavLink>
-						<NavLink to="/slackr/dashboard/reports/choose">
+						 <NavLink to="/dashboard/reports/choose">
+							<button className = "menu-bar-add-poll"><span>+</span> Poll</button>
+						</NavLink>
+						<NavLink to="/dashboard/reports/choose">
 							<button className = "menu-bar-add-team"><span>+</span> Team Member</button>
 						</NavLink>
 						 </div>
@@ -140,7 +139,7 @@ class Navigation extends React.Component {
 						{loggedIn ? (
 							<>
 							<div className = "vert-buttons">
-								<NavLink to="/slackr/dashboard/profile" className = "menu-button">
+								<NavLink to="slackr/dashboard/profile" className = "menu-button">
 									<img className = "menu-icon" src={User} />
 									<div className ="button-label">user</div>
 								</NavLink>
