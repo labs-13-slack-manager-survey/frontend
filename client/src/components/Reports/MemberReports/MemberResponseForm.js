@@ -1,17 +1,17 @@
-import React, { Component } from "react";
-import { axiosWithAuth, baseURL } from "../../../config/axiosWithAuth";
+import React, { Component } from 'react';
+import { axiosWithAuth, baseURL } from '../../../config/axiosWithAuth';
 
-import ReportInput from "./ReportInput";
+import ReportInput from './ReportInput';
 
 // style imports
-import Button from "@material-ui/core/Button";
-import "./MemberResponseForm.css";
+import Button from '@material-ui/core/Button';
+import './MemberResponseForm.css';
 
 class MemberResponseForm extends Component {
   state = {
-    clientInfo: "",
-    reportName: "",
-    reportMessage: "",
+    clientInfo: '',
+    reportName: '',
+    reportMessage: '',
     questions: [],
     isSentiment: false
   };
@@ -23,8 +23,8 @@ class MemberResponseForm extends Component {
       </>
     ) : (
       <div>
-        <h1 className="member-form-title">{this.state.reportName}</h1>
-        <p className="member-form-subtitle">{this.state.reportMessage}</p>
+        <h1 className='member-form-title'>{this.state.reportName}</h1>
+        <p className='member-form-subtitle'>{this.state.reportMessage}</p>
         {this.state.questions.map((q, i) => (
           <ReportInput
             question={q.question}
@@ -38,13 +38,13 @@ class MemberResponseForm extends Component {
         ))}
         <Button
           style={{
-            display: "block",
-            margin: "auto",
-            marginTop: "30px",
-            marginBottom: "30px"
+            display: 'block',
+            margin: 'auto',
+            marginTop: '30px',
+            marginBottom: '30px'
           }}
-          variant="outlined"
-          color="primary"
+          variant='outlined'
+          color='primary'
           onClick={this.submitReport}
         >
           Submit Report
@@ -64,7 +64,7 @@ class MemberResponseForm extends Component {
           reportMessage: message,
           questions: questions.map(q => ({
             question: q,
-            response: "",
+            response: '',
             sentimentRange: 3
           })),
           isSentiment: isSentiment
@@ -152,7 +152,7 @@ class MemberResponseForm extends Component {
             ...prevState,
             questions: prevState.questions.map(q => ({
               question: q.question,
-              response: "",
+              response: '',
               sentimentRange: 3
             }))
           }));
@@ -169,7 +169,7 @@ class MemberResponseForm extends Component {
             ...prevState,
             questions: prevState.questions.map(q => ({
               question: q.question,
-              response: ""
+              response: ''
             }))
           }));
         })
