@@ -1,3 +1,16 @@
 .managerresponse{
-    border: solid red 1px;
+
 }
+
+.manager-subtitle {
+    font-size: 18px;
+    line-height: 1.3;
+    padding: 10px 20px 0 0;
+  }
+
+.manager-subtitle-bold {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.3;
+    padding: 10px 20px 0 0;
+  }

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { axiosWithAuth, baseURL } from "../../../config/axiosWithAuth";
 
-import Manager from './Manager'
+import Manager from './Manager';
+import CreateReport from '../ModifyReports/CreateReport';
 import ReportInput from "./ReportInput";
 
 // style imports
@@ -14,7 +15,8 @@ class MemberResponseForm extends Component {
     reportName: "",
     reportMessage: "",
     questions: [],
-    isSentiment: false
+    isSentiment: false,
+    hasManagementQuestions: false
   };
 
   render() {
@@ -24,7 +26,7 @@ class MemberResponseForm extends Component {
       </>
     ) : (
       <div>
-        <Manager/>
+        { this.state.hasManagementQuestions ? <Manager /> :'no manager questions'}
         <h1 className="member-form-title">{this.state.reportName}</h1>
         <p className="member-form-subtitle">{this.state.reportMessage}</p>
         {this.state.questions.map((q, i) => (
