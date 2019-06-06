@@ -4,6 +4,7 @@ import Slider from "@material-ui/lab/Slider";
 import { withStyles } from "@material-ui/core/styles";
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import "./Report_Input.css";
+import Manager from "./Manager";
 
 // this component handles the response inputs for individual questions
 // when a user is filling in a report
@@ -52,6 +53,7 @@ class ReportInput extends React.Component {
     console.log("slidaaaaa", this.props.sentimentRange);
     return (
       <div className="member-report-input">
+        <Manager/>
         <h4>{this.props.question}</h4>
         {this.props.isSentiment ? (
           <>
