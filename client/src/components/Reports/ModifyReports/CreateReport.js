@@ -66,18 +66,14 @@ state = {
   message: "Please fill out your report by the end of the day!",
   errorMessage: "",
     //array of listed survey questions
-    typeOfManager:[
-      "Engineering Manager",
-      "Scrum master",
-    ],
-  managerQuestionResponse:[],
-  responseM: "",
-  questions: [],
-  resOne: "",
-  resTwo: "",
-  resThree:"",
-  slackChannelId: null,
-  slackAuthorized: false,
+    managerQuestionResponse:[],
+    responseM: "",
+    questions: [],
+    resOne: "",
+    resTwo: "",
+    resThree:"",
+    slackChannelId: null,
+    slackAuthorized: false,
   managerQuestions: "no",
   isSentiment: false,
   //array for listing manager questions
@@ -101,7 +97,22 @@ state = {
     "Sunday"
   ],
   hidden: true,
-  managerType:0
+  managerType:0,
+  typeOfManager:[
+    "Engineering Manager",
+    "Scrum master",
+  ],
+  //set manager questions here as well as type of manager BEFORE you add to the managerType
+    EngineeringManager: {
+      questionOne: "As an Engineering manager,What is your weekly goal?",
+      questionTwo: "What features should be Priority?",
+      questionThree :"Are there any new project details that the team should know?"},
+    
+    ScrumMaster:{ 
+      questionOne: "What is the weekly sales goal?",
+      questionTwo: "Is their any important customer feedback?",
+      questionThree :"How are you feeling about the current state of team moral?"
+    }
 };
 
 changeHandler = e => {
@@ -216,7 +227,8 @@ addReport = e => {
     slackChannelId,
     resOne, 
     resTwo,
-    resThree
+    resThree,
+    typeOfManager
   } = this.state;
   const report = {
     reportName,
@@ -227,6 +239,7 @@ addReport = e => {
     resOne, 
     resTwo,
     resThree,
+    typeOfManager,
     slackChannelId,
     slackChannelName,
     created_at: new Date()
@@ -323,7 +336,7 @@ renderManagerQuestions = () => {
         //questions for Engineering manager
         <div >
           <br/>
-          <h6>As an Engineering manager,What is your weekly goal?</h6>
+          <h6>{this.state.EngineeringManager.questionOne}</h6>
           <Input
             id="report-question"
             className="input-field"
@@ -333,7 +346,7 @@ renderManagerQuestions = () => {
             value={this.state.resOne}
             onChange={this.handleSubmission}
           />
-            <h6>What features should be Priority?</h6>
+            <h6>{this.state.EngineeringManager.questionTwo}</h6>
           <Input
             id="report-question"
             className="input-field"
@@ -343,7 +356,7 @@ renderManagerQuestions = () => {
             value={this.state.resTwo}
             onChange={this.handleSubmission}
           />
-            <h6>Are there any new project details that the team should know?</h6>
+            <h6>{this.state.EngineeringManager.questionThree}</h6>
           <Input
             id="report-question"
             className="input-field"
@@ -358,7 +371,7 @@ renderManagerQuestions = () => {
         //questions for marketing manager
         <div>
           <br/>
-          <h6>What is the weekly sales goal?</h6>
+          <h6>{this.state.ScrumMaster.questionOne}</h6>
           <Input
             id="report-question"
             className="input-field"
@@ -368,7 +381,7 @@ renderManagerQuestions = () => {
             value={this.state.resOne}
             onChange={this.handleSubmission}
           />
-           <h6>IS their any important customer feedback?</h6>
+           <h6>{this.state.ScrumMaster.questionTwo}</h6>
           <Input
             id="report-question"
             className="input-field"
@@ -378,7 +391,7 @@ renderManagerQuestions = () => {
             value={this.state.resTwo}
             onChange={this.handleSubmission}
           />
-           <h6>How are you feeling about the current state of team moral?</h6>
+           <h6>{this.state.ScrumMaster.questionThree}</h6>
           <Input
             id="report-question"
             className="input-field"
