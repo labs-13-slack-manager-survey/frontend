@@ -82,8 +82,8 @@ class Reports extends Component {
               }
               to={
                 this.props.role !== "admin"
-                  ? "/dashboard"
-                  : "/dashboard/reports/choose"
+                  ? "/slackr/dashboard"
+                  : "/slackr/dashboard/reports/choose"
               }
             >
               <Fab
@@ -113,7 +113,7 @@ class Reports extends Component {
 
             <Button
               onClick={() =>
-                this.props.history.push("/dashboard/reports/choose")
+                this.props.history.push("/slackr/dashboard/reports/choose")
               }
             >
               Skip

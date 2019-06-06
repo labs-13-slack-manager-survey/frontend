@@ -49,28 +49,28 @@ function App() {
       <Route path="/login" component={Login} />
 
       {/* Navigation */}
-      <Route path="/" component={Navigation}/>
+      <Route path="/slackr" component={Navigation}/>
                   {/* Onboarding */}
-          <NewUserRoute exact path="/onboarding" component={Onboarding} />
+      <NewUserRoute exact path="/slackr/onboarding" component={Onboarding} />
 
           {/* Dashboard */}
-          <PrivateRoute exact path="/dashboard" component={View} />
+      <PrivateRoute exact path="/slackr/dashboard" component={View} />
 
           {/* Stats Dashboard */}
-          <Route path="/dashboard/stats" component={StatsDashboard} />
+      <Route path="/slackr/dashboard/stats" component={StatsDashboard} />
 
           {/* Reports */}
-          <PrivateRoute path="/dashboard/reports" component={ReportsDash} />
+      <PrivateRoute path="/slackr/dashboard/reports" component={ReportsDash} />
 
           {/* Profile */}
-          <PrivateRoute exact path="/dashboard/profile" component={Profile} />
+      <PrivateRoute exact path="/slackr/dashboard/profile" component={Profile} />
 
           {/* Slack Connection */}
-          <Route exact path="/slack" component={Slack} />
-          <Route exact path="/slack/auth" component={SlackRedirect} />
+      <Route exact path="/slackr/slack" component={Slack} />
+      <Route exact path="/slackr/slack/auth" component={SlackRedirect} />
 
           {/* Footer */}
-          <Route path="/" component={Footer} />
+      <Route path="/slackr" component={Footer} />
      
     </div>
   );

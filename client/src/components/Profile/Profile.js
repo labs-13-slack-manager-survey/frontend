@@ -264,7 +264,7 @@ class Profile extends Component {
 			.catch(err => console.log(err));
 		this.setState({ archivedReports: newArchivedReports });
 		// this does not rerender dashboard - report does not show up without a refresh. Sorry!
-		// this.props.history.push('/dashboard');
+		// this.props.history.push('/slackr/dashboard');
 	};
 
 	updateUser = e => {

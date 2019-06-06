@@ -64,16 +64,16 @@ class Navigation extends React.Component {
 					<div className="left-horizontal">
 							<NavLink
 								// if user is logged in, icon takes them to dashboard, otherwise go to marketing page
-								to={loggedIn ? '/dashboard' : '/'}
+								to={!loggedIn ? '/slackr/dashboard' : '/'}
 								className={classes.logoLink}
 							>
 								<img className="logo" src = {Logo} />
-			
+
 							</NavLink>
 							<div>slackr</div>
 						</div>
 						 <div className="horizontal-buttons">
-						 <NavLink to="/dashboard/reports/choose">
+						 <NavLink to="/slackr/dashboard/reports/choose">
 							<button className = "menu-bar-add-poll"><span>+</span> Add Poll</button>
 							</NavLink>
 						 </div>
@@ -137,7 +137,7 @@ class Navigation extends React.Component {
 						{loggedIn ? (
 							<>
 							<div className = "vert-buttons">
-								<NavLink to="/dashboard/profile" className = "menu-button">
+								<NavLink to="/slackr/dashboard/profile" className = "menu-button">
 									<img className = "menu-icon" src={User} />
 									<div className ="button-label">user</div>
 								</NavLink>

@@ -194,7 +194,7 @@ class EditReport extends Component {
 			.put(endpoint, report)
 			.then(res => {
 				this.props.setResponseAsState(res.data);
-				this.props.history.push('/dashboard');
+				this.props.history.push('/slackr/dashboard');
 			})
 			.catch(err => console.log(err));
 	};
@@ -474,7 +474,7 @@ class EditReport extends Component {
 			.put(endpoint, report)
 			.then(res => {
 				this.props.setResponseAsState(res.data);
-				this.props.history.push('/dashboard');
+				this.props.history.push('/slackr/dashboard');
 			})
 			.catch(err => console.log(err));
 	};
