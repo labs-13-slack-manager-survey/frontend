@@ -15,7 +15,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         console.log(decoded);
 
         if (!decoded) {
-          return <Redirect to="/onboarding" />;
+          return <Redirect to="/slackr/onboarding" />;
         }
         return <Component {...props} />;
       }}

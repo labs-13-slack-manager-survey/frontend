@@ -28,7 +28,7 @@ class ReportsDash extends Component {
     return (
       <div
         className={
-          this.props.location.pathname === "/dashboard"
+          this.props.location.pathname === "/slackr/dashboard"
             ? "ReportsOnDash"
             : "ReportSingle"
         }
@@ -36,7 +36,7 @@ class ReportsDash extends Component {
         <Switch>
           <Route
             exact
-            path="/dashboard"
+            path="/slackr/dashboard"
             render={props => (
               <Reports
                 {...props}
@@ -48,7 +48,7 @@ class ReportsDash extends Component {
           />
           <Route
             exact
-            path="/dashboard/reports/choose"
+            path="/slackr/dashboard/reports/choose"
             render={props => (
               <ChooseReport
                 {...props}
@@ -58,7 +58,7 @@ class ReportsDash extends Component {
           />
           <Route
             exact
-            path="/dashboard/reports/new"
+            path="/slackr/dashboard/reports/new"
             render={props => (
               <CreateReport
                 {...props}
@@ -68,7 +68,7 @@ class ReportsDash extends Component {
           />
           <Route
             exact
-            path="/dashboard/reports/createSentiment"
+            path="/slackr/dashboard/reports/createSentiment"
             render={props => (
               <CreateSentiment
                 {...props}
@@ -78,7 +78,7 @@ class ReportsDash extends Component {
           />
           <Route
             exact
-            path="/dashboard/reports/:reportId/edit"
+            path="/slackr/dashboard/reports/:reportId/edit"
             render={props => (
               <EditReport
                 {...props}
@@ -88,7 +88,7 @@ class ReportsDash extends Component {
           />
           <Route
             exact
-            path="/dashboard/reports/:reportId"
+            path="/slackr/dashboard/reports/:reportId"
             render={props => (
               <SingleReportResults {...props} getReports={this.getReports} />
             )}

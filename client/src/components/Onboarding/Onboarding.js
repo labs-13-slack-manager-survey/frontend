@@ -82,7 +82,7 @@ class Onboarding extends Component {
       }
 
       //redirect back to dashboard after team creation
-      this.props.history.push("/dashboard");
+      this.props.history.push("/slackr/dashboard");
     } catch (error) {
       this.setState({
         error:
@@ -101,7 +101,7 @@ class Onboarding extends Component {
         `${baseURL}/users/joinCode/${this.state.joinCode}`
       );
       localStorage.setItem("token", newToken.data.updatedToken);
-      this.props.history.push("/dashboard");
+      this.props.history.push("/slackr/dashboard");
     } catch (err) {
       this.setState({
         error: "There was an issue joining this team. Check your join code.",

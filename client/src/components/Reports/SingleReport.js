@@ -42,14 +42,14 @@ const SingleReport = props => {
 		<Card raised={true} className="reportsCard">
 			<div className="single-report-header">
 				<Link
-					to={`/dashboard/reports/${props.report.id}`}
+					to={`/slackr/dashboard/reports/${props.report.id}`}
 					style={{ textDecoration: 'none' }}
 				>
 					<h1 className="reports-card-title">{props.report.reportName}</h1>
 				</Link>
 				<div className="single-report-buttons">
 					<Link
-						to={`/dashboard/reports/${props.report.id}/edit`}
+						to={`/slackr/dashboard/reports/${props.report.id}/edit`}
 						id={props.role !== 'admin' ? 'display-link' : ''}
 					>
 						<Fab
@@ -92,7 +92,7 @@ const SingleReport = props => {
 			</div>
 			<div className="single-report-content">
 				<Link
-					to={`/dashboard/reports/${props.report.id}`}
+					to={`/slackr/dashboard/reports/${props.report.id}`}
 					style={{ textDecoration: 'none' }}
 				>
 					<h4 className="reports-card-schedule">Schedule</h4>

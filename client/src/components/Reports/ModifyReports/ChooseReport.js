@@ -39,14 +39,14 @@ class ChooseReport extends Component {
             </h3>
             <Divider className="divider" variant="fullWidth" />
             <section>
-              <Link to="/dashboard/reports/new">
+              <Link to="/slackr/dashboard/reports/new">
                 <Button variant="outlined" style={{ marginTop: "20px" }}>
                   Create Standup Survey
                 </Button>
               </Link>
             </section>
             <section>
-              <Link to="/dashboard/reports/createSentiment">
+              <Link to="/slackr/dashboard/reports/createSentiment">
                 <Button variant="outlined" style={{ marginTop: "20px" }}>
                   Create Sentiment Poll
                 </Button>
