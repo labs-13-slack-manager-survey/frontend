@@ -231,6 +231,7 @@ addReport = e => {
     created_at: new Date()
   };
   const endpoint = `${baseURL}/reports`;
+
   axiosWithAuth()
     .post(endpoint, report)
     .then(res => {
