@@ -67,15 +67,18 @@ class Navigation extends React.Component {
 								to={loggedIn ? '/slackr/dashboard' : '/'}
 								className={classes.logoLink}
 							>
-								<img className="logo" src = {Logo} />
+								<div className= "logo-container"></div><img className="logo" src = {Logo} /></div>
 
 							</NavLink>
-							<div>slackr</div>
+							<div className="app-name">slackr</div>
 						</div>
 						 <div className="horizontal-buttons">
 						 <NavLink to="/slackr/dashboard/reports/choose">
-							<button className = "menu-bar-add-poll"><span>+</span> Add Poll</button>
+							<button className = "menu-bar-add-poll"><span>+</span> New Poll</button>
 							</NavLink>
+						<NavLink to="/slackr/dashboard/reports/choose">
+							<button className = "menu-bar-add-team"><span>+</span> Team Member</button>
+						</NavLink>
 						 </div>
 						{/* <div className="nav-links"> */}
 							{/* <div> */}
