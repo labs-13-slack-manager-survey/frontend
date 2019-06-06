@@ -24,9 +24,9 @@ const styles = {
 	// 	marginLeft: 0,
 	// 	marginRight: 0
 	// },
-	// logoLink: {
-	// 	borderRight: '1px solid #FFF'
-	// },
+	logoLink: {
+		borderRight: '1px solid #FFF',
+	},
 	// appBar: {
 	// 	height: 50,
 	// 	backgroundColor: 'white',
@@ -64,7 +64,7 @@ class Navigation extends React.Component {
 					<div className="left-horizontal">
 							<NavLink
 								// if user is logged in, icon takes them to dashboard, otherwise go to marketing page
-								to={!loggedIn ? '/slackr/dashboard' : '/'}
+								to={loggedIn ? '/slackr/dashboard' : '/'}
 								className={classes.logoLink}
 							>
 								<img className="logo" src = {Logo} />
