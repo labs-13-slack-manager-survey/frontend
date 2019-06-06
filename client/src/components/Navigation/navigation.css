@@ -14,6 +14,7 @@
 	width: 95%;
 }
 
+
 .horizontalMenuBar {
 	height: 70px; 
 	background-color: none; 
@@ -72,9 +73,15 @@
 	cursor: pointer;
 }
 
+.horizontal-buttons {
+	display: flex;
+	flex-direction: row; 
+	align-items: center;
+}
 
 span {
 	font-size: 15px;
+
 }
 
 .verticalBar { 
@@ -125,6 +132,9 @@ span {
 	flex-direction: column; 
 }
 
+.menu-button:hover {
+	cursor: pointer;
+}
 
 .button-label {
 	font-size: 10px; 
@@ -132,11 +142,26 @@ span {
 	padding-top: 3px;
 }
 
+.button-label-logout{
+	color: #F16363;
+	padding-top: 3px;
+	font-size: 10px; 
+}
+
+.button-label-active {
+	font-size: 10px; 
+	color: #2076DB;
+	padding-top: 3px;
+}
+
 .logo {
 	height: 50px;
-	margin-left: 8px; 
-	margin-top: 4px;
-	padding-right: 35px;
+	padding-left: 8px;
+	padding-top:4px;
+	padding-right: 15px;
+}
+.app-name{
+	padding-left: 10px;
 }
 
 @media (min-width: 550px) {
