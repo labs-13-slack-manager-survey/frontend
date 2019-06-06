@@ -38,6 +38,7 @@ const SingleReport = props => {
 		timeStr = `${time[0] - 12}:${time[1]}pm`;
 	}
 
+
 	return (
 		<Card raised={true} className="reportsCard">
 			<div className="single-report-header">
@@ -66,7 +67,8 @@ const SingleReport = props => {
 						size="small"
 						aria-label="Delete"
 						// onClick={() => props.archiveReport(props.report.id)}
-						onClick={() => props.handleArchive()}
+						// onClick={() => props.handleArchive()}
+						onClick={() => props.handleArchive(props.report.id)}
 						id={props.role !== 'admin' ? 'display-link' : ''}
 					>
 						<Icon>delete_icon</Icon>
@@ -89,6 +91,12 @@ const SingleReport = props => {
 						<Button onClick={() => 
 							props.ConsoleCheck(props.report.id)
 							// props.handleArchive()
+							}>id</Button>
+
+						//testing purposes
+						<Button onClick={() => 
+					
+							props.handleArchive()
 							}>No</Button>
 					</Dialog>
 				</div>

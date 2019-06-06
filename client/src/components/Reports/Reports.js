@@ -80,7 +80,8 @@ class Reports extends Component {
   };
 
 
-  handleArchive = () => {
+  handleArchive = (id) => {
+    console.log(id);
     this.setState({
       archiveModal: !this.state.archiveModal
     });
