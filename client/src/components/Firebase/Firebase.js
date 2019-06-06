@@ -22,7 +22,7 @@ class Firebase extends Component {
   render() {
     const uiConfig = {
       signInFlow: "popup",
-      signInSuccessUrl: "/onboarding",
+      signInSuccessUrl: "/slackr/onboarding",
       signInOptions: [
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
         firebase.auth.GithubAuthProvider.PROVIDER_ID,
@@ -42,9 +42,9 @@ class Firebase extends Component {
               console.log(token);
               //   conditional rendering based on whether if the user belongs to a team
               if (token.teamId) {
-                this.props.history.push("/dashboard");
+                this.props.history.push("/slackr/dashboard");
               } else {
-                this.props.history.push("/onboarding");
+                this.props.history.push("/slackr/onboarding");
               }
             })
             .catch(err => {

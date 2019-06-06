@@ -13,7 +13,7 @@ const NewUserRoute = ({ component: Component, ...rest }) => {
 				}
 				const decoded = jwt_decode(token);
 				if (decoded.teamId) {
-					return <Redirect to="/dashboard" />;
+					return <Redirect to="/slackr/dashboard" />;
 				}
 				return <Component {...props} />;
 			}}
