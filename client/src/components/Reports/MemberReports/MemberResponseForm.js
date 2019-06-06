@@ -13,7 +13,7 @@ class MemberResponseForm extends Component {
     reportName: "",
     reportMessage: "",
     questions: [],
-    isSentiment: false,
+    isSentiment: false
   };
 
   render() {
@@ -34,7 +34,6 @@ class MemberResponseForm extends Component {
             key={i}
             isSentiment={this.state.isSentiment}
             handleSentiment={this.handleSentiment}
-            
           />
         ))}
         <Button
@@ -59,49 +58,45 @@ class MemberResponseForm extends Component {
     axiosWithAuth()
       .get(endpoint)
       .then(res => {
-        console.log(res.data.report);
-        const {
-          reportName,
-          message,
-          questions,
-          isSentiment,
-        } = res.data.report;
+        const { reportName, message, questions, isSentiment } = res.data.report;
         this.setState({
           reportName,
           reportMessage: message,
           questions: questions.map(q => ({
             question: q,
             response: "",
-            sentimentRange: 3,
+            sentimentRange: 3
           })),
-          isSentiment: isSentiment,
+          isSentiment: isSentiment
           // sentimentRange: sentimentRange
         });
       })
       .catch(err => console.log(err));
   }
-    //   this.setState(prevState => ({
-    //     ...prevState,
-    //     questions: prevState.questions.map(
-    //       q => (q.question !== question ? q : aObj) // qObj
-    //     )
-    //   }));
+  //   this.setState(prevState => ({
+  //     ...prevState,
+  //     questions: prevState.questions.map(
+  //       q => (q.question !== question ? q : aObj) // qObj
+  //     )
+  //   }));
 
-    //handling the submit for sentiment functions 
+  //handling the submit for sentiment functions
   handleSentiment = (event, value, question) => {
-    const sObj = {question, sentimentRange: value}
-    // console.log(sObj)
-    this.setState( prevState => ({ 
+    this.setState(prevState => ({
       ...prevState,
-      questions: prevState.questions.map( q =>
-         q.question !== question ? q:sObj)
-      }));
-    // console.log(this.state.questions)
-  }
+      questions: prevState.questions.map(q => {
+        return q.question !== question
+          ? q
+          : { question, sentimentRange: value, response: q.response };
+      })
+    }));
+  };
 
   handleChange = (e, question) => {
-    console.log(question)
-    const qObj = { question, response: e.target.value };
+    const qObj = {
+      question,
+      response: e.target.value
+    };
     // const sObj = {question, sentimentRange: e.target.value};
     // console.log(sObj)
     // console.log(question);
@@ -120,20 +115,28 @@ class MemberResponseForm extends Component {
     //     )
     //   }));
     // } else {
-      this.setState(prevState => ({
-        ...prevState,
-        questions: prevState.questions.map(
-          q => (q.question !== question ? q : qObj) // qObj
-        )
-       }));
-    };
+    this.setState(prevState => ({
+      ...prevState,
+      questions: prevState.questions.map(
+        q =>
+          q.question !== question
+            ? q
+            : {
+                question,
+                sentimentRange: q.sentimentRange,
+                response: qObj.response
+              } // qObj
+      )
+    }));
+  };
 
   submitReport = () => {
     const endpoint = `${baseURL}/responses/${this.props.match.params.reportId}`;
     if (this.state.isSentiment) {
       axiosWithAuth()
         .post(
-          endpoint, this.state.questions
+          endpoint,
+          this.state.questions
           // this.state.questions.map(val => {
           //   return {
           //     question: val.question,
@@ -143,6 +146,7 @@ class MemberResponseForm extends Component {
           // })
         )
         .then(res => {
+          console.log(res);
           this.props.updateWithUserResponse(res);
           this.setState(prevState => ({
             ...prevState,
@@ -157,7 +161,6 @@ class MemberResponseForm extends Component {
           console.log(err.response.data);
         });
     } else {
-      console.log(this.state.questions);
       axiosWithAuth()
         .post(endpoint, this.state.questions)
         .then(res => {
