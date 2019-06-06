@@ -64,9 +64,7 @@ class Reports extends Component {
   };
 
   archiveReport = id => {
-    console.log('archive report')
     const endpoint = `${baseURL}/reports/${id}`;
-    console.log(id)
     const updatedReport = {
       active: false
     };
@@ -79,13 +77,6 @@ class Reports extends Component {
       .catch(err => console.log(err));
   };
 
-
-  handleArchive = (id) => {
-    console.log(id);
-    this.setState({
-      archiveModal: !this.state.archiveModal
-    });
-  };
 
   render() {
     //const { stepsEnabled, steps, initialStep } = this.state;
@@ -151,7 +142,6 @@ class Reports extends Component {
               report={report}
               archiveReport={this.archiveReport}
               archiveModal={this.state.archiveModal}
-              handleArchive={this.handleArchive}
               ConsoleCheck = {this.ConsoleCheck}
             />
           ))}

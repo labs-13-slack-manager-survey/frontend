@@ -20,7 +20,12 @@ function Transition(props) {
 	return <Slide direction="up" {...props} />;
 }
 
-const SingleReport = props => {
+class SingleReport extends React.Component {
+	state = {
+		dialogOpen: false,
+	}
+
+	render() {
 	const week = [
 		'Monday',
 		'Tuesday',
@@ -32,32 +37,33 @@ const SingleReport = props => {
 	];
 
 	// time refactor for api call
-	const time = props.report.scheduleTime.split(':');
+	const time = this.props.report.scheduleTime.split(':');
 	let timeStr = `${time[0]}:${time[1]}am`;
 	if (time[0] > 12) {
 		timeStr = `${time[0] - 12}:${time[1]}pm`;
 	}
+	const reportId = this.props.report.id;
 
 
 	return (
 		<Card raised={true} className="reportsCard">
 			<div className="single-report-header">
 				<Link
-					to={`/slackr/dashboard/reports/${props.report.id}`}
+					to={`/slackr/dashboard/reports/${this.props.report.id}`}
 					style={{ textDecoration: 'none' }}
 				>
-					<h1 className="reports-card-title">{props.report.reportName}</h1>
+					<h1 className="reports-card-title">{this.props.report.reportName}</h1>
 				</Link>
 				<div className="single-report-buttons">
 					<Link
-						to={`/slackr/dashboard/reports/${props.report.id}/edit`}
-						id={props.role !== 'admin' ? 'display-link' : ''}
+						to={`/slackr/dashboard/reports/${this.props.report.id}/edit`}
+						id={this.props.role !== 'admin' ? 'display-link' : ''}
 					>
 						<Fab
 							color="default"
 							size="small"
 							aria-label="Edit"
-							id={props.role !== 'admin' ? 'disabled-link' : ''}
+							id={this.props.role !== 'admin' ? 'disabled-link' : ''}
 						>
 							<Icon>edit_icon</Icon>
 						</Fab>
@@ -66,44 +72,44 @@ const SingleReport = props => {
 						color="secondary"
 						size="small"
 						aria-label="Delete"
-						// onClick={() => props.archiveReport(props.report.id)}
-						// onClick={() => props.handleArchive()}
-						onClick={() => props.handleArchive(props.report.id)}
-						id={props.role !== 'admin' ? 'display-link' : ''}
+						// onClick={() => this.props.archiveReport(this.props.report.id)}
+						// onClick={() => this.props.handleArchive()}
+						onClick={() => this.setState({dialogOpen: true})}
+						id={this.props.role !== 'admin' ? 'display-link' : ''}
 					>
 						<Icon>delete_icon</Icon>
 					</Fab>
 					<Dialog
-						open={props.archiveModal}
+						open={this.state.dialogOpen}
 						TransitionComponent={Transition}
 						keepMounted
-						onClose={props.clearError}
+						onClose={this.props.clearError}
 						aria-labelledby="alert-dialog-slide-title"
 						aria-describedby="alert-dialog-slide-description"
 					>
 						<DialogTitle id="alert-dialog-slide-title">
-							{"Are you sure you'd like to archive this report?"}
+							Are you sure you'd like to archive this report? {reportId}
 						</DialogTitle>
 
-						<Button onClick={() => props.archiveReport(props.report.id)}>
+						<Button onClick={() => this.props.archiveReport(this.props.report.id)}>
 							Yes
 						</Button>
 						<Button onClick={() => 
-							props.ConsoleCheck(props.report.id)
-							// props.handleArchive()
+							this.props.ConsoleCheck(this.props.report.id)
+							// this.props.handleArchive()
 							}>id</Button>
 
 						//testing purposes
-						<Button onClick={() => 
-					
-							props.handleArchive()
-							}>No</Button>
+						<Button onClick={() => {
+							console.log(this.props.report.id)
+							this.setState({dialogOpen: false})
+							}}>No</Button>
 					</Dialog>
 				</div>
 			</div>
 			<div className="single-report-content">
 				<Link
-					to={`/slackr/dashboard/reports/${props.report.id}`}
+					to={`/slackr/dashboard/reports/${this.props.report.id}`}
 					style={{ textDecoration: 'none' }}
 				>
 					<h4 className="reports-card-schedule">Schedule</h4>
@@ -116,7 +122,7 @@ const SingleReport = props => {
 								<div
 									key={day}
 									className={`day ${
-										props.report.schedule.includes(day) ? 'selected' : ''
+										this.props.report.schedule.includes(day) ? 'selected' : ''
 									}`}
 								>
 									{/* if M/W/F, only show first letter, otherwise first 2 */}
@@ -139,6 +145,7 @@ const SingleReport = props => {
 			</div>
 		</Card>
 	);
+	}
 };
 
 export default SingleReport;
