@@ -162,7 +162,6 @@ class ReportResults extends Component {
 			})
 			.catch(err => console.log(err));
 	}
-	console.log(this.state.responses)
 
 	filter = (date, responder) => {
 		axiosWithAuth()
