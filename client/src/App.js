@@ -39,8 +39,7 @@ import "./App.css";
 function App() {
   return (
     <div>
-      {/* Navigation */}
-      <Route path="/" component={Navigation} />
+
 
       {/* Marketing Pages*/}
       <Route exact path="/" component={MarketingPage} />
@@ -49,27 +48,30 @@ function App() {
       {/* Login */}
       <Route path="/login" component={Login} />
 
-      {/* Onboarding */}
-      <NewUserRoute exact path="/onboarding" component={Onboarding} />
+      {/* Navigation */}
+      <Route path="/" component={Navigation}/>
+                  {/* Onboarding */}
+          <NewUserRoute exact path="/onboarding" component={Onboarding} />
 
-      {/* Dashboard */}
-      <PrivateRoute exact path="/dashboard" component={View} />
+          {/* Dashboard */}
+          <PrivateRoute exact path="/dashboard" component={View} />
 
-      {/* Stats Dashboard */}
-      <Route path="/dashboard/stats" component={StatsDashboard} />
+          {/* Stats Dashboard */}
+          <Route path="/dashboard/stats" component={StatsDashboard} />
 
-      {/* Reports */}
-      <PrivateRoute path="/dashboard/reports" component={ReportsDash} />
+          {/* Reports */}
+          <PrivateRoute path="/dashboard/reports" component={ReportsDash} />
 
-      {/* Profile */}
-      <PrivateRoute exact path="/dashboard/profile" component={Profile} />
+          {/* Profile */}
+          <PrivateRoute exact path="/dashboard/profile" component={Profile} />
 
-      {/* Slack Connection */}
-      <Route exact path="/slack" component={Slack} />
-      <Route exact path="/slack/auth" component={SlackRedirect} />
+          {/* Slack Connection */}
+          <Route exact path="/slack" component={Slack} />
+          <Route exact path="/slack/auth" component={SlackRedirect} />
 
-      {/* Footer */}
-      <Route path="/" component={Footer} />
+          {/* Footer */}
+          <Route path="/" component={Footer} />
+     
     </div>
   );
 }
