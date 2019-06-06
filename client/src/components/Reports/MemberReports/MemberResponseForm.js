@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { axiosWithAuth, baseURL } from "../../../config/axiosWithAuth";
 
+import Manager from './Manager'
 import ReportInput from "./ReportInput";
 
 // style imports
@@ -23,6 +24,7 @@ class MemberResponseForm extends Component {
       </>
     ) : (
       <div>
+        <Manager/>
         <h1 className="member-form-title">{this.state.reportName}</h1>
         <p className="member-form-subtitle">{this.state.reportMessage}</p>
         {this.state.questions.map((q, i) => (
