@@ -228,7 +228,9 @@ addReport = e => {
     resOne, 
     resTwo,
     resThree,
-    typeOfManager
+    typeOfManager, //new manager templates need to be added here so they can be sent to MemberReposonseForm.js
+    EngineeringManager,
+    ScrumMaster
   } = this.state;
   const report = {
     reportName,
@@ -239,7 +241,9 @@ addReport = e => {
     resOne, 
     resTwo,
     resThree,
-    typeOfManager,
+    typeOfManager, //new manager templates need to be added here so they can be sent to MemberReposonseForm.js
+    EngineeringManager,
+    ScrumMaster,
     slackChannelId,
     slackChannelName,
     created_at: new Date()

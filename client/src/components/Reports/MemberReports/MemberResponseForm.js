@@ -29,7 +29,13 @@ class MemberResponseForm extends Component {
       </>
     ) : (
       <div>
-        
+        <h1 className="member-form-title">Managers Thought's</h1>
+        <h3>q1</h3>
+        <h3>r1</h3>
+        <h3>q2</h3>
+        <h3>r2</h3>
+        <h3>q3</h3>
+        <h3>r3</h3>
         <h1 className="member-form-title">{this.state.reportName}</h1>
         <p className="member-form-subtitle">{this.state.reportMessage}</p>
         {this.state.questions.map((q, i) => (
