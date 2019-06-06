@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { axiosWithAuth, baseURL } from "../../../config/axiosWithAuth";
 
-import Manager from './Manager';
+
 import CreateReport from '../ModifyReports/CreateReport';
 import ReportInput from "./ReportInput";
 
@@ -16,7 +16,10 @@ class MemberResponseForm extends Component {
     reportMessage: "",
     questions: [],
     isSentiment: false,
-    hasManagementQuestions: false
+    hasManagementQuestions: false,
+    resOne:"",
+    resTwo:"",
+    resThree:""
   };
 
   render() {
@@ -26,7 +29,7 @@ class MemberResponseForm extends Component {
       </>
     ) : (
       <div>
-        { this.state.hasManagementQuestions ? <Manager /> :'no manager questions'}
+        
         <h1 className="member-form-title">{this.state.reportName}</h1>
         <p className="member-form-subtitle">{this.state.reportMessage}</p>
         {this.state.questions.map((q, i) => (
@@ -62,7 +65,7 @@ class MemberResponseForm extends Component {
     axiosWithAuth()
       .get(endpoint)
       .then(res => {
-        const { reportName, message, questions, isSentiment } = res.data.report;
+        const { reportName, message, questions, isSentiment, resOne, resTwo, resThree } = res.data.report;
         this.setState({
           reportName,
           reportMessage: message,
@@ -71,6 +74,9 @@ class MemberResponseForm extends Component {
             response: "",
             sentimentRange: 3
           })),
+          resOne,
+          resTwo,
+          resThree,
           isSentiment: isSentiment
           // sentimentRange: sentimentRange
         });

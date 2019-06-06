@@ -73,9 +73,9 @@ state = {
   managerQuestionResponse:[],
   responseM: "",
   questions: [],
-  questionOne: "",
-  questionTwo: "",
-  questionThree:"",
+  resOne: "",
+  resTwo: "",
+  resThree:"",
   slackChannelId: null,
   slackAuthorized: false,
   managerQuestions: "no",
@@ -213,7 +213,10 @@ addReport = e => {
     scheduleTime,
     message,
     questions,
-    slackChannelId
+    slackChannelId,
+    resOne, 
+    resTwo,
+    resThree
   } = this.state;
   const report = {
     reportName,
@@ -221,8 +224,9 @@ addReport = e => {
     scheduleTime,
     message,
     questions: JSON.stringify(questions),
-    //add questions selected for manager here,
-    //add questions selected for report here,
+    resOne, 
+    resTwo,
+    resThree,
     slackChannelId,
     slackChannelName,
     created_at: new Date()
@@ -296,7 +300,7 @@ e.preventDefault();
 this.setState({
 [e.target.name] : e.target.value
 });
-console.log(this.state.questionOne)
+console.log(this.state.resOne)
 }
 
 //this is for rendering the manager questions at top of
@@ -324,9 +328,9 @@ renderManagerQuestions = () => {
             id="report-question"
             className="input-field"
             type="text"
-            name="questionOne"
+            name="resOne"
             placeholder="Enter your response here"
-            value={this.state.questionOne}
+            value={this.state.resOne}
             onChange={this.handleSubmission}
           />
             <h6>What features should be Priority?</h6>
@@ -334,9 +338,9 @@ renderManagerQuestions = () => {
             id="report-question"
             className="input-field"
             type="text"
-            name="questionTwo"
+            name="resTwo"
             placeholder="Enter your response here"
-            value={this.state.questionTwo}
+            value={this.state.resTwo}
             onChange={this.handleSubmission}
           />
             <h6>Are there any new project details that the team should know?</h6>
@@ -344,9 +348,9 @@ renderManagerQuestions = () => {
             id="report-question"
             className="input-field"
             type="text"
-            name="questionThree"
+            name="resThree"
             placeholder="Enter your response here"
-            value={this.state.questionThree}
+            value={this.state.resThree}
             onChange={this.handleSubmission}
           />
         </div>
@@ -359,9 +363,9 @@ renderManagerQuestions = () => {
             id="report-question"
             className="input-field"
             type="text"
-            name="questionOne"
+            name="resOne"
             placeholder="Enter your response here"
-            value={this.state.questionOne}
+            value={this.state.resOne}
             onChange={this.handleSubmission}
           />
            <h6>IS their any important customer feedback?</h6>
@@ -369,9 +373,9 @@ renderManagerQuestions = () => {
             id="report-question"
             className="input-field"
             type="text"
-            name="questionTwo"
+            name="resTwo"
             placeholder="Enter your response here"
-            value={this.state.questionTwo}
+            value={this.state.resTwo}
             onChange={this.handleSubmission}
           />
            <h6>How are you feeling about the current state of team moral?</h6>
@@ -379,9 +383,9 @@ renderManagerQuestions = () => {
             id="report-question"
             className="input-field"
             type="text"
-            name="questionThree"
+            name="resThree"
             placeholder="Enter your response here"
-            value={this.state.questionThree}
+            value={this.state.resThree}
             onChange={this.handleSubmission}
           />
         </div>}
