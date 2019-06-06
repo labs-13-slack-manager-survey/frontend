@@ -24,6 +24,8 @@ FormLabel,
 Menu
 } from "@material-ui/core";
 
+import MemberResponseForm from '../MemberReports/MemberResponseForm';
+
 //importing things from material-ui
 import MenuItem from "@material-ui/core/MenuItem";
 import { TimePicker } from "material-ui-pickers";
@@ -68,7 +70,8 @@ state = {
       "Engineering Manager",
       "Scrum master",
     ],
-  managerQuestionResponse:"",
+  managerQuestionResponse:[],
+  responseM: "",
   questions: [],
   questionOne: "",
   questionTwo: "",
@@ -84,12 +87,6 @@ state = {
     "Did you have any blockers yesterday?",
     "How are you feeling about your contribution so far?",
     "Are you happy with your teams contribution to this sprint?"
-  ],
-  //button shown before clicking to see drop down menu of questions
-  dropDownMenu:[
-    "select question One",
-    "select question Two",
-    "select question Three"
   ],
   // Temporary State
   channels: [],
@@ -294,52 +291,12 @@ removeQuestion = (e, question) => {
   }));
 };
 
-
-
-
-
-QuestionOne = e =>{
-  e.preventDefault();
-
-  const answer = e.nativeEvent.target.outerText;
-
-  console.log("VALUE++++",e.nativeEvent.target.outerText)
-  console.log("STATE++++",this.state.questionOne)
-
-  this.setState({questionOne:e.nativeEvent.target.outerText})
-
-  console.log(" NEW STATE++++",this.state.questionOne)
-
-
-//need to set the state for the question that was picked
-}
-QuestionTwo = e =>{
-  e.preventDefault();
-
-  const answer = e.nativeEvent.target.outerText;
-
-  console.log("VALUE++++",e.nativeEvent.target.outerText)
-  console.log("STATE++++",this.state.questionOne)
-
-  this.setState({questionTwo:answer})
-
-
-
-//need to set the state for the question that was picked
-}
-QuestionThree = e =>{
-  e.preventDefault();
-
-  const answer = e.nativeEvent.target.outerText;
-
-  console.log("VALUE++++",e.nativeEvent.target.outerText)
-  console.log("STATE++++",this.state.questionOne)
-
-  this.setState({questionThree:answer})
-
-
-
-//need to set the state for the question that was picked
+handleSubmission = e =>{
+e.preventDefault();
+this.setState({
+[e.target.name] : e.target.value
+});
+console.log(this.state.questionOne)
 }
 
 //this is for rendering the manager questions at top of
@@ -363,33 +320,33 @@ renderManagerQuestions = () => {
         <div >
           <br/>
           <h6>As an Engineering manager,What is your weekly goal?</h6>
-          <input
+          <Input
             id="report-question"
             className="input-field"
             type="text"
-            name="managerQuestionResponse"
+            name="questionOne"
             placeholder="Enter your response here"
-            //value={this.state.managerQuestionResponse}
+            value={this.state.questionOne}
             onChange={this.handleSubmission}
           />
             <h6>What features should be Priority?</h6>
-          <input
+          <Input
             id="report-question"
             className="input-field"
             type="text"
-            name="managerQuestionResponse"
+            name="questionTwo"
             placeholder="Enter your response here"
-            //value={this.state.managerQuestionResponse}
+            value={this.state.questionTwo}
             onChange={this.handleSubmission}
           />
             <h6>Are there any new project details that the team should know?</h6>
-          <input
+          <Input
             id="report-question"
             className="input-field"
             type="text"
-            name="managerQuestionResponse"
+            name="questionThree"
             placeholder="Enter your response here"
-            //value={this.state.managerQuestionResponse}
+            value={this.state.questionThree}
             onChange={this.handleSubmission}
           />
         </div>
@@ -398,33 +355,33 @@ renderManagerQuestions = () => {
         <div>
           <br/>
           <h6>What is the weekly sales goal?</h6>
-          <input
+          <Input
             id="report-question"
             className="input-field"
             type="text"
-            name="managerQuestionResponse"
+            name="questionOne"
             placeholder="Enter your response here"
-            //value={this.state.managerQuestionResponse}
+            value={this.state.questionOne}
             onChange={this.handleSubmission}
           />
            <h6>IS their any important customer feedback?</h6>
-          <input
+          <Input
             id="report-question"
             className="input-field"
             type="text"
-            name="managerQuestionResponse"
+            name="questionTwo"
             placeholder="Enter your response here"
-            //value={this.state.managerQuestionResponse}
+            value={this.state.questionTwo}
             onChange={this.handleSubmission}
           />
            <h6>How are you feeling about the current state of team moral?</h6>
-          <input
+          <Input
             id="report-question"
             className="input-field"
             type="text"
-            name="managerQuestionResponse"
+            name="questionThree"
             placeholder="Enter your response here"
-            //value={this.state.managerQuestionResponse}
+            value={this.state.questionThree}
             onChange={this.handleSubmission}
           />
         </div>}
