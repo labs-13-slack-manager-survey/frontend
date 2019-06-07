@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import Chart from "chart.js";
+import { axiosWithAuth } from "../../config/axiosWithAuth";
+
+const URL = process.env.REACT_APP_BASE_URL;
 
 class SentimentChart extends Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
-
   chartRef = React.createRef();
 
   componentDidMount() {
