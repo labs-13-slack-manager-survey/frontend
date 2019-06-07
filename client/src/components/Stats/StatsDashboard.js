@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { axiosWithAuth } from "../../config/axiosWithAuth";
 
 import SentimentChart from "./SentimentChart";
 import SentimentAvg from "./SentimentAvg";
@@ -7,6 +8,8 @@ import TodayPoll from "./TodayPoll";
 import PollCalendar from "./PollCalendar";
 
 import "./StatsDashboard.css";
+
+const URL = process.env.REACT_APP_BASE_URL;
 
 class StatsDashboard extends Component {
   constructor() {
