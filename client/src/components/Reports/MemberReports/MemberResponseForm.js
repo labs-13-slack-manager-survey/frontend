@@ -17,12 +17,11 @@ class MemberResponseForm extends Component {
     questions: [],
     isSentiment: false,
     typeOfManager: [],
-    resOne:"",
-    resTwo:"",
-    resThree:""
+    managerResponse:[],
   };
 
   render() {
+    console.log("REPONSE!",this.state.managerResponse)
     return this.state.clientInfo.length > 0 ? (
       <>
         <div>{this.state.clientInfo}</div>
@@ -34,11 +33,11 @@ class MemberResponseForm extends Component {
         <h1 className="member-form-title">Managers Thought's</h1>   
         <h2>{this.state.typeOfManager}</h2>   
         <h3>q1</h3>
-        <h3>r1</h3>
+        <h3>{this.state.managerResponse[0]}</h3>
         <h3>q2</h3>
-        <h3>r2</h3>
+        <h3>{this.state.managerResponse[1]}</h3>
         <h3>q3</h3>
-        <h3>r3</h3>
+        <h3>{this.state.managerResponse[2]}</h3>
         </div>
 
         <h1 className="member-form-title">{this.state.reportName}</h1>
@@ -80,10 +79,8 @@ class MemberResponseForm extends Component {
                 message, 
                 questions, 
                 isSentiment, 
-                resOne, 
-                resTwo,
-                resThree,
-                typeOfManager, //new manager templates need to be added here so they can be sent to MemberReposonseForm.js
+                managerResponse,
+                // typeOfManager, //new manager templates need to be added here so they can be sent to MemberReposonseForm.js
                 EngineeringManager,
                 ScrumMaster,} = res.data.report;
                 console.log('report below',res.data.report)
@@ -95,12 +92,10 @@ class MemberResponseForm extends Component {
             response: "",
             sentimentRange: 3
           })),
-          resOne,
-          resTwo,
-          resThree,
+          managerResponse: JSON.parse(managerResponse),
           isSentiment: isSentiment,
           // sentimentRange: sentimentRange
-          typeOfManager: typeOfManager
+          // typeOfManager: typeOfManager
         });
       })
       .catch(err => console.log(err));

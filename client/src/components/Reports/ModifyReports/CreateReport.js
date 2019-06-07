@@ -241,7 +241,7 @@ addReport = e => {
     // typeOfManager, //new manager templates need to be added here so they can be sent to MemberReposonseForm.js
     // EngineeringManager,
     // ScrumMaster,
-    managerResponse,
+    managerResponse: JSON.stringify(managerResponse),
     slackChannelId,
     slackChannelName,
     created_at: new Date()
