@@ -21,7 +21,6 @@ class MemberResponseForm extends Component {
   };
 
   render() {
-    console.log("REPONSE!",this.state.managerResponse)
     return this.state.clientInfo.length > 0 ? (
       <>
         <div>{this.state.clientInfo}</div>
