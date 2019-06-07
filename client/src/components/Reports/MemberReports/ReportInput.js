@@ -49,7 +49,6 @@ class ReportInput extends React.Component {
     console.log(value);
   };
   render() {
-    console.log("slidaaaaa", this.props.sentimentRange);
     return (
       <div className="member-report-input">
         <h4>{this.props.question}</h4>

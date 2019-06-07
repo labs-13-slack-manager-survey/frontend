@@ -218,6 +218,7 @@ addReport = e => {
     if (channel.id === this.state.slackChannelId)
       slackChannelName = channel.name;
   });
+
   const {
     reportName,
     schedule,
@@ -225,12 +226,12 @@ addReport = e => {
     message,
     questions,
     slackChannelId,
-    resOne, 
-    resTwo,
-    resThree,
-    typeOfManager, //new manager templates need to be added here so they can be sent to MemberReposonseForm.js
-    EngineeringManager,
-    ScrumMaster
+    // resOne, 
+    // resTwo,
+    // resThree,
+    // typeOfManager, //new manager templates need to be added here so they can be sent to MemberReposonseForm.js
+    // EngineeringManager,
+    // ScrumMaster
   } = this.state;
   const report = {
     reportName,
@@ -238,12 +239,12 @@ addReport = e => {
     scheduleTime,
     message,
     questions: JSON.stringify(questions),
-    resOne, 
-    resTwo,
-    resThree,
-    typeOfManager, //new manager templates need to be added here so they can be sent to MemberReposonseForm.js
-    EngineeringManager,
-    ScrumMaster,
+    // resOne, 
+    // resTwo,
+    // resThree,
+    // typeOfManager, //new manager templates need to be added here so they can be sent to MemberReposonseForm.js
+    // EngineeringManager,
+    // ScrumMaster,
     slackChannelId,
     slackChannelName,
     created_at: new Date()
@@ -256,6 +257,7 @@ addReport = e => {
       this.props.setResponseAsState(res.data);
 
       this.props.history.push("/slackr/dashboard");
+      console.log('submit data',res.date)
     })
     .catch(err => console.log(err));
 };

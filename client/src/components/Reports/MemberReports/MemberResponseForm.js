@@ -16,7 +16,7 @@ class MemberResponseForm extends Component {
     reportMessage: "",
     questions: [],
     isSentiment: false,
-    hasManagementQuestions: false,
+    typeOfManager: [],
     resOne:"",
     resTwo:"",
     resThree:""
@@ -29,13 +29,18 @@ class MemberResponseForm extends Component {
       </>
     ) : (
       <div>
-        <h1 className="member-form-title">Managers Thought's</h1>
+        {/*need to render this condtionally  */}
+        <div> 
+        <h1 className="member-form-title">Managers Thought's</h1>   
+        <h2>{this.state.typeOfManager}</h2>   
         <h3>q1</h3>
         <h3>r1</h3>
         <h3>q2</h3>
         <h3>r2</h3>
         <h3>q3</h3>
         <h3>r3</h3>
+        </div>
+
         <h1 className="member-form-title">{this.state.reportName}</h1>
         <p className="member-form-subtitle">{this.state.reportMessage}</p>
         {this.state.questions.map((q, i) => (
@@ -71,7 +76,17 @@ class MemberResponseForm extends Component {
     axiosWithAuth()
       .get(endpoint)
       .then(res => {
-        const { reportName, message, questions, isSentiment, resOne, resTwo, resThree } = res.data.report;
+        const { reportName, 
+                message, 
+                questions, 
+                isSentiment, 
+                resOne, 
+                resTwo,
+                resThree,
+                typeOfManager, //new manager templates need to be added here so they can be sent to MemberReposonseForm.js
+                EngineeringManager,
+                ScrumMaster,} = res.data.report;
+                console.log('report below',res.data.report)
         this.setState({
           reportName,
           reportMessage: message,
@@ -83,8 +98,9 @@ class MemberResponseForm extends Component {
           resOne,
           resTwo,
           resThree,
-          isSentiment: isSentiment
+          isSentiment: isSentiment,
           // sentimentRange: sentimentRange
+          typeOfManager: typeOfManager
         });
       })
       .catch(err => console.log(err));
@@ -145,6 +161,10 @@ class MemberResponseForm extends Component {
       )
     }));
   };
+
+  displayManagerQuestions =() =>{
+    const endpoint = `${baseURL}/responses/${this.props.match.params.reportId}`;
+  }
 
   submitReport = () => {
     const endpoint = `${baseURL}/responses/${this.props.match.params.reportId}`;
