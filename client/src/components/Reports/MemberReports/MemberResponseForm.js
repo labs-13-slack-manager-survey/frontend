@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { axiosWithAuth, baseURL } from "../../../config/axiosWithAuth";
 
+
+import CreateReport from '../ModifyReports/CreateReport';
 import ReportInput from "./ReportInput";
 
 // style imports
@@ -13,7 +15,9 @@ class MemberResponseForm extends Component {
     reportName: "",
     reportMessage: "",
     questions: [],
-    isSentiment: false
+    isSentiment: false,
+    typeOfManager: [],
+    managerResponse:[],
   };
 
   render() {
@@ -23,6 +27,14 @@ class MemberResponseForm extends Component {
       </>
     ) : (
       <div>
+        {/*need to render this condtionally  */}
+        <div> 
+        <h1 className="member-form-title">Managers Thought's</h1>   
+        <h3>{this.state.managerResponse[0]}</h3>
+        <h3>{this.state.managerResponse[1]}</h3>
+        <h3>{this.state.managerResponse[2]}</h3>
+        </div>
+
         <h1 className="member-form-title">{this.state.reportName}</h1>
         <p className="member-form-subtitle">{this.state.reportMessage}</p>
         {this.state.questions.map((q, i) => (
@@ -58,7 +70,15 @@ class MemberResponseForm extends Component {
     axiosWithAuth()
       .get(endpoint)
       .then(res => {
-        const { reportName, message, questions, isSentiment } = res.data.report;
+        const { reportName, 
+                message, 
+                questions, 
+                isSentiment, 
+                managerResponse,
+                // typeOfManager, //new manager templates need to be added here so they can be sent to MemberReposonseForm.js
+                EngineeringManager,
+                ScrumMaster,} = res.data.report;
+                console.log('report below',res.data.report)
         this.setState({
           reportName,
           reportMessage: message,
@@ -67,8 +87,10 @@ class MemberResponseForm extends Component {
             response: "",
             sentimentRange: 3
           })),
-          isSentiment: isSentiment
+          managerResponse: JSON.parse(managerResponse),
+          isSentiment: isSentiment,
           // sentimentRange: sentimentRange
+          // typeOfManager: typeOfManager
         });
       })
       .catch(err => console.log(err));
@@ -129,6 +151,10 @@ class MemberResponseForm extends Component {
       )
     }));
   };
+
+  displayManagerQuestions =() =>{
+    const endpoint = `${baseURL}/responses/${this.props.match.params.reportId}`;
+  }
 
   submitReport = () => {
     const endpoint = `${baseURL}/responses/${this.props.match.params.reportId}`;
