@@ -4,24 +4,23 @@ import { axiosWithAuth } from "../../config/axiosWithAuth";
 
 const URL = process.env.REACT_APP_BASE_URL;
 
-const reportId = 1;
-
 class TodayPoll extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      reports: []
+    };
   }
 
   chartRef = React.createRef();
 
   componentDidMount() {
-    console.log(this.props);
     axiosWithAuth()
       .get(`${URL}/responses/sentimentAvg/${this.props.lastReport.id}`)
       .then(res => {
         console.log(res);
         this.setState({
-          report: res.data
+          reports: res.data
         });
       })
       .catch(err => console.log(err));
@@ -50,12 +49,19 @@ class TodayPoll extends Component {
   }
 
   render() {
+    console.log(this.state);
+
     return (
       <div>
         <h2 style={{ margin: "0" }}>Today's Poll</h2>
-        <h4 style={{ textAlign: "center", margin: "20px 0" }}>
-          Sentiment Average: {this.props.average}
-        </h4>
+        {this.state.reports.length === 0 ? (
+          <div>Loading...</div>
+        ) : (
+          <h4 style={{ textAlign: "center", margin: "20px 0" }}>
+            Sentiment Average: {this.state.reports[0].average}
+          </h4>
+        )}
+
         <canvas id="submittedPercent" ref={this.chartRef} />
       </div>
     );
