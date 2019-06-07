@@ -28,12 +28,14 @@ class MemberResponseForm extends Component {
     ) : (
       <div>
         {/*need to render this condtionally  */}
-        <div> 
-        <h1 className="member-form-title">Managers Thought's</h1>   
-        <h3>{this.state.managerResponse[0]}</h3>
-        <h3>{this.state.managerResponse[1]}</h3>
-        <h3>{this.state.managerResponse[2]}</h3>
-        </div>
+      {this.state.isSentiment ? null
+         : <div> 
+         <h1 className="member-form-title">Managers Thought's</h1>   
+         <h3>{this.state.managerResponse[0]}</h3>
+         <h3>{this.state.managerResponse[1]}</h3>
+         <h3>{this.state.managerResponse[2]}</h3>
+         </div>
+        }
 
         <h1 className="member-form-title">{this.state.reportName}</h1>
         <p className="member-form-subtitle">{this.state.reportMessage}</p>
