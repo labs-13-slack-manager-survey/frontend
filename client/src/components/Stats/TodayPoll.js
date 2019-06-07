@@ -4,6 +4,8 @@ import { axiosWithAuth } from "../../config/axiosWithAuth";
 
 const URL = process.env.REACT_APP_BASE_URL;
 
+const reportId = 1;
+
 class TodayPoll extends Component {
   constructor() {
     super();

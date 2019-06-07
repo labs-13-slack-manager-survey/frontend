@@ -15,7 +15,8 @@ class StatsDashboard extends Component {
   constructor() {
     super();
     this.state = {
-      reports: []
+      reports: [],
+      lastReport: null
     };
   }
 
@@ -25,13 +26,27 @@ class StatsDashboard extends Component {
       .then(res => {
         console.log(res);
         this.setState({
-          reports: res.data
+          reports: res.data.reports
         });
       })
       .catch(err => console.log(err));
   }
 
+  setLastReport = () => {
+    const lastReport = this.state.reports[this.state.reports.length - 1];
+    this.setState({
+      lastReport
+    });
+  };
+
   render() {
+    if (this.state.reports.length === 0) {
+      return <div>Loading...</div>;
+    }
+    if (this.state.lastReport === null) {
+      this.setLastReport();
+    }
+
     return (
       <div className="dashboard">
         <h2 style={{ marginBottom: "40px" }}>Stats Dashboard</h2>
