@@ -9,16 +9,15 @@ const reportId = 1;
 class TodayPoll extends Component {
   constructor() {
     super();
-    this.state = {
-      report: {}
-    };
+    this.state = {};
   }
 
   chartRef = React.createRef();
 
   componentDidMount() {
+    console.log(this.props);
     axiosWithAuth()
-      .get(`${URL}/respones/sentimentAvg/${reportId}`)
+      .get(`${URL}/responses/sentimentAvg/${this.props.lastReport.id}`)
       .then(res => {
         console.log(res);
         this.setState({

@@ -15,8 +15,7 @@ class StatsDashboard extends Component {
   constructor() {
     super();
     this.state = {
-      reports: [],
-      lastReport: null
+      reports: []
     };
   }
 
@@ -32,19 +31,9 @@ class StatsDashboard extends Component {
       .catch(err => console.log(err));
   }
 
-  setLastReport = () => {
-    const lastReport = this.state.reports[this.state.reports.length - 1];
-    this.setState({
-      lastReport
-    });
-  };
-
   render() {
     if (this.state.reports.length === 0) {
-      return <div>Loading...</div>;
-    }
-    if (this.state.lastReport === null) {
-      this.setLastReport();
+      return <div className="dashboard">Loading...</div>;
     }
 
     return (
@@ -61,7 +50,10 @@ class StatsDashboard extends Component {
           </div>
         </div>
         <div className="sideDashboard">
-          <TodayPoll average={3.8} />
+          <TodayPoll
+            reports={this.state.reports}
+            lastReport={this.state.reports[this.state.reports.length - 1]}
+          />
           <PollCalendar />
         </div>
       </div>
