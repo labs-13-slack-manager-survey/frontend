@@ -11,3 +11,18 @@
     justify-content: space-between;
     margin-top: -30px; 
 }
+
+.toggleComments {
+    height: 20px;
+    margin-right: -30px;
+}
+
+.toggleComments:hover {
+    cursor: pointer;
+}
+
+.question {
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-between; 
+}

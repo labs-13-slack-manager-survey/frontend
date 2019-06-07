@@ -4,6 +4,8 @@ import Slider from "@material-ui/lab/Slider";
 import { withStyles } from "@material-ui/core/styles";
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import "./Report_Input.css";
+import Cancel from '../../../images/icons/cancel.png'
+import Comment from '../../../images/icons/comment.png'
 
 // this component handles the response inputs for individual questions
 // when a user is filling in a report
@@ -38,20 +40,29 @@ const StyledSlider = withStyles({
 
 class ReportInput extends React.Component {
   state = {
-    value: 3
+	value: 3,
+	userComment: false, 
   };
 
-  // handleChange = (event, sentimentRange) => {
-  // 	this.setState({ this.props.sentimentRange });
-  // 	console.log(this.props.sentimentRange)
-  // };
+  toggleComment = (e) => {
+	  e.preventDefault();
+	  this.setState({
+		userComment: !this.state.userComment, 
+	  })  
+	  console.log(this.state.userComment)
+	}
+
+
   handleChange = (event, value) => {
     console.log(value);
   };
   render() {
     return (
       <div className="member-report-input">
-        <h4>{this.props.question}</h4>
+		<div className = "question">
+        	<h4>{this.props.question}</h4>
+			<img className ="toggleComments" src={this.state.userComment ? Cancel : Comment} onClick = {this.toggleComment} />
+		</div>
         {this.props.isSentiment ? (
           <>
             <StyledSlider
@@ -81,7 +92,8 @@ class ReportInput extends React.Component {
               <p>4</p>
               <p>5</p>
             </div>
-            <TextField
+			
+			{ this.state.userComment ? <TextField
               fullWidth={true}
               onChange={e => this.props.handleChange(e, this.props.question)}
               margin="normal"
@@ -89,7 +101,8 @@ class ReportInput extends React.Component {
               name="response"
               value={this.props.response}
               variant="outlined"
-            />
+            /> : null}
+        
           </>
         ) : (
           <TextField
