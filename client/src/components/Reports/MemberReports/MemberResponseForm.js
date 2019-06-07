@@ -30,12 +30,8 @@ class MemberResponseForm extends Component {
         {/*need to render this condtionally  */}
         <div> 
         <h1 className="member-form-title">Managers Thought's</h1>   
-        <h2>{this.state.typeOfManager}</h2>   
-        <h3>q1</h3>
         <h3>{this.state.managerResponse[0]}</h3>
-        <h3>q2</h3>
         <h3>{this.state.managerResponse[1]}</h3>
-        <h3>q3</h3>
         <h3>{this.state.managerResponse[2]}</h3>
         </div>
 

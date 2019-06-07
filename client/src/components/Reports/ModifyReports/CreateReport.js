@@ -318,7 +318,7 @@ this.setState({
 [e.target.name] : e.target.value,
 managerResponse: [this.state.resOne, this.state.resTwo, this.state.resThree],
 });
-console.log(this.state.managerResponse)
+console.log("MANAGER THEN REPONSE",this.state.typeOfManager, this.state.managerResponse)
 }
 
 //this is for rendering the manager questions at top of
