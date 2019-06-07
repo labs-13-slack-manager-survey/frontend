@@ -9,6 +9,25 @@ import PollCalendar from "./PollCalendar";
 import "./StatsDashboard.css";
 
 class StatsDashboard extends Component {
+  constructor() {
+    super();
+    this.state = {
+      reports: []
+    };
+  }
+
+  componentDidMount() {
+    axiosWithAuth()
+      .get(`${URL}/reports`)
+      .then(res => {
+        console.log(res);
+        this.setState({
+          reports: res.data
+        });
+      })
+      .catch(err => console.log(err));
+  }
+
   render() {
     return (
       <div className="dashboard">

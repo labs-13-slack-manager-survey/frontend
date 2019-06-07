@@ -5,26 +5,9 @@ import { axiosWithAuth } from "../../config/axiosWithAuth";
 const URL = process.env.REACT_APP_BASE_URL;
 
 class SentimentChart extends Component {
-  constructor() {
-    super();
-    this.state = {
-      reports: []
-    };
-  }
-
   chartRef = React.createRef();
 
   componentDidMount() {
-    axiosWithAuth()
-      .get(`${URL}/reports`)
-      .then(res => {
-        console.log(res);
-        this.setState({
-          reports: res.data
-        });
-      })
-      .catch(err => console.log(err));
-
     const myChartRef = this.chartRef.current.getContext("2d");
     new Chart(myChartRef, {
       type: "bar",
