@@ -69,6 +69,7 @@ state = {
     managerQuestionResponse:[],
     responseM: "",
     questions: [],
+    managerResponse: [],
     resOne: "",
     resTwo: "",
     resThree:"",
@@ -226,9 +227,7 @@ addReport = e => {
     message,
     questions,
     slackChannelId,
-    // resOne, 
-    // resTwo,
-    // resThree,
+    managerResponse,
     // typeOfManager, //new manager templates need to be added here so they can be sent to MemberReposonseForm.js
     // EngineeringManager,
     // ScrumMaster
@@ -239,12 +238,10 @@ addReport = e => {
     scheduleTime,
     message,
     questions: JSON.stringify(questions),
-    // resOne, 
-    // resTwo,
-    // resThree,
     // typeOfManager, //new manager templates need to be added here so they can be sent to MemberReposonseForm.js
     // EngineeringManager,
     // ScrumMaster,
+    managerResponse,
     slackChannelId,
     slackChannelName,
     created_at: new Date()
@@ -257,7 +254,7 @@ addReport = e => {
       this.props.setResponseAsState(res.data);
 
       this.props.history.push("/slackr/dashboard");
-      console.log('submit data',res.date)
+      console.log('submit data',res.data, 'report', report)
     })
     .catch(err => console.log(err));
 };
@@ -318,9 +315,10 @@ removeQuestion = (e, question) => {
 handleSubmission = e =>{
 e.preventDefault();
 this.setState({
-[e.target.name] : e.target.value
+[e.target.name] : e.target.value,
+managerResponse: [this.state.resOne, this.state.resTwo, this.state.resThree],
 });
-console.log(this.state.resOne)
+console.log(this.state.managerResponse)
 }
 
 //this is for rendering the manager questions at top of
