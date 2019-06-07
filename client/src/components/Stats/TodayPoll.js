@@ -1,15 +1,31 @@
 import React, { Component } from "react";
 import Chart from "chart.js";
+import { axiosWithAuth } from "../../config/axiosWithAuth";
+
+const URL = process.env.REACT_APP_BASE_URL;
 
 class TodayPoll extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      report: {}
+    };
   }
 
   chartRef = React.createRef();
 
   componentDidMount() {
+    axiosWithAuth()
+      .get(`${URL}/respones/sentimentAvg/${reportId}`)
+      .then(res => {
+        console.log(res);
+        this.setState({
+          report: res.data
+        });
+      })
+      .catch(err => console.log(err));
+
+    // Creates Doughnut Chart
     const myChartRef = this.chartRef.current.getContext("2d");
     new Chart(myChartRef, {
       type: "doughnut",
