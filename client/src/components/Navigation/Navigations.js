@@ -1,15 +1,18 @@
-import React from "react";
-import { NavLink, Link } from "react-router-dom";
+import React from 'react';
+import { NavLink, Link } from 'react-router-dom';
 
 // style imports
-import "./navigation.css";
-import { AppBar, Toolbar, Button, Icon, Avatar } from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
-import Logo from "../../images/logo_v1.png";
-import Teams from "../../images/icons/teams.png";
-import User from "../../images/icons/user.png";
-import Stats from "../../images/icons/stats.png";
-import Logout from "../../images/icons/logout.png";
+import './navigation.css';
+import { AppBar, Toolbar, Button, Icon, Avatar } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+import Logo from '../../images/logo_v1.png';
+import Teams from '../../images/icons/teams.png';
+import TeamsActive from '../../images/icons/teams-active.png';
+import User from '../../images/icons/user.png';
+import UserActive from '../../images/icons/user-active.png';
+import Stats from '../../images/icons/stats.png';
+import StatsActive from '../../images/icons/stats_active.png'
+import Logout from '../../images/icons/logout.png';
 
 const styles = {
   // root: {
@@ -24,9 +27,9 @@ const styles = {
   // 	marginLeft: 0,
   // 	marginRight: 0
   // },
-  logoLink: {
-    borderRight: "1px solid #FFF"
-  },
+  // logoLink: {
+  //   borderRight: "1px solid #FFF"
+  // },
   // appBar: {
   // 	height: 50,
   // 	backgroundColor: 'white',
@@ -77,6 +80,10 @@ class Navigation extends React.Component {
                 <span>+</span> Add Poll
               </button>
             </NavLink>
+
+            <NavLink to="/dashboard/reports/choose">
+							<button className = "menu-bar-add-team"><span>+</span> Team Member</button>
+						</NavLink>
           </div>
           {/* <div className="nav-links"> */}
           {/* <div> */}
@@ -117,51 +124,48 @@ class Navigation extends React.Component {
 								</NavLink>
 							)}
 						</div> */}
-        </div>
-        <div className="verticalBar">
-          {loggedIn ? (
-            <div className="vert-buttons">
-              <div className="menu-button">
-                <img className="menu-icon" src={Teams} />
-                <div className="button-label">teams</div>
-              </div>
-              <div className="menu-button">
-                <NavLink to="/slackr/dashboard/stats">
-                  <img className="menu-icon" src={Stats} />
-                  <div className="button-label">stats</div>
+				</div>
+				<div className = "verticalBar">
+					{loggedIn ? (
+					<div className = "vert-buttons">
+					<div className = "menu-button">
+							<NavLink to='/slackr/dashboard' > <img className = "menu-icon" src={this.props.history.location.pathname ===
+											'/slackr/dashboard' ? TeamsActive : Teams} /></NavLink>
+							<div className ={this.props.history.location.pathname ===
+											'/slackr/dashboard' ? "button-label-active" : "button-label"}>reports</div>
+						</div>
+						<div className = "menu-button">
+              <NavLink to="/slackr/dashboard/stats">
+                  <img className="menu-icon" src={this.props.history.location.pathname === '/slackr/dashboard/stats' ? StatsActive : Stats} />
+                  <div className = {this.props.history.location.pathname ===
+											'/slackr/dashboard/stats' ? "button-label-active" : "button-label"} >stats</div>
                 </NavLink>
-              </div>
-            </div>
-          ) : (
-            <div className="empty-buttons" />
-          )}
-          {loggedIn ? (
-            <>
-              <div className="vert-buttons">
-                <NavLink to="/slackr/dashboard/profile" className="menu-button">
-                  <img className="menu-icon" src={User} />
-                  <div className="button-label">user</div>
-                </NavLink>
-                <NavLink
-                  to="/login"
-                  onClick={this.handleLogout}
-                  className="menu-button"
-                >
-                  <img className="menu-icon" src={Logout} />
-                  <div className="button-label">logout</div>
-                </NavLink>{" "}
-              </div>{" "}
-            </>
-          ) : (
-            <NavLink
-              to="/login"
-              onClick={this.handleLogout}
-              className="menu-button"
-            >
-              <img className="menu-icon" src={Logout} />
-              <div className="button-label">login</div>
-            </NavLink>
-          )}
+						</div>
+					</div>
+               
+
+            ): (
+                <div className = "empty-buttons"/>
+              )}
+                {loggedIn ? (
+							<>
+							<div className = "vert-buttons">
+								<NavLink to="/slackr/dashboard/profile" className = "menu-button">
+									<img className = "menu-icon" src={this.props.history.location.pathname ===
+											'/slackr/dashboard/profile' ? UserActive : User} />
+									<div className = {this.props.history.location.pathname ===
+											'/slackr/dashboard/profile' ? "button-label-active" : "button-label"} >user</div>
+								</NavLink>
+								<NavLink to="/login" onClick = {this.handleLogout} className = "menu-button">
+									<img className = "menu-icon" src={Logout} />
+									<div className ="button-label-logout">logout</div>
+								</NavLink> </div> </>
+							) : (
+								<NavLink to="/login" onClick = {this.handleLogout} className = "menu-button">
+									<img className = "menu-icon" src={Logout} />
+									<div className = "button-label-logout">login</div>
+							</NavLink>
+						)}
         </div>
       </>
     );
