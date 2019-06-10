@@ -104,12 +104,12 @@ state = {
     "Scrum master",
   ],
   //set manager questions here as well as type of manager BEFORE you add to the managerType
-    EngineeringManager: {
+    EngineeringManagerQuestions: {
       questionOne: "As an Engineering manager,What is your weekly goal?",
       questionTwo: "What features should be Priority?",
       questionThree :"Are there any new project details that the team should know?"},
     
-    ScrumMaster:{ 
+    ScrumMasterQuestions:{ 
       questionOne: "What is the weekly sales goal?",
       questionTwo: "Is their any important customer feedback?",
       questionThree :"How are you feeling about the current state of team moral?"
@@ -229,8 +229,8 @@ addReport = e => {
     slackChannelId,
     managerResponse,
     // typeOfManager, //new manager templates need to be added here so they can be sent to MemberReposonseForm.js
-    // EngineeringManager,
-    // ScrumMaster
+    EngineeringManagerQuestions,
+    ScrumMasterQuestions
   } = this.state;
   const report = {
     reportName,
@@ -239,8 +239,8 @@ addReport = e => {
     message,
     questions: JSON.stringify(questions),
     // typeOfManager, //new manager templates need to be added here so they can be sent to MemberReposonseForm.js
-    // EngineeringManager,
-    // ScrumMaster,
+    EngineeringManagerQuestions,
+    ScrumMasterQuestions,
     managerResponse: JSON.stringify(managerResponse),
     slackChannelId,
     slackChannelName,
@@ -341,7 +341,7 @@ renderManagerQuestions = () => {
         //questions for Engineering manager
         <div >
           <br/>
-          <h6>{this.state.EngineeringManager.questionOne}</h6>
+          <h6>{this.state.EngineeringManagerQuestions.questionOne}</h6>
           <Input
             id="report-question"
             className="input-field"
@@ -351,7 +351,7 @@ renderManagerQuestions = () => {
             value={this.state.resOne}
             onChange={this.handleSubmission}
           />
-            <h6>{this.state.EngineeringManager.questionTwo}</h6>
+            <h6>{this.state.EngineeringManagerQuestions.questionTwo}</h6>
           <Input
             id="report-question"
             className="input-field"
@@ -361,7 +361,7 @@ renderManagerQuestions = () => {
             value={this.state.resTwo}
             onChange={this.handleSubmission}
           />
-            <h6>{this.state.EngineeringManager.questionThree}</h6>
+            <h6>{this.state.EngineeringManagerQuestions.questionThree}</h6>
           <Input
             id="report-question"
             className="input-field"
@@ -376,7 +376,7 @@ renderManagerQuestions = () => {
         //questions for marketing manager
         <div>
           <br/>
-          <h6>{this.state.ScrumMaster.questionOne}</h6>
+          <h6>{this.state.ScrumMasterQuestions.questionOne}</h6>
           <Input
             id="report-question"
             className="input-field"
@@ -386,7 +386,7 @@ renderManagerQuestions = () => {
             value={this.state.resOne}
             onChange={this.handleSubmission}
           />
-           <h6>{this.state.ScrumMaster.questionTwo}</h6>
+           <h6>{this.state.ScrumMasterQuestions.questionTwo}</h6>
           <Input
             id="report-question"
             className="input-field"
@@ -396,7 +396,7 @@ renderManagerQuestions = () => {
             value={this.state.resTwo}
             onChange={this.handleSubmission}
           />
-           <h6>{this.state.ScrumMaster.questionThree}</h6>
+           <h6>{this.state.ScrumMasterQuestions.questionThree}</h6>
           <Input
             id="report-question"
             className="input-field"
