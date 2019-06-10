@@ -3,10 +3,10 @@ import { axiosWithAuth, baseURL } from "../../config/axiosWithAuth";
 import jwt_decode from "jwt-decode";
 
 //components
-import Dashboard from  "../Dashboard/Dashboard";
+import Dashboard from "../Dashboard/Dashboard";
 import ReportsDash from "../Dashboard/ReportsDash";
-import SummaryBox from '../../components/SummaryBox';
-import TableDisplay from '../../components/TableDisplay'
+import SummaryBox from "../../components/SummaryBox";
+import TableDisplay from "../../components/TableDisplay";
 // style imports
 import "./view.css";
 import { Card } from "@blueprintjs/core";
