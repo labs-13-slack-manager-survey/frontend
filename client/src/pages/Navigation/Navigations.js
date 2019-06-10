@@ -1,5 +1,7 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
+import { axiosWithAuth, baseURL } from "../../config/axiosWithAuth";
 
 // style imports
 import './navigation.css';
@@ -51,7 +53,33 @@ class Navigation extends React.Component {
     window.location.reload();
   };
 
+  slackAuthCheck = e => {
+    const token = jwt_decode(localStorage.getItem('token'));
+
+    e.preventDefault();
+    const endpoint = `${baseURL}/slack/channels`;
+    axiosWithAuth()
+      .get(endpoint)
+      .then(res => {
+        if (res.status !== 200) {
+          console.log("56");
+          this.setState({
+            slackModal: true
+          });
+        } else {
+          this.props.history.push("dashboard/reports/choose");
+        }
+      })
+      .catch(err => {
+        this.setState({
+          slackModal: true
+        });
+        console.log(err);
+      });
+  };
+
   render() {
+    const token = jwt_decode(localStorage.getItem('token'));
     const appToken = localStorage.getItem("token");
     const firebaseToken = localStorage.getItem(
       "firebaseui::rememberedAccounts"
@@ -75,15 +103,17 @@ class Navigation extends React.Component {
             <div>slackr</div>
           </div>
           <div className="horizontal-buttons">
-            <NavLink to="/slackr/dashboard/reports/choose">
-              <button className="menu-bar-add-poll">
-                <span>+</span> Add Poll
+            {token.roles == "admin" ? 
+              (<><NavLink to="/slackr/dashboard/reports/choose">
+              <button className="menu-bar-add-poll"
+                onClick={token.roles !== "admin" ? this.slackAuthCheck : null}>
+                <span>+</span>Add Poll
               </button>
             </NavLink>
 
             <NavLink to="/dashboard/reports/choose">
 							<button className = "menu-bar-add-team"><span>+</span> Team Member</button>
-						</NavLink>
+            </NavLink></>) : null }
           </div>
 
 				</div>

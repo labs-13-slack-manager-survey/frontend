@@ -16,6 +16,10 @@ import AddIcon from "@material-ui/icons/Add";
 import Slack from "../Slack/Slack";
 import SingleReport from "./SingleReport";
 import "./reports.css";
+import TableHeader from '../../components/TableHeader'
+import TableDisplay from '../../components/TableDisplay'
+
+
 
 // Container for all reports including title
 // Parent component = ReportsDash.js in '/pages/Dashboard/ReportsDash'
@@ -27,7 +31,7 @@ function Transition(props) {
 class Reports extends Component {
   state = {
     slackModal: false,
-    archiveModal: false
+    archiveModal: false,
   };
 
   slackAuthCheck = e => {
@@ -53,9 +57,10 @@ class Reports extends Component {
       });
   };
 
-  ConsoleCheck = (id) => {
-    console.log(id)
-  }
+  // ConsoleCheck = (id) => {
+  //   console.log(id)
+
+  // }
 
   handleClose = () => {
     this.setState({
@@ -85,31 +90,6 @@ class Reports extends Component {
     return (
       <div className="user-reports-container">
         <header className="reports-header">
-          <Typography variant="h3">Your Reports</Typography>
-          <div className="reports-header-buttons">
-            <Link
-              style={
-                this.props.role !== "admin"
-                  ? { cursor: "initial" }
-                  : { cursor: "pointer" }
-              }
-              to={
-                this.props.role !== "admin"
-                  ? "/slackr/dashboard"
-                  : "/slackr/dashboard/reports/choose"
-              }
-            >
-              <Fab
-                color="primary"
-                aria-label="Add"
-                size="large"
-                disabled={this.props.role !== "admin" ? true : false}
-                onClick={this.slackAuthCheck}
-              >
-                {this.props.role !== "admin" ? <Icon>lock</Icon> : <AddIcon />}
-              </Fab>
-            </Link>
-          </div>
           <Dialog
             open={this.state.slackModal}
             TransitionComponent={Transition}
@@ -135,15 +115,35 @@ class Reports extends Component {
         </header>
         <div>
           {/* passing reports from state to individual components */}
+          <TableHeader 
+              column1 = "Report Name"
+              column2 = "Date Created"
+              column3 = "Schedule" 
+              column4 = "Total Responses"/>
           {activeReports.map(report => (
-            <SingleReport
+              // 		<TableDisplay 
+              //       column1 = "Report Name"
+              //       column2 = "Date Created"
+              //       column3 = "Schedule" 
+              //       column4 = "Total Responses"
+              // content1 = {report.ReportName}/>
+              <TableDisplay 
+              content1 = {report.reportName}
+              report = {report}
               role={this.props.role}
-              key={report.id}
-              report={report}
               archiveReport={this.archiveReport}
               archiveModal={this.state.archiveModal}
               ConsoleCheck = {this.ConsoleCheck}
-            />
+              />
+              // <SingleReport
+              //   role={this.props.role}
+              //   key={report.id}
+              //   report={report}
+              //   archiveReport={this.archiveReport}
+              //   archiveModal={this.state.archiveModal}
+              //   ConsoleCheck = {this.ConsoleCheck}
+              // />
+            
           ))}
         </div>
       </div>

@@ -33,11 +33,21 @@ export class Dashboard extends Component {
     return (
       <>
       <PageTitle 
-      title = "TEAM NAME"
+      title = "REPORTS DASHBOARD"
       />
-      <SummaryBox 
+      <div className = "summary-boxes">
+        <SummaryBox 
             title = "no. of team members"
             content = {this.state.users.length}/>
+
+        <SummaryBox 
+            title = "total poll responses" 
+            content = {this.state.users.length}/>
+
+        <SummaryBox 
+            title = "total polls scheduled"
+            content = {this.state.users.length}/>
+      </div>
       <Card raised={true} className="teamDashboard">
         <header className="teamDashboard-header">
           <Typography variant="h3">Team</Typography>
