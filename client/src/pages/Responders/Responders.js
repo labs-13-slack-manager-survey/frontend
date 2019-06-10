@@ -4,7 +4,7 @@ import React from 'react';
 // shows their profile picture on the results page, but slightly transparent. User can click on
 // the profile picture to filter reponses by that user
 
-// parent component = ReportResults.js (/components/Reports/ReportResults)
+// parent component = ReportResults.js (/pages/Reports/ReportResults)
 
 const ResponseTeamList = props => (
 	<div className="responders">

@@ -1,11 +1,16 @@
 .view {
 	display: flex;
 	justify-content: space-evenly;
+	flex-direction: column;
 	margin: auto;
 	max-width: 800px;
 }
 
-
+.summaryStats {
+	display: flex;
+	justify-content: space-between; 
+	margin-top: 10px;
+}
 
 
 @media(max-width: 800px){

@@ -11,6 +11,8 @@ import Slack from "../Slack/Slack";
 import { Spinner, Intent } from "@blueprintjs/core";
 import { Card, Typography } from "@material-ui/core";
 import "./dashboard.css";
+
+
 export class Dashboard extends Component {
   state = {
     users: [],

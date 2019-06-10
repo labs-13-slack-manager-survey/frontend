@@ -22,7 +22,7 @@ import { getHours } from 'date-fns';
 import { getMinutes } from 'date-fns/esm';
 
 // this edits reports - admin only
-// Parent component = ReportsDash.js in '/components/Dashboard/ReportsDash'
+// Parent component = ReportsDash.js in '/pages/Dashboard/ReportsDash'
 
 const styles = theme => ({
 	container: {

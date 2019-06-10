@@ -25,7 +25,7 @@ import { TimePicker } from "material-ui-pickers";
 import "./Report.css";
 
 // this component does what it says - admin can create a new report
-// Parent component = ReportsDash.js in '/components/Dashboard/ReportsDash'
+// Parent component = ReportsDash.js in '/pages/Dashboard/ReportsDash'
 
 const styles = theme => ({
   container: {

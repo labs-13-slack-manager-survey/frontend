@@ -12,7 +12,7 @@ import { Card, Elevation } from "@blueprintjs/core";
 import { Fab, Icon } from "@material-ui/core";
 import "./ReportResults.css";
 
-// Parent component = ReportsDash.js in '/components/Dashboard/ReportsDash'
+// Parent component = ReportsDash.js in '/pages/Dashboard/ReportsDash'
 
 class ReportResults extends Component {
   state = {

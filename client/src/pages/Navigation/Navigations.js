@@ -85,45 +85,7 @@ class Navigation extends React.Component {
 							<button className = "menu-bar-add-team"><span>+</span> Team Member</button>
 						</NavLink>
           </div>
-          {/* <div className="nav-links"> */}
-          {/* <div> */}
-          {/* <NavLink to="/dashboard"> */}
-          {/* style here highlights which tab user is currently on */}
-          {/* <Button
-										style={
-											this.props.history.location.pathname === '/dashboard'
-												? { color: 'white' }
-												: { color: '#B0C4DE' }
-										}
-										className={classes.grow}
-									>
-										<Icon>home</Icon>
-									</Button> */}
-          {/* </NavLink> */}
-          {/* <NavLink to="/dashboard/profile">
-									<Button
-										style={
-											this.props.history.location.pathname ===
-											'/dashboard/profile'
-												? { color: 'white' }
-												: { color: '#B0C4DE' }
-										}
-									>
-										<Icon>account_circle</Icon>
-									</Button>
-								</NavLink> */}
-          {/* </div>  */}
-          {/* login/logout operator
-							{!loggedIn ? (
-								<NavLink to="/login">
-									<Button className={classes.grow}>Login</Button>
-								</NavLink>
-							) : (
-								<NavLink to="/login" onClick={this.handleLogout}>
-									<Button className={classes.grow}>Logout</Button>
-								</NavLink>
-							)}
-						</div> */}
+
 				</div>
 				<div className = "verticalBar">
 					{loggedIn ? (

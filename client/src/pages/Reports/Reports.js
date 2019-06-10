@@ -18,7 +18,7 @@ import SingleReport from "./SingleReport";
 import "./reports.css";
 
 // Container for all reports including title
-// Parent component = ReportsDash.js in '/components/Dashboard/ReportsDash'
+// Parent component = ReportsDash.js in '/pages/Dashboard/ReportsDash'
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
