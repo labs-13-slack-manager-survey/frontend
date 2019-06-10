@@ -9,10 +9,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLinkedin, faGithubSquare } from '@fortawesome/free-brands-svg-icons';
 
 // profile pictures
-import Erin from '../../images/erin.JPG';
-import Mikaela from '../../images/mikaela.jpg';
-import Arshak from '../../images/arshak.jpeg';
-import Shaun from '../../images/shaun.png';
+import Curtis from 	"../../images/Curtis.png";
+import Mckay from '../../images/mckay.png';
+import Ben from '../../images/Ben.png';
+import Erica from '../../images/erica.png';
+import Taylor from "../../images/Taylor.png"
 
 class DevTeam extends Component {
 	scrollToTop() {
@@ -29,61 +30,77 @@ class DevTeam extends Component {
 				</Typography>
 				<TeamContainer>
 					<TeamMember>
-						<MemberImage src={Arshak} alt="Arshak Asriyan" />
-						<Typography variant="h4">Arshak Asriyan</Typography>
+						<MemberImage src={Ben} alt="Ben Tsao" />
+						<Typography variant="h4">Ben Tsao</Typography>
 						<p>Full-Stack Developer</p>
 						<MemberLinks>
-							<a target="blank" href="https://github.com/AAsriyan">
+							<a target="blank" href="https://github.com/cbtsao47">
 								<FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
 							</a>
 							<a
 								target="blank"
-								href="https://www.linkedin.com/in/arshak-asriyan-097012a0/"
+								href="https://www.linkedin.com/in/cbtsao/"
 							>
 								<FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
 							</a>
 						</MemberLinks>
 					</TeamMember>
 					<TeamMember>
-						<MemberImage src={Erin} alt="Erin Koen" />
-						<Typography variant="h4">Erin Koen</Typography>
+						<MemberImage src={Curtis} alt="Curtis Hubbard" />
+						<Typography variant="h4">Curtis Hubbard</Typography>
 						<p>Full-Stack Developer</p>
 						<MemberLinks>
-							<a target="blank" href="https://github.com/erin-koen">
+							<a target="blank" href="https://github.com/chubbard022">
 								<FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
 							</a>
-							<a target="blank" href="https://www.linkedin.com/in/erinkoen/">
+							<a target="blank" href="https://www.linkedin.com/in/curtis-hubbard-945764158/">
 								<FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
 							</a>
 						</MemberLinks>
 					</TeamMember>
 					<TeamMember>
-						<MemberImage src={Mikaela} alt="Mikaela Currier" />
-						<Typography variant="h4">Mikaela Currier</Typography>
+						<MemberImage src={Mckay} alt="Mckay Wrigley" />
+						<Typography variant="h4">Mckay Wrigley</Typography>
 						<p>Full-Stack Developer</p>
 						<MemberLinks>
-							<a target="blank" href="https://github.com/mikaelacurrier">
+							<a target="blank" href="https://github.com/mckaywrigley45">
 								<FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
 							</a>
 							<a
 								target="blank"
-								href="https://www.linkedin.com/in/mikaela-currier/"
+								href="https://www.linkedin.com/in/mckay-wrigley-05b496166/"
 							>
 								<FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
 							</a>
 						</MemberLinks>
 					</TeamMember>
 					<TeamMember>
-						<MemberImage src={Shaun} alt="Shaun Carmody" />
-						<Typography variant="h4">Shaun Carmody</Typography>
+						<MemberImage src={Erica} alt="Erica Chen" />
+						<Typography variant="h4">Erica Chen</Typography>
 						<p>Full-Stack Developer</p>
 						<MemberLinks>
-							<a target="blank" href="https://github.com/shaunmcarmody">
+							<a target="blank" href="https://github.com/erica-y-chen">
 								<FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
 							</a>
 							<a
 								target="blank"
-								href="https://www.linkedin.com/in/shaunmcarmody/"
+								href="https://www.linkedin.com/in/eyufanchen/"
+							>
+								<FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
+							</a>
+						</MemberLinks>
+					</TeamMember>
+					<TeamMember>
+						<MemberImage src={Taylor} alt="Taylor Blount" />
+						<Typography variant="h4">Taylor Blount</Typography>
+						<p>Full-Stack Developer</p>
+						<MemberLinks>
+							<a target="blank" href="hhttps://github.com/thirdeyeclub">
+								<FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
+							</a>
+							<a
+								target="blank"
+								//TAYLOR add your linkedIn here when you decide to make one
 							>
 								<FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
 							</a>

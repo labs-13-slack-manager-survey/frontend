@@ -18,7 +18,6 @@ class TodayPoll extends Component {
     axiosWithAuth()
       .get(`${URL}/responses/sentimentAvg/${this.props.lastReport.id}`)
       .then(res => {
-        console.log(res);
         this.setState({
           reports: res.data
         });
@@ -49,8 +48,6 @@ class TodayPoll extends Component {
   }
 
   render() {
-    console.log(this.state);
-
     return (
       <div>
         <h2 style={{ margin: "0" }}>Today's Poll</h2>

@@ -3,9 +3,11 @@ import { axiosWithAuth } from "../../config/axiosWithAuth";
 
 import SentimentChart from "./SentimentChart";
 import SentimentAvg from "./SentimentAvg";
-import DataSquare from "./DataSquare";
 import TodayPoll from "./TodayPoll";
 import PollCalendar from "./PollCalendar";
+import SummaryBox from "../../components/SummaryBox";
+
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 import "./StatsDashboard.css";
 
@@ -23,9 +25,13 @@ class StatsDashboard extends Component {
     axiosWithAuth()
       .get(`${URL}/reports`)
       .then(res => {
-        console.log(res);
+        const sentimentReports = res.data.reports.filter(report => {
+          if (report.isSentiment) {
+            return report;
+          }
+        });
         this.setState({
-          reports: res.data.reports
+          reports: sentimentReports
         });
       })
       .catch(err => console.log(err));
@@ -33,7 +39,11 @@ class StatsDashboard extends Component {
 
   render() {
     if (this.state.reports.length === 0) {
-      return <div className="dashboard">Loading...</div>;
+      return (
+        <div>
+          <CircularProgress />
+        </div>
+      );
     }
 
     return (
@@ -41,12 +51,12 @@ class StatsDashboard extends Component {
         <h2 style={{ marginBottom: "40px" }}>Stats Dashboard</h2>
         <div className="mainDashboard">
           <SentimentChart />
-          <SentimentAvg />
+          <SentimentAvg reports={this.state.reports} />
           <div className="dataSquares">
             {/* Dummy Data */}
-            <DataSquare text="Number of Teams" data="8" />
-            <DataSquare text="Total Poll Responses" data="1715/1824" />
-            <DataSquare text="Total Response Rate" data="76%" />
+            <SummaryBox title="Number of Teams" content="8" />
+            <SummaryBox title="Total Poll Responses" content="1715/1824" />
+            <SummaryBox title="Total Response Rate" content="76%" />
           </div>
         </div>
         <div className="sideDashboard">
