@@ -17,6 +17,7 @@ import Slack from "../Slack/Slack";
 import SingleReport from "./SingleReport";
 import "./reports.css";
 import TableHeader from '../../components/TableHeader'
+import TableDisplay from '../../components/TableDisplay'
 
 
 
@@ -30,7 +31,7 @@ function Transition(props) {
 class Reports extends Component {
   state = {
     slackModal: false,
-    archiveModal: false
+    archiveModal: false,
   };
 
   slackAuthCheck = e => {
@@ -58,6 +59,7 @@ class Reports extends Component {
 
   ConsoleCheck = (id) => {
     console.log(id)
+
   }
 
   handleClose = () => {
@@ -150,14 +152,19 @@ class Reports extends Component {
               //       column3 = "Schedule" 
               //       column4 = "Total Responses"
               // content1 = {report.ReportName}/>
-              <SingleReport
-                role={this.props.role}
-                key={report.id}
-                report={report}
-                archiveReport={this.archiveReport}
-                archiveModal={this.state.archiveModal}
-                ConsoleCheck = {this.ConsoleCheck}
+              <TableDisplay 
+              content1 = {report.reportName}
+              report = {report}
+  
               />
+              // <SingleReport
+              //   role={this.props.role}
+              //   key={report.id}
+              //   report={report}
+              //   archiveReport={this.archiveReport}
+              //   archiveModal={this.state.archiveModal}
+              //   ConsoleCheck = {this.ConsoleCheck}
+              // />
             
           ))}
         </div>
