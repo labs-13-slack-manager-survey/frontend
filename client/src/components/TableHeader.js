@@ -8,6 +8,7 @@ const TableDisplay = props => (
             <div className="label">{props.column2}</div>
             {props.column3 ? <div className="label">{props.column3}</div> : null }
             {props.column4 ? <div className="label">{props.column4}</div> : null }
+            <div className="spacer"></div>
         </div>
         <div className = "vertical-line" />
         

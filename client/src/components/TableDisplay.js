@@ -35,20 +35,21 @@ class TableDisplay extends React.Component {
                 <div className = "column1">{this.props.content1}</div>
                 <div className = "column">{Date.parse(this.props.report.created_at)}</div>
 
-     
-                {week.map((day, idx) => (
-                        <div
-                            key={day}
-                            className={`day ${
-                                this.props.report.schedule.includes(day) ? 'selectedDays' : ''
-                            }`}
-                        >
-                            {/* if M/W/F, only show first letter, otherwise first 2 */}
-                            {idx === 0 || idx === 2 || idx === 4
-                                ? day.charAt(0)
-                                : day.charAt(0) + day.charAt(1)}
-                        </div>
-                    ))}
+                <div className = "schedule-time">
+                    {week.map((day, idx) => (
+                            <div
+                                key={day}
+                                className={`day ${
+                                    this.props.report.schedule.includes(day) ? 'selectedDays' : ''
+                                }`}
+                            >
+                                {/* if M/W/F, only show first letter, otherwise first 2 */}
+                                {idx === 0 || idx === 2 || idx === 4
+                                    ? day.charAt(0)
+                                    : day.charAt(0) + day.charAt(1)}
+                            </div>
+                        ))}
+                </div>
 
 
                 <div className = "column">hello</div>
