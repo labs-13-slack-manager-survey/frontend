@@ -17,7 +17,7 @@
 
 .horizontalMenuBar {
 	height: 70px; 
-	background-color: none; 
+	background-color: white; 
 	border-bottom: 2px solid #F5F5F5;
 	width: 100%;
 	position: sticky; 
@@ -36,6 +36,7 @@
 	justify-content: space-between; 
 	width: 115px;
 	align-items: center;
+
 }
 
 .menu-bar-add-poll {
@@ -89,7 +90,7 @@ span {
 	left: 0; 
 	width: 70px;
 	height: 100%;
-	background-color: none;
+	background-color: white;
 	border-right: 2px solid #F5F5F5;
 	top: 0;
 	display: flex;

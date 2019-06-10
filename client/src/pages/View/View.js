@@ -37,7 +37,9 @@ class View extends Component {
     // If user's account is inactive, they cannot see the dashboard
     return this.state.active ? (
       <div className="view">
-        <PageTitle />
+        <PageTitle 
+          title = "TEAM NAME"
+        />
         <div className = "summaryStats">
           <SummaryBox 
             title = "no. of team members"
