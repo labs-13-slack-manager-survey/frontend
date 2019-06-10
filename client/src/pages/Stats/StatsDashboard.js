@@ -23,9 +23,15 @@ class StatsDashboard extends Component {
     axiosWithAuth()
       .get(`${URL}/reports`)
       .then(res => {
-        console.log(res);
+        console.log(res.data.reports);
+        const sentimentReports = res.data.reports.filter(report => {
+          if (report.isSentiment) {
+            return report;
+          }
+        });
+        console.log(sentimentReports);
         this.setState({
-          reports: res.data.reports
+          reports: sentimentReports
         });
       })
       .catch(err => console.log(err));
@@ -41,7 +47,7 @@ class StatsDashboard extends Component {
         <h2 style={{ marginBottom: "40px" }}>Stats Dashboard</h2>
         <div className="mainDashboard">
           <SentimentChart />
-          <SentimentAvg />
+          <SentimentAvg report={this.state.reports} />
           <div className="dataSquares">
             {/* Dummy Data */}
             <SummaryBox title="Number of Teams" content="8" />
