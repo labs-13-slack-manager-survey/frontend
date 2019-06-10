@@ -7,6 +7,8 @@ import TodayPoll from "./TodayPoll";
 import PollCalendar from "./PollCalendar";
 import SummaryBox from "../../components/SummaryBox";
 
+import CircularProgress from "@material-ui/core/CircularProgress";
+
 import "./StatsDashboard.css";
 
 const URL = process.env.REACT_APP_BASE_URL;
@@ -37,7 +39,11 @@ class StatsDashboard extends Component {
 
   render() {
     if (this.state.reports.length === 0) {
-      return <div className="dashboard">There are no stats to report.</div>;
+      return (
+        <div>
+          <CircularProgress />
+        </div>
+      );
     }
 
     return (
