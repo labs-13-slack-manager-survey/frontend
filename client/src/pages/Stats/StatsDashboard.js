@@ -23,13 +23,11 @@ class StatsDashboard extends Component {
     axiosWithAuth()
       .get(`${URL}/reports`)
       .then(res => {
-        console.log(res.data.reports);
         const sentimentReports = res.data.reports.filter(report => {
           if (report.isSentiment) {
             return report;
           }
         });
-        console.log(sentimentReports);
         this.setState({
           reports: sentimentReports
         });

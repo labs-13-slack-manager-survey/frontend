@@ -10,7 +10,6 @@ class SentimentAvgItem extends Component {
 
   componentDidMount() {
     this.getSentimentAvg(this.props.id);
-    console.log(this.props);
   }
 
   getSentimentAvg = id => {
