@@ -47,7 +47,7 @@ class StatsDashboard extends Component {
         <h2 style={{ marginBottom: "40px" }}>Stats Dashboard</h2>
         <div className="mainDashboard">
           <SentimentChart />
-          <SentimentAvg report={this.state.reports} />
+          <SentimentAvg reports={this.state.reports} />
           <div className="dataSquares">
             {/* Dummy Data */}
             <SummaryBox title="Number of Teams" content="8" />

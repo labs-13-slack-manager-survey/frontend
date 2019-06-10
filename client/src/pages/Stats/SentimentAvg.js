@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { axiosWithAuth } from "../../config/axiosWithAuth";
+import SentimentAvgItem from "./SentimentAvgItem";
 
 const URL = process.env.REACT_APP_BASE_URL;
 
@@ -13,7 +14,16 @@ class SentimentAvg extends Component {
   render() {
     return (
       <div>
-        <h2>SentimentAvg</h2>
+        {this.props.reports.map(report => {
+          return (
+            <SentimentAvgItem
+              key={report.id}
+              id={report.id}
+              name={report.reportName}
+              message={report.message}
+            />
+          );
+        })}
       </div>
     );
   }
