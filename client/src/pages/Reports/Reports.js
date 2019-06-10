@@ -104,15 +104,15 @@ class Reports extends Component {
                   : "/slackr/dashboard/reports/choose"
               }
             >
-              <Fab
+              {/* <Fab
                 color="primary"
                 aria-label="Add"
                 size="large"
                 disabled={this.props.role !== "admin" ? true : false}
                 onClick={this.slackAuthCheck}
-              >
-                {this.props.role !== "admin" ? <Icon>lock</Icon> : <AddIcon />}
-              </Fab>
+              > */}
+                {/* {this.props.role !== "admin" ? <Icon>lock</Icon> : <AddIcon />} */}
+              {/* </Fab> */}
             </Link>
           </div>
           <Dialog
