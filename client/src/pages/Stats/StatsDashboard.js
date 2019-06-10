@@ -6,6 +6,7 @@ import SentimentAvg from "./SentimentAvg";
 import DataSquare from "./DataSquare";
 import TodayPoll from "./TodayPoll";
 import PollCalendar from "./PollCalendar";
+import SummaryBox from "../../components/SummaryBox";
 
 import "./StatsDashboard.css";
 
@@ -33,7 +34,7 @@ class StatsDashboard extends Component {
 
   render() {
     if (this.state.reports.length === 0) {
-      return <div className="dashboard">Loading...</div>;
+      return <div className="dashboard">There are no stats to report.</div>;
     }
 
     return (
@@ -44,9 +45,9 @@ class StatsDashboard extends Component {
           <SentimentAvg />
           <div className="dataSquares">
             {/* Dummy Data */}
-            <DataSquare text="Number of Teams" data="8" />
-            <DataSquare text="Total Poll Responses" data="1715/1824" />
-            <DataSquare text="Total Response Rate" data="76%" />
+            <SummaryBox title="Number of Teams" content="8" />
+            <SummaryBox title="Total Poll Responses" content="1715/1824" />
+            <SummaryBox title="Total Response Rate" content="76%" />
           </div>
         </div>
         <div className="sideDashboard">
