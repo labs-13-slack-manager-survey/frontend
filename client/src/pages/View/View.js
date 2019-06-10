@@ -6,7 +6,7 @@ import jwt_decode from "jwt-decode";
 import Dashboard from  "../Dashboard/Dashboard";
 import ReportsDash from "../Dashboard/ReportsDash";
 import SummaryBox from '../../components/SummaryBox';
-import TableDisplay from '../../components/TableDisplay'
+
 // style imports
 import "./view.css";
 import { Card } from "@blueprintjs/core";
@@ -37,19 +37,7 @@ class View extends Component {
     // If user's account is inactive, they cannot see the dashboard
     return this.state.active ? (
       <div className="view">
-        {/* <TableDisplay 
-        column1 = "Report Name"
-        column2 = "Date Created"
-        column3 = "Schedule" 
-        column4 = "Total Responses"/>
-        <div className = "summaryStats">
-          <SummaryBox 
-            title = "total poll responses"
-            content = "8"/>
-          <SummaryBox 
-            title = "no. scheduled polls"
-            content = "8"/>
-        </div> */}
+
         <Dashboard className="usersDash" role={this.state.roles} />
         <ReportsDash
           className="reportsDash"

@@ -16,6 +16,9 @@ import AddIcon from "@material-ui/icons/Add";
 import Slack from "../Slack/Slack";
 import SingleReport from "./SingleReport";
 import "./reports.css";
+import TableHeader from '../../components/TableHeader'
+
+
 
 // Container for all reports including title
 // Parent component = ReportsDash.js in '/pages/Dashboard/ReportsDash'
@@ -135,15 +138,27 @@ class Reports extends Component {
         </header>
         <div>
           {/* passing reports from state to individual components */}
+          <TableHeader 
+              column1 = "Report Name"
+              column2 = "Date Created"
+              column3 = "Schedule" 
+              column4 = "Total Responses"/>
           {activeReports.map(report => (
-            <SingleReport
-              role={this.props.role}
-              key={report.id}
-              report={report}
-              archiveReport={this.archiveReport}
-              archiveModal={this.state.archiveModal}
-              ConsoleCheck = {this.ConsoleCheck}
-            />
+              // 		<TableDisplay 
+              //       column1 = "Report Name"
+              //       column2 = "Date Created"
+              //       column3 = "Schedule" 
+              //       column4 = "Total Responses"
+              // content1 = {report.ReportName}/>
+              <SingleReport
+                role={this.props.role}
+                key={report.id}
+                report={report}
+                archiveReport={this.archiveReport}
+                archiveModal={this.state.archiveModal}
+                ConsoleCheck = {this.ConsoleCheck}
+              />
+            
           ))}
         </div>
       </div>

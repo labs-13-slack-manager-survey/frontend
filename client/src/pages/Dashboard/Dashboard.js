@@ -33,7 +33,7 @@ export class Dashboard extends Component {
     return (
       <>
       <PageTitle 
-      title = "TEAM NAME"
+      title = "REPORTS DASHBOARD"
       />
       <SummaryBox 
             title = "no. of team members"
