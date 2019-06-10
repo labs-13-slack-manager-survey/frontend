@@ -3,7 +3,6 @@ import { axiosWithAuth } from "../../config/axiosWithAuth";
 
 import SentimentChart from "./SentimentChart";
 import SentimentAvg from "./SentimentAvg";
-import DataSquare from "./DataSquare";
 import TodayPoll from "./TodayPoll";
 import PollCalendar from "./PollCalendar";
 import SummaryBox from "../../components/SummaryBox";
