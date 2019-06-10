@@ -1,8 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import editActive from '../images/icons/edit-active.png';
 import edit from '../images/icons/edit.png';
 import trashCan from '../images/icons/trash.png';
 import './tableDisplay.css';
+import {
+	Dialog,
+    DialogTitle,
+    Slide,
+} from '@material-ui/core';
 
 const week = [
     'Monday',
@@ -16,9 +23,14 @@ const week = [
 
 // time refactor for api call
 
-
+function Transition(props) {
+	return <Slide direction="up" {...props} />;
+}
 
 class TableDisplay extends React.Component {
+    state = {
+		dialogOpen: false,
+	}
     
     render() {
         const time = this.props.report.scheduleTime.split(':');
@@ -30,9 +42,13 @@ class TableDisplay extends React.Component {
         
         return (
             <div className="table-display">
-            
+
             <div className = "content">
-                <div className = "column1">{this.props.content1}</div>
+            <Link
+				to={`/slackr/dashboard/reports/${this.props.report.id}`}
+				style={{ textDecoration: 'none' }} className = "column1">
+                <div>{this.props.content1}</div>
+                </Link>
                 <div className = "column">{Date.parse(this.props.report.created_at)}</div>
 
                 <div className = "schedule-time">
@@ -55,13 +71,39 @@ class TableDisplay extends React.Component {
                 <div className = "column">hello</div>
 
                 <div className = "action-icons">
-                    <img className ="action" src={edit} />
-                    <img className ="action" src={trashCan} />
+                    <Link
+						to={`/slackr/dashboard/reports/${this.props.report.id}/edit`}
+						id={this.props.role !== 'admin' ? 'display-link' : ''}
+					>
+                        <img className ="action" src={edit} />
+                    </Link>
+
+                    <img onClick={() => this.setState({dialogOpen: true})} id={this.props.role !== 'admin' ? 'display-link' : ''} className ="action" src={trashCan} />
+
+                    <Dialog
+						open={this.state.dialogOpen}
+						TransitionComponent={Transition}
+						keepMounted
+						onClose={this.props.clearError}
+						aria-labelledby="alert-dialog-slide-title"
+						aria-describedby="alert-dialog-slide-description"
+					>
+						<DialogTitle id="alert-dialog-slide-title">
+							Are you sure you'd like to archive this report? 
+						</DialogTitle>
+
+						<button onClick={() => this.props.archiveReport(this.props.report.id)}>
+							Yes
+						</button>
+						<button onClick={() => {
+							this.setState({dialogOpen: false})
+							}}>No</button>
+					</Dialog>
 
                 </div>
 
             </div>
-        
+                            
             </div> 
         )}
 };

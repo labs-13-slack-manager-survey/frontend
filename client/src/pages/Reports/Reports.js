@@ -57,10 +57,10 @@ class Reports extends Component {
       });
   };
 
-  ConsoleCheck = (id) => {
-    console.log(id)
+  // ConsoleCheck = (id) => {
+  //   console.log(id)
 
-  }
+  // }
 
   handleClose = () => {
     this.setState({
@@ -90,7 +90,7 @@ class Reports extends Component {
     return (
       <div className="user-reports-container">
         <header className="reports-header">
-          <Typography variant="h3">Your Reports</Typography>
+
           <div className="reports-header-buttons">
             <Link
               style={
@@ -155,7 +155,10 @@ class Reports extends Component {
               <TableDisplay 
               content1 = {report.reportName}
               report = {report}
-  
+              role={this.props.role}
+              archiveReport={this.archiveReport}
+              archiveModal={this.state.archiveModal}
+              ConsoleCheck = {this.ConsoleCheck}
               />
               // <SingleReport
               //   role={this.props.role}
