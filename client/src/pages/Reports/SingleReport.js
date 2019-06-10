@@ -72,8 +72,6 @@ class SingleReport extends React.Component {
 						color="secondary"
 						size="small"
 						aria-label="Delete"
-						// onClick={() => this.props.archiveReport(this.props.report.id)}
-						// onClick={() => this.props.handleArchive()}
 						onClick={() => this.setState({dialogOpen: true})}
 						id={this.props.role !== 'admin' ? 'display-link' : ''}
 					>
@@ -96,12 +94,10 @@ class SingleReport extends React.Component {
 						</Button>
 						<Button onClick={() => 
 							this.props.ConsoleCheck(this.props.report.id)
-							// this.props.handleArchive()
 							}>id</Button>
 
 						//testing purposes
 						<Button onClick={() => {
-							console.log(this.props.report.id)
 							this.setState({dialogOpen: false})
 							}}>No</Button>
 					</Dialog>

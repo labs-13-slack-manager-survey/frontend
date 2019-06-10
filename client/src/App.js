@@ -2,32 +2,32 @@ import React from "react";
 import { Route } from "react-router-dom";
 
 // Firebase Login
-import Login from "./components/Login/Login";
+import Login from "./pages/Login/Login";
 
 // Onboarding
-import Onboarding from "./components/Onboarding/Onboarding";
+import Onboarding from "./pages/Onboarding/Onboarding";
 
-// View houses all components for /dashboard including ReportsDash (shows reports) and Dashboard (shows team)
-import View from "./components/View/View";
-import ReportsDash from "./components/Dashboard/ReportsDash";
+// View houses all pages for /dashboard including ReportsDash (shows reports) and Dashboard (shows team)
+import View from "./pages/View/View";
+import ReportsDash from "./pages/Dashboard/ReportsDash";
 
 // Stats Dashboard
-import StatsDashboard from "./components/Stats/StatsDashboard";
+import StatsDashboard from "./pages/Stats/StatsDashboard";
 
 // Profile Page
-import Profile from "./components/Profile/Profile";
+import Profile from "./pages/Profile/Profile";
 
 // Marketing Page
-import MarketingPage from "./components/Marketing/MarketingPage";
-import DevTeam from "./components/Marketing/DevTeam";
+import MarketingPage from "./pages/Marketing/MarketingPage";
+import DevTeam from "./pages/Marketing/DevTeam";
 
 // Nav and Footer
-import Navigation from "./components/Navigation/Navigations";
-import Footer from "./components/Navigation/Footer";
+import Navigation from "./pages/Navigation/Navigations";
+import Footer from "./pages/Navigation/Footer";
 
 // Slack Routes
-import Slack from "./components/Slack/Slack";
-import SlackRedirect from "./components/Slack/SlackRedirect";
+import Slack from "./pages/Slack/Slack";
+import SlackRedirect from "./pages/Slack/SlackRedirect";
 
 //Protected Routes
 import PrivateRoute from "./auth/PrivateRoute";
@@ -38,7 +38,7 @@ import "./App.css";
 
 function App() {
   return (
-    <div>
+    <div className = "App">
 
 
       {/* Marketing Pages*/}
