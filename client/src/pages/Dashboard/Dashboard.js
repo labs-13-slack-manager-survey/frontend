@@ -6,6 +6,8 @@ import jwt_decode from "jwt-decode";
 import Team from "./Team";
 import InviteUser from "./InviteUser";
 import Slack from "../Slack/Slack";
+import PageTitle from '../../components/PageTitle'
+import SummaryBox from '../../components/SummaryBox';
 
 // style imports
 import { Spinner, Intent } from "@blueprintjs/core";
@@ -29,6 +31,13 @@ export class Dashboard extends Component {
       return <Spinner intent={Intent.PRIMARY} className="loading-spinner" />;
     }
     return (
+      <>
+      <PageTitle 
+      title = "TEAM NAME"
+      />
+      <SummaryBox 
+            title = "no. of team members"
+            content = {this.state.users.length}/>
       <Card raised={true} className="teamDashboard">
         <header className="teamDashboard-header">
           <Typography variant="h3">Team</Typography>
@@ -52,6 +61,7 @@ export class Dashboard extends Component {
         />
         <Slack />
       </Card>
+      </>
     );
   }
 
@@ -59,7 +69,7 @@ export class Dashboard extends Component {
     // get user's joinCode from token and setState accordingly. Necessary to invite new team members.
     const joinCode = jwt_decode(localStorage.getItem("token")).joinCode;
     console.log(joinCode);
-
+    console.log(this.state.users.length)
     this.setState({
       joinCode: joinCode
     });
