@@ -10,6 +10,7 @@ class SentimentAvgItem extends Component {
 
   componentDidMount() {
     this.getSentimentAvg(this.props.id);
+    console.log(this.props);
   }
 
   getSentimentAvg = id => {
@@ -32,8 +33,9 @@ class SentimentAvgItem extends Component {
           border: "1px solid black"
         }}
       >
-        <h4>{this.props.name}</h4>
-        <p>{this.props.message}</p>
+        <h4>Title: {this.props.name}</h4>
+        <p>Message: {this.props.message}</p>
+        <p>Questions: {this.props.questions}</p>
         {this.state.average === null ? (
           <p>Sentiment Average: No Responses Yet</p>
         ) : (
