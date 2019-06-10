@@ -146,3 +146,9 @@ textarea.bp3-input {
 #display-button {
 	display: none;
 }
+
+
+.summary-boxes {
+	display: flex;
+	justify-content: space-between;
+}

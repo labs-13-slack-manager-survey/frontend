@@ -90,31 +90,6 @@ class Reports extends Component {
     return (
       <div className="user-reports-container">
         <header className="reports-header">
-
-          <div className="reports-header-buttons">
-            <Link
-              style={
-                this.props.role !== "admin"
-                  ? { cursor: "initial" }
-                  : { cursor: "pointer" }
-              }
-              to={
-                this.props.role !== "admin"
-                  ? "/slackr/dashboard"
-                  : "/slackr/dashboard/reports/choose"
-              }
-            >
-              {/* <Fab
-                color="primary"
-                aria-label="Add"
-                size="large"
-                disabled={this.props.role !== "admin" ? true : false}
-                onClick={this.slackAuthCheck}
-              > */}
-                {/* {this.props.role !== "admin" ? <Icon>lock</Icon> : <AddIcon />} */}
-              {/* </Fab> */}
-            </Link>
-          </div>
           <Dialog
             open={this.state.slackModal}
             TransitionComponent={Transition}
