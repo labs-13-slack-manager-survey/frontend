@@ -13,7 +13,7 @@ import {
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 
-import Slack from "../Slack/Slack";
+import Slack from "../Slack/Slack.js";
 import SingleReport from "./SingleReport";
 import "./reports.css";
 import TableHeader from '../../components/TableHeader'
@@ -121,12 +121,6 @@ class Reports extends Component {
               column3 = "Schedule" 
               column4 = "Total Responses"/>
           {activeReports.map(report => (
-              // 		<TableDisplay 
-              //       column1 = "Report Name"
-              //       column2 = "Date Created"
-              //       column3 = "Schedule" 
-              //       column4 = "Total Responses"
-              // content1 = {report.ReportName}/>
               <TableDisplay 
               content1 = {report.reportName}
               report = {report}
@@ -135,14 +129,6 @@ class Reports extends Component {
               archiveModal={this.state.archiveModal}
               ConsoleCheck = {this.ConsoleCheck}
               />
-              // <SingleReport
-              //   role={this.props.role}
-              //   key={report.id}
-              //   report={report}
-              //   archiveReport={this.archiveReport}
-              //   archiveModal={this.state.archiveModal}
-              //   ConsoleCheck = {this.ConsoleCheck}
-              // />
             
           ))}
         </div>

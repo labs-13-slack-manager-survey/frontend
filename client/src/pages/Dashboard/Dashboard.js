@@ -5,7 +5,7 @@ import jwt_decode from "jwt-decode";
 // component imports
 import Team from "./Team";
 import InviteUser from "../../components/InviteUser";
-import Slack from "../Slack/Slack";
+// import Slack from "../Slack/Slack";
 import PageTitle from '../../components/PageTitle'
 import SummaryBox from '../../components/SummaryBox';
 

@@ -7,7 +7,7 @@ import InviteUser from '../../components/InviteUser.js';
 import PageTitle from '../../components/PageTitle'
 import PageDescription from '../../components/PageDescription'
 import TableHeader from '../../components/TableHeader'
-
+import SlackButton from '../Slack/Slack.js'
 // import $ from 'jquery';
 // import jCircle from 'jquery-circle-progress';
 
@@ -20,10 +20,15 @@ import TableDisplay from "../../components/TableHeader";
 class myTeam extends Component {
   state = {
     roles: "member",
-    active: true
+    active: true,
+    users: [], 
+    anchorEl: null,
   };
 
+
+
   componentDidMount() {
+    // get user's joinCode from token and setState accordingly. Necessary to invite new team members.
     const roles = jwt_decode(localStorage.getItem("token")).roles;
     const endpoint = `${baseURL}/users/byuser`;
     axiosWithAuth()
@@ -37,10 +42,94 @@ class myTeam extends Component {
       .catch(err => {
         console.log(err.response.data);
       });
+
+    const joinCode = jwt_decode(localStorage.getItem("token")).joinCode;
+    console.log(joinCode);
+    console.log(this.state.users.length)
+    this.setState({
+      joinCode: joinCode
+    });
+    axiosWithAuth()
+      .get(`${baseURL}/users/team`)
+      .then(res => {
+        console.log(res);
+        this.setState({ users: res.data.users });
+
+        if (this.state.users.length > 0) {
+          this.setState({ isLoading: false });
+        }
+      })
+      .catch(err => console.log(err));
   }
+
+  updateUser = () => {
+    const endpoint = `${baseURL}/users/`;
+    const editedUser = {
+      active: false
+    };
+    axiosWithAuth()
+      .put(endpoint, editedUser)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  activateUser = id => {
+    const endpoint = `${baseURL}/users/${id}`;
+    const editedUser = {
+      active: true
+    };
+    //create an array with everyone but the user the function's been called on
+    const newUsers = this.state.users.filter(user => user.id !== id);
+    axiosWithAuth()
+      .put(endpoint, editedUser)
+      .then(res => {
+        newUsers.push(res.data.editedUser);
+        this.setState({
+          users: newUsers
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  deactivateUser = id => {
+    const endpoint = `${baseURL}/users/${id}`;
+    const editedUser = {
+      active: false
+    };
+    const newUsers = this.state.users.filter(user => user.id !== id);
+
+    axiosWithAuth()
+      .put(endpoint, editedUser)
+      .then(res => {
+        newUsers.push(res.data.editedUser);
+        this.setState({
+          users: newUsers,
+          anchorEl: null
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  handleClickMenu = e => {
+    this.setState({ anchorEl: e.currentTarget });
+  };
+
+  handleCloseMenu = () => {
+    this.setState({ anchorEl: null });
+  };
+
   render() {
     //If user's account is inactive, they cannot see the dashboard
-
+    const activeUsers = this.state.users.filter(user => user.active);
+      console.log(activeUsers)
     return this.state.active ? (
       <div className = "dashboard-view">
         <div className="view">
@@ -54,8 +143,21 @@ class myTeam extends Component {
           column3 = "Polls completed" 
           column4 = "Last poll answered"
         />
+
+        {activeUsers.map(user => (
+            <TableHeader 
+            column1 = {user.fullName}
+            // report = {report}
+            // role={this.props.role}
+            // archiveReport={this.archiveReport}
+            // archiveModal={this.state.archiveModal}
+            // ConsoleCheck = {this.ConsoleCheck}
+            />
+        ))}
+
         </div>
         <div className = "sidebar">
+          <SlackButton/>
           <InviteUser />
           {/* <PollCalendar /> */}
         </div>
