@@ -477,7 +477,7 @@ class CreateReport extends Component {
                   />
                 </RadioGroup>
                 {this.renderManagerQuestions()}
-                <Button onClick={this.addQuestions}>Add Questions</Button>
+                <Button style={{color:"white",backgroundColor:"blue"}}onClick={this.addQuestions}>Add Questions</Button>
               </FormControl>
             </section>
           </Card>
