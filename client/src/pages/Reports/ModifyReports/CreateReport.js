@@ -74,6 +74,7 @@ class CreateReport extends Component {
     slackChannelId: null,
     slackAuthorized: false,
     managerQuestions: "no",
+
     isSentiment: false,
     //array for listing manager questions
     listSurveyQuestions: [
@@ -97,21 +98,19 @@ class CreateReport extends Component {
     ],
     hidden: true,
     managerType: 0,
-    typeOfManager: ["Engineering Manager", "Project master"],
+    typeOfManager: ["Engineering Manager", "Project Manager"],
     //set manager questions here as well as type of manager BEFORE you add to the managerType
-    EngineeringManagerQuestions: {
-      questionOne: "As an Engineering manager,What is your weekly goal?",
-      questionTwo: "What features should be Priority?",
-      questionThree:
-        "Are there any new project details that the team should know?"
-    },
+    EngineeringManagerQuestions: [
+      "As an Engineering manager,What is your weekly goal?",
+      "What features should be Priority?",
 
-    ProjectManagerQuestions: {
-      questionOne: "What is the weekly sales goal?",
-      questionTwo: "Is their any important customer feedback?",
-      questionThree:
-        "How are you feeling about the current state of team moral?"
-    }
+      "Are there any new project details that the team should know?"
+    ],
+    ProjectManagerQuestions: [
+      "What is the weekly sales goal?",
+      "Is their any important customer feedback?",
+      "How are you feeling about the current state of team moral?"
+    ]
   };
 
   changeHandler = e => {
@@ -229,21 +228,25 @@ class CreateReport extends Component {
       EngineeringManagerQuestions,
       ProjectManagerQuestions
     } = this.state;
-    const report = {
+
+    let report = {
       reportName,
       schedule: JSON.stringify(schedule),
       scheduleTime,
       message,
       questions: JSON.stringify(questions),
-      EngineeringManagerQuestions: JSON.stringify(EngineeringManagerQuestions),
-      ProjectManagerQuestions: JSON.stringify(ProjectManagerQuestions),
       managerResponses: JSON.stringify(managerResponses),
       slackChannelId,
       slackChannelName,
       created_at: new Date()
     };
+    this.state.managerType === 0
+      ? (report["managerQuestions"] = JSON.stringify(
+          EngineeringManagerQuestions
+        ))
+      : (report["managerQuestions"] = JSON.stringify(ProjectManagerQuestions));
     const endpoint = `${baseURL}/reports`;
-
+    console.log("report", report);
     axiosWithAuth()
       .post(endpoint, report)
       .then(res => {
@@ -268,7 +271,7 @@ class CreateReport extends Component {
     this.state({ selectedItem: index });
   }
 
-  mangerType = e => {
+  managerType = e => {
     e.preventDefault();
     this.setState({ managerType: e.target.value });
   };
@@ -336,7 +339,7 @@ class CreateReport extends Component {
                 <Button variant="contained" {...bindTrigger(popupState)}>
                   Select Manager Questions
                 </Button>
-                <Menu {...bindMenu(popupState)} onClick={this.mangerType}>
+                <Menu {...bindMenu(popupState)} onClick={this.managerType}>
                   {this.state.typeOfManager.map((type, index) => (
                     <MenuItem
                       key={index}
@@ -354,7 +357,7 @@ class CreateReport extends Component {
                   //questions for Engineering manager
                   <div>
                     <br />
-                    <h6>{this.state.EngineeringManagerQuestions.questionOne}</h6>
+                    <h6>{this.state.EngineeringManagerQuestions[0]}</h6>
                     <Input
                       id="report-question"
                       className="input-field"
@@ -364,7 +367,7 @@ class CreateReport extends Component {
                       value={this.state.resOne}
                       onChange={this.handleSubmission}
                     />
-                    <h6>{this.state.EngineeringManagerQuestions.questionTwo}</h6>
+                    <h6>{this.state.EngineeringManagerQuestions[1]}</h6>
                     <Input
                       id="report-question"
                       className="input-field"
@@ -374,7 +377,7 @@ class CreateReport extends Component {
                       value={this.state.resTwo}
                       onChange={this.handleSubmission}
                     />
-                    <h6>{this.state.EngineeringManagerQuestions.questionThree}</h6>
+                    <h6>{this.state.EngineeringManagerQuestions[2]}</h6>
                     <Input
                       id="report-question"
                       className="input-field"
@@ -389,7 +392,7 @@ class CreateReport extends Component {
                   //questions for marketing manager
                   <div>
                     <br />
-                    <h6>{this.state.ProjectManagerQuestions.questionOne}</h6>
+                    <h6>{this.state.ProjectManagerQuestions[0]}</h6>
                     <Input
                       id="report-question"
                       className="input-field"
@@ -399,7 +402,7 @@ class CreateReport extends Component {
                       value={this.state.resOne}
                       onChange={this.handleSubmission}
                     />
-                    <h6>{this.state.ProjectManagerQuestions.questionTwo}</h6>
+                    <h6>{this.state.ProjectManagerQuestions[1]}</h6>
                     <Input
                       id="report-question"
                       className="input-field"
@@ -409,7 +412,7 @@ class CreateReport extends Component {
                       value={this.state.resTwo}
                       onChange={this.handleSubmission}
                     />
-                    <h6>{this.state.ProjectManagerQuestions.questionThree}</h6>
+                    <h6>{this.state.ProjectManagerQuestions[2]}</h6>
                     <Input
                       id="report-question"
                       className="input-field"
