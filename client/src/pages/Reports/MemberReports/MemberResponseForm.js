@@ -16,7 +16,9 @@ class MemberResponseForm extends Component {
     questions: [],
     isSentiment: false,
     typeOfManager: [],
-    managerResponses: []
+    managerResponses: [],
+    EngineeringManagerQuestions:[],
+    ProjectManagerQuestions:[]
   };
 
   render() {
