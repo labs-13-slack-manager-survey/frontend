@@ -97,7 +97,7 @@ class CreateReport extends Component {
     ],
     hidden: true,
     managerType: 0,
-    typeOfManager: ["Engineering Manager", "Scrum master"],
+    typeOfManager: ["Engineering Manager", "Project master"],
     //set manager questions here as well as type of manager BEFORE you add to the managerType
     EngineeringManagerQuestions: {
       questionOne: "As an Engineering manager,What is your weekly goal?",
@@ -235,8 +235,8 @@ class CreateReport extends Component {
       scheduleTime,
       message,
       questions: JSON.stringify(questions),
-      EngineeringManagerQuestions,
-      ProjectManagerQuestions,
+      EngineeringManagerQuestions: JSON.stringify(EngineeringManagerQuestions),
+      ProjectManagerQuestions: JSON.stringify(ProjectManagerQuestions),
       managerResponses: JSON.stringify(managerResponses),
       slackChannelId,
       slackChannelName,

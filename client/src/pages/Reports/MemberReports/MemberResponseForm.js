@@ -91,9 +91,10 @@ class MemberResponseForm extends Component {
             sentimentRange: 3
           })),
           managerResponses: JSON.parse(managerResponses),
+          EngineeringManagerQuestions,
+          ProjectManagerQuestions,
           isSentiment: isSentiment
           // sentimentRange: sentimentRange
-          // typeOfManager: typeOfManager
         });
       })
       .catch(err => console.log(err));
