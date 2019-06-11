@@ -55,7 +55,7 @@ class View extends Component {
           <CircleProgress 
           title = "Today's Polls"
           percentComplete = '0.6'/>
-          <InviteUser />
+
           {/* <PollCalendar /> */}
         </div>
       </div>

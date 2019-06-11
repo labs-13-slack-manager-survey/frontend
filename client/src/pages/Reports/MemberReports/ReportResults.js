@@ -6,13 +6,38 @@ import jwt_decode from "jwt-decode";
 import MemberResponseForm from "./MemberResponseForm";
 import Responders from "../../Responders/Responders";
 import DatePicker from "../../DatePicker/DatePicker";
+import PageTitle from '../../../components/PageTitle';
+import Slider from "@material-ui/lab/Slider";
+import { withStyles } from "@material-ui/core/styles";
+import { fade } from "@material-ui/core/styles/colorManipulator";
+
+
 
 // style imports
 import { Card, Elevation } from "@blueprintjs/core";
 import { Fab, Icon } from "@material-ui/core";
 import "./ReportResults.css";
 
-// Parent component = ReportsDash.js in '/pages/Dashboard/ReportsDash'
+const StyledSlider = withStyles({
+  thumb: {
+    height: 24,
+    width: 24,
+    backgroundColor: "#4A90E2",
+    border: `3px solid #fff`,
+    // "&$focused, &:hover": "none",
+    // "&$activated": "none",
+    // "&$jumped": "none",
+  },
+  track: {
+    backgroundColor: "#A0CBFF",
+    height: 8,
+    borderRadius: '10px',
+  },
+  trackAfter: {
+    backgroundColor: "#d0d7dc"
+  }
+})(Slider);
+
 
 class ReportResults extends Component {
   state = {
@@ -33,6 +58,12 @@ class ReportResults extends Component {
     };
 
     return (
+      <div className = "view">
+      <PageTitle 
+      title = "Report"
+      />
+
+      
       <main className="report-results-container">
         <div className="report-results-container-backButton">
           <Fab onClick={() => this.props.history.goBack()} color="default">
@@ -40,7 +71,7 @@ class ReportResults extends Component {
           </Fab>
         </div>
 
-        <section className="report-results-aside">
+        {/* <section className="report-results-aside">
           {this.state.filteredResponse.length > 0 ||
           this.state.completed === true ? (
             <Card
@@ -84,8 +115,11 @@ class ReportResults extends Component {
               clickedResponder={this.state.clickedResponder}
             />
           </Card>
-        </section>
-        <section className="report-results-feed">
+        </section> */}
+      </main>
+
+
+      <section className="report-results-feed">
           {this.state.responses.map(
             batch =>
               batch.responses.length > 0 && (
@@ -96,24 +130,45 @@ class ReportResults extends Component {
                       .replace(",", "")}
                   </h3>
                   {batch.responses.map(response => (
-                    <Card key={response.userId}>
+
+                    <div key={response.userId}>
                       <div className="response-container">
-                        <img
-                          className="response-container-image"
-                          src={response.profilePic}
-                          alt={response.fullName}
-                        />
-                        <div className="response-container-main">
+                        <div className = "user-info">
+                          <img
+                            className="response-container-image"
+                            src={response.profilePic}
+                            alt={response.fullName}
+                          />
                           <h3 className="response-container-main-name">
-                            {response.fullName}
+                              {response.fullName}
                           </h3>
+                        </div>
+
+
+                        <div className="response-container-main">
                           {response.questions.map(
                             ({ question, answer, id, sentimentRange }) => (
                               <div key={id}>
-                                <h6 className="response-container-main-question">
+                                <div className="response-container-main-question">
                                   {question}
-                                </h6>
+                                </div>
                                 {sentimentRange && <h3>{sentimentRange}</h3>}
+                                <StyledSlider
+                                  className="slider"
+                                  value={sentimentRange}
+                                  min={1}
+                                  max={5}
+                                  step={1}
+                                  // onChange={e => this.props.handleChange(e, this.props.question)}
+                                />
+                                  <div className="slider-label">
+                                    <p className={sentimentRange !=1 ? "deselected" : null}>1</p>
+                                    <p className={sentimentRange !=2 ? "deselected" : null}>2</p>
+                                    <p className={sentimentRange !=3 ? "deselected" : null}>3</p>
+                                    <p className={sentimentRange !=4 ? "deselected" : null}>4</p>
+                                    <p className={sentimentRange !=5 ? "deselected" : null}>5</p>
+                                  </div>
+
                                 <p className="response-container-main-answer">
                                   {answer}
                                 </p>
@@ -122,13 +177,15 @@ class ReportResults extends Component {
                           )}
                         </div>
                       </div>
-                    </Card>
+                    </div>
+                    
                   ))}
                 </div>
               )
           )}
         </section>
-      </main>
+
+      </div>
     );
   }
 

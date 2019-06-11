@@ -20,7 +20,6 @@
 	.report-results-container {
 		display: flex;
 		margin: auto;
-		max-width: 1000px;
 	}
 
 	.report-results-aside {
@@ -34,11 +33,16 @@
 
 .response-container {
 	display: flex;
+	flex-direction: column;
 	margin-top: 24px;
 	padding-top: 24px;
-
+	border: 1px solid black;
 }
 
+.user-info {
+	display: flex;
+	flex-direction: row;
+}
 .response-container-image {
 	border-radius: 50%;
 	height: 60px;
@@ -50,6 +54,8 @@
 .response-container-main {
 	flex: 1;
 	margin-right: 10px;
+	border: 1px solid red;
+	text-align: left;
 }
 
 .response-container-main-name {
@@ -65,11 +71,16 @@
 }
 
 .response-container-main-answer {
-	font-size: 16px;
+	font-size: 15px;
 	font-weight: 300;
 	margin-top: 0px;
+	padding-left: 10px;
 }
 
+.deselected {
+	color: #9B9B9B;
+	font-style: none;
+}
 .report-results-filter-container {
 
 }
