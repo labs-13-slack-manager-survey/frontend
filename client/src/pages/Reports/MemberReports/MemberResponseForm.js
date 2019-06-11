@@ -80,8 +80,8 @@ class MemberResponseForm extends Component {
           isSentiment,
           managerResponses,
           // typeOfManager, //new manager templates need to be added here so they can be sent to MemberReposonseForm.js
-          EngineeringManager,
-          ScrumMaster
+          EngineeringManagerQuestions,
+          ProjectManagerQuestions
         } = res.data.report;
         console.log("report below", res.data.report);
         this.setState({
