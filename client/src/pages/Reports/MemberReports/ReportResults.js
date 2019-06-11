@@ -134,48 +134,59 @@ class ReportResults extends Component {
                     <div key={response.userId}>
                       <div className="response-container">
                         <div className = "user-info">
-                          <img
+                            <div className = "month-day">
+                            {batch.date}
+                            </div>
+                          {/* <img
                             className="response-container-image"
                             src={response.profilePic}
                             alt={response.fullName}
-                          />
-                          <h3 className="response-container-main-name">
+                          /> */}
+                          <div className="response-container-main-name">
                               {response.fullName}
-                          </h3>
+                          </div>
                         </div>
 
 
                         <div className="response-container-main">
-                          {response.questions.map(
-                            ({ question, answer, id, sentimentRange }) => (
-                              <div key={id}>
-                                <div className="response-container-main-question">
-                                  {question}
-                                </div>
-                                {sentimentRange && <h3>{sentimentRange}</h3>}
-                                <StyledSlider
-                                  className="slider"
-                                  value={sentimentRange}
-                                  min={1}
-                                  max={5}
-                                  step={1}
-                                  // onChange={e => this.props.handleChange(e, this.props.question)}
-                                />
-                                  <div className="slider-label">
-                                    <p className={sentimentRange !=1 ? "deselected" : null}>1</p>
-                                    <p className={sentimentRange !=2 ? "deselected" : null}>2</p>
-                                    <p className={sentimentRange !=3 ? "deselected" : null}>3</p>
-                                    <p className={sentimentRange !=4 ? "deselected" : null}>4</p>
-                                    <p className={sentimentRange !=5 ? "deselected" : null}>5</p>
+                          <div className = "vertical-timeline" />
+                          <div className = "response-content">
+                              {response.questions.map(
+                                ({ question, answer, id, sentimentRange }) => (
+                                  <div key={id}>
+                                    <div className="response-container-main-question">
+                                      {question}
+                                    </div>
+                                    {sentimentRange && 
+                                    <>
+                                        <StyledSlider
+                                          className="slider"
+                                          value={sentimentRange}
+                                          min={1}
+                                          max={5}
+                                          step={1}
+                                        />
+                                          <div className="slider-label">
+                                            <p className={sentimentRange !=1 ? "deselected" : null}>1</p>
+                                            <p className={sentimentRange !=2 ? "deselected" : null}>2</p>
+                                            <p className={sentimentRange !=3 ? "deselected" : null}>3</p>
+                                            <p className={sentimentRange !=4 ? "deselected" : null}>4</p>
+                                            <p className={sentimentRange !=5 ? "deselected" : null}>5</p>
+                                          </div>
+                                      </>
+                                    }
+                                    <p className="response-container-main-answer">
+                                      {sentimentRange && <div>Comments:</div>}
+                                      {answer}
+                                    </p>
                                   </div>
+                                )
+                              )}
+                          </div>
 
-                                <p className="response-container-main-answer">
-                                  {answer}
-                                </p>
-                              </div>
-                            )
-                          )}
                         </div>
+
+
                       </div>
                     </div>
                     

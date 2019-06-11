@@ -53,21 +53,23 @@
 
 .response-container-main {
 	flex: 1;
-	margin-right: 10px;
 	border: 1px solid red;
 	text-align: left;
+	display: flex;
+	flex-direction: row;
 }
 
 .response-container-main-name {
-	font-size: 24px;
-	font-weight: 700;
+	font-size: 15px;
+	font-weight: 400;
 	margin-top: 17px;
+	padding-left: 20px;
 }
 
 .response-container-main-question {
 	font-size: 18px;
 	font-weight: 500;
-	padding-top: 30px;
+	padding-top: 20px;
 }
 
 .response-container-main-answer {
@@ -79,7 +81,18 @@
 
 .deselected {
 	color: #9B9B9B;
-	font-style: none;
+}
+
+.vertical-timeline {
+	
+	width:1px;
+	background-color: rgb(206, 206, 206);
+	margin-right: 20px;
+	margin-left: 20px;
+}
+
+.response-content {
+	width: 90%;
 }
 .report-results-filter-container {
 
