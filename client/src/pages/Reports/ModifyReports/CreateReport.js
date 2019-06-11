@@ -246,14 +246,12 @@ class CreateReport extends Component {
         ))
       : (report["managerQuestions"] = JSON.stringify(ProjectManagerQuestions));
     const endpoint = `${baseURL}/reports`;
-    console.log("report", report);
     axiosWithAuth()
       .post(endpoint, report)
       .then(res => {
         this.props.setResponseAsState(res.data);
 
         this.props.history.push("/slackr/dashboard");
-        console.log("submit data", res.data, "report", report);
       })
       .catch(err => console.log(err));
   };
@@ -463,7 +461,6 @@ class CreateReport extends Component {
 
   render() {
     const { classes } = this.props;
-    console.log(this.state.question);
     return (
       <div className="create-report">
         <Fab onClick={() => this.props.history.goBack()} color="default">

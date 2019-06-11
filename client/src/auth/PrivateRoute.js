@@ -12,7 +12,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
           return <Redirect to="/login" />;
         }
         const decoded = jwt_decode(token);
-        console.log(decoded);
 
         if (!decoded) {
           return <Redirect to="/slackr/onboarding" />;

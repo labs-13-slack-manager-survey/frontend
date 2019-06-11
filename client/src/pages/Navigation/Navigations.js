@@ -46,7 +46,6 @@ const styles = {
 
 class Navigation extends React.Component {
   handleLogout = e => {
-    console.log("logged out");
     e.preventDefault();
     localStorage.removeItem("firebaseui::rememberedAccounts");
     localStorage.removeItem("token");
@@ -62,7 +61,6 @@ class Navigation extends React.Component {
       .get(endpoint)
       .then(res => {
         if (res.status !== 200) {
-          console.log("56");
           this.setState({
             slackModal: true
           });

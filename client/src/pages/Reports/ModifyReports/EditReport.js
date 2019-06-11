@@ -425,7 +425,6 @@ class EditReport extends Component {
 	};
 
 	removeQuestion = (e, question) => {
-		console.log(question)
 		e.preventDefault();
 		// this.setState(prevState => ({
 		// 	questions: prevState.questions.filter(q => q !== question)

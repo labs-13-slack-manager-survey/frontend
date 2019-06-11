@@ -17,11 +17,12 @@ class MemberResponseForm extends Component {
     isSentiment: false,
     typeOfManager: [],
     managerResponses: [],
-    EngineeringManagerQuestions:[],
-    ProjectManagerQuestions:[]
+    EngineeringManagerQuestions: [],
+    ProjectManagerQuestions: []
   };
 
   render() {
+    console.log("membersResponse", this.state);
     return this.state.clientInfo.length > 0 ? (
       <>
         <div>{this.state.clientInfo}</div>
@@ -31,7 +32,7 @@ class MemberResponseForm extends Component {
         {/*need to render this condtionally  */}
         {this.state.isSentiment ? null : (
           <div>
-            <h1 className="member-form-title">Managers Thought's</h1>
+            <h1 className="member-form-title">Managers Thoughts</h1>
             <h3>{this.state.managerResponses[0]}</h3>
             <h3>{this.state.managerResponses[1]}</h3>
             <h3>{this.state.managerResponses[2]}</h3>
@@ -83,7 +84,6 @@ class MemberResponseForm extends Component {
           EngineeringManagerQuestions,
           ProjectManagerQuestions
         } = res.data.report;
-        console.log("report below", res.data.report);
         this.setState({
           reportName,
           reportMessage: message,
@@ -125,24 +125,7 @@ class MemberResponseForm extends Component {
       question,
       response: e.target.value
     };
-    // const sObj = {question, sentimentRange: e.target.value};
-    // console.log(sObj)
-    // console.log(question);
-    // if (this.state.isSentiment) {
-    //   // this.setState(prevState => ({
-    //   //   ...prevState,
-    //   //   sentimentRange: question,
-    //   //   questions: prevState.questions.map(q =>
-    //   //     q.question !== question ? q : null
-    //   //   )
-    //   // }));
-    //   this.setState(prevState => ({
-    //     ...prevState,
-    //     questions: prevState.questions.map(
-    //       q => (q.question !== question? q : sObj)
-    //     )
-    //   }));
-    // } else {
+
     this.setState(prevState => ({
       ...prevState,
       questions: prevState.questions.map(
@@ -166,19 +149,8 @@ class MemberResponseForm extends Component {
     const endpoint = `${baseURL}/responses/${this.props.match.params.reportId}`;
     if (this.state.isSentiment) {
       axiosWithAuth()
-        .post(
-          endpoint,
-          this.state.questions
-          // this.state.questions.map(val => {
-          //   return {
-          //     question: val.question,
-          //     response: "test",
-          //     sentimentRange: this.state.sentimentRange
-          //   };
-          // })
-        )
+        .post(endpoint, this.state.questions)
         .then(res => {
-          console.log(res);
           this.props.updateWithUserResponse(res);
           this.setState(prevState => ({
             ...prevState,

@@ -39,7 +39,6 @@ class Firebase extends Component {
             .then(res => {
               localStorage.setItem("token", res.data);
               const token = jwt_decode(res.data);
-              console.log(token);
               //   conditional rendering based on whether if the user belongs to a team
               if (token.teamId) {
                 this.props.history.push("/slackr/dashboard");
