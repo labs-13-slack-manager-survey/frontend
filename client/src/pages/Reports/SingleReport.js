@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core';
 import Icon from '@material-ui/core/Icon';
 import './reports.css';
+// import TableDisplay from '../../components/TableDisplay'
 
 // this component displays a single report as a card on /dashboard
 // parent component = Reports.js
@@ -46,7 +47,10 @@ class SingleReport extends React.Component {
 
 
 	return (
-		<Card raised={true} className="reportsCard">
+		<div>
+			{/* <TableDisplay 
+			  content1 = {this.props.report.reportName}
+			  /> */}
 			<div className="single-report-header">
 				<Link
 					to={`/slackr/dashboard/reports/${this.props.report.id}`}
@@ -139,7 +143,7 @@ class SingleReport extends React.Component {
 					</div>
 				</Link>
 			</div>
-		</Card>
+		</div>
 	);
 	}
 };

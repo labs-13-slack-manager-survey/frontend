@@ -28,14 +28,7 @@ p {
 	margin-bottom: 10px;
 }
 
-.day {
-	border: 1px solid #5294e2;
-	border-radius: 5px;
-	cursor: pointer;
-	line-height: 30px;
-	text-align: center;
-	width: 35px;
-}
+
 
 .delete-icon {
 	width: 30px;

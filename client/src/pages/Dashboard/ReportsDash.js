@@ -9,6 +9,8 @@ import Reports from "../Reports/Reports";
 import EditReport from "../Reports/ModifyReports/EditReport";
 import SingleReportResults from "../Reports/MemberReports/ReportResults";
 
+
+
 // style imports
 import { baseURL, axiosWithAuth } from "../../config/axiosWithAuth";
 import { Spinner, Intent } from "@blueprintjs/core";
@@ -34,6 +36,9 @@ class ReportsDash extends Component {
             : "ReportSingle"
         }
       >
+
+        <div className = "summaryStats">
+        </div>
         <Switch>
           <Route
             exact
