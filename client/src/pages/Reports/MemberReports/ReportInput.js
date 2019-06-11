@@ -59,11 +59,6 @@ class ReportInput extends React.Component {
       <div className="member-report-input">
         <div className="question">
           <h4>{this.props.question}</h4>
-          <img
-            className="toggleComments"
-            src={this.state.userComment ? Cancel : Comment}
-            onClick={this.toggleComment}
-          />
         </div>
         {this.props.isSentiment ? (
           <>
@@ -86,7 +81,7 @@ class ReportInput extends React.Component {
 						max={5}
 						step={1}
 						onChange={(e, v) => this.props.handleChange(e, v)}
-						/>  */}
+          />  */}
             <div className="slider-label">
               <p>1</p>
               <p>2</p>
@@ -94,6 +89,11 @@ class ReportInput extends React.Component {
               <p>4</p>
               <p>5</p>
             </div>
+          <img
+          className="toggleComments"
+          src={this.state.userComment ? Cancel : Comment}
+          onClick={this.toggleComment}
+        /> 
 
             {this.state.userComment ? (
               <TextField

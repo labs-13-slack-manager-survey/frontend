@@ -62,9 +62,9 @@ class CreateTeam extends Component {
           >
             <Icon>arrow_back</Icon>
           </Fab>
-          <Button variant="outlined" onClick={this.props.joinToggle}>
+          {/* <Button variant="outlined" onClick={this.props.joinToggle}>
             Join an Existing Team
-          </Button>
+          </Button> */}
         </div>
       </div>
     );
