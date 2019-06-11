@@ -141,17 +141,14 @@ class MemberResponseForm extends Component {
     }));
   };
 
-  displayManagerQuestions = () => {
-    const endpoint = `${baseURL}/responses/${this.props.match.params.reportId}`;
-  };
-
   submitReport = () => {
     const endpoint = `${baseURL}/responses/${this.props.match.params.reportId}`;
-    if (this.state.isSentiment) {
-      axiosWithAuth()
-        .post(endpoint, this.state.questions)
-        .then(res => {
+    axiosWithAuth()
+      .post(endpoint, this.state.questions)
+      .then(res => {
+        if (this.state.isSentiment) {
           this.props.updateWithUserResponse(res);
+
           this.setState(prevState => ({
             ...prevState,
             questions: prevState.questions.map(q => ({
@@ -160,15 +157,7 @@ class MemberResponseForm extends Component {
               sentimentRange: 3
             }))
           }));
-        })
-        .catch(err => {
-          console.log(err.response.data);
-        });
-    } else {
-      axiosWithAuth()
-        .post(endpoint, this.state.questions)
-        .then(res => {
-          this.props.updateWithUserResponse(res);
+        } else {
           this.setState(prevState => ({
             ...prevState,
             questions: prevState.questions.map(q => ({
@@ -176,11 +165,11 @@ class MemberResponseForm extends Component {
               response: ""
             }))
           }));
-        })
-        .catch(err => {
-          console.log(err.response.data);
-        });
-    }
+        }
+      })
+      .catch(err => {
+        console.log(err.response.data);
+      });
   };
 }
 
