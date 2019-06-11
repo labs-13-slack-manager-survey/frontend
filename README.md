@@ -1,4 +1,4 @@
-# Stand-Em-Ups
+# Slackr
 ## Contributors
 
 |                                      [Ben Tsao](https://github.com/cbtsao47)                                     |                                           [Erica Chen](https://github.com/erica-y-chen)                                             |                                          [Mckay Wrigley](https://github.com/mckaywrigley45)                                              |                                      [Curtis Hubbard](https://github.com/chubbard022)                                         |     [Taylor Blount](https://github.com/thirdeyeclub)    |
@@ -13,7 +13,7 @@
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 ## Project Overview
-Stand-Em-Ups is an application that helps managers run their daily standup reports asynchronously to help maximize efficiency and let team members submit their reports any time during the day. Our application will help the whole team and best of all, it is completely free to start!
+Slackr is an application that helps managers run their daily standup reports asynchronously to help maximize efficiency and let team members submit their reports any time during the day. Our application will help the whole team and best of all, it is completely free to start!
 
 You can find the project at [https://stand-em-ups.netlify.com](https://stand-em-ups.netlify.com).
 ### Key Features
@@ -21,6 +21,10 @@ You can find the project at [https://stand-em-ups.netlify.com](https://stand-em-
     * Sending out Daily Standup reports to team members
     * Connecting your team with slack
     * Asynchronous Stand reports
+    * Different manager survey templates
+    * Stats for team members contribution to surveys 
+    * Management can choose between stand-up Survey and Sentiment report
+    * Respond to Survey requests by management through Slack
 ## Tech Stack
 ### Front end built using:
     * @blueprintjs/core
@@ -32,19 +36,25 @@ You can find the project at [https://stand-em-ups.netlify.com](https://stand-em-
     * @fortawesome/react-fontawesome
     * @material-ui/core
     * @material-ui/icons
+    * @material-ui/lab
     * @material-ui/pickers
     * axios
+    * chart.js
     * date-fns
     * firebase
     * intro.js
     * intro.js-react
+    * jquery
+    * jquery-circle-progress
     * jstz
     * jwt-decode
     * material-ui-chip-input
     * material-ui-pickers
+    * material-ui-popup-state
     * moment
     * moment-timezone
     * react
+    * react-calendar
     * react-dates
     * react-dom
     * react-firebaseui
@@ -52,6 +62,7 @@ You can find the project at [https://stand-em-ups.netlify.com](https://stand-em-
     * react-scripts
     * react-scroll
     * styled-components
+    * styled-dropdown-component
 
 #### Front end deployed to `Netlify`
 ### [Back end](https://github.com/labs12-slack-standup/labs12-slack-standup-BE) built using:
