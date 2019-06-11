@@ -109,7 +109,18 @@ span {
 	flex-direction: column;
 	justify-content: space-between; 
 	align-items: center;
-	height: 100px;
+	height: 235px;
+	padding-top: 30px;
+}
+
+.vert-buttons2{
+	width: 70px; 
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between; 
+	align-items: center;
+	height: 150px;
+	padding-top: 30px;
 }
 
 .empty-buttons{
