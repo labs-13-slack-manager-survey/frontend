@@ -150,5 +150,5 @@ textarea.bp3-input {
 
 .summary-boxes {
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-start;
 }

@@ -39,7 +39,7 @@ class TableDisplay extends React.Component {
             timeStr = `${time[0] - 12}:${time[1]}pm`;
         }
         const reportId = this.props.report.id;
-        
+        const dateString  = new Date(this.props.report.created_at);
         return (
             <div className="table-display">
 
@@ -49,7 +49,7 @@ class TableDisplay extends React.Component {
 				style={{ textDecoration: 'none' }} className = "column1">
                 <div>{this.props.content1}</div>
                 </Link>
-                <div className = "column">{Date.parse(this.props.report.created_at)}</div>
+                <div className = "date">{dateString.getMonth()+1}/{dateString.getDate()}/{dateString.getFullYear()}</div>
 
                 <div className = "schedule-time">
                     {week.map((day, idx) => (
