@@ -67,7 +67,7 @@
 .response-container-main-answer {
 	font-size: 16px;
 	font-weight: 300;
-	margin-top: 10px;
+	margin-top: 0px;
 }
 
 .report-results-filter-container {
@@ -95,7 +95,7 @@
 	height: 331px;
 	margin: auto;
 	width: 321px;
-	box-shadow: none;
+	box-shadow: 0px 0px 15px rgb(230, 230, 230);
 }
 
 .responders {
@@ -104,6 +104,7 @@
 	justify-content: flex-start;
 	margin: auto;
 	width: 300px;
+
 }
 
 .responders-user {
@@ -113,6 +114,7 @@
 	margin: 10px;
 	opacity: 0.5;
 	width: 40px;
+
 }
 
 

@@ -1,19 +1,49 @@
+.dashboard-view {
+	display: flex;
+	flex-direction: row;
+	margin: 0 auto;
+}
+
+.sidebar {
+	width: 15%;
+	margin-right: 150px;
+	margin-left: 100px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+}
+
+.$circle {
+
+}
+.stats-summary-content-import-status-arc-wrapper {
+	position: absolute;
+	left: -6;
+	top: -6;
+  }
+  
+  .stats-summary-content-import-status-arc-wrapper.mod-import-process {
+	position: absolute;
+	left: -9.5;
+	top: -9;
+}
+
 .view {
 	display: flex;
 	justify-content: space-evenly;
 	flex-direction: column;
 	margin: auto;
-	max-width: 1000px;
-	margin-top: 20px;
 	margin-left: 120px;
+	width: 70%;
 }
 
-.summaryStats {
+/* .summaryStats {
 	display: flex;
-	justify-content: space-between; 
+	justify-content: flex-start; 
 	margin-top: 10px;
 
-}
+} */
 
 
 @media(max-width: 800px){
