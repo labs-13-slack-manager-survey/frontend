@@ -62,8 +62,6 @@ class CreateReport extends Component {
     timePickDate: new Date("2000-01-01T08:00:00"),
     message: "Please fill out your report by the end of the day!",
     errorMessage: "",
-    //array of listed survey questions
-    managerQuestionResponse: [],
     responseM: "",
     questions: [],
     managerResponses: [],
@@ -238,6 +236,7 @@ class CreateReport extends Component {
       slackChannelName,
       created_at: new Date()
     };
+    console.log("REPORT++",this.report)
     this.state.managerType === 0
       ? (report["managerQuestions"] = JSON.stringify(
           EngineeringManagerQuestions
@@ -293,18 +292,24 @@ class CreateReport extends Component {
     }));
   };
 
+
+  addQuestions = e =>{
+    e.preventDefault();
+
+    this.setState({
+      managerResponses:[this.state.resOne,this.state.resTwo,this.state.resThree]
+    })
+
+    console.log(this.state.managerResponses)
+  }
+
+
+
   //chandle changes with manager questions
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value,
-      managerResponses: [
-        this.state.resOne,
-        this.state.resTwo,
-        this.state.resThree
-      ]
-    });
-    console.log(this.state.managerResponses);
-  };
+    })};
 
   //this is for rendering the manager questions at top of the report
   renderManagerQuestions = () => {
@@ -472,6 +477,7 @@ class CreateReport extends Component {
                   />
                 </RadioGroup>
                 {this.renderManagerQuestions()}
+                <Button style={{color:"white",backgroundColor:"blue"}}onClick={this.addQuestions}>Add Questions</Button>
               </FormControl>
             </section>
           </Card>
