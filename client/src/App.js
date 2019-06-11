@@ -17,6 +17,9 @@ import StatsDashboard from "./pages/Stats/StatsDashboard";
 // Profile Page
 import Profile from "./pages/Profile/Profile";
 
+// Team Page
+import Team from './pages/MyTeam/myTeam'
+
 // Marketing Page
 import MarketingPage from "./pages/Marketing/MarketingPage";
 import DevTeam from "./pages/Marketing/DevTeam";
@@ -64,6 +67,10 @@ function App() {
 
           {/* Profile */}
       <PrivateRoute exact path="/slackr/dashboard/profile" component={Profile} />
+
+
+      {/* Profile */}
+      <PrivateRoute exact path="/slackr/dashboard/myteam" component={Team} />
 
           {/* Slack Connection */}
       <Route exact path="/slackr/slack" component={Slack} />

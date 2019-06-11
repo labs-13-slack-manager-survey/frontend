@@ -14,11 +14,11 @@ import InviteUser from '../../components/InviteUser.js';
 // import jCircle from 'jquery-circle-progress';
 
 // style imports
-import "./view.css";
+// import "./view.css";
 import { Card } from "@blueprintjs/core";
 
 // this is the container for ALL of '/dashboard'
-class View extends Component {
+class myTeam extends Component {
   state = {
     roles: "member",
     active: true
@@ -40,6 +40,7 @@ class View extends Component {
       });
   }
   render() {
+    //If user's account is inactive, they cannot see the dashboard
 
     return this.state.active ? (
       <div className = "dashboard-view">
@@ -68,4 +69,4 @@ class View extends Component {
   }
 }
 
-export default View;
+export default myTeam;
