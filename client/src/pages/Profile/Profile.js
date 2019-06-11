@@ -289,7 +289,6 @@ class Profile extends Component {
 				}
 			});
 		}
-		console.log(editedUser);
 		axiosWithAuth()
 			.put(endpoint, editedUser)
 			.then(res => {

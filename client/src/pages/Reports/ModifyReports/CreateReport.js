@@ -44,7 +44,6 @@ const styles = theme => ({
   },
   textField: {
     marginLeft: 0,
-    marginRight: theme.spacing.unit,
     width: 200
   },
   menu: {
@@ -74,6 +73,7 @@ class CreateReport extends Component {
     slackChannelId: null,
     slackAuthorized: false,
     managerQuestions: "no",
+
     isSentiment: false,
     //array for listing manager questions
     listSurveyQuestions: [
@@ -97,21 +97,18 @@ class CreateReport extends Component {
     ],
     hidden: true,
     managerType: 0,
-    typeOfManager: ["Engineering Manager", "Project master"],
+    typeOfManager: ["Engineering Manager", "Project Manager"],
     //set manager questions here as well as type of manager BEFORE you add to the managerType
-    EngineeringManagerQuestions: {
-      questionOne: "As an Engineering manager,What is your weekly goal?",
-      questionTwo: "What features should be Priority?",
-      questionThree:
-        "Are there any new project details that the team should know?"
-    },
-
-    ProjectManagerQuestions: {
-      questionOne: "What is the weekly sales goal?",
-      questionTwo: "Is their any important customer feedback?",
-      questionThree:
-        "How are you feeling about the current state of team moral?"
-    }
+    EngineeringManagerQuestions: [
+      "As an Engineering manager,What is your weekly goal?",
+      "What features should be Priority?",
+      "Are there any new project details that the team should know?"
+    ],
+    ProjectManagerQuestions: [
+      "What is the weekly sales goal?",
+      "Is their any important customer feedback?",
+      "How are you feeling about the current state of team moral?"
+    ]
   };
 
   changeHandler = e => {
@@ -194,6 +191,7 @@ class CreateReport extends Component {
     });
   };
 
+  //function sends reports. This will also render within MemberResponseForm.js
   addReport = e => {
     e.preventDefault();
 
@@ -225,32 +223,34 @@ class CreateReport extends Component {
       questions,
       slackChannelId,
       managerResponses,
-      // typeOfManager, //new manager templates need to be added here so they can be sent to MemberReposonseForm.js
       EngineeringManagerQuestions,
       ProjectManagerQuestions
     } = this.state;
-    const report = {
+    console.log("mRes", managerResponses);
+    let report = {
       reportName,
       schedule: JSON.stringify(schedule),
       scheduleTime,
       message,
       questions: JSON.stringify(questions),
-      EngineeringManagerQuestions: JSON.stringify(EngineeringManagerQuestions),
-      ProjectManagerQuestions: JSON.stringify(ProjectManagerQuestions),
       managerResponses: JSON.stringify(managerResponses),
       slackChannelId,
       slackChannelName,
       created_at: new Date()
     };
+    this.state.managerType === 0
+      ? (report["managerQuestions"] = JSON.stringify(
+          EngineeringManagerQuestions
+        ))
+      : (report["managerQuestions"] = JSON.stringify(ProjectManagerQuestions));
+    console.log("mres after", report.managerResponses);
     const endpoint = `${baseURL}/reports`;
-
     axiosWithAuth()
       .post(endpoint, report)
       .then(res => {
         this.props.setResponseAsState(res.data);
 
         this.props.history.push("/slackr/dashboard");
-        console.log("submit data", res.data, "report", report);
       })
       .catch(err => console.log(err));
   };
@@ -268,7 +268,7 @@ class CreateReport extends Component {
     this.state({ selectedItem: index });
   }
 
-  mangerType = e => {
+  managerType = e => {
     e.preventDefault();
     this.setState({ managerType: e.target.value });
   };
@@ -276,21 +276,6 @@ class CreateReport extends Component {
   aQuestion = e => {
     e.preventDefault();
     this.setState({ aQuestion: e.target.value });
-  };
-
-  enterQuestionsHandler = e => {
-    e.preventDefault();
-    const code = e.keyCode || e.which;
-    if (code === 13) {
-      this.setState(prevState => ({
-        questions: [...prevState.questions, this.state.question],
-        question: ""
-      }));
-    } else {
-      this.setState({
-        [e.target.name]: e.target.value
-      });
-    }
   };
 
   questionsHandler = e => {
@@ -308,8 +293,8 @@ class CreateReport extends Component {
     }));
   };
 
-  handleSubmission = e => {
-    e.preventDefault();
+  //chandle changes with manager questions
+  handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value,
       managerResponses: [
@@ -318,25 +303,21 @@ class CreateReport extends Component {
         this.state.resThree
       ]
     });
-    console.log(
-      "MANAGER THEN REPONSE",
-      this.state.typeOfManager,
-      this.state.managerResponses
-    );
+    console.log(this.state.managerResponses);
   };
 
-  //this is for rendering the manager questions at top of
+  //this is for rendering the manager questions at top of the report
   renderManagerQuestions = () => {
     if (this.state.managerQuestions === "yes") {
       return (
         <>
-          <PopupState variant="popover" popupId="demo-popup-menu">
+          <PopupState variant="popover" popupId="demoMenu">
             {popupState => (
               <React.Fragment>
                 <Button variant="contained" {...bindTrigger(popupState)}>
                   Select Manager Questions
                 </Button>
-                <Menu {...bindMenu(popupState)} onClick={this.mangerType}>
+                <Menu {...bindMenu(popupState)} onClick={this.managerType}>
                   {this.state.typeOfManager.map((type, index) => (
                     <MenuItem
                       key={index}
@@ -354,7 +335,7 @@ class CreateReport extends Component {
                   //questions for Engineering manager
                   <div>
                     <br />
-                    <h6>{this.state.EngineeringManagerQuestions.questionOne}</h6>
+                    <h6>{this.state.EngineeringManagerQuestions[0]}</h6>
                     <Input
                       id="report-question"
                       className="input-field"
@@ -362,9 +343,9 @@ class CreateReport extends Component {
                       name="resOne"
                       placeholder="Enter your response here"
                       value={this.state.resOne}
-                      onChange={this.handleSubmission}
+                      onChange={this.handleChange}
                     />
-                    <h6>{this.state.EngineeringManagerQuestions.questionTwo}</h6>
+                    <h6>{this.state.EngineeringManagerQuestions[1]}</h6>
                     <Input
                       id="report-question"
                       className="input-field"
@@ -372,9 +353,9 @@ class CreateReport extends Component {
                       name="resTwo"
                       placeholder="Enter your response here"
                       value={this.state.resTwo}
-                      onChange={this.handleSubmission}
+                      onChange={this.handleChange}
                     />
-                    <h6>{this.state.EngineeringManagerQuestions.questionThree}</h6>
+                    <h6>{this.state.EngineeringManagerQuestions[2]}</h6>
                     <Input
                       id="report-question"
                       className="input-field"
@@ -382,14 +363,14 @@ class CreateReport extends Component {
                       name="resThree"
                       placeholder="Enter your response here"
                       value={this.state.resThree}
-                      onChange={this.handleSubmission}
+                      onChange={this.handleChange}
                     />
                   </div>
                 ) : (
                   //questions for marketing manager
                   <div>
                     <br />
-                    <h6>{this.state.ProjectManagerQuestions.questionOne}</h6>
+                    <h6>{this.state.ProjectManagerQuestions[0]}</h6>
                     <Input
                       id="report-question"
                       className="input-field"
@@ -397,9 +378,9 @@ class CreateReport extends Component {
                       name="resOne"
                       placeholder="Enter your response here"
                       value={this.state.resOne}
-                      onChange={this.handleSubmission}
+                      onChange={this.handleChange}
                     />
-                    <h6>{this.state.ProjectManagerQuestions.questionTwo}</h6>
+                    <h6>{this.state.ProjectManagerQuestions[1]}</h6>
                     <Input
                       id="report-question"
                       className="input-field"
@@ -407,9 +388,9 @@ class CreateReport extends Component {
                       name="resTwo"
                       placeholder="Enter your response here"
                       value={this.state.resTwo}
-                      onChange={this.handleSubmission}
+                      onChange={this.handleChange}
                     />
-                    <h6>{this.state.ProjectManagerQuestions.questionThree}</h6>
+                    <h6>{this.state.ProjectManagerQuestions[2]}</h6>
                     <Input
                       id="report-question"
                       className="input-field"
@@ -417,7 +398,7 @@ class CreateReport extends Component {
                       name="resThree"
                       placeholder="Enter your response here"
                       value={this.state.resThree}
-                      onChange={this.handleSubmission}
+                      onChange={this.handleChange}
                     />
                   </div>
                 )}
@@ -433,7 +414,7 @@ class CreateReport extends Component {
   RenderSurveyQuestions = () => {
     return (
       <>
-        <PopupState variant="popover" popupId="demo-popup-menu">
+        <PopupState variant="popover" popupId="demoMenu">
           {popupState => (
             <React.Fragment>
               <Button variant="contained" {...bindTrigger(popupState)}>
@@ -460,7 +441,6 @@ class CreateReport extends Component {
 
   render() {
     const { classes } = this.props;
-    console.log(this.state.question);
     return (
       <div className="create-report">
         <Fab onClick={() => this.props.history.goBack()} color="default">

@@ -178,10 +178,7 @@ class ReportResults extends Component {
   };
 
   updateWithUserResponse = res => {
-    console.log(this.state);
-    console.log(res.data);
     this.setState({ responses: res.data, completed: true });
-    console.log(this.state);
   };
 }
 
