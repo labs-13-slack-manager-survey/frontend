@@ -44,7 +44,6 @@ const styles = theme => ({
   },
   textField: {
     marginLeft: 0,
-    marginRight: theme.spacing.unit,
     width: 200
   },
   menu: {
@@ -103,7 +102,6 @@ class CreateReport extends Component {
     EngineeringManagerQuestions: [
       "As an Engineering manager,What is your weekly goal?",
       "What features should be Priority?",
-
       "Are there any new project details that the team should know?"
     ],
     ProjectManagerQuestions: [
@@ -193,6 +191,7 @@ class CreateReport extends Component {
     });
   };
 
+  //function sends reports. This will also render within MemberResponseForm.js
   addReport = e => {
     e.preventDefault();
 
@@ -224,11 +223,9 @@ class CreateReport extends Component {
       questions,
       slackChannelId,
       managerResponses,
-      // typeOfManager, //new manager templates need to be added here so they can be sent to MemberReposonseForm.js
       EngineeringManagerQuestions,
       ProjectManagerQuestions
     } = this.state;
-
     let report = {
       reportName,
       schedule: JSON.stringify(schedule),
@@ -279,21 +276,6 @@ class CreateReport extends Component {
     this.setState({ aQuestion: e.target.value });
   };
 
-  enterQuestionsHandler = e => {
-    e.preventDefault();
-    const code = e.keyCode || e.which;
-    if (code === 13) {
-      this.setState(prevState => ({
-        questions: [...prevState.questions, this.state.question],
-        question: ""
-      }));
-    } else {
-      this.setState({
-        [e.target.name]: e.target.value
-      });
-    }
-  };
-
   questionsHandler = e => {
     e.preventDefault();
     this.setState(prevState => ({
@@ -309,7 +291,8 @@ class CreateReport extends Component {
     }));
   };
 
-  handleSubmission = e => {
+  //chandle changes with manager questions
+  handleChange = e => {
     e.preventDefault();
     this.setState({
       [e.target.name]: e.target.value,
@@ -319,14 +302,9 @@ class CreateReport extends Component {
         this.state.resThree
       ]
     });
-    console.log(
-      "MANAGER THEN REPONSE",
-      this.state.typeOfManager,
-      this.state.managerResponses
-    );
   };
 
-  //this is for rendering the manager questions at top of
+  //this is for rendering the manager questions at top of the report
   renderManagerQuestions = () => {
     if (this.state.managerQuestions === "yes") {
       return (
@@ -363,7 +341,7 @@ class CreateReport extends Component {
                       name="resOne"
                       placeholder="Enter your response here"
                       value={this.state.resOne}
-                      onChange={this.handleSubmission}
+                      onChange={this.handleChange}
                     />
                     <h6>{this.state.EngineeringManagerQuestions[1]}</h6>
                     <Input
@@ -373,7 +351,7 @@ class CreateReport extends Component {
                       name="resTwo"
                       placeholder="Enter your response here"
                       value={this.state.resTwo}
-                      onChange={this.handleSubmission}
+                      onChange={this.handleChange}
                     />
                     <h6>{this.state.EngineeringManagerQuestions[2]}</h6>
                     <Input
@@ -383,7 +361,7 @@ class CreateReport extends Component {
                       name="resThree"
                       placeholder="Enter your response here"
                       value={this.state.resThree}
-                      onChange={this.handleSubmission}
+                      onChange={this.handleChange}
                     />
                   </div>
                 ) : (
@@ -398,7 +376,7 @@ class CreateReport extends Component {
                       name="resOne"
                       placeholder="Enter your response here"
                       value={this.state.resOne}
-                      onChange={this.handleSubmission}
+                      onChange={this.handleChange}
                     />
                     <h6>{this.state.ProjectManagerQuestions[1]}</h6>
                     <Input
@@ -408,7 +386,7 @@ class CreateReport extends Component {
                       name="resTwo"
                       placeholder="Enter your response here"
                       value={this.state.resTwo}
-                      onChange={this.handleSubmission}
+                      onChange={this.handleChange}
                     />
                     <h6>{this.state.ProjectManagerQuestions[2]}</h6>
                     <Input
@@ -418,7 +396,7 @@ class CreateReport extends Component {
                       name="resThree"
                       placeholder="Enter your response here"
                       value={this.state.resThree}
-                      onChange={this.handleSubmission}
+                      onChange={this.handleChange}
                     />
                   </div>
                 )}

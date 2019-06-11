@@ -34,7 +34,6 @@ const styles = theme => ({
   },
   textField: {
     marginLeft: 0,
-    marginRight: theme.spacing.unit,
     width: 200
   },
   menu: {
@@ -131,7 +130,7 @@ class CreateSentiment extends Component {
     }));
   };
 
-    //function for questions
+  //function for questions
   removeQuestion = (e, question) => {
     e.preventDefault();
     this.setState(prevState => ({
