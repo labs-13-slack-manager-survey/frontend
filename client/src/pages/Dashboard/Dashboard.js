@@ -48,7 +48,7 @@ export class Dashboard extends Component {
             title = "total polls scheduled"
             content = {this.state.users.length}/>
       </div>
-      <Card raised={true} className="teamDashboard">
+      {/* <Card raised={true} className="teamDashboard">
         <header className="teamDashboard-header">
           <Typography variant="h3">Team</Typography>
         </header>
@@ -70,7 +70,7 @@ export class Dashboard extends Component {
           modal={this.state.modal}
         />
         <Slack />
-      </Card>
+      </Card> */}
       </>
     );
   }

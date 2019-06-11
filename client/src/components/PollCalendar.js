@@ -10,7 +10,7 @@ class PollCalendar extends Component {
   render() {
     return (
       <div className = "calendar-card">
-        <div style={{ marginTop: "20px" }}>
+        <div style={{ marginTop: "50px" }}>
           <div className="report-results-date-picker">
             <DayPickerSingleDateController numberOfMonths={1} noBorder={true} />
           </div>

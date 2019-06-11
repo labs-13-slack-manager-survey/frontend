@@ -14,26 +14,13 @@
 
 }
 
-.$circle {
 
-}
-.stats-summary-content-import-status-arc-wrapper {
-	position: absolute;
-	left: -6;
-	top: -6;
-  }
-  
-  .stats-summary-content-import-status-arc-wrapper.mod-import-process {
-	position: absolute;
-	left: -9.5;
-	top: -9;
-}
 
 .view {
 	display: flex;
-	justify-content: space-evenly;
+	justify-content: flex-start;
 	flex-direction: column;
-	margin: auto;
+	/* margin: auto; */
 	margin-left: 120px;
 	width: 70%;
 }
