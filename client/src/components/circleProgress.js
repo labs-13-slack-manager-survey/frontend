@@ -25,9 +25,12 @@ class circleProgress extends React.Component {
             <div className="circle-graph">
                 <div className = "circle" id="circle" />
                 <div className = "circle-background"></div>
-                <div className = "percent-complete">
-                    <div className = "number">{numericPercent}</div>
-                    <div className = "percent">%</div>
+                <div className = "text-description">
+                    <div className = "percent-complete">
+                        <div className = "number">{numericPercent}</div>
+                        <div className = "percent">%</div>
+                    </div>
+                    <div className = "description">Completed</div>
                 </div>
                 
             </div>

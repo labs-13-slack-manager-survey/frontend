@@ -26,16 +26,28 @@
 }
 
 .percent-complete {
-    top: 35%;
-    left: 42%;
+
     display: flex;
     align-items: flex-start;
     z-index: 2;
-    position: absolute;
+    position: relative;
     margin: 0 auto;
 }
 .number {
     font-size: 2.5rem;
     padding-right: 5px;
     z-index: 2;
+}
+
+.text-description {
+    top: 32%;
+    left: 36%;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    margin: 0 auto;
+}
+
+.description {
+    margin-top: 10px;
 }
