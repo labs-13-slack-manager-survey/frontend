@@ -18,7 +18,9 @@ class StatsDashboard extends Component {
     super();
     this.state = {
       reports: [],
-      responses: []
+      responses: [],
+      barLabels: [],
+      barData: []
     };
   }
 
@@ -26,7 +28,6 @@ class StatsDashboard extends Component {
     axiosWithAuth()
       .get(`${URL}/reports`)
       .then(res => {
-        console.log(res.data);
         const sentimentReports = res.data.reports.filter(report => {
           if (report.isSentiment) {
             return report;
@@ -39,17 +40,7 @@ class StatsDashboard extends Component {
       .catch(err => console.log(err));
   }
 
-  viewStats = id => {
-    axiosWithAuth()
-      .get(`${URL}/responses/sentimentAvg/${id}`)
-      .then(res => {
-        console.log(res.data);
-        this.setState({
-          responses: res.data
-        });
-      })
-      .catch(err => console.log(err));
-  };
+  viewStats = id => {};
 
   render() {
     if (this.state.reports.length === 0) {
@@ -64,10 +55,8 @@ class StatsDashboard extends Component {
       <div className="dashboard">
         <h2 style={{ marginBottom: "40px" }}>Stats Dashboard</h2>
         <div className="mainDashboard">
-          <SentimentChart
-            responses={this.state.responses}
-            reports={this.state.reports}
-          />
+          <SentimentChart reports={this.state.reports} />
+
           <SentimentAvg
             reports={this.state.reports}
             viewStats={this.viewStats}

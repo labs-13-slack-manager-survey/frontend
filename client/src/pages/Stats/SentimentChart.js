@@ -1,35 +1,50 @@
 import React, { Component } from "react";
 import Chart from "chart.js";
 import { axiosWithAuth } from "../../config/axiosWithAuth";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const URL = process.env.REACT_APP_BASE_URL;
 
 class SentimentChart extends Component {
   state = {
-    responses: this.props.responses,
-    chartLabels: [],
-    chartData: [],
-    reportNames: []
+    results: [],
+    labels: []
   };
 
   chartRef = React.createRef();
 
   componentDidMount() {
+    console.log(this.state);
+    // Bar Chart ---------
+    let averages = [];
     this.props.reports.forEach(report => {
-      this.state.reportNames.push(report.reportName);
+      axiosWithAuth()
+        .get(`${URL}/responses/sentimentAvg/${report.id}`)
+        .then(res => {
+          averages.push(res.data[0].average);
+        })
+        .catch(err => console.log(err));
+    });
+    this.setState({
+      results: averages
+    });
+    console.log(this.state.results);
+
+    // Labels
+    this.props.reports.forEach(report => {
+      this.state.labels.push(report.reportName);
     });
 
     // Chart -------------------------
     const myChartRef = this.chartRef.current.getContext("2d");
     new Chart(myChartRef, {
       type: "bar",
-      // Currently just hard-coded dummy data
       data: {
-        labels: this.state.reportNames,
+        labels: this.state.labels,
         datasets: [
           {
             label: "Sentiment Average",
-            data: [3.3, 3.7, 4.8, 2.4, 5, 2.9, 3.5],
+            data: this.state.results,
             backgroundColor: [
               "red",
               "green",
