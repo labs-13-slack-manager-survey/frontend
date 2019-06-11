@@ -8,6 +8,7 @@ import ReportsDash from "../Dashboard/ReportsDash";
 import SummaryBox from '../../components/SummaryBox';
 import PollCalendar from '../../components/PollCalendar';
 import CircleProgress from '../../components/circleProgress.js';
+import InviteUser from '../../components/InviteUser.js';
 
 // import $ from 'jquery';
 // import jCircle from 'jquery-circle-progress';
@@ -63,6 +64,7 @@ class View extends Component {
             />
         </div>
         <div className = "sidebar">
+          <InviteUser />
           <PollCalendar />
           <CircleProgress 
           percentComplete = '0.6'/>
