@@ -7,7 +7,7 @@ import {
 	Slide
 } from '@material-ui/core';
 
-import './dashboard.css';
+import '../pages/Dashboard/dashboard.css';
 
 // component to invite user to team (only admin access - BE preventions also)
 
