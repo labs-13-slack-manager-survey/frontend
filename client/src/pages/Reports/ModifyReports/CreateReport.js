@@ -99,14 +99,14 @@ class CreateReport extends Component {
     managerType: 0,
     typeOfManager: ["Engineering Manager", "Scrum master"],
     //set manager questions here as well as type of manager BEFORE you add to the managerType
-    EngineeringManager: {
+    EngineeringManagerQuestions: {
       questionOne: "As an Engineering manager,What is your weekly goal?",
       questionTwo: "What features should be Priority?",
       questionThree:
         "Are there any new project details that the team should know?"
     },
 
-    ScrumMaster: {
+    ProjectManagerQuestions: {
       questionOne: "What is the weekly sales goal?",
       questionTwo: "Is their any important customer feedback?",
       questionThree:
@@ -224,10 +224,10 @@ class CreateReport extends Component {
       message,
       questions,
       slackChannelId,
-      managerResponses
+      managerResponses,
       // typeOfManager, //new manager templates need to be added here so they can be sent to MemberReposonseForm.js
-      // EngineeringManager,
-      // ScrumMaster
+      EngineeringManagerQuestions,
+      ProjectManagerQuestions
     } = this.state;
     const report = {
       reportName,
@@ -235,9 +235,8 @@ class CreateReport extends Component {
       scheduleTime,
       message,
       questions: JSON.stringify(questions),
-      // typeOfManager, //new manager templates need to be added here so they can be sent to MemberReposonseForm.js
-      // EngineeringManager,
-      // ScrumMaster,
+      EngineeringManagerQuestions,
+      ProjectManagerQuestions,
       managerResponses: JSON.stringify(managerResponses),
       slackChannelId,
       slackChannelName,
@@ -355,7 +354,7 @@ class CreateReport extends Component {
                   //questions for Engineering manager
                   <div>
                     <br />
-                    <h6>{this.state.EngineeringManager.questionOne}</h6>
+                    <h6>{this.state.EngineeringManagerQuestions.questionOne}</h6>
                     <Input
                       id="report-question"
                       className="input-field"
@@ -365,7 +364,7 @@ class CreateReport extends Component {
                       value={this.state.resOne}
                       onChange={this.handleSubmission}
                     />
-                    <h6>{this.state.EngineeringManager.questionTwo}</h6>
+                    <h6>{this.state.EngineeringManagerQuestions.questionTwo}</h6>
                     <Input
                       id="report-question"
                       className="input-field"
@@ -375,7 +374,7 @@ class CreateReport extends Component {
                       value={this.state.resTwo}
                       onChange={this.handleSubmission}
                     />
-                    <h6>{this.state.EngineeringManager.questionThree}</h6>
+                    <h6>{this.state.EngineeringManagerQuestions.questionThree}</h6>
                     <Input
                       id="report-question"
                       className="input-field"
@@ -390,7 +389,7 @@ class CreateReport extends Component {
                   //questions for marketing manager
                   <div>
                     <br />
-                    <h6>{this.state.ScrumMaster.questionOne}</h6>
+                    <h6>{this.state.ProjectManagerQuestions.questionOne}</h6>
                     <Input
                       id="report-question"
                       className="input-field"
@@ -400,7 +399,7 @@ class CreateReport extends Component {
                       value={this.state.resOne}
                       onChange={this.handleSubmission}
                     />
-                    <h6>{this.state.ScrumMaster.questionTwo}</h6>
+                    <h6>{this.state.ProjectManagerQuestions.questionTwo}</h6>
                     <Input
                       id="report-question"
                       className="input-field"
@@ -410,7 +409,7 @@ class CreateReport extends Component {
                       value={this.state.resTwo}
                       onChange={this.handleSubmission}
                     />
-                    <h6>{this.state.ScrumMaster.questionThree}</h6>
+                    <h6>{this.state.ProjectManagerQuestions.questionThree}</h6>
                     <Input
                       id="report-question"
                       className="input-field"
