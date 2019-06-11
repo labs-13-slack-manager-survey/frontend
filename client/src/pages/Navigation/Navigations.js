@@ -8,6 +8,8 @@ import './navigation.css';
 import { AppBar, Toolbar, Button, Icon, Avatar } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import Logo from '../../images/logo_v1.png';
+import Reports from '../../images/icons/reports.png';
+import ReportsActive from '../../images/icons/reports-active.png';
 import Teams from '../../images/icons/teams.png';
 import TeamsActive from '../../images/icons/teams-active.png';
 import User from '../../images/icons/user.png';
@@ -116,7 +118,7 @@ class Navigation extends React.Component {
 					<div className = "vert-buttons">
 					<div className = "menu-button">
 							<NavLink to='/slackr/dashboard' > <img className = "menu-icon" src={this.props.history.location.pathname ===
-											'/slackr/dashboard' ? TeamsActive : Teams} /></NavLink>
+											'/slackr/dashboard' ? ReportsActive : Reports} /></NavLink>
 							<div className ={this.props.history.location.pathname ===
 											'/slackr/dashboard' ? "button-label-active" : "button-label"}>reports</div>
 						</div>
@@ -127,6 +129,13 @@ class Navigation extends React.Component {
 											'/slackr/dashboard/stats' ? "button-label-active" : "button-label"} >stats</div>
                 </NavLink>
 						</div>
+            <div className = "menu-button">
+              <NavLink to="/slackr/dashboard/stats">
+                  <img className="menu-icon" src={this.props.history.location.pathname === '/slackr/dashboard/stats' ? TeamsActive : Teams} />
+                  <div className = {this.props.history.location.pathname ===
+											'/slackr/dashboard/stats' ? "button-label-active" : "button-label"} >my team</div>
+                </NavLink>
+						</div>
 					</div>
                
 
@@ -135,7 +144,7 @@ class Navigation extends React.Component {
               )}
                 {loggedIn ? (
 							<>
-							<div className = "vert-buttons">
+							<div className = "vert-buttons2">
 								<NavLink to="/slackr/dashboard/profile" className = "menu-button">
 									<img className = "menu-icon" src={this.props.history.location.pathname ===
 											'/slackr/dashboard/profile' ? UserActive : User} />

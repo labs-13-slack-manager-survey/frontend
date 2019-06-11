@@ -11,6 +11,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	padding-top: 50px;
 
 }
 
@@ -25,12 +26,6 @@
 	width: 70%;
 }
 
-/* .summaryStats {
-	display: flex;
-	justify-content: flex-start; 
-	margin-top: 10px;
-
-} */
 
 
 @media(max-width: 800px){
