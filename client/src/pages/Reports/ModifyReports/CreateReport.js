@@ -226,6 +226,7 @@ class CreateReport extends Component {
       EngineeringManagerQuestions,
       ProjectManagerQuestions
     } = this.state;
+    console.log("mRes", managerResponses);
     let report = {
       reportName,
       schedule: JSON.stringify(schedule),
@@ -242,6 +243,7 @@ class CreateReport extends Component {
           EngineeringManagerQuestions
         ))
       : (report["managerQuestions"] = JSON.stringify(ProjectManagerQuestions));
+    console.log("mres after", report.managerResponses);
     const endpoint = `${baseURL}/reports`;
     axiosWithAuth()
       .post(endpoint, report)
@@ -293,7 +295,6 @@ class CreateReport extends Component {
 
   //chandle changes with manager questions
   handleChange = e => {
-    e.preventDefault();
     this.setState({
       [e.target.name]: e.target.value,
       managerResponses: [
@@ -302,6 +303,7 @@ class CreateReport extends Component {
         this.state.resThree
       ]
     });
+    console.log(this.state.managerResponses);
   };
 
   //this is for rendering the manager questions at top of the report
@@ -309,7 +311,7 @@ class CreateReport extends Component {
     if (this.state.managerQuestions === "yes") {
       return (
         <>
-          <PopupState variant="popover" popupId="demo-popup-menu">
+          <PopupState variant="popover" popupId="demoMenu">
             {popupState => (
               <React.Fragment>
                 <Button variant="contained" {...bindTrigger(popupState)}>
@@ -412,7 +414,7 @@ class CreateReport extends Component {
   RenderSurveyQuestions = () => {
     return (
       <>
-        <PopupState variant="popover" popupId="demo-popup-menu">
+        <PopupState variant="popover" popupId="demoMenu">
           {popupState => (
             <React.Fragment>
               <Button variant="contained" {...bindTrigger(popupState)}>
