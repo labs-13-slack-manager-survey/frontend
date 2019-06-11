@@ -4,8 +4,8 @@ import Slider from "@material-ui/lab/Slider";
 import { withStyles } from "@material-ui/core/styles";
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import "./Report_Input.css";
-import Cancel from '../../../images/icons/cancel.png'
-import Comment from '../../../images/icons/comment.png'
+import Cancel from "../../../images/icons/cancel.png";
+import Comment from "../../../images/icons/comment.png";
 
 // this component handles the response inputs for individual questions
 // when a user is filling in a report
@@ -40,18 +40,16 @@ const StyledSlider = withStyles({
 
 class ReportInput extends React.Component {
   state = {
-	value: 3,
-	userComment: false, 
+    value: 3,
+    userComment: false
   };
 
-  toggleComment = (e) => {
-	  e.preventDefault();
-	  this.setState({
-		userComment: !this.state.userComment, 
-	  })  
-	  console.log(this.state.userComment)
-	}
-
+  toggleComment = e => {
+    e.preventDefault();
+    this.setState({
+      userComment: !this.state.userComment
+    });
+  };
 
   handleChange = (event, value) => {
     console.log(value);
@@ -59,10 +57,9 @@ class ReportInput extends React.Component {
   render() {
     return (
       <div className="member-report-input">
-		<div className = "question">
-        	<h4>{this.props.question}</h4>
-			<img className ="toggleComments" src={this.state.userComment ? Cancel : Comment} onClick = {this.toggleComment} />
-		</div>
+        <div className="question">
+          <h4>{this.props.question}</h4>
+        </div>
         {this.props.isSentiment ? (
           <>
             <StyledSlider
@@ -84,7 +81,7 @@ class ReportInput extends React.Component {
 						max={5}
 						step={1}
 						onChange={(e, v) => this.props.handleChange(e, v)}
-						/>  */}
+          />  */}
             <div className="slider-label">
               <p>1</p>
               <p>2</p>
@@ -92,17 +89,23 @@ class ReportInput extends React.Component {
               <p>4</p>
               <p>5</p>
             </div>
-			
-			{ this.state.userComment ? <TextField
-              fullWidth={true}
-              onChange={e => this.props.handleChange(e, this.props.question)}
-              margin="normal"
-              multiline={true}
-              name="response"
-              value={this.props.response}
-              variant="outlined"
-            /> : null}
-        
+          <img
+          className="toggleComments"
+          src={this.state.userComment ? Cancel : Comment}
+          onClick={this.toggleComment}
+        /> 
+
+            {this.state.userComment ? (
+              <TextField
+                fullWidth={true}
+                onChange={e => this.props.handleChange(e, this.props.question)}
+                margin="normal"
+                multiline={true}
+                name="response"
+                value={this.props.response}
+                variant="outlined"
+              />
+            ) : null}
           </>
         ) : (
           <TextField

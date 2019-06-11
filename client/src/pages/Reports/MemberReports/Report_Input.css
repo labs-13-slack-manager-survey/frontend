@@ -13,8 +13,10 @@
 }
 
 .toggleComments {
-    height: 20px;
-    margin-right: -30px;
+   display: flex;
+   flex-direction: row-reverse;
+   height: 20px;
+   margin: 25px;
 }
 
 .toggleComments:hover {

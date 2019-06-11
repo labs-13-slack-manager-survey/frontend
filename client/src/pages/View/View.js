@@ -6,6 +6,12 @@ import jwt_decode from "jwt-decode";
 import Dashboard from "../Dashboard/Dashboard";
 import ReportsDash from "../Dashboard/ReportsDash";
 import SummaryBox from '../../components/SummaryBox';
+import PollCalendar from '../../components/PollCalendar';
+import CircleProgress from '../../components/circleProgress.js';
+import InviteUser from '../../components/InviteUser.js';
+
+// import $ from 'jquery';
+// import jCircle from 'jquery-circle-progress';
 
 // style imports
 import "./view.css";
@@ -35,15 +41,35 @@ class View extends Component {
   }
   render() {
     // If user's account is inactive, they cannot see the dashboard
-    return this.state.active ? (
-      <div className="view">
+    // $('#circle').circleProgress({
+    //   value: 0.75,
+    //   size: 230,
+    //   fill: {
+    //     gradient: ['#8BD8FF' , '#0069D2']
+    //   },
+    //   startAngle: -Math.PI/2,
+    //   thickness:25, 
+    //   animation: { duration: 1400,},
+    //   emptyFill: 'white',
+    // });
 
-        <Dashboard className="usersDash" role={this.state.roles} />
-        <ReportsDash
-          className="reportsDash"
-          role={this.state.roles}
-          {...this.props}
-        />
+    return this.state.active ? (
+      <div className = "dashboard-view">
+        <div className="view">
+            <Dashboard className="usersDash" role={this.state.roles} />
+            <ReportsDash
+              className="reportsDash"
+              role={this.state.roles}
+              {...this.props}
+            />
+        </div>
+        <div className = "sidebar">
+          <CircleProgress 
+          title = "Today's Polls"
+          percentComplete = '0.6'/>
+          <InviteUser />
+          {/* <PollCalendar /> */}
+        </div>
       </div>
     ) : (
       <Card style={{ textAlign: "center" }}>

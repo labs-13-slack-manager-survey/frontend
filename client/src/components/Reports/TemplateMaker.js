@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { axiosWithAuth, baseURL } from "../../../config/axiosWithAuth";
+
 
 // imports for time schedule
 import { getHours } from "date-fns";
@@ -25,7 +25,7 @@ import { TimePicker } from "material-ui-pickers";
 import "./Report.css";
 
 // this component does what it says - admin can create a new report
-// Parent component = ReportsDash.js in '/pages/Dashboard/ReportsDash'
+// Parent component = ReportsDash.js in '/components/Dashboard/ReportsDash'
 
 const styles = theme => ({
   container: {
@@ -34,6 +34,7 @@ const styles = theme => ({
   },
   textField: {
     marginLeft: 0,
+    marginRight: theme.spacing.unit,
     width: 200
   },
   menu: {
@@ -41,7 +42,7 @@ const styles = theme => ({
   }
 });
 
-class CreateSentiment extends Component {
+class TemplateMaker extends Component {
   state = {
     // Main Report State
     reportName: "Sentiment Poll",
@@ -130,7 +131,7 @@ class CreateSentiment extends Component {
     }));
   };
 
-  //function for questions
+    //function for questions
   removeQuestion = (e, question) => {
     e.preventDefault();
     this.setState(prevState => ({
@@ -384,4 +385,4 @@ class CreateSentiment extends Component {
   }
 }
 
-export default withStyles(styles)(CreateSentiment);
+export default withStyles(styles)(TemplateMaker);

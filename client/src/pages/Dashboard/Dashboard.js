@@ -4,7 +4,7 @@ import jwt_decode from "jwt-decode";
 
 // component imports
 import Team from "./Team";
-import InviteUser from "./InviteUser";
+import InviteUser from "../../components/InviteUser";
 import Slack from "../Slack/Slack";
 import PageTitle from '../../components/PageTitle'
 import SummaryBox from '../../components/SummaryBox';
@@ -33,7 +33,7 @@ export class Dashboard extends Component {
     return (
       <>
       <PageTitle 
-      title = "REPORTS DASHBOARD"
+      title = "Reports Dashboard"
       />
       <div className = "summary-boxes">
         <SummaryBox 
@@ -48,7 +48,7 @@ export class Dashboard extends Component {
             title = "total polls scheduled"
             content = {this.state.users.length}/>
       </div>
-      <Card raised={true} className="teamDashboard">
+      {/* <Card raised={true} className="teamDashboard">
         <header className="teamDashboard-header">
           <Typography variant="h3">Team</Typography>
         </header>
@@ -70,7 +70,7 @@ export class Dashboard extends Component {
           modal={this.state.modal}
         />
         <Slack />
-      </Card>
+      </Card> */}
       </>
     );
   }
@@ -160,39 +160,6 @@ export class Dashboard extends Component {
     this.setState({ anchorEl: null });
   };
 
-  addUser = e => {
-    e.preventDefault();
-    //create mailObject to post to sendgrid API
-    const mailObject = {
-      email: this.state.newMemberEmail,
-      joinCode: this.state.joinCode
-    };
-    console.log(mailObject);
-    //sendgrid endpoint on our back end
-    const endpoint = `${baseURL}/email`;
-
-    axiosWithAuth()
-      .post(endpoint, mailObject)
-      .then(res => {
-        console.log(res);
-        this.setState({ message: "Email sent!", modal: true });
-      })
-      .catch(err => {
-        console.log(err);
-        this.setState({
-          message:
-            "There was an issue sending the email, please email your new team member manually.",
-          modal: true
-        });
-      });
-  };
-
-  changeHandler = e => {
-    this.setState({ newMemberEmail: e.target.value });
-  };
-  clearMessage = () => {
-    this.setState({ message: "", modal: false });
-  };
 }
 
 export default Dashboard;

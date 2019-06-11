@@ -1,9 +1,11 @@
 .title-box {
     display: flex;
     justify-content: flex-start;
-    font-size: 20px;
-    margin-top: 30px;
-    margin-bottom: 20px;
+    font-size: 30px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    color: rgb(54, 54, 54);
+    font-weight: 10px;
 }
 .page-title {
 

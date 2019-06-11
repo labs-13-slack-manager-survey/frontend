@@ -12,6 +12,7 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
     />
+    <script src="../node_modules/jquery-circle-progress/dist/circle-progress.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <!--
@@ -74,4 +75,18 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
+
+  <script>
+    $('.js-arc').circleProgress({
+        value: 0.75,
+        size: 130,
+        startAngle: -(Math.PI) / 2,
+        fill: {
+            gradient: ['#F5F5F5', '#FAB0B7'],
+        },
+        thickness: 15,
+        emptyFill: 'rgba(225, 84, 48, 0.1)'
+        });
+</script>
+
 </html>
