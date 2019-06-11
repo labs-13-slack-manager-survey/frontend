@@ -17,7 +17,10 @@ class StatsDashboard extends Component {
   constructor() {
     super();
     this.state = {
-      reports: []
+      reports: [],
+      responses: [],
+      barLabels: [],
+      barData: []
     };
   }
 
@@ -37,6 +40,8 @@ class StatsDashboard extends Component {
       .catch(err => console.log(err));
   }
 
+  viewStats = id => {};
+
   render() {
     if (this.state.reports.length === 0) {
       return (
@@ -50,8 +55,12 @@ class StatsDashboard extends Component {
       <div className="dashboard">
         <h2 style={{ marginBottom: "40px" }}>Stats Dashboard</h2>
         <div className="mainDashboard">
-          <SentimentChart />
-          <SentimentAvg reports={this.state.reports} />
+          <SentimentChart reports={this.state.reports} />
+
+          <SentimentAvg
+            reports={this.state.reports}
+            viewStats={this.viewStats}
+          />
           <div className="dataSquares">
             {/* Dummy Data */}
             <SummaryBox title="Number of Teams" content="8" />
