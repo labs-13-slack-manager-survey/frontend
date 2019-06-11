@@ -16,9 +16,8 @@ class MemberResponseForm extends Component {
     questions: [],
     isSentiment: false,
     typeOfManager: [],
-    managerResponses: [],
-    EngineeringManagerQuestions: [],
-    ProjectManagerQuestions: []
+    managerQuestions: [],
+    managerResponses: []
   };
 
   render() {
@@ -33,8 +32,11 @@ class MemberResponseForm extends Component {
         {this.state.isSentiment ? null : (
           <div>
             <h1 className="member-form-title">Managers Thoughts</h1>
+            <h3>{this.state.managerQuestions[0]}</h3>
             <h3>{this.state.managerResponses[0]}</h3>
+            <h3>{this.state.managerQuestions[1]}</h3>
             <h3>{this.state.managerResponses[1]}</h3>
+            <h3>{this.state.managerQuestions[2]}</h3>
             <h3>{this.state.managerResponses[2]}</h3>
           </div>
         )}
@@ -81,8 +83,7 @@ class MemberResponseForm extends Component {
           isSentiment,
           managerResponses,
           // typeOfManager, //new manager templates need to be added here so they can be sent to MemberReposonseForm.js
-          EngineeringManagerQuestions,
-          ProjectManagerQuestions
+          managerQuestions
         } = res.data.report;
         this.setState({
           reportName,
@@ -92,9 +93,8 @@ class MemberResponseForm extends Component {
             response: "",
             sentimentRange: 3
           })),
+          managerQuestions,
           managerResponses: JSON.parse(managerResponses),
-          EngineeringManagerQuestions,
-          ProjectManagerQuestions,
           isSentiment: isSentiment
           // sentimentRange: sentimentRange
         });
