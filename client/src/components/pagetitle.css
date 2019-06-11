@@ -7,6 +7,12 @@
     color: rgb(54, 54, 54);
     font-weight: 10px;
 }
-.page-title {
-
+.page-description {
+    font-size: 12px;
+    text-align: left;
+    margin-top: -15px;
+    color: #9C9C9C;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+    margin-bottom: 50px;
 }

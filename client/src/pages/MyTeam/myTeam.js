@@ -3,12 +3,10 @@ import { axiosWithAuth, baseURL } from "../../config/axiosWithAuth";
 import jwt_decode from "jwt-decode";
 
 //components
-import Dashboard from "../Dashboard/Dashboard";
-import ReportsDash from "../Dashboard/ReportsDash";
-import SummaryBox from '../../components/SummaryBox';
-import PollCalendar from '../../components/PollCalendar';
-import CircleProgress from '../../components/circleProgress.js';
 import InviteUser from '../../components/InviteUser.js';
+import PageTitle from '../../components/PageTitle'
+import PageDescription from '../../components/PageDescription'
+import TableHeader from '../../components/TableHeader'
 
 // import $ from 'jquery';
 // import jCircle from 'jquery-circle-progress';
@@ -16,6 +14,7 @@ import InviteUser from '../../components/InviteUser.js';
 // style imports
 // import "./view.css";
 import { Card } from "@blueprintjs/core";
+import TableDisplay from "../../components/TableHeader";
 
 // this is the container for ALL of '/dashboard'
 class myTeam extends Component {
@@ -45,17 +44,18 @@ class myTeam extends Component {
     return this.state.active ? (
       <div className = "dashboard-view">
         <div className="view">
-            <Dashboard className="usersDash" role={this.state.roles} />
-            <ReportsDash
-              className="reportsDash"
-              role={this.state.roles}
-              {...this.props}
-            />
+        <PageTitle 
+          title = "My Team"
+        />
+        <PageDescription description= "Add individuals via email to your team. everyone on your team who is also in your slack workplace will recieve direct messages through the slackr bot, alerting them to fill out a poll when it becomes available. Team members will be prompted to create an account on Slackr and view and respond to polls in the browser application."/>
+        
+        <TableHeader 
+          column1 = "Member"
+          column3 = "Polls completed" 
+          column4 = "Last poll answered"
+        />
         </div>
         <div className = "sidebar">
-          <CircleProgress 
-          title = "Today's Polls"
-          percentComplete = '0.6'/>
           <InviteUser />
           {/* <PollCalendar /> */}
         </div>
