@@ -9,7 +9,7 @@ import {
 	Slide
 } from '@material-ui/core';
 
-import '../pages/Dashboard/dashboard.css';
+import './inviteUser.css';
 
 // component to invite user to team (only admin access - BE preventions also)
 
@@ -83,9 +83,9 @@ class InviteUser extends React.Component {
 	render () {
 		return (
 			<div className="inviteUserBox">
-				<h3>Invite a new team member</h3>
+				<div className="invite">Invite a new team member</div>
 				<form onSubmit={this.addUser} className="inviteUser">
-					<TextField
+					<input
 						id="outlined-email-input"
 						label="Email"
 						type="email"
