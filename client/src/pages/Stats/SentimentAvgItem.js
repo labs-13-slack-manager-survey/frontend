@@ -45,6 +45,9 @@ class SentimentAvgItem extends Component {
         ) : (
           <p>Sentiment Average: {this.state.average}</p>
         )}
+        <button onClick={e => this.props.viewStats(this.props.id)}>
+          View Stats
+        </button>
       </div>
     );
   }
