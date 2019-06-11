@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { axiosWithAuth, baseURL } from "../../../config/axiosWithAuth";
+
 
 // imports for time schedule
 import { getHours } from "date-fns";
@@ -16,26 +16,16 @@ import {
   Fab,
   Icon,
   TextField,
-  withStyles,
-  Radio,
-  RadioGroup,
-  FormControlLabel,
-  FormLabel,
-  Menu
+  MenuItem,
+  withStyles
 } from "@material-ui/core";
-
-import MemberResponseForm from "../MemberReports/MemberResponseForm";
-
-//importing things from material-ui
-import MenuItem from "@material-ui/core/MenuItem";
-import { TimePicker } from "material-ui-pickers";
-import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
 import AddIcon from "@material-ui/icons/Add";
+import { TimePicker } from "material-ui-pickers";
 
 import "./Report.css";
 
 // this component does what it says - admin can create a new report
-// Parent component = ReportsDash.js in '/pages/Dashboard/ReportsDash'
+// Parent component = ReportsDash.js in '/components/Dashboard/ReportsDash'
 
 const styles = theme => ({
   container: {
@@ -44,6 +34,7 @@ const styles = theme => ({
   },
   textField: {
     marginLeft: 0,
+    marginRight: theme.spacing.unit,
     width: 200
   },
   menu: {
@@ -51,36 +42,20 @@ const styles = theme => ({
   }
 });
 
-class CreateReport extends Component {
+class TemplateMaker extends Component {
   state = {
-    //Questions for survey with new menu
-    questionExperience: ["Marketing Team", "Dev Team"],
     // Main Report State
-    reportName: "Daily Standup",
+    reportName: "Sentiment Poll",
     schedule: [],
     scheduleTime: "8:0",
     timePickDate: new Date("2000-01-01T08:00:00"),
-    message: "Please fill out your report by the end of the day!",
+    message: "Please respond to the poll ASAP.",
     errorMessage: "",
-    responseM: "",
     questions: [],
-    managerResponses: [],
-    resOne: "",
-    resTwo: "",
-    resThree: "",
     slackChannelId: null,
     slackAuthorized: false,
     managerQuestions: "no",
-
-    isSentiment: false,
-    //array for listing manager questions
-    listSurveyQuestions: [
-      "How did you feel about yesterday?",
-      "What are you going to be working on today?",
-      "Did you have any blockers yesterday?",
-      "How are you feeling about your contribution so far?",
-      "Are you happy with your teams contribution to this sprint?"
-    ],
+    isSentiment: true,
     // Temporary State
     channels: [],
     question: "",
@@ -92,20 +67,6 @@ class CreateReport extends Component {
       "Friday",
       "Saturday",
       "Sunday"
-    ],
-    hidden: true,
-    managerType: 0,
-    typeOfManager: ["Engineering Manager", "Project Manager"],
-    //set manager questions here as well as type of manager BEFORE you add to the managerType
-    EngineeringManagerQuestions: [
-      "As an Engineering manager,What is your weekly goal?",
-      "What features should be Priority?",
-      "Are there any new project details that the team should know?"
-    ],
-    ProjectManagerQuestions: [
-      "What is the weekly sales goal?",
-      "Is their any important customer feedback?",
-      "How are you feeling about the current state of team moral?"
     ]
   };
 
@@ -145,6 +106,7 @@ class CreateReport extends Component {
       });
   };
 
+  //function for questions
   enterQuestionsHandler = e => {
     e.preventDefault();
     const code = e.keyCode || e.which;
@@ -160,6 +122,7 @@ class CreateReport extends Component {
     }
   };
 
+  //function for questions
   questionsHandler = e => {
     e.preventDefault();
     this.setState(prevState => ({
@@ -168,6 +131,7 @@ class CreateReport extends Component {
     }));
   };
 
+    //function for questions
   removeQuestion = (e, question) => {
     e.preventDefault();
     this.setState(prevState => ({
@@ -182,14 +146,12 @@ class CreateReport extends Component {
       schedule: includes ? schedule.filter(d => d !== day) : [...schedule, day]
     });
   };
-
   selectWeekdays = () => {
     this.setState({
       schedule: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
     });
   };
 
-  //function sends reports. This will also render within MemberResponseForm.js
   addReport = e => {
     e.preventDefault();
 
@@ -220,29 +182,21 @@ class CreateReport extends Component {
       message,
       questions,
       slackChannelId,
-      managerResponses,
-      EngineeringManagerQuestions,
-      ProjectManagerQuestions
+      isSentiment
     } = this.state;
-    console.log("mRes", managerResponses);
-    let report = {
+
+    const report = {
       reportName,
       schedule: JSON.stringify(schedule),
       scheduleTime,
       message,
       questions: JSON.stringify(questions),
-      managerResponses: JSON.stringify(managerResponses),
       slackChannelId,
       slackChannelName,
-      created_at: new Date()
+      created_at: new Date(),
+      isSentiment
     };
-    console.log("REPORT++",this.report)
-    this.state.managerType === 0
-      ? (report["managerQuestions"] = JSON.stringify(
-          EngineeringManagerQuestions
-        ))
-      : (report["managerQuestions"] = JSON.stringify(ProjectManagerQuestions));
-    console.log("mres after", report.managerResponses);
+
     const endpoint = `${baseURL}/reports`;
     axiosWithAuth()
       .post(endpoint, report)
@@ -254,233 +208,15 @@ class CreateReport extends Component {
       .catch(err => console.log(err));
   };
 
-  handleButton = e => {
-    e.preventDefault();
-  };
-
-  handleOpenCloseDropdown() {
-    this.setState({
-      hidden: !this.state.hidden
-    });
-  }
-  handleMenuItemClick(event, index) {
-    this.state({ selectedItem: index });
-  }
-
-  managerType = e => {
-    e.preventDefault();
-    this.setState({ managerType: e.target.value });
-  };
-
-  aQuestion = e => {
-    e.preventDefault();
-    this.setState({ aQuestion: e.target.value });
-  };
-
-  questionsHandler = e => {
-    e.preventDefault();
-    this.setState(prevState => ({
-      questions: [...prevState.questions, this.state.question],
-      question: ""
-    }));
-  };
-
-  removeQuestion = (e, question) => {
-    e.preventDefault();
-    this.setState(prevState => ({
-      questions: prevState.questions.filter(q => q !== question)
-    }));
-  };
-
-
-  addQuestions = e =>{
-    e.preventDefault();
-
-    this.setState({
-      managerResponses:[this.state.resOne,this.state.resTwo,this.state.resThree]
-    })
-
-    console.log(this.state.managerResponses)
-  }
-
-
-
-  //chandle changes with manager questions
-  handleChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value,
-    })};
-
-  //this is for rendering the manager questions at top of the report
-  renderManagerQuestions = () => {
-    if (this.state.managerQuestions === "yes") {
-      return (
-        <>
-          <PopupState variant="popover" popupId="demoMenu">
-            {popupState => (
-              <React.Fragment>
-                <Button variant="contained" {...bindTrigger(popupState)}>
-                  Select Manager Questions
-                </Button>
-                <Menu {...bindMenu(popupState)} onClick={this.managerType}>
-                  {this.state.typeOfManager.map((type, index) => (
-                    <MenuItem
-                      key={index}
-                      onClick={popupState.close}
-                      value={index}
-                    >
-                      {" "}
-                      {type}{" "}
-                    </MenuItem>
-                  ))}
-                </Menu>
-
-                {/* conditionally rendering manager questions to reflect who is manager */}
-                {this.state.managerType === 0 ? (
-                  //questions for Engineering manager
-                  <div>
-                    <br />
-                    <h6>{this.state.EngineeringManagerQuestions[0]}</h6>
-                    <Input
-                      id="report-question"
-                      className="input-field"
-                      type="text"
-                      name="resOne"
-                      placeholder="Enter your response here"
-                      value={this.state.resOne}
-                      onChange={this.handleChange}
-                    />
-                    <h6>{this.state.EngineeringManagerQuestions[1]}</h6>
-                    <Input
-                      id="report-question"
-                      className="input-field"
-                      type="text"
-                      name="resTwo"
-                      placeholder="Enter your response here"
-                      value={this.state.resTwo}
-                      onChange={this.handleChange}
-                    />
-                    <h6>{this.state.EngineeringManagerQuestions[2]}</h6>
-                    <Input
-                      id="report-question"
-                      className="input-field"
-                      type="text"
-                      name="resThree"
-                      placeholder="Enter your response here"
-                      value={this.state.resThree}
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                ) : (
-                  //questions for marketing manager
-                  <div>
-                    <br />
-                    <h6>{this.state.ProjectManagerQuestions[0]}</h6>
-                    <Input
-                      id="report-question"
-                      className="input-field"
-                      type="text"
-                      name="resOne"
-                      placeholder="Enter your response here"
-                      value={this.state.resOne}
-                      onChange={this.handleChange}
-                    />
-                    <h6>{this.state.ProjectManagerQuestions[1]}</h6>
-                    <Input
-                      id="report-question"
-                      className="input-field"
-                      type="text"
-                      name="resTwo"
-                      placeholder="Enter your response here"
-                      value={this.state.resTwo}
-                      onChange={this.handleChange}
-                    />
-                    <h6>{this.state.ProjectManagerQuestions[2]}</h6>
-                    <Input
-                      id="report-question"
-                      className="input-field"
-                      type="text"
-                      name="resThree"
-                      placeholder="Enter your response here"
-                      value={this.state.resThree}
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                )}
-              </React.Fragment>
-            )}
-          </PopupState>
-        </>
-      );
-    }
-  };
-
-  //this is for rendering the survey questions at the bottom of the report
-  RenderSurveyQuestions = () => {
-    return (
-      <>
-        <PopupState variant="popover" popupId="demoMenu">
-          {popupState => (
-            <React.Fragment>
-              <Button variant="contained" {...bindTrigger(popupState)}>
-                Select Survey Template
-              </Button>
-              <Menu {...bindMenu(popupState)} onClick={this.aQuestion}>
-                {this.state.questionExperience.map((type, index) => (
-                  <MenuItem
-                    key={index}
-                    onClick={popupState.close}
-                    value={index}
-                  >
-                    {" "}
-                    {type}{" "}
-                  </MenuItem>
-                ))}
-              </Menu>
-            </React.Fragment>
-          )}
-        </PopupState>
-      </>
-    );
-  };
-
   render() {
     const { classes } = this.props;
+
     return (
       <div className="create-report">
         <Fab onClick={() => this.props.history.goBack()} color="default">
           <Icon>arrow_back</Icon>
         </Fab>
         <form className="create-report">
-          {/* Checks if admin wants manager questions answered */}
-          <Card raised={true} className="schedule-card">
-            <section className="schedule-card-content">
-              <FormControl>
-                <FormLabel component="legend">
-                  Would you like the manager to answer questions?
-                </FormLabel>
-                <RadioGroup
-                  name="managerQuestions"
-                  onChange={this.changeHandler}
-                >
-                  <FormControlLabel
-                    className="yesNoButton"
-                    value="yes"
-                    control={<Radio />}
-                    label="Yes"
-                  />
-                  <FormControlLabel
-                    value="no"
-                    className="yesNoButton"
-                    control={<Radio />}
-                    label="No"
-                  />
-                </RadioGroup>
-                {this.renderManagerQuestions()}
-                <Button style={{color:"white",backgroundColor:"blue"}}onClick={this.addQuestions}>Add Questions</Button>
-              </FormControl>
-            </section>
-          </Card>
           <Card raised={true} className="schedule-card">
             <section className="schedule-card-content">
               <h3 className="schedule-title">Report Information</h3>
@@ -587,10 +323,9 @@ class CreateReport extends Component {
               </section>
             </section>
           </Card>
-
           <Card raised={true} className="schedule-card">
             <section className="schedule-card-content">
-              <h3 className="schedule-title">Standup Questions</h3>
+              <h3 className="schedule-title">Poll Questions</h3>
               <Divider className="divider" variant="fullWidth" />
               <section>
                 {this.state.questions.map(question => (
@@ -634,13 +369,13 @@ class CreateReport extends Component {
               </section>
             </section>
           </Card>
-
           <Button
             style={{ display: "block", marginTop: "30px" }}
             variant="contained"
             color="primary"
             type="submit"
             onClick={this.addReport}
+            disabled={this.state.questions.length === 0 ? true : false}
           >
             Create Report
           </Button>
@@ -650,4 +385,4 @@ class CreateReport extends Component {
   }
 }
 
-export default withStyles(styles)(CreateReport);
+export default withStyles(styles)(TemplateMaker);
