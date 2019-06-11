@@ -6,7 +6,9 @@ class SentimentAvg extends Component {
     reports: []
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    console.log(this.props);
+  }
 
   render() {
     return (

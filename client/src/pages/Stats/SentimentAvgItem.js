@@ -5,11 +5,16 @@ const URL = process.env.REACT_APP_BASE_URL;
 
 class SentimentAvgItem extends Component {
   state = {
-    average: "No Data"
+    average: "No Data",
+    questions: []
   };
 
   componentDidMount() {
     this.getSentimentAvg(this.props.id);
+    const parsedQuestions = JSON.parse(this.props.questions);
+    this.setState({
+      questions: parsedQuestions
+    });
   }
 
   getSentimentAvg = id => {
@@ -34,7 +39,7 @@ class SentimentAvgItem extends Component {
       >
         <h4>Title: {this.props.name}</h4>
         <p>Message: {this.props.message}</p>
-        <p>Questions: {this.props.questions}</p>
+        <p>Questions: {this.state.questions}</p>
         {this.state.average === null ? (
           <p>Sentiment Average: No Responses Yet</p>
         ) : (
