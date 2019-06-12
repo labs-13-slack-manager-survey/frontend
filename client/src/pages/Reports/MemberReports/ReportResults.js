@@ -77,8 +77,6 @@ class ReportResults extends Component {
           </Fab>
         </div>
 
-
-        <section className="report-results-aside">
           {this.state.filteredResponse.length > 0 ||
           this.state.completed === true ? (
             <Card
@@ -89,7 +87,7 @@ class ReportResults extends Component {
               <h3>Thank you for filling out this report!</h3>
             </Card>
           ) : (
-            <Card
+            <div
               className="response-card"
               interactive={false}
               elevation={Elevation.TWO}
@@ -98,7 +96,7 @@ class ReportResults extends Component {
                 {...this.props}
                 updateWithUserResponse={this.updateWithUserResponse}
               />
-            </Card>
+            </div>
           )}
 
           <Card
@@ -122,7 +120,7 @@ class ReportResults extends Component {
               clickedResponder={this.state.clickedResponder}
             />
           </Card>
-        </section>
+
 
 
           <section className="report-results-feed">
