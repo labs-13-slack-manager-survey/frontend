@@ -51,7 +51,7 @@ class Navigation extends React.Component {
     e.preventDefault();
     localStorage.removeItem("firebaseui::rememberedAccounts");
     localStorage.removeItem("token");
-    window.location.reload();
+    this.props.history.push("/login");
   };
 
   slackAuthCheck = e => {
@@ -156,7 +156,7 @@ class Navigation extends React.Component {
 									<div className ="button-label-logout">logout</div>
 								</NavLink> </div> </>
 							) : (
-								<NavLink to="/login" onClick = {this.handleLogout} className = "menu-button">
+								<NavLink to="/login"  className = "menu-button">
 									<img className = "menu-icon" src={Logout} />
 									<div className = "button-label-logout">login</div>
 							</NavLink>
