@@ -141,8 +141,7 @@ class ReportResults extends Component {
                                           </>
                                         } 
                                         <p className="response-container-main-answer">
-                                          {/* {sentimentRange && <div className="view-comments">Comments:</div>} */}
-                                          <div className={this.state.isSentiment ?  "sentiment-comment": "regular-answer"}>{answer}</div>
+                                          <div className={ "regular-answer"}>{answer}</div>
                                         </p>
                                       </div>
                                     )
@@ -190,9 +189,7 @@ class ReportResults extends Component {
               clickedResponder={this.state.clickedResponder}
             />
           </Card>
-          {/* <PollCalendar /> */}
-        </div>
-                          
+        </div>    
       </div>
     );
   }
@@ -200,13 +197,6 @@ class ReportResults extends Component {
   componentDidMount() {
     const userId = jwt_decode(localStorage.getItem("token")).subject;
 
-    // axiosWithAuth() 
-    //   .get(`${baseURL}/reports/submissionRate/${this.props.match.params.reportId}`)
-    //   .then(res=>{
-    //     console.log(res);
-    //   })
-
-    //   .catch(err => console.log(err))
     axiosWithAuth()
     .get(`${baseURL}/reports/${this.props.match.params.reportId}`)
     .then(res => {
@@ -215,7 +205,6 @@ class ReportResults extends Component {
       } = res.data.report;
       this.setState({
         isSentiment: isSentiment
-        // sentimentRange: sentimentRange
       });
     })
     .catch(err => console.log(err));
