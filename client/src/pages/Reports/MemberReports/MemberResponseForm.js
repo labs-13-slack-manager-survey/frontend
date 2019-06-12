@@ -64,9 +64,9 @@ class MemberResponseForm extends Component {
           <div className="member-form-title">{this.state.reportName}</div>
           <p className="member-form-subtitle">{this.state.reportMessage}</p>
         </div>
-        <div className = "vertical-line" />
-        {this.state.questions.map((q, i) => (
-          <ReportInput
+
+        <ol type="1">{this.state.questions.map((q, i) => (
+          <li><ReportInput
             question={q.question}
             response={q.response}
             sentimentRange={q.sentimentRange}
@@ -74,8 +74,9 @@ class MemberResponseForm extends Component {
             key={i}
             isSentiment={this.state.isSentiment}
             handleSentiment={this.handleSentiment}
-          />
-        ))}
+          /></li>
+        ))}</ol>
+        
         <Button
           style={{
             display: "block",

@@ -58,7 +58,7 @@ class ReportInput extends React.Component {
     return (
       <div className="member-report-input">
         <div className="question">
-          <h4>{this.props.question}</h4>
+          <div className = "poll-question">{this.props.question}</div>
         </div>
         {this.props.isSentiment ? (
           <>

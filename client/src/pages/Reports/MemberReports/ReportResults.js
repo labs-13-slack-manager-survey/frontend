@@ -50,6 +50,7 @@ class ReportResults extends Component {
     responders: [],
     completed: false,
     isSentiment: false,
+    mainPage: false,
   };
 
   render() {
@@ -70,6 +71,7 @@ class ReportResults extends Component {
       <main className="view">
       <PageTitle 
       title = "Report"
+      mainPage = {this.state.mainPage}
       />
                       <div className="report-results-container-backButton">
           <Fab onClick={() => this.props.history.goBack()} color="default">

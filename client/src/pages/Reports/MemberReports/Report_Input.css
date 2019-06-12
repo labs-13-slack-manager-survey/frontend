@@ -28,3 +28,10 @@
     flex-direction: row; 
     justify-content: space-between; 
 }
+
+.poll-question {
+    font-size: 15px;
+	font-weight: 500;
+    padding-top: 10px;
+    margin-bottom: -10px;
+}
