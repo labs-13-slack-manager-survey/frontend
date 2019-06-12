@@ -9,7 +9,6 @@ import SummaryBox from "../../components/SummaryBox";
 import TableDisplay from "../../components/TableDisplay";
 import TableHeader from "../../components/TableHeader";
 
-
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 import "./StatsDashboard.css";
