@@ -9,16 +9,12 @@ import DatePicker from "../../DatePicker/DatePicker";
 import PageTitle from '../../../components/PageTitle';
 import Slider from "@material-ui/lab/Slider";
 import { withStyles } from "@material-ui/core/styles";
-import { fade } from "@material-ui/core/styles/colorManipulator";
 import CircleProgress from '../../../components/circleProgress.js';
-
-
-
-
-// style imports
 import { Card, Elevation } from "@blueprintjs/core";
-import { Fab, Icon } from "@material-ui/core";
+
+
 import "./ReportResults.css";
+
 
 const StyledSlider = withStyles({
   thumb: {
@@ -26,9 +22,6 @@ const StyledSlider = withStyles({
     width: 24,
     backgroundColor: "#4A90E2",
     border: `3px solid #fff`,
-    // "&$focused, &:hover": "none",
-    // "&$activated": "none",
-    // "&$jumped": "none",
   },
   track: {
     backgroundColor: "#A0CBFF",
@@ -111,11 +104,6 @@ class ReportResults extends Component {
                                 {new Date(batch.date).getDate()}
                                 {new Date(batch.date).getMonth()} 
                                 </div>
-                              {/* <img
-                                className="response-container-image"
-                                src={response.profilePic}
-                                alt={response.fullName}
-                              /> */}
                               <div className="response-container-main-name">
                                   {response.fullName}
                               </div>
@@ -173,10 +161,14 @@ class ReportResults extends Component {
               )} 
             </section>
         </main>  
+    
+    
+        {/* The components below are the circle chart and calendar */}
         <div className = "sidebar">
           <CircleProgress 
           title = "Today's Polls"
-          percentComplete = '0.6'/>
+          percentComplete = ".90"
+          />
                     <Card
             interactive={false}
             elevation={Elevation.TWO}
@@ -232,7 +224,7 @@ class ReportResults extends Component {
     axiosWithAuth()
       .get(`${baseURL}/responses/${this.props.match.params.reportId}`)
       .then(res => {
-        console.log(res);
+        console.log("RES++__++",res);
         const filtered = res.data[0].responses.filter(
           response => response.userId === userId
         );

@@ -5,7 +5,6 @@ import { axiosWithAuth, baseURL } from "../../config/axiosWithAuth";
 
 // style imports
 import './navigation.css';
-import { AppBar, Toolbar, Button, Icon, Avatar } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import Logo from '../../images/logo_v1.png';
 import Reports from '../../images/icons/reports.png';
