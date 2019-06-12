@@ -51,7 +51,7 @@ class Navigation extends React.Component {
     e.preventDefault();
     localStorage.removeItem("firebaseui::rememberedAccounts");
     localStorage.removeItem("token");
-    window.location.reload();
+    this.props.history.push("/login");
   };
 
   slackAuthCheck = e => {
