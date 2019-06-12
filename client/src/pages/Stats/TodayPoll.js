@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Chart from "chart.js";
 import { axiosWithAuth } from "../../config/axiosWithAuth";
+import moment from "moment";
 
 import "../../components/circleProgress.css";
 
@@ -50,19 +51,20 @@ class TodayPoll extends Component {
   }
 
   render() {
+    console.log(this.state.reports[1]);
     return (
       <div className="circle-graph" style={{ padding: "10px" }}>
-        <h3>Today's Poll</h3>
-
-        <canvas id="submittedPercent" ref={this.chartRef} />
-
-        <div style={{ marginTop: "20px" }} className="today-date">
-          6/12/19
-        </div>
+        <h3>Most Recent Poll</h3>
         {this.state.reports.length === 0 ? (
           <div>Loading...</div>
         ) : (
-          <p style={{ textAlign: "center", margin: "10px 0" }}>
+          <h3>{moment(this.state.reports[1].date).format("MMM Do YYYY")}</h3>
+        )}
+        <canvas id="submittedPercent" ref={this.chartRef} />
+        {this.state.reports.length === 0 ? (
+          <div>Loading...</div>
+        ) : (
+          <p style={{ textAlign: "center", margin: "15px 0" }}>
             Sentiment Average: {this.state.reports[0].average}
           </p>
         )}
