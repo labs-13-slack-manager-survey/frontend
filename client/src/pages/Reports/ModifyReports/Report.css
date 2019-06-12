@@ -66,6 +66,8 @@ p {
 .create-report {
 	max-width: 600px;
 	margin: 20px auto;
+	/* border: 1px solid rgb(226, 226, 226); */
+	padding: 20px;
 }
 
 .edit-report {
