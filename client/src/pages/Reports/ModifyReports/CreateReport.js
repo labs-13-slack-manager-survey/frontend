@@ -321,7 +321,8 @@ class CreateReport extends Component {
           <PopupState variant="popover" popupId="demoMenu">
             {popupState => (
               <React.Fragment>
-                <Button variant="contained" {...bindTrigger(popupState)}>
+                <Button variant="text"
+                  {...bindTrigger(popupState)}>
                   Select Manager Questions
                 </Button>
                 <Menu {...bindMenu(popupState)} onClick={this.managerType}>

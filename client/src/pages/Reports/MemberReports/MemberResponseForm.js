@@ -55,6 +55,8 @@ class MemberResponseForm extends Component {
             <div className = "manager-poll-response">{this.state.managerResponses[1]}</div>
             <div className = "manager-poll-question">{this.state.managerQuestions[2]}</div>
             <div className = "manager-poll-response">{this.state.managerResponses[2]}</div>
+            <div className = "manager-poll-question">{this.state.managerQuestions[3]}</div>
+            <div className = "manager-poll-response">{this.state.managerResponses[3]}</div>
             <div className = "vertical-line" />
             </> : null }
           
