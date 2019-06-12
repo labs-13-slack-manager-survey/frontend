@@ -6,13 +6,40 @@ import jwt_decode from "jwt-decode";
 import MemberResponseForm from "./MemberResponseForm";
 import Responders from "../../Responders/Responders";
 import DatePicker from "../../DatePicker/DatePicker";
+import PageTitle from '../../../components/PageTitle';
+import Slider from "@material-ui/lab/Slider";
+import { withStyles } from "@material-ui/core/styles";
+import { fade } from "@material-ui/core/styles/colorManipulator";
+import CircleProgress from '../../../components/circleProgress.js';
+
+
+
 
 // style imports
 import { Card, Elevation } from "@blueprintjs/core";
 import { Fab, Icon } from "@material-ui/core";
 import "./ReportResults.css";
 
-// Parent component = ReportsDash.js in '/pages/Dashboard/ReportsDash'
+const StyledSlider = withStyles({
+  thumb: {
+    height: 24,
+    width: 24,
+    backgroundColor: "#4A90E2",
+    border: `3px solid #fff`,
+    // "&$focused, &:hover": "none",
+    // "&$activated": "none",
+    // "&$jumped": "none",
+  },
+  track: {
+    backgroundColor: "#A0CBFF",
+    height: 8,
+    borderRadius: '10px',
+  },
+  trackAfter: {
+    backgroundColor: "#d0d7dc"
+  }
+})(Slider);
+
 
 class ReportResults extends Component {
   state = {
@@ -21,7 +48,8 @@ class ReportResults extends Component {
     filteredResponse: [],
     clickedResponder: null,
     responders: [],
-    completed: false
+    completed: false,
+    isSentiment: false,
   };
 
   render() {
@@ -32,13 +60,23 @@ class ReportResults extends Component {
       day: "numeric"
     };
 
+
+
     return (
-      <main className="report-results-container">
-        <div className="report-results-container-backButton">
+      <div className="dashboard-view">
+
+
+      
+      <main className="view">
+      <PageTitle 
+      title = "Report"
+      />
+                      <div className="report-results-container-backButton">
           <Fab onClick={() => this.props.history.goBack()} color="default">
             <Icon>arrow_back</Icon>
           </Fab>
         </div>
+
 
         <section className="report-results-aside">
           {this.state.filteredResponse.length > 0 ||
@@ -85,55 +123,126 @@ class ReportResults extends Component {
             />
           </Card>
         </section>
-        <section className="report-results-feed">
-          {this.state.responses.map(
-            batch =>
-              batch.responses.length > 0 && (
-                <div key={batch.date}>
-                  <h3 className="report-results-feed-date">
-                    {new Date(batch.date)
-                      .toLocaleDateString("en-US", options)
-                      .replace(",", "")}
-                  </h3>
-                  {batch.responses.map(response => (
-                    <Card key={response.userId}>
-                      <div className="response-container">
-                        <img
-                          className="response-container-image"
-                          src={response.profilePic}
-                          alt={response.fullName}
-                        />
-                        <div className="response-container-main">
-                          <h3 className="response-container-main-name">
-                            {response.fullName}
-                          </h3>
-                          {response.questions.map(
-                            ({ question, answer, id, sentimentRange }) => (
-                              <div key={id}>
-                                <h6 className="response-container-main-question">
-                                  {question}
-                                </h6>
-                                {sentimentRange && <h3>{sentimentRange}</h3>}
-                                <p className="response-container-main-answer">
-                                  {answer}
-                                </p>
+
+
+          <section className="report-results-feed">
+   
+              {this.state.responses.map(
+                batch =>
+                  batch.responses.length > 0 && (
+                    <div key={batch.date}>
+                      <h3 className="report-results-feed-date">
+                        {new Date(batch.date)
+                          .toLocaleDateString("en-US", options)
+                          .replace(",", "")}
+                      </h3>
+                      {batch.responses.map(response => (
+
+                        <div key={response.userId}>
+                          <div className="response-container">
+                            <div className = "user-info">
+                                <div className = "month-day">
+                                {new Date(batch.date).getDate()}
+                                {new Date(batch.date).getMonth()}
+                                </div>
+                              {/* <img
+                                className="response-container-image"
+                                src={response.profilePic}
+                                alt={response.fullName}
+                              /> */}
+                              <div className="response-container-main-name">
+                                  {response.fullName}
                               </div>
-                            )
-                          )}
+                            </div>
+
+
+                            <div className="response-container-main">
+                              <div className = "vertical-timeline" />
+                              <div className = "response-content">
+                              <ol type="1">
+                                  {response.questions.map(
+                                    ({ question, answer, id, sentimentRange }) => (
+                                      <div key={id}>
+                                        <div className="response-container-main-question">
+                                        
+                                          <li>{question}</li>
+                                          
+                                        </div>
+                                        {this.state.isSentiment && 
+                                        <>
+                                            <StyledSlider
+                                              className="slider"
+                                              value={sentimentRange}
+                                              min={1}
+                                              max={5}
+                                              step={1}
+                                            />
+                                              <div className="slider-label">
+                                                <p className={sentimentRange !=1 ? "deselected" : null}>1</p>
+                                                <p className={sentimentRange !=2 ? "deselected" : null}>2</p>
+                                                <p className={sentimentRange !=3 ? "deselected" : null}>3</p>
+                                                <p className={sentimentRange !=4 ? "deselected" : null}>4</p>
+                                                <p className={sentimentRange !=5 ? "deselected" : null}>5</p>
+                                              </div>
+                                          </>
+                                        } 
+                                        <p className="response-container-main-answer">
+                                          {/* {sentimentRange && <div className="view-comments">Comments:</div>} */}
+                                          <div className={this.state.isSentiment ?  "sentiment-comment": "regular-answer"}>{answer}</div>
+                                        </p>
+                                      </div>
+                                    )
+                                  )} </ol>
+                              </div>
+
+                            </div>
+
+
+                          </div>
                         </div>
-                      </div>
-                    </Card>
-                  ))}
-                </div>
-              )
-          )}
-        </section>
-      </main>
+                        
+                      ))}
+                    </div>
+                  )
+              )} 
+            </section>
+        </main>  
+        <div className = "sidebar">
+          <CircleProgress 
+          title = "Today's Polls"
+          percentComplete = '0.6'/>
+
+          {/* <PollCalendar /> */}
+        </div>
+                          
+      </div>
     );
   }
 
   componentDidMount() {
     const userId = jwt_decode(localStorage.getItem("token")).subject;
+
+    // axiosWithAuth() 
+    //   .get(`${baseURL}/reports/submissionRate/${this.props.match.params.reportId}`)
+    //   .then(res=>{
+    //     console.log(res);
+    //   })
+
+    //   .catch(err => console.log(err))
+    axiosWithAuth()
+    .get(`${baseURL}/reports/${this.props.match.params.reportId}`)
+    .then(res => {
+      const {
+        isSentiment,
+      } = res.data.report;
+      this.setState({
+        isSentiment: isSentiment
+        // sentimentRange: sentimentRange
+      });
+    })
+    .catch(err => console.log(err));
+
+
     axiosWithAuth()
       .get(`${baseURL}/responses/${this.props.match.params.reportId}`)
       .then(res => {

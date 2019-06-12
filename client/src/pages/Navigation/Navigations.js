@@ -130,10 +130,10 @@ class Navigation extends React.Component {
                 </NavLink>
 						</div>
             <div className = "menu-button">
-              <NavLink to="/slackr/dashboard/stats">
-                  <img className="menu-icon" src={this.props.history.location.pathname === '/slackr/dashboard/stats' ? TeamsActive : Teams} />
+              <NavLink to="/slackr/dashboard/myteam">
+                  <img className="menu-icon" src={this.props.history.location.pathname === '/slackr/dashboard/myteam' ? TeamsActive : Teams} />
                   <div className = {this.props.history.location.pathname ===
-											'/slackr/dashboard/stats' ? "button-label-active" : "button-label"} >my team</div>
+											'/slackr/dashboard/myteam' ? "button-label-active" : "button-label"} >my team</div>
                 </NavLink>
 						</div>
 					</div>

@@ -5,7 +5,7 @@ import jwt_decode from "jwt-decode";
 // component imports
 import Team from "./Team";
 import InviteUser from "../../components/InviteUser";
-import Slack from "../Slack/Slack";
+// import Slack from "../Slack/Slack";
 import PageTitle from '../../components/PageTitle'
 import SummaryBox from '../../components/SummaryBox';
 
@@ -48,29 +48,6 @@ export class Dashboard extends Component {
             title = "total polls scheduled"
             content = {this.state.users.length}/>
       </div>
-      {/* <Card raised={true} className="teamDashboard">
-        <header className="teamDashboard-header">
-          <Typography variant="h3">Team</Typography>
-        </header>
-        <Team
-          className="teamContainer"
-          users={this.state.users}
-          updateUser={this.updateUser}
-          anchorEl={this.state.anchorEl}
-          activateUser={this.activateUser}
-          deactivateUser={this.deactivateUser}
-          handleClickMenu={this.handleClickMenu}
-          handleCloseMenu={this.handleCloseMenu}
-        />
-        <InviteUser
-          changeHandler={this.changeHandler}
-          addUser={this.addUser}
-          message={this.state.message}
-          clearMessage={this.clearMessage}
-          modal={this.state.modal}
-        />
-        <Slack />
-      </Card> */}
       </>
     );
   }

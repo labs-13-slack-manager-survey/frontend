@@ -40,18 +40,6 @@ class View extends Component {
       });
   }
   render() {
-    // If user's account is inactive, they cannot see the dashboard
-    // $('#circle').circleProgress({
-    //   value: 0.75,
-    //   size: 230,
-    //   fill: {
-    //     gradient: ['#8BD8FF' , '#0069D2']
-    //   },
-    //   startAngle: -Math.PI/2,
-    //   thickness:25, 
-    //   animation: { duration: 1400,},
-    //   emptyFill: 'white',
-    // });
 
     return this.state.active ? (
       <div className = "dashboard-view">
@@ -67,7 +55,7 @@ class View extends Component {
           <CircleProgress 
           title = "Today's Polls"
           percentComplete = '0.6'/>
-          <InviteUser />
+
           {/* <PollCalendar /> */}
         </div>
       </div>

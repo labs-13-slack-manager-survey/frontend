@@ -31,7 +31,6 @@ class TableDisplay extends React.Component {
     state = {
 		dialogOpen: false,
 	}
-    
     render() {
         const time = this.props.report.scheduleTime.split(':');
         let timeStr = `${time[0]}:${time[1]}am`;
