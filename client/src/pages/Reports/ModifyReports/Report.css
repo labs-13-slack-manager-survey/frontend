@@ -219,3 +219,15 @@ p {
   .linebr {
 	  height: 20px;
   }
+
+  .response-card-example {
+	border: 1px dashed rgb(226, 226, 226);
+	padding: 30px;
+  }
+
+  .response-question {
+	text-align: left;
+	font-style: italic;
+	color: #9C9C9C;
+	font-size: 12px;
+  }
