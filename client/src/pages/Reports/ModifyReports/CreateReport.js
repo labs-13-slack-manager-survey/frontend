@@ -79,6 +79,7 @@ class CreateReport extends Component {
     resOne: "",
     resTwo: "",
     resThree: "",
+    resFour:"",
     slackChannelId: null,
     slackAuthorized: false,
     managerQuestions: false,
@@ -109,14 +110,15 @@ class CreateReport extends Component {
     typeOfManager: ["Engineering Manager", "Project Manager"],
     //set manager questions here as well as type of manager BEFORE you add to the managerType
     EngineeringManagerQuestions: [
-      "As an Engineering manager,What is your weekly goal?",
-      "What features should be Priority?",
-      "Are there any new project details that the team should know?"
+      "What input or feedback would you like to share with the team?",
+      "What is the top priority for us right now?",
+      "What challenges do you as the manager need to overcome?"
     ],
     ProjectManagerQuestions: [
-      "What is the weekly sales goal?",
-      "Is their any important customer feedback?",
-      "How are you feeling about the current state of team moral?"
+      "What input or feedback would you like to share with the team?",
+      "What do you think is the most critical part of the objective for today?",
+      "What upcoming demos or requirements does the team need to know about?",
+      "What are the challenges you are facing for the team to succeed?"
     ]
   };
 
@@ -308,7 +310,7 @@ class CreateReport extends Component {
     e.preventDefault();
 
     this.setState({
-      managerResponses:[this.state.resOne,this.state.resTwo,this.state.resThree]
+      managerResponses:[this.state.resOne,this.state.resTwo,this.state.resThree,this.state.resFour]
     })
 
     console.log(this.state.managerResponses)
@@ -429,6 +431,7 @@ class CreateReport extends Component {
                       value={this.state.resTwo}
                       onChange={this.handleChange}
                     /></div>
+
                     <div className ="poll-answer-field"><li><div className= "manager-poll-question">{this.state.ProjectManagerQuestions[2]}</div></li>
                     <TextField
                       fullWidth={true} 
@@ -440,6 +443,20 @@ class CreateReport extends Component {
                       name="resThree"
                       placeholder="Enter your response here"
                       value={this.state.resThree}
+                      onChange={this.handleChange}
+                    /></div>
+
+                    <div className ="poll-answer-field"><li><div className= "manager-poll-question">{this.state.ProjectManagerQuestions[3]}</div></li>
+                    <TextField
+                      fullWidth={true} 
+                      variant ="outlined"
+                      multiline = {true}
+                      id="report-question"
+                      className="input-field"
+                      type="text"
+                      name="resFour"
+                      placeholder="Enter your response here"
+                      value={this.state.resFour}
                       onChange={this.handleChange}
                     /></div>
                   </div></ol>
