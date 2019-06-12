@@ -77,13 +77,7 @@ class ReportResults extends Component {
 
           {this.state.filteredResponse.length > 0 ||
           this.state.completed === true ? (
-            <Card
-              interactive={false}
-              elevation={Elevation.TWO}
-              className="completed-report"
-            >
-              <h3>Thank you for filling out this report!</h3>
-            </Card>
+              <div className="confirm-response">Your response has been recorded</div>
           ) : (
             <div
               className="response-card"
@@ -96,30 +90,6 @@ class ReportResults extends Component {
               />
             </div>
           )}
-
-          <Card
-            interactive={false}
-            elevation={Elevation.TWO}
-            style={{ marginTop: "30px" }}
-            className="report-results-filter-container"
-          >
-            <h1 className="report-results-filter">Filter by day</h1>
-            <DatePicker
-              // getByDate={this.getByDate}
-              clickedDate={this.state.clickedDate}
-              clickedResponder={this.state.clickedResponder}
-              filter={this.filter}
-            />
-            <h1 className="report-results-filter">Filter by team member</h1>
-            <Responders
-              responders={this.state.responders}
-              filter={this.filter}
-              clickedDate={this.state.clickedDate}
-              clickedResponder={this.state.clickedResponder}
-            />
-          </Card>
-
-
 
           <section className="report-results-feed">
    
@@ -207,7 +177,27 @@ class ReportResults extends Component {
           <CircleProgress 
           title = "Today's Polls"
           percentComplete = '0.6'/>
-
+                    <Card
+            interactive={false}
+            elevation={Elevation.TWO}
+            style={{ marginTop: "30px" }}
+            className="report-results-filter-container"
+          >
+            <h1 className="report-results-filter">Filter by day</h1>
+            <DatePicker
+              // getByDate={this.getByDate}
+              clickedDate={this.state.clickedDate}
+              clickedResponder={this.state.clickedResponder}
+              filter={this.filter}
+            />
+            <h1 className="report-results-filter">Filter by team member</h1>
+            <Responders
+              responders={this.state.responders}
+              filter={this.filter}
+              clickedDate={this.state.clickedDate}
+              clickedResponder={this.state.clickedResponder}
+            />
+          </Card>
           {/* <PollCalendar /> */}
         </div>
                           

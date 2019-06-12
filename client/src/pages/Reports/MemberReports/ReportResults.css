@@ -165,3 +165,10 @@
 	padding-left: 10px;
 	margin-bottom: 20px;
 }
+
+.confirm-response {
+	font-size: 13px;
+	border: 1px dashed rgb(226, 226, 226);
+	padding: 15px;
+	margin-top: -20px;
+}
