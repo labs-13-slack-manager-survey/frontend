@@ -6,6 +6,7 @@ import { axiosWithAuth, baseURL } from "../../config/axiosWithAuth";
 // style imports
 import './navigation.css';
 import { withStyles } from '@material-ui/core/styles';
+import Logo from '../../images/logo_v1.png';
 import Reports from '../../images/icons/reports.png';
 import ReportsActive from '../../images/icons/reports-active.png';
 import Teams from '../../images/icons/teams.png';
