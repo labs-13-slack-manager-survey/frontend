@@ -2,6 +2,9 @@ import './profile.css';
 import React, { Component } from 'react';
 import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
 
+
+import PageTitle from '../../components/PageTitle'
+
 // style imports
 import { Collapse } from '@blueprintjs/core';
 import {
@@ -31,7 +34,11 @@ class Profile extends Component {
 		const inactiveUsers = this.state.users.filter(user => !user.active);
 
 		return (
-			<div className="userCard">
+			
+			<div className="dashboard-view">
+				<div className="view">
+				<PageTitle title = "My Profile"/>
+
 				<Card raised={true} className="top-user-card">
 					<div className="userCard-content">
 						<div className="profileCard-content">
@@ -105,6 +112,10 @@ class Profile extends Component {
 						/>
 					</div>
 				</Card>
+
+				
+				</div>
+				
 
 				{/* ADMIN VIEW STARTS HERE */}
 

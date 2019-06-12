@@ -48,7 +48,8 @@ class ReportResults extends Component {
     filteredResponse: [],
     clickedResponder: null,
     responders: [],
-    completed: false
+    completed: false,
+    isSentiment: false,
   };
 
   render() {
@@ -73,7 +74,9 @@ class ReportResults extends Component {
             <Icon>arrow_back</Icon>
           </Fab>
         </div>
-        {/* <section className="report-results-aside">
+
+
+        <section className="report-results-aside">
           {this.state.filteredResponse.length > 0 ||
           this.state.completed === true ? (
             <Card
@@ -117,7 +120,7 @@ class ReportResults extends Component {
               clickedResponder={this.state.clickedResponder}
             />
           </Card>
-        </section> */}
+        </section>
 
 
           <section className="report-results-feed">
@@ -158,7 +161,7 @@ class ReportResults extends Component {
                                         <div className="response-container-main-question">
                                           {question}
                                         </div>
-                                        {sentimentRange && 
+                                        {this.state.isSentiment && 
                                         <>
                                             <StyledSlider
                                               className="slider"
@@ -218,7 +221,21 @@ class ReportResults extends Component {
     //     console.log(res);
     //   })
 
-      // .catch(err => console.log(err))
+    //   .catch(err => console.log(err))
+    axiosWithAuth()
+    .get(`${baseURL}/reports/${this.props.match.params.reportId}`)
+    .then(res => {
+      const {
+        isSentiment,
+      } = res.data.report;
+      this.setState({
+        isSentiment: isSentiment
+        // sentimentRange: sentimentRange
+      });
+    })
+    .catch(err => console.log(err));
+
+
     axiosWithAuth()
       .get(`${baseURL}/responses/${this.props.match.params.reportId}`)
       .then(res => {
