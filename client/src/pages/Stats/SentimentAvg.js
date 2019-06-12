@@ -19,6 +19,7 @@ class SentimentAvg extends Component {
               name={report.reportName}
               message={report.message}
               questions={report.questions}
+              viewStats={this.props.viewStats}
             />
           );
         })}
