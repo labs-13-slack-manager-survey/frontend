@@ -95,7 +95,7 @@ class DevTeam extends Component {
 						<Typography variant="h4">Taylor Blount</Typography>
 						<p>Full-Stack Developer</p>
 						<MemberLinks>
-							<a target="blank" href="hhttps://github.com/thirdeyeclub">
+							<a target="blank" href="https://github.com/thirdeyeclub">
 								<FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
 							</a>
 							<a

@@ -10,16 +10,12 @@ import DatePicker from "../../DatePicker/DatePicker";
 import PageTitle from '../../../components/PageTitle';
 import Slider from "@material-ui/lab/Slider";
 import { withStyles } from "@material-ui/core/styles";
-import { fade } from "@material-ui/core/styles/colorManipulator";
 import CircleProgress from '../../../components/circleProgress.js';
-
-
-
-
-// style imports
 import { Card, Elevation } from "@blueprintjs/core";
-import { Fab, Icon } from "@material-ui/core";
+
+
 import "./ReportResults.css";
+
 
 const StyledSlider = withStyles({
   thumb: {
@@ -27,9 +23,6 @@ const StyledSlider = withStyles({
     width: 24,
     backgroundColor: "#4A90E2",
     border: `3px solid #fff`,
-    // "&$focused, &:hover": "none",
-    // "&$activated": "none",
-    // "&$jumped": "none",
   },
   track: {
     backgroundColor: "#A0CBFF",
@@ -112,11 +105,6 @@ class ReportResults extends Component {
                                   <div className="calendar-top">{moment(batch.date).format('DD')}</div>
                                   <div className="calendar-bot">{moment(batch.date).format('MMMM')}</div>
                                 </div>
-                              {/* <img
-                                className="response-container-image"
-                                src={response.profilePic}
-                                alt={response.fullName}
-                              /> */}
                               <div className="response-container-main-name">
                                   {response.fullName}
                               </div>
@@ -154,8 +142,8 @@ class ReportResults extends Component {
                                           </>
                                         } 
                                         <p className="response-container-main-answer">
-                                          {/* {sentimentRange && <div className="view-comments">Comments:</div>} */}
-                                          <div className={this.state.isSentiment ?  "sentiment-comment": "manager-poll-response"}>{answer}</div>
+                                          <div className={ "regular-answer"}>{answer}</div>
+
                                         </p>
                                       </div>
                                     )
@@ -174,12 +162,17 @@ class ReportResults extends Component {
               )} 
             </section>
         </main>  
+    
+    
+        {/* The components below are the circle chart and calendar */}
         <div className = "sidebar">
           <CircleProgress 
           title = "Today's Polls"
-          percentComplete = '0.6'/>
-          
-          <Card
+ minorFix
+          percentComplete = ".90"
+          />
+                    <Card
+
             interactive={false}
             elevation={Elevation.TWO}
             style={{ marginTop: "30px" }}
@@ -200,9 +193,7 @@ class ReportResults extends Component {
               clickedResponder={this.state.clickedResponder}
             />
           </Card>
-          {/* <PollCalendar /> */}
-        </div>
-                          
+        </div>    
       </div>
     );
   }
@@ -210,13 +201,6 @@ class ReportResults extends Component {
   componentDidMount() {
     const userId = jwt_decode(localStorage.getItem("token")).subject;
 
-    // axiosWithAuth() 
-    //   .get(`${baseURL}/reports/submissionRate/${this.props.match.params.reportId}`)
-    //   .then(res=>{
-    //     console.log(res);
-    //   })
-
-    //   .catch(err => console.log(err))
     axiosWithAuth()
     .get(`${baseURL}/reports/${this.props.match.params.reportId}`)
     .then(res => {
@@ -225,7 +209,6 @@ class ReportResults extends Component {
       } = res.data.report;
       this.setState({
         isSentiment: isSentiment
-        // sentimentRange: sentimentRange
       });
     })
     .catch(err => console.log(err));
@@ -234,7 +217,7 @@ class ReportResults extends Component {
     axiosWithAuth()
       .get(`${baseURL}/responses/${this.props.match.params.reportId}`)
       .then(res => {
-        console.log(res);
+        console.log("RES++__++",res);
         const filtered = res.data[0].responses.filter(
           response => response.userId === userId
         );

@@ -51,7 +51,6 @@ class TodayPoll extends Component {
   }
 
   render() {
-    console.log(this.state.reports[1]);
     return (
       <div className="circle-graph" style={{ padding: "10px" }}>
         <h3>Most Recent Poll</h3>
