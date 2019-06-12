@@ -74,6 +74,11 @@ class StatsDashboard extends Component {
       <div className="dashboard-view">
         <div className="view">
           <PageTitle title="Stats Dashboard" />
+          <div className="dataSquares">
+            <SummaryBox title="Number of Teams" content="8" />
+            <SummaryBox title="Total Poll Responses" content="1715/1824" />
+            <SummaryBox title="Total Response Rate" content="76%" />
+          </div>
           <SentimentChart reports={this.state.reports} />
           <TableHeader
             column1={"Poll Name"}
@@ -95,11 +100,6 @@ class StatsDashboard extends Component {
             reports={this.state.reports}
             viewStats={this.viewStats}
           /> */}
-          <div className="dataSquares">
-            <SummaryBox title="Number of Teams" content="8" />
-            <SummaryBox title="Total Poll Responses" content="1715/1824" />
-            <SummaryBox title="Total Response Rate" content="76%" />
-          </div>
         </div>
         <div className="sidebar">
           <PollCalendar />
