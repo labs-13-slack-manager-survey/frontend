@@ -80,34 +80,32 @@ class StatsDashboard extends Component {
             <SummaryBox title="Total Response Rate" content="76%" />
           </div>
           <SentimentChart reports={this.state.reports} />
-          <TableHeader
-            column1={"Poll Name"}
-            column2={"Date Created"}
-            column3={"Schedule"}
-            column4={"Total Responses"}
-          />
+          <div style={{ marginTop: "50px" }}>
+            <TableHeader
+              column1={"Poll Name"}
+              column2={"Date Created"}
+              column3={"Schedule"}
+              column4={"Sentiment Avg"}
+            />
+          </div>
           {this.state.reports.map(report => (
             <TableDisplay
+              key={report.id}
               content1={report.reportName}
               report={report}
               role={"test"}
               archiveReport={this.archiveReport}
               archiveModal={false}
-              // ConsoleCheck=
             />
           ))}
-          {/* <SentimentAvg
-            reports={this.state.reports}
-            viewStats={this.viewStats}
-          /> */}
         </div>
         <div className="sidebar">
           <PollCalendar />
-          <CircleProgress title={"Progress"} percentComplete={".8"} />
-          {/* <TodayPoll
-            reports={this.state.reports}
-            lastReport={this.state.reports[this.state.reports.length - 1]}
-          /> */}
+          <div style={{ marginTop: "30px" }}>
+            <TodayPoll
+              lastReport={this.state.reports[this.state.reports.length - 1]}
+            />
+          </div>
         </div>
       </div>
     );
