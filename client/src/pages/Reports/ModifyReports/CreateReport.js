@@ -378,7 +378,7 @@ class CreateReport extends Component {
                       id="report-question"
                       className="input-field"
                       type="text"
-                      name="resOne"
+                      name="resTwo"
                       placeholder="Enter your response here"
                       value={this.state.resTwo}
                       onChange={this.handleChange}
@@ -392,7 +392,7 @@ class CreateReport extends Component {
                       id="report-question"
                       className="input-field"
                       type="text"
-                      name="resOne"
+                      name="resThree"
                       placeholder="Enter your response here"
                       value={this.state.resThree}
                       onChange={this.handleChange}
