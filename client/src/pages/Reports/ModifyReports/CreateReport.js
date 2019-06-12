@@ -27,6 +27,7 @@ import PageTitle from '../../../components/PageTitle'
 import PageDescription from '../../../components/PageDescription'
 import ToggleOn from '../../../images/icons/toggle-on.png';
 import ToggleOff from '../../../images/icons/toggle-off.png';
+import ReportInput from "../MemberReports/ReportInput.js";
 
 
 import MemberResponseForm from "../MemberReports/MemberResponseForm";
@@ -349,10 +350,13 @@ class CreateReport extends Component {
                 {/* conditionally rendering manager questions to reflect who is manager */}
                 {this.state.managerType === 0 ? (
                   //questions for Engineering manager
+
                   <div>
-                    <br />
-                    <h6>{this.state.EngineeringManagerQuestions[0]}</h6>
-                    <Input
+                    <ol><div className ="poll-answer-field"><li><div className= "manager-poll-question">{this.state.EngineeringManagerQuestions[0]}</div></li>
+                      <TextField
+                      fullWidth={true} 
+                      variant ="outlined"
+                      multiline = {true}
                       id="report-question"
                       className="input-field"
                       type="text"
@@ -360,34 +364,46 @@ class CreateReport extends Component {
                       placeholder="Enter your response here"
                       value={this.state.resOne}
                       onChange={this.handleChange}
-                    />
-                    <h6>{this.state.EngineeringManagerQuestions[1]}</h6>
-                    <Input
+                      onSubmit = {this.add}
+                      /></div>
+                      <div className ="poll-answer-field"><li><div className= "manager-poll-question">{this.state.EngineeringManagerQuestions[1]}</div></li>
+                      <TextField
+                      fullWidth={true} 
+                      variant ="outlined"
+                      multiline = {true}
                       id="report-question"
                       className="input-field"
                       type="text"
-                      name="resTwo"
+                      name="resOne"
                       placeholder="Enter your response here"
                       value={this.state.resTwo}
                       onChange={this.handleChange}
-                    />
-                    <h6>{this.state.EngineeringManagerQuestions[2]}</h6>
-                    <Input
+                      onSubmit = {this.add}
+                      /></div>
+                      <div className ="poll-answer-field"><li><div className= "manager-poll-question">{this.state.EngineeringManagerQuestions[2]}</div></li>
+                      <TextField
+                      fullWidth={true} 
+                      variant ="outlined"
+                      multiline = {true}
                       id="report-question"
                       className="input-field"
                       type="text"
-                      name="resThree"
+                      name="resOne"
                       placeholder="Enter your response here"
                       value={this.state.resThree}
                       onChange={this.handleChange}
-                    />
+                      onSubmit = {this.add}
+                      /></div>
+                    </ol>
                   </div>
                 ) : (
                   //questions for marketing manager
-                  <div>
-                    <br />
-                    <h6>{this.state.ProjectManagerQuestions[0]}</h6>
-                    <Input
+                  <ol><div>
+                    <div className ="poll-answer-field"><li><div className= "manager-poll-question">{this.state.ProjectManagerQuestions[0]}</div></li>
+                    <TextField
+                      fullWidth={true} 
+                      variant ="outlined"
+                      multiline = {true}
                       id="report-question"
                       className="input-field"
                       type="text"
@@ -395,9 +411,12 @@ class CreateReport extends Component {
                       placeholder="Enter your response here"
                       value={this.state.resOne}
                       onChange={this.handleChange}
-                    />
-                    <h6>{this.state.ProjectManagerQuestions[1]}</h6>
-                    <Input
+                    /></div>
+                    <div className ="poll-answer-field"><li><div className= "manager-poll-question">{this.state.ProjectManagerQuestions[1]}</div></li>
+                    <TextField
+                      fullWidth={true} 
+                      variant ="outlined"
+                      multiline = {true}
                       id="report-question"
                       className="input-field"
                       type="text"
@@ -405,9 +424,12 @@ class CreateReport extends Component {
                       placeholder="Enter your response here"
                       value={this.state.resTwo}
                       onChange={this.handleChange}
-                    />
-                    <h6>{this.state.ProjectManagerQuestions[2]}</h6>
-                    <Input
+                    /></div>
+                    <div className ="poll-answer-field"><li><div className= "manager-poll-question">{this.state.ProjectManagerQuestions[2]}</div></li>
+                    <TextField
+                      fullWidth={true} 
+                      variant ="outlined"
+                      multiline = {true}
                       id="report-question"
                       className="input-field"
                       type="text"
@@ -415,10 +437,10 @@ class CreateReport extends Component {
                       placeholder="Enter your response here"
                       value={this.state.resThree}
                       onChange={this.handleChange}
-                    />
-                  </div>
+                    /></div>
+                  </div></ol>
                 )}
-                <Button style={{color:"white",backgroundColor:"blue"}}onClick={this.addQuestions}>Add Questions</Button>
+                <button className = "submit-button" onClick={this.addQuestions}>Add Responses</button>
               </React.Fragment>
             )}
           </PopupState>
@@ -465,7 +487,7 @@ class CreateReport extends Component {
           {...this.props}
           secondaryPage = {true}
         />
-        <div className="response-card">
+        <section className="response-card">
           {/* Checks if admin wants manager questions answered */}
           <div className="manager-poll-responses">
               <FormControl>
@@ -476,21 +498,22 @@ class CreateReport extends Component {
                     </div>
                   <div className = "poll-section-description">Answer some questions about your goals for the team to help them prioritize their tasks. These will be displayed at the top of the survey sent out to them.</div>
                 </div>
-
                 {this.renderManagerQuestions()}
-                <div className="vertical-line" />
               </FormControl>
+            </div>
+        </section>
 
-
-
-          </div>
-          <Card raised={true} className="schedule-card">
-            <section className="schedule-card-content">
-              <h3 className="schedule-title">Report Information</h3>
-              <Divider className="divider" variant="fullWidth" />
+        <div className = "linebr" />
+          <section className="response-card">
+            <section className="manager-poll-responses">
+              <div className="member-form-title">Report Information</div>
+              <div className = "poll-section-description">Name and describe your report</div>
               <FormControl className="report-name report-margin" required>
-                <InputLabel htmlFor="report-name">Report Name</InputLabel>
-                <Input
+                <div className= "manager-poll-question">Report Name*</div>
+                <TextField
+                  fullWidth={true} 
+                  variant ="outlined"
+                  multiline = {true}
                   id="report-name"
                   className="input-field"
                   required
@@ -503,10 +526,11 @@ class CreateReport extends Component {
               </FormControl>
               <section>
                 <FormControl className="input-field" required>
-                  <InputLabel htmlFor="report-message">
-                    Report Message
-                  </InputLabel>
-                  <Input
+                <div className ="poll-answer-field"><div className= "manager-poll-question">Description</div>
+                  <TextField
+                    fullWidth={true} 
+                    variant ="outlined"
+                    multiline = {true}
                     required
                     className="input-field"
                     id="report-message"
@@ -515,9 +539,10 @@ class CreateReport extends Component {
                     name="message"
                     placeholder="Message to be sent with each report"
                     value={this.state.message}
-                  />
+                  /></div>
                 </FormControl>
               </section>
+
               <section>
                 {this.state.channels.length > 0 ? (
                   <div>
@@ -548,11 +573,15 @@ class CreateReport extends Component {
                 ) : null}
               </section>
             </section>
-          </Card>
-          <Card raised={true} className="schedule-card">
-            <section className="schedule-card-content">
-              <h3 className="schedule-title">Delivery Schedule</h3>
-              <Divider className="divider" variant="fullWidth" />
+          </section>
+
+
+          <div className = "linebr" />
+          <section className="response-card">
+            <section className="manager-poll-responses">
+              <div className="member-form-title">Delivery schedule</div>
+              <div className = "poll-section-description">When would you like the surveys to be sent out to your team?</div>
+
               <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <p style={{ marginTop: "40px" }}>Days</p>
                 <Button
@@ -589,12 +618,12 @@ class CreateReport extends Component {
                 />
               </section>
             </section>
-          </Card>
-
-          <Card raised={true} className="schedule-card">
-            <section className="schedule-card-content">
-              <h3 className="schedule-title">Standup Questions</h3>
-              <Divider className="divider" variant="fullWidth" />
+          </section>
+          
+          <div className="linebr" />
+          <section className="response-card">
+            <section className="manager-poll-responses">
+            <div className="member-form-title">Survey Questions</div>
               <section>
                 {this.state.questions.map(question => (
                   <article className="question-flex" key={question}>
@@ -636,7 +665,7 @@ class CreateReport extends Component {
                 </Fab>
               </section>
             </section>
-          </Card>
+          </section>
 
           <Button
             style={{ display: "block", marginTop: "30px" }}
@@ -647,7 +676,6 @@ class CreateReport extends Component {
           >
             Create Report
           </Button>
-        </div>
       </div>
     );
   }

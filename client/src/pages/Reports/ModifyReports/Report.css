@@ -205,3 +205,17 @@ p {
 	  width: 30px;
 
   }
+
+  .poll-answer-field{
+	  margin-top: 25px;
+  }
+
+  .submit-button {
+	  height: 50px;
+	  background-color: none;
+
+  }
+
+  .linebr {
+	  height: 20px;
+  }
