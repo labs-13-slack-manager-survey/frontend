@@ -87,7 +87,7 @@ class MemberResponseForm extends Component {
           }}
           variant="outlined"
           color="primary"
-          onClick={this.submitReport}
+          onClick={this.submitAll}
         >
           Submit Report
         </Button>
@@ -179,7 +179,7 @@ class MemberResponseForm extends Component {
               question: q.question,
               response: "",
               sentimentRange: 3
-            }))
+            })),
           }));
         } else {
           this.setState(prevState => ({
@@ -195,6 +195,16 @@ class MemberResponseForm extends Component {
         console.log(err.response.data);
       });
   };
+
+  reload = () => {
+    window.location.reload()
+  }
+
+  submitAll = () =>{
+    this.submitReport();
+    this.reload()
+  }
+
 }
 
 export default MemberResponseForm;
