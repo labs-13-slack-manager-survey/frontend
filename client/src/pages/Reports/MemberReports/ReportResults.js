@@ -143,7 +143,7 @@ class ReportResults extends Component {
                             <div className = "user-info">
                                 <div className = "month-day">
                                 {new Date(batch.date).getDate()}
-                                {new Date(batch.date).getMonth()}
+                                {new Date(batch.date).getMonth()} 
                                 </div>
                               {/* <img
                                 className="response-container-image"

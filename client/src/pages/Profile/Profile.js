@@ -113,7 +113,7 @@ class Profile extends Component {
 					</div>
 				</Card>
 
-				
+				7
 				</div>
 				
 
