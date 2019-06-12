@@ -6,7 +6,7 @@ import {
 } from "@material-ui/core";
 
 import PageTitle from '../../../components/PageTitle'
-import PageDescription from '../../../components/PageDescription'
+import PollDescription from '../../../components/PollDescription'
 
 const styles = theme => ({
   container: {
@@ -31,7 +31,7 @@ class ChooseReport extends Component {
           {...this.props}
           secondaryPage = {true}
         />
-        <PageDescription description= "Select the type of poll you would like to create"/>
+        <PollDescription description= "Select the type of poll you would like to create"/>
           <section className="schedule-card-content">
             <section>
               <Link to="/slackr/dashboard/reports/new">

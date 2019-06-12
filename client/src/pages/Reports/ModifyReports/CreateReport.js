@@ -24,7 +24,7 @@ import {
   Menu
 } from "@material-ui/core";
 import PageTitle from '../../../components/PageTitle'
-import PageDescription from '../../../components/PageDescription'
+import PollDescription from '../../../components/PollDescription'
 import ToggleOn from '../../../images/icons/toggle-on.png';
 import ToggleOff from '../../../images/icons/toggle-off.png';
 import ReportInput from "../MemberReports/ReportInput.js";
@@ -55,7 +55,11 @@ const styles = theme => ({
   },
   menu: {
     width: 200
-  }
+  },
+  input: {
+    margin: theme.spacing(1),
+  },
+
 });
 
 class CreateReport extends Component {
@@ -487,6 +491,7 @@ class CreateReport extends Component {
           {...this.props}
           secondaryPage = {true}
         />
+         <PollDescription description= "Create your own standup survey with custom questions to be sent out to your team at a scheduled time."/>
         <section className="response-card">
           {/* Checks if admin wants manager questions answered */}
           <div className="manager-poll-responses">
