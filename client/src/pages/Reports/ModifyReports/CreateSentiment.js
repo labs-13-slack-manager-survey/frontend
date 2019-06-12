@@ -22,6 +22,9 @@ import {
 import AddIcon from "@material-ui/icons/Add";
 import { TimePicker } from "material-ui-pickers";
 
+import PageTitle from '../../../components/PageTitle'
+import PageDescription from '../../../components/PageDescription'
+
 import "./Report.css";
 
 // this component does what it says - admin can create a new report
@@ -212,9 +215,11 @@ class CreateSentiment extends Component {
 
     return (
       <div className="create-report">
-        <Fab onClick={() => this.props.history.goBack()} color="default">
-          <Icon>arrow_back</Icon>
-        </Fab>
+        <PageTitle 
+          title = "New Sentiment Poll"
+          {...this.props}
+          secondaryPage = {true}
+        />
         <form className="create-report">
           <Card raised={true} className="schedule-card">
             <section className="schedule-card-content">

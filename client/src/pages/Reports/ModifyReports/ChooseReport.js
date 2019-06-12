@@ -3,11 +3,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import {
   withStyles,
-  Card,
-  Button,
-  Divider,
-  Fab,
-  Icon
 } from "@material-ui/core";
 
 import PageTitle from '../../../components/PageTitle'
@@ -32,7 +27,7 @@ class ChooseReport extends Component {
     return (
       <div className="create-report">
         <PageTitle 
-          title = "New Poll"
+          title = "Type of Poll"
           {...this.props}
           secondaryPage = {true}
         />
@@ -40,14 +35,14 @@ class ChooseReport extends Component {
           <section className="schedule-card-content">
             <section>
               <Link to="/slackr/dashboard/reports/new">
-                <button  className="add-to-slack" variant="outlined" style={{ marginTop: "20px" }}>
+                <button  className="add-to-slack" variant="outlined" style={{ marginTop: "20px", cursor:"pointer"}}>
                   Standup Survey
                 </button>
               </Link>
             </section>
             <section>
               <Link to="/slackr/dashboard/reports/createSentiment">
-                <button className="add-to-slack" style={{ marginTop: "20px" }}>
+                <button className="add-to-slack" style={{ marginTop: "20px", cursor:"pointer" }}>
                   Sentiment Poll
                 </button>
               </Link>

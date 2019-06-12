@@ -23,6 +23,11 @@ import {
   FormLabel,
   Menu
 } from "@material-ui/core";
+import PageTitle from '../../../components/PageTitle'
+import PageDescription from '../../../components/PageDescription'
+import ToggleOn from '../../../images/icons/toggle-on.png';
+import ToggleOff from '../../../images/icons/toggle-off.png';
+
 
 import MemberResponseForm from "../MemberReports/MemberResponseForm";
 
@@ -31,6 +36,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import { TimePicker } from "material-ui-pickers";
 import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
 import AddIcon from "@material-ui/icons/Add";
+
 
 import "./Report.css";
 
@@ -70,7 +76,7 @@ class CreateReport extends Component {
     resThree: "",
     slackChannelId: null,
     slackAuthorized: false,
-    managerQuestions: "no",
+    managerQuestions: false,
 
     isSentiment: false,
     //array for listing manager questions
@@ -303,7 +309,12 @@ class CreateReport extends Component {
     console.log(this.state.managerResponses)
   }
 
-
+  //toggle manager questions
+  toggleManagerQ = () => {
+    this.setState ({ 
+      managerQuestions: !this.state.managerQuestions
+    })
+  }
 
   //chandle changes with manager questions
   handleChange = e => {
@@ -313,14 +324,14 @@ class CreateReport extends Component {
 
   //this is for rendering the manager questions at top of the report
   renderManagerQuestions = () => {
-    if (this.state.managerQuestions === "yes") {
+    if (this.state.managerQuestions) {
       return (
         <>
           <PopupState variant="popover" popupId="demoMenu">
             {popupState => (
               <React.Fragment>
                 <Button variant="contained" {...bindTrigger(popupState)}>
-                  Select Manager Questions
+                  {this.state.managerType === 0 ? "Engineering Manager" : "Project Manager"}
                 </Button>
                 <Menu {...bindMenu(popupState)} onClick={this.managerType}>
                   {this.state.typeOfManager.map((type, index) => (
@@ -407,6 +418,7 @@ class CreateReport extends Component {
                     />
                   </div>
                 )}
+                <Button style={{color:"white",backgroundColor:"blue"}}onClick={this.addQuestions}>Add Questions</Button>
               </React.Fragment>
             )}
           </PopupState>
@@ -448,39 +460,30 @@ class CreateReport extends Component {
     const { classes } = this.props;
     return (
       <div className="create-report">
-        <Fab onClick={() => this.props.history.goBack()} color="default">
-          <Icon>arrow_back</Icon>
-        </Fab>
-        <form className="create-report">
+          <PageTitle 
+          title = "New Standup Survey"
+          {...this.props}
+          secondaryPage = {true}
+        />
+        <div className="response-card">
           {/* Checks if admin wants manager questions answered */}
-          <Card raised={true} className="schedule-card">
-            <section className="schedule-card-content">
+          <div className="manager-poll-responses">
               <FormControl>
-                <FormLabel component="legend">
-                  Would you like the manager to answer questions?
-                </FormLabel>
-                <RadioGroup
-                  name="managerQuestions"
-                  onChange={this.changeHandler}
-                >
-                  <FormControlLabel
-                    className="yesNoButton"
-                    value="yes"
-                    control={<Radio />}
-                    label="Yes"
-                  />
-                  <FormControlLabel
-                    value="no"
-                    className="yesNoButton"
-                    control={<Radio />}
-                    label="No"
-                  />
-                </RadioGroup>
+                <div onClick = {this.toggleManagerQ}>
+                    <div className = "toggle-manager-questions" >              
+                      <div className="member-form-title">Manager Questions (Optional)</div>
+                      <img className="manager-toggle" src={this.state.managerQuestions ? ToggleOn : ToggleOff }/>
+                    </div>
+                  <div className = "poll-section-description">Answer some questions about your goals for the team to help them prioritize their tasks. These will be displayed at the top of the survey sent out to them.</div>
+                </div>
+
                 {this.renderManagerQuestions()}
-                <Button style={{color:"white",backgroundColor:"blue"}}onClick={this.addQuestions}>Add Questions</Button>
+                <div className="vertical-line" />
               </FormControl>
-            </section>
-          </Card>
+
+
+
+          </div>
           <Card raised={true} className="schedule-card">
             <section className="schedule-card-content">
               <h3 className="schedule-title">Report Information</h3>
@@ -644,7 +647,7 @@ class CreateReport extends Component {
           >
             Create Report
           </Button>
-        </form>
+        </div>
       </div>
     );
   }

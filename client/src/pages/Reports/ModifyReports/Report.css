@@ -184,3 +184,24 @@ p {
   .btnnn{
 	  display:none;
   }
+
+  .poll-section-description {
+  font-size: 14px;
+  font-weight: 300;
+	margin-top: 10px;
+	line-height: 22px;
+	padding-bottom: 20px;
+	color: #9C9C9C;
+  }	
+
+  .toggle-manager-questions {
+	  display: flex;
+	  flex-direction: row;
+	  justify-content: space-between;
+	  align-items: flex-end;
+  }
+
+  .manager-toggle{
+	  width: 30px;
+
+  }
