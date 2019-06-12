@@ -9,6 +9,7 @@ import SummaryBox from "../../components/SummaryBox";
 import TableDisplay from "../../components/TableDisplay";
 import TableHeader from "../../components/TableHeader";
 
+
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 import "./StatsDashboard.css";
@@ -97,12 +98,20 @@ class StatsDashboard extends Component {
           ))}
         </div>
         <div className="sidebar">
+<<<<<<< HEAD
+          <PollCalendar />          
+          {/* <TodayPoll
+            reports={this.state.reports}
+            lastReport={this.state.reports[this.state.reports.length - 1]}
+          /> */}
+=======
           <PollCalendar />
           <div style={{ marginTop: "30px" }}>
             <TodayPoll
               lastReport={this.state.reports[this.state.reports.length - 1]}
             />
           </div>
+>>>>>>> 17baf059c5ee5538e299cbb83590d1cf8bc1e1b7
         </div>
       </div>
     );
