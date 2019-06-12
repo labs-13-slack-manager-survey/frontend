@@ -50,7 +50,7 @@ class ReportResults extends Component {
     responders: [],
     completed: false,
     isSentiment: false,
-    mainPage: false,
+    secondaryPage: true,
   };
 
   render() {
@@ -71,13 +71,9 @@ class ReportResults extends Component {
       <main className="view">
       <PageTitle 
       title = "Report"
-      mainPage = {this.state.mainPage}
+      {...this.props}
+      secondaryPage = {this.state.secondaryPage}
       />
-                      <div className="report-results-container-backButton">
-          <Fab onClick={() => this.props.history.goBack()} color="default">
-            <Icon>arrow_back</Icon>
-          </Fab>
-        </div>
 
           {this.state.filteredResponse.length > 0 ||
           this.state.completed === true ? (

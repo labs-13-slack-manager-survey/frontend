@@ -6,6 +6,13 @@
     margin-bottom: 50px;
     color: rgb(54, 54, 54);
     font-weight: 10px;
+    align-items: center;
+}
+
+.back {
+    height: 25px;
+    padding-right: 20px;
+    cursor: pointer;
 }
 .page-description {
     font-size: 12px;
