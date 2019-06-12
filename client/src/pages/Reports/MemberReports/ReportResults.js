@@ -177,7 +177,8 @@ class ReportResults extends Component {
           <CircleProgress 
           title = "Today's Polls"
           percentComplete = '0.6'/>
-                    <Card
+          
+          <Card
             interactive={false}
             elevation={Elevation.TWO}
             style={{ marginTop: "30px" }}
