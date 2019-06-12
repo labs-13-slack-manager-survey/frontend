@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { axiosWithAuth, baseURL } from "../../../config/axiosWithAuth";
 import jwt_decode from "jwt-decode";
+import moment from 'moment';
 
 // component imports
 import MemberResponseForm from "./MemberResponseForm";
@@ -97,19 +98,19 @@ class ReportResults extends Component {
                 batch =>
                   batch.responses.length > 0 && (
                     <div key={batch.date}>
-                      <h3 className="report-results-feed-date">
+                      {/* <h3 className="report-results-feed-date">
                         {new Date(batch.date)
                           .toLocaleDateString("en-US", options)
                           .replace(",", "")}
-                      </h3>
+                      </h3> */}
                       {batch.responses.map(response => (
 
                         <div key={response.userId}>
                           <div className="response-container">
                             <div className = "user-info">
                                 <div className = "month-day">
-                                {new Date(batch.date).getDate()}
-                                {new Date(batch.date).getMonth()} 
+                                  <div className="calendar-top">{moment(batch.date).format('DD')}</div>
+                                  <div className="calendar-bot">{moment(batch.date).format('MMMM')}</div>
                                 </div>
                               {/* <img
                                 className="response-container-image"
@@ -131,7 +132,7 @@ class ReportResults extends Component {
                                       <div key={id}>
                                         <div className="response-container-main-question">
                                         
-                                          <li>{question}</li>
+                                          <li className = "manager-poll-question">{question}</li>
                                           
                                         </div>
                                         {this.state.isSentiment && 
@@ -154,7 +155,7 @@ class ReportResults extends Component {
                                         } 
                                         <p className="response-container-main-answer">
                                           {/* {sentimentRange && <div className="view-comments">Comments:</div>} */}
-                                          <div className={this.state.isSentiment ?  "sentiment-comment": "regular-answer"}>{answer}</div>
+                                          <div className={this.state.isSentiment ?  "sentiment-comment": "manager-poll-response"}>{answer}</div>
                                         </p>
                                       </div>
                                     )

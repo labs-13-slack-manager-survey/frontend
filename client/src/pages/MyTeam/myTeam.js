@@ -8,6 +8,7 @@ import PageTitle from '../../components/PageTitle'
 import PageDescription from '../../components/PageDescription'
 import TableHeader from '../../components/TableHeader'
 import SlackButton from '../Slack/Slack.js'
+import CircleProgress from '../../components/circleProgress.js';
 // import $ from 'jquery';
 // import jCircle from 'jquery-circle-progress';
 
@@ -160,6 +161,9 @@ class myTeam extends Component {
           <SlackButton/>
           <InviteUser />
           {/* <PollCalendar /> */}
+          <CircleProgress 
+          title = "Today's Polls"
+          percentComplete = '0.6'/>
         </div>
       </div>
     ) : (

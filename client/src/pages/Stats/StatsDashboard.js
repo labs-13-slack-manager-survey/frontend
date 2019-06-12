@@ -8,6 +8,7 @@ import TodayPoll from "./TodayPoll";
 import PollCalendar from "../../components/PollCalendar";
 import SummaryBox from "../../components/SummaryBox";
 
+
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 import "./StatsDashboard.css";
@@ -69,11 +70,11 @@ class StatsDashboard extends Component {
           </div>
         </div>
         <div className="sidebar">
-          <PollCalendar />
-          <TodayPoll
+          <PollCalendar />          
+          {/* <TodayPoll
             reports={this.state.reports}
             lastReport={this.state.reports[this.state.reports.length - 1]}
-          />
+          /> */}
         </div>
       </div>
     );
