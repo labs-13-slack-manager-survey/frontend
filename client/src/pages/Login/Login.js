@@ -1,7 +1,7 @@
 import React from "react";
 import Firebase from "../Firebase/Firebase";
 import Card from "@material-ui/core/Card";
-import Logo from "../../images/logo_v1.png";
+import Logo from "../../images/slackr_icon.png";
 
 import "./login.css";
 import { Divider } from "@material-ui/core";

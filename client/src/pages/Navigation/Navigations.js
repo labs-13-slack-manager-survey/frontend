@@ -1,12 +1,11 @@
-import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
-import jwt_decode from 'jwt-decode';
+import React from "react";
+import { NavLink, Link } from "react-router-dom";
+import jwt_decode from "jwt-decode";
 import { axiosWithAuth, baseURL } from "../../config/axiosWithAuth";
 
 // style imports
 import './navigation.css';
 import { withStyles } from '@material-ui/core/styles';
-import Logo from '../../images/logo_v1.png';
 import Reports from '../../images/icons/reports.png';
 import ReportsActive from '../../images/icons/reports-active.png';
 import Teams from '../../images/icons/teams.png';
@@ -50,11 +49,11 @@ class Navigation extends React.Component {
     e.preventDefault();
     localStorage.removeItem("firebaseui::rememberedAccounts");
     localStorage.removeItem("token");
-    window.location.reload();
+    this.props.history.push("/login");
   };
 
   slackAuthCheck = e => {
-    const token = jwt_decode(localStorage.getItem('token'));
+    const token = jwt_decode(localStorage.getItem("token"));
 
     e.preventDefault();
     const endpoint = `${baseURL}/slack/channels`;
@@ -78,7 +77,7 @@ class Navigation extends React.Component {
   };
 
   render() {
-    const token = jwt_decode(localStorage.getItem('token'));
+    const token = jwt_decode(localStorage.getItem("token"));
     const appToken = localStorage.getItem("token");
     const firebaseToken = localStorage.getItem(
       "firebaseui::rememberedAccounts"
@@ -102,64 +101,138 @@ class Navigation extends React.Component {
             <div>slackr</div>
           </div>
           <div className="horizontal-buttons">
-            {token.roles == "admin" ? 
-              (<NavLink to="/slackr/dashboard/reports/choose">
-              <button className="menu-bar-add-poll"
-                onClick={token.roles !== "admin" ? this.slackAuthCheck : null}>
-                <span>+</span>Add Poll
-              </button>
-            </NavLink>) : null }
+            {token.roles == "admin" ? (
+              <NavLink to="/slackr/dashboard/reports/choose">
+                <button
+                  className="menu-bar-add-poll"
+                  onClick={token.roles !== "admin" ? this.slackAuthCheck : null}
+                >
+                  <span>+</span>Add Poll
+                </button>
+              </NavLink>
+            ) : null}
           </div>
-
-				</div>
-				<div className = "verticalBar">
-					{loggedIn ? (
-					<div className = "vert-buttons">
-					<div className = "menu-button">
-							<NavLink to='/slackr/dashboard' > <img className = "menu-icon" src={this.props.history.location.pathname ===
-											'/slackr/dashboard' ? ReportsActive : Reports} /></NavLink>
-							<div className ={this.props.history.location.pathname ===
-											'/slackr/dashboard' ? "button-label-active" : "button-label"}>reports</div>
-						</div>
-						<div className = "menu-button">
-              <NavLink to="/slackr/dashboard/stats">
-                  <img className="menu-icon" src={this.props.history.location.pathname === '/slackr/dashboard/stats' ? StatsActive : Stats} />
-                  <div className = {this.props.history.location.pathname ===
-											'/slackr/dashboard/stats' ? "button-label-active" : "button-label"} >stats</div>
+        </div>
+        <div className="verticalBar">
+          {loggedIn && token.teamId ? (
+            <div className="vert-buttons">
+              <div className="menu-button">
+                <NavLink to="/slackr/dashboard">
+                  {" "}
+                  <img
+                    className="menu-icon"
+                    src={
+                      this.props.history.location.pathname ===
+                      "/slackr/dashboard"
+                        ? ReportsActive
+                        : Reports
+                    }
+                  />
                 </NavLink>
-						</div>
-            <div className = "menu-button">
-              <NavLink to="/slackr/dashboard/myteam">
-                  <img className="menu-icon" src={this.props.history.location.pathname === '/slackr/dashboard/myteam' ? TeamsActive : Teams} />
-                  <div className = {this.props.history.location.pathname ===
-											'/slackr/dashboard/myteam' ? "button-label-active" : "button-label"} >my team</div>
+                <div
+                  className={
+                    this.props.history.location.pathname === "/slackr/dashboard"
+                      ? "button-label-active"
+                      : "button-label"
+                  }
+                >
+                  reports
+                </div>
+              </div>
+              <div className="menu-button">
+                <NavLink to="/slackr/dashboard/stats">
+                  <img
+                    className="menu-icon"
+                    src={
+                      this.props.history.location.pathname ===
+                      "/slackr/dashboard/stats"
+                        ? StatsActive
+                        : Stats
+                    }
+                  />
+                  <div
+                    className={
+                      this.props.history.location.pathname ===
+                      "/slackr/dashboard/stats"
+                        ? "button-label-active"
+                        : "button-label"
+                    }
+                  >
+                    stats
+                  </div>
                 </NavLink>
-						</div>
-					</div>
-               
-
-            ): (
-                <div className = "empty-buttons"/>
-              )}
-                {loggedIn ? (
-							<>
-							<div className = "vert-buttons2">
-								<NavLink to="/slackr/dashboard/profile" className = "menu-button">
-									<img className = "menu-icon" src={this.props.history.location.pathname ===
-											'/slackr/dashboard/profile' ? UserActive : User} />
-									<div className = {this.props.history.location.pathname ===
-											'/slackr/dashboard/profile' ? "button-label-active" : "button-label"} >user</div>
-								</NavLink>
-								<NavLink to="/login" onClick = {this.handleLogout} className = "menu-button">
-									<img className = "menu-icon" src={Logout} />
-									<div className ="button-label-logout">logout</div>
-								</NavLink> </div> </>
-							) : (
-								<NavLink to="/login" onClick = {this.handleLogout} className = "menu-button">
-									<img className = "menu-icon" src={Logout} />
-									<div className = "button-label-logout">login</div>
-							</NavLink>
-						)}
+              </div>
+              <div className="menu-button">
+                <NavLink to="/slackr/dashboard/myteam">
+                  <img
+                    className="menu-icon"
+                    src={
+                      this.props.history.location.pathname ===
+                      "/slackr/dashboard/myteam"
+                        ? TeamsActive
+                        : Teams
+                    }
+                  />
+                  <div
+                    className={
+                      this.props.history.location.pathname ===
+                      "/slackr/dashboard/myteam"
+                        ? "button-label-active"
+                        : "button-label"
+                    }
+                  >
+                    my team
+                  </div>
+                </NavLink>
+              </div>
+            </div>
+          ) : (
+            <div className="empty-buttons" />
+          )}
+          {loggedIn ? (
+            <>
+              <div className="vert-buttons2">
+                <NavLink to="/slackr/dashboard/profile" className="menu-button">
+                  <img
+                    className="menu-icon"
+                    src={
+                      this.props.history.location.pathname ===
+                      "/slackr/dashboard/profile"
+                        ? UserActive
+                        : User
+                    }
+                  />
+                  <div
+                    className={
+                      this.props.history.location.pathname ===
+                      "/slackr/dashboard/profile"
+                        ? "button-label-active"
+                        : "button-label"
+                    }
+                  >
+                    user
+                  </div>
+                </NavLink>
+                <NavLink
+                  to="/login"
+                  onClick={this.handleLogout}
+                  className="menu-button"
+                >
+                  <img className="menu-icon" src={Logout} />
+                  <div className="button-label-logout">logout</div>
+                </NavLink>{" "}
+              </div>{" "}
+            </>
+          ) : (
+            <NavLink
+              to="/login"
+              onClick={this.handleLogout}
+              className="menu-button"
+            >
+              <img className="menu-icon" src={Logout} />
+              <div className="button-label-logout">login</div>
+            </NavLink>
+          )}
         </div>
       </>
     );
