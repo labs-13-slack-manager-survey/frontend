@@ -119,13 +119,13 @@ class myTeam extends Component {
       });
   };
 
-  handleClickMenu = e => {
-    this.setState({ anchorEl: e.currentTarget });
-  };
+  // handleClickMenu = e => {
+  //   this.setState({ anchorEl: e.currentTarget });
+  // };
 
-  handleCloseMenu = () => {
-    this.setState({ anchorEl: null });
-  };
+  // handleCloseMenu = () => {
+  //   this.setState({ anchorEl: null });
+  // };
 
   render() {
     //If user's account is inactive, they cannot see the dashboard

@@ -6,7 +6,8 @@ import {
 	Button,
 	Dialog,
 	DialogTitle,
-	Slide
+	Slide,
+	Input
 } from '@material-ui/core';
 
 import './inviteUser.css';
@@ -85,7 +86,7 @@ class InviteUser extends React.Component {
 			<div className="inviteUserBox">
 				<div className="invite">Invite a new team member</div>
 				<form onSubmit={this.addUser} className="inviteUser">
-					<input
+					<Input
 						id="outlined-email-input"
 						label="Email"
 						type="email"
@@ -94,6 +95,7 @@ class InviteUser extends React.Component {
 						autoComplete="email"
 						margin="normal"
 						variant="outlined"
+						placeholder="add email"
 					/>
 					<br />
 					<Button variant="outlined" type="submit" onClick={this.addUser}>
