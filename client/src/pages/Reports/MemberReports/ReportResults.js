@@ -71,9 +71,10 @@ class ReportResults extends Component {
 
           {this.state.filteredResponse.length > 0 ||
           this.state.completed === true ? (
-              <div className="confirm-response">Your response has been recorded</div>
+              <><div className="confirm-response">Your response has been recorded</div>
+              <div className = "linebr" /></>
           ) : (
-            <div
+            <><div
               className="response-card"
               interactive={false}
               elevation={Elevation.TWO}
@@ -82,7 +83,7 @@ class ReportResults extends Component {
                 {...this.props}
                 updateWithUserResponse={this.updateWithUserResponse}
               />
-            </div>
+            </div><div className = "linebr" /></>
           )}
 
           <section className="report-results-feed">
