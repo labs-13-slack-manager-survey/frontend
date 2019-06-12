@@ -3,6 +3,7 @@ import { axiosWithAuth } from "../../config/axiosWithAuth";
 
 import SentimentChart from "./SentimentChart";
 import SentimentAvg from "./SentimentAvg";
+import PageTitle from '../../components/PageTitle'
 import TodayPoll from "./TodayPoll";
 import PollCalendar from "../../components/PollCalendar";
 import SummaryBox from "../../components/SummaryBox";
@@ -47,9 +48,12 @@ class StatsDashboard extends Component {
     }
 
     return (
-      <div className="dashboard">
-        <h2 style={{ marginBottom: "40px" }}>Stats Dashboard</h2>
-        <div className="mainDashboard">
+      <div className="dashboard-view">
+
+        <div className="view">
+        <PageTitle 
+          title = "Stats Dashboard"
+        />
           <SentimentChart />
           <SentimentAvg reports={this.state.reports} />
           <div className="dataSquares">
@@ -59,12 +63,12 @@ class StatsDashboard extends Component {
             <SummaryBox title="Total Response Rate" content="76%" />
           </div>
         </div>
-        <div className="sideDashboard">
+        <div className="sidebar">
+          <PollCalendar />
           <TodayPoll
             reports={this.state.reports}
             lastReport={this.state.reports[this.state.reports.length - 1]}
           />
-          <PollCalendar />
         </div>
       </div>
     );

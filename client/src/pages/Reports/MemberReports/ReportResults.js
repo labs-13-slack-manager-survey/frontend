@@ -60,6 +60,8 @@ class ReportResults extends Component {
       day: "numeric"
     };
 
+
+
     return (
       <div className="dashboard-view">
 
@@ -124,6 +126,7 @@ class ReportResults extends Component {
 
 
           <section className="report-results-feed">
+   
               {this.state.responses.map(
                 batch =>
                   batch.responses.length > 0 && (
@@ -139,7 +142,8 @@ class ReportResults extends Component {
                           <div className="response-container">
                             <div className = "user-info">
                                 <div className = "month-day">
-                                {batch.date}
+                                {new Date(batch.date).getDate()}
+                                {new Date(batch.date).getMonth()}
                                 </div>
                               {/* <img
                                 className="response-container-image"
@@ -155,11 +159,14 @@ class ReportResults extends Component {
                             <div className="response-container-main">
                               <div className = "vertical-timeline" />
                               <div className = "response-content">
+                              <ol type="1">
                                   {response.questions.map(
                                     ({ question, answer, id, sentimentRange }) => (
                                       <div key={id}>
                                         <div className="response-container-main-question">
-                                          {question}
+                                        
+                                          <li>{question}</li>
+                                          
                                         </div>
                                         {this.state.isSentiment && 
                                         <>
@@ -178,14 +185,14 @@ class ReportResults extends Component {
                                                 <p className={sentimentRange !=5 ? "deselected" : null}>5</p>
                                               </div>
                                           </>
-                                        }
+                                        } 
                                         <p className="response-container-main-answer">
                                           {/* {sentimentRange && <div className="view-comments">Comments:</div>} */}
-                                          <div className={sentimentRange ?  "sentiment-comment":null}>{answer}</div>
+                                          <div className={this.state.isSentiment ?  "sentiment-comment": "regular-answer"}>{answer}</div>
                                         </p>
                                       </div>
                                     )
-                                  )}
+                                  )} </ol>
                               </div>
 
                             </div>
@@ -197,7 +204,7 @@ class ReportResults extends Component {
                       ))}
                     </div>
                   )
-              )}
+              )} 
             </section>
         </main>  
         <div className = "sidebar">
