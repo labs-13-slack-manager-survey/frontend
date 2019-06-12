@@ -3,6 +3,8 @@ import { axiosWithAuth, baseURL } from "../../../config/axiosWithAuth";
 
 import CreateReport from "../ModifyReports/CreateReport";
 import ReportInput from "./ReportInput";
+import ChevronUp from '../../../images/icons/chevron-up.png'
+import ChevronDown from '../../../images/icons/chevron-down.png'
 
 // style imports
 import Button from "@material-ui/core/Button";
@@ -17,8 +19,16 @@ class MemberResponseForm extends Component {
     isSentiment: false,
     typeOfManager: [],
     managerQuestions: [],
-    managerResponses: []
+    managerResponses: [],
+    toggleManager: true,
   };
+
+  toggleManagerQ = () => {
+    this.setState({ 
+      toggleManager: !this.state.toggleManager,
+    })
+    console.log(this.state.toggleManager)
+  }
 
   render() {
     console.log("membersResponse", this.state);
@@ -30,21 +40,33 @@ class MemberResponseForm extends Component {
       <div>
         {/*need to render this condtionally  */}
         {this.state.isSentiment ? null : (
-          <div>
-            <h1 className="member-form-title">Managers Thoughts</h1>
-            <h3>{this.state.managerQuestions[0]}</h3>
-            <h3>{this.state.managerResponses[0]}</h3>
-            <h3>{this.state.managerQuestions[1]}</h3>
-            <h3>{this.state.managerResponses[1]}</h3>
-            <h3>{this.state.managerQuestions[2]}</h3>
-            <h3>{this.state.managerResponses[2]}</h3>
+          <div className = "manager-poll-responses">
+            <div className = "poll-header-toggle"  onClick={this.toggleManagerQ}>
+              <div className="member-form-title">Managers Thoughts</div>
+              <img className = "thoughts-toggle" src={this.state.toggleManager ? ChevronDown : ChevronUp} />
+            </div>
+            {this.state.toggleManager ? null : <p className="member-form-subtitle">click to view your manager's goals for the week</p> }
+            <div className = "vertical-line" />
+            {this.state.toggleManager ? 
+            <> 
+            <div className = "manager-poll-question">{this.state.managerQuestions[0]}</div>
+            <div className = "manager-poll-response">{this.state.managerResponses[0]}</div>
+            <div className = "manager-poll-question">{this.state.managerQuestions[1]}</div>
+            <div className = "manager-poll-response">{this.state.managerResponses[1]}</div>
+            <div className = "manager-poll-question">{this.state.managerQuestions[2]}</div>
+            <div className = "manager-poll-response">{this.state.managerResponses[2]}</div>
+            <div className = "vertical-line" />
+            </> : null }
+          
           </div>
         )}
+        <div className = "poll-header">
+          <div className="member-form-title">{this.state.reportName}</div>
+          <p className="member-form-subtitle">{this.state.reportMessage}</p>
+        </div>
 
-        <h1 className="member-form-title">{this.state.reportName}</h1>
-        <p className="member-form-subtitle">{this.state.reportMessage}</p>
-        {this.state.questions.map((q, i) => (
-          <ReportInput
+        <ol type="1">{this.state.questions.map((q, i) => (
+          <li><ReportInput
             question={q.question}
             response={q.response}
             sentimentRange={q.sentimentRange}
@@ -52,8 +74,9 @@ class MemberResponseForm extends Component {
             key={i}
             isSentiment={this.state.isSentiment}
             handleSentiment={this.handleSentiment}
-          />
-        ))}
+          /></li>
+        ))}</ol>
+        
         <Button
           style={{
             display: "block",

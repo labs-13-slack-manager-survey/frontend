@@ -59,7 +59,7 @@ class StatsDashboard extends Component {
         <PageTitle 
           title = "Stats Dashboard"
         />
-          <SentimentChart />
+          <SentimentChart reports={this.state.reports} />
           <SentimentAvg reports={this.state.reports} viewStats={this.viewStats}/>
           <div className="dataSquares">
             {/* Dummy Data */}
