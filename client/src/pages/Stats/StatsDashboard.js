@@ -2,17 +2,14 @@ import React, { Component } from "react";
 import { axiosWithAuth, baseURL } from "../../config/axiosWithAuth";
 
 import SentimentChart from "./SentimentChart";
-import SentimentAvg from "./SentimentAvg";
 import PageTitle from "../../components/PageTitle";
 import TodayPoll from "./TodayPoll";
 import PollCalendar from "../../components/PollCalendar";
 import SummaryBox from "../../components/SummaryBox";
-import $ from "jquery";
 import TableDisplay from "../../components/TableDisplay";
 import TableHeader from "../../components/TableHeader";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
-import CircleProgress from "../../components/circleProgress.js";
 
 import "./StatsDashboard.css";
 

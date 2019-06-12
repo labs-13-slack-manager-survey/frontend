@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Chart from "chart.js";
 import { axiosWithAuth } from "../../config/axiosWithAuth";
-import CircularProgress from "@material-ui/core/CircularProgress";
 
 const URL = process.env.REACT_APP_BASE_URL;
 
@@ -44,20 +43,23 @@ class SentimentChart extends Component {
         datasets: [
           {
             label: "Sentiment Average",
-            data: this.state.results,
-            backgroundColor: [
-              "red",
-              "green",
-              "blue",
-              "magenta",
-              "purple",
-              "orange",
-              "teal"
-            ]
+            data: [1, 2, 3],
+            backgroundColor: "#055EBE"
           }
         ]
       },
-      options: {}
+      options: {
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                min: 0,
+                max: 5
+              }
+            }
+          ]
+        }
+      }
     });
   }
 
