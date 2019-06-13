@@ -86,6 +86,7 @@ class Reports extends Component {
   render() {
     //const { stepsEnabled, steps, initialStep } = this.state;
     const activeReports = this.props.reports.filter(report => report.active);
+    const activeReportsReverse = activeReports.reverse(); 
 
     return (
       <div className="user-reports-container">
@@ -120,7 +121,7 @@ class Reports extends Component {
               column2 = "Date Created"
               column3 = "Schedule" 
               column4 = "Total Responses"/>
-          {activeReports.map(report => (
+          {activeReportsReverse.map(report => (
               <TableDisplay 
               content1 = {report.reportName}
               report = {report}

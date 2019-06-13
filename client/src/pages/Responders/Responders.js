@@ -9,21 +9,24 @@ import React from 'react';
 const ResponseTeamList = props => (
 	<div className="responders">
 		{props.responders.map(responder => (
+			<div onClick={() => {
+				const user =
+					props.clickedResponder === responder.userId
+						? null
+						: responder.userId;
+				props.filter(props.clickedDate, user);
+			}}
+			className="username-profile-pic">
 			<img
 				key={responder.userId}
 				src={responder.profilePic}
 				alt={responder.fullName}
-				onClick={() => {
-					const user =
-						props.clickedResponder === responder.userId
-							? null
-							: responder.userId;
-					props.filter(props.clickedDate, user);
-				}}
 				className={`responders-user ${
 					props.clickedResponder === responder.userId ? 'transparent' : ''
 				}`}
 			/>
+			<div>{responder.fullName}</div>
+			</div>
 		))}
 	</div>
 );
