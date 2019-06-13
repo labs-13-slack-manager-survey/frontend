@@ -23,8 +23,9 @@ class myTeam extends Component {
     active: true,
     users: [], 
     anchorEl: null,
-    pollCompletion: "0",
-    lastAnswerPoll: "1"
+    pollCompletion: 0,
+    lastAnswerPoll: "No polls Answered",
+
   };
 
 
@@ -46,15 +47,13 @@ class myTeam extends Component {
       });
 
     const joinCode = jwt_decode(localStorage.getItem("token")).joinCode;
-    console.log(joinCode);
-    console.log(this.state.users.length)
     this.setState({
       joinCode: joinCode
     });
     axiosWithAuth()
       .get(`${baseURL}/users/team`)
       .then(res => {
-        console.log(res);
+        console.log("TESTING",res)
         this.setState({ users: res.data.users });
 
         if (this.state.users.length > 0) {
@@ -62,6 +61,26 @@ class myTeam extends Component {
         }
       })
       .catch(err => console.log(err));
+
+
+    const pollEndpoint = `${baseURL}/reports`
+
+      axiosWithAuth()
+        .get(pollEndpoint)
+        .then(res=>{
+
+          const lastReport = res.data.reports.length -1;
+
+          console.log("POLLS COMPLETED",res.data)
+        
+          this.setState({
+            pollCompletion: res.data.reports.length,
+            lastAnswerPoll:res.data.reports[lastReport].reportName
+          })  
+        })
+        .catch(err => {
+          console.log("ERROR GETTING POLL COMPLETED",err);
+        });
   }
 
   updateUser = () => {
@@ -120,24 +139,40 @@ class myTeam extends Component {
       });
   };
 
-  pollsCompleted = id =>{
-    const endpoint = `${baseURL}/reports/submissionRate/${id}`
-
+  lastCompletedPoll = () =>{
+    const endpoint = `${baseURL}/responses`;
 
     axiosWithAuth()
       .get(endpoint)
-      .then(res=>
-        this.setState({
-          pollCompletion: res.data
-        })  
-      )
-
+      .then(res=>{
+        console.log("COMPLETED POLL",res)
+        console.log("last pull answered",res.reports[-1].reportName)
+      })
+      .catch(err=>{
+        console.log("ERR WITH LAST POLL",err)
+      })
   }
+
+  archiveReport = id => {
+    const endpoint = `${baseURL}/reports/${id}`;
+    const updatedReport = {
+      active: false
+    };
+    axiosWithAuth()
+      .put(endpoint, updatedReport)
+      .then(res => {
+        this.props.getReports();
+        this.handleArchive(); 
+      })
+      .catch(err => console.log(err));
+  };
+
+
+
 
   render() {
     //If user's account is inactive, they cannot see the dashboard
     const activeUsers = this.state.users.filter(user => user.active);
-      console.log(activeUsers)
     return this.state.active ? (
       <div className = "dashboard-view">
         <div className="view">
