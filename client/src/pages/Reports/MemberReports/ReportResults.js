@@ -45,6 +45,7 @@ class ReportResults extends Component {
     completed: false,
     isSentiment: false,
     secondaryPage: true,
+    percentComplete: 0,
   };
 
   render() {
@@ -144,6 +145,7 @@ class ReportResults extends Component {
                                         } 
                                         <p className="response-container-main-answer">
                                           <div className={ "regular-answer"}>{answer}</div>
+                                          <div className ="linebr" />
 
                                         </p>
                                       </div>
@@ -169,8 +171,8 @@ class ReportResults extends Component {
         <div className = "sidebar">
           <CircleProgress 
           title = "Today's Polls"
- minorFix
-          percentComplete = ".90"
+//  minorFix
+          percentComplete = {this.state.percentComplete}
           />
                     <Card
 
@@ -214,6 +216,15 @@ class ReportResults extends Component {
     })
     .catch(err => console.log(err));
 
+    axiosWithAuth()
+      .get(`${baseURL}/submissionRate/${this.props.match.params.reportId}`)
+      .then(res => {
+        const percent = res.data.historicalSubmissionRate;
+        this.setState({
+          percentComplete: percent,
+        })
+        console.log(percent)
+      })
 
     axiosWithAuth()
       .get(`${baseURL}/responses/${this.props.match.params.reportId}`)

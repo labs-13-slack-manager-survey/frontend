@@ -5,20 +5,21 @@ import "./circleProgress.css";
 
 class circleProgress extends React.Component {
 
-    render() {
-        $('#circle').circleProgress({
-            value: this.props.percentComplete,
-            size: 150,
-            fill: {
-              gradient: ['#8BD8FF' , '#0069D2']
-            },
-            startAngle: -Math.PI/2,
-            thickness: 15, 
-            animation: { duration: 1400,},
-            emptyFill: 'rgb(231, 254, 255)',
+    componentDidMount() {
+      $('#circle').circleProgress({
+        value: this.props.percentComplete,
+        size: 150,
+        fill: {
+          gradient: ['#8BD8FF' , '#0069D2']
+        },
+        startAngle: -(Math.PI)/2,
+        thickness: 15, 
+        animation: { duration: 1400,},
+        emptyFill: 'rgb(231, 254, 255)',
 
-          });
-    
+      });
+    }
+    render() {
           const numericPercent = this.props.percentComplete *100; 
 
           let today = new Date();
@@ -43,7 +44,8 @@ class circleProgress extends React.Component {
                 </div>
                 
             </div>
-        )}
-};
+        );
+    }
+}
 
 export default circleProgress; 

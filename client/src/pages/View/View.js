@@ -27,6 +27,7 @@ class View extends Component {
   componentDidMount() {
     const roles = jwt_decode(localStorage.getItem("token")).roles;
     const endpoint = `${baseURL}/users/byuser`;
+
     axiosWithAuth()
       .get(endpoint)
       .then(res =>
@@ -36,7 +37,7 @@ class View extends Component {
         })
       )
       .catch(err => {
-        console.log(err.response.data);
+        console.log(err);
       });
   }
   render() {

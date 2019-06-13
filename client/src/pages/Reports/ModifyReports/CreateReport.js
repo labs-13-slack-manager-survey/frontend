@@ -596,7 +596,7 @@ class CreateReport extends Component {
           <section className="response-card">
             <section className="manager-poll-responses">
               <div className="member-form-title">Delivery schedule</div>
-              <div className = "poll-section-description">When would you like the surveys to be sent out to your team?</div>
+              <div className = "poll-section-description">When would you like the survey to be sent out to your team?</div>
 
               <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <p style={{ marginTop: "40px" }}>Days</p>
