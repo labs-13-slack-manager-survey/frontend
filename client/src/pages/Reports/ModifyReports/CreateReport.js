@@ -474,7 +474,16 @@ class CreateReport extends Component {
                     /></div>
                   </div></ol>
                 )}
-                <button className = "submit-button" onClick={this.addQuestions}>Add Responses</button>
+
+          <Button
+            style={{ display: "block", marginTop: "30px" }}
+            variant="contained"
+            color="primary"
+            type="submit"
+            onClick={this.addQuestions}
+          >
+            Add Responses
+          </Button>
               </React.Fragment>
             )}
           </PopupState>
