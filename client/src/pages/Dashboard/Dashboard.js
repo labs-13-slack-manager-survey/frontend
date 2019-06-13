@@ -14,8 +14,9 @@ import { Spinner, Intent } from "@blueprintjs/core";
 import { Card, Typography } from "@material-ui/core";
 import "./dashboard.css";
 
-//imports for tour
-
+//Tour
+import 'intro.js/introjs.css';
+import { Steps} from 'intro.js-react';
 export class Dashboard extends Component {
   state = {
     users: [],
@@ -25,16 +26,34 @@ export class Dashboard extends Component {
     active: true,
     modal: false,
     anchorEl: null,
-    joinCode: ""
+    joinCode: "",
+    stepsEnabled: true,
+    initialStep: 0,
+    steps: [
+      {
+        element: '.hello',
+        intro: 'Hello step',
+      },
+      {
+        element: '.world',
+        intro: 'World step',
+      },
+    ]
   };
-
-  render() {
   
+  render() {
+    const { stepsEnabled, steps, initialStep, hintsEnabled, hints } = this.state;
     if (this.state.isLoading) {
       return <Spinner intent={Intent.PRIMARY} className="loading-spinner" />;
     }
     return (
       <>
+       <Steps
+          enabled={stepsEnabled}
+          steps={steps}
+          initialStep={initialStep}
+          onExit={this.onExit}
+        />
       <PageTitle 
       title = "Reports Dashboard"
       />
@@ -54,7 +73,7 @@ export class Dashboard extends Component {
       </>
     );
   }
-
+  
   componentDidMount() {
     // get user's joinCode from token and setState accordingly. Necessary to invite new team members.
     const joinCode = jwt_decode(localStorage.getItem("token")).joinCode;
@@ -138,6 +157,10 @@ export class Dashboard extends Component {
 
   handleCloseMenu = () => {
     this.setState({ anchorEl: null });
+  };
+
+  onExit = () => {
+    this.setState(() => ({ stepsEnabled: false }));
   };
 
 }
