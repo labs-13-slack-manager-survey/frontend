@@ -11,6 +11,8 @@ import TableHeader from "../../components/TableHeader";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
 
+import CircleProgress from '../../components/circleProgress.js';
+
 import "./StatsDashboard.css";
 
 const URL = process.env.REACT_APP_BASE_URL;
@@ -119,12 +121,15 @@ class StatsDashboard extends Component {
           ))}
         </div>
         <div className="sidebar">
-          <PollCalendar />
-          <div style={{ marginTop: "30px" }}>
-            <TodayPoll
-              lastReport={this.state.reports[this.state.reports.length - 1]}
-            />
-          </div>
+          {/* <PollCalendar /> */}
+
+          <CircleProgress 
+          title = "Today's Polls"
+//  minorFix
+          percentComplete = "0.8"
+          />
+
+  
         </div>
       </div>
     );
