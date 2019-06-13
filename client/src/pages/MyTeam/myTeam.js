@@ -54,7 +54,7 @@ class myTeam extends Component {
     axiosWithAuth()
       .get(`${baseURL}/users/team`)
       .then(res => {
-        console.log(res);
+
         this.setState({ users: res.data.users });
 
         if (this.state.users.length > 0) {
@@ -62,6 +62,28 @@ class myTeam extends Component {
         }
       })
       .catch(err => console.log(err));
+
+
+      const pollEndpoint = `${baseURL}/reports`
+
+
+      axiosWithAuth()
+        .get(pollEndpoint)
+        .then(res=>{
+          console.log("POLLS COMPLETED",res.data.reports.length)
+          this.setState({
+            pollCompletion: res.data.reports.length
+          })  
+        })
+        .catch(err => {
+          console.log("ERROR GETTING POLL COMPLETED",err);
+        });
+
+
+
+
+
+
   }
 
   updateUser = () => {
@@ -120,24 +142,10 @@ class myTeam extends Component {
       });
   };
 
-  pollsCompleted = id =>{
-    const endpoint = `${baseURL}/reports/submissionRate/${id}`
-
-
-    axiosWithAuth()
-      .get(endpoint)
-      .then(res=>
-        this.setState({
-          pollCompletion: res.data
-        })  
-      )
-
-  }
 
   render() {
     //If user's account is inactive, they cannot see the dashboard
     const activeUsers = this.state.users.filter(user => user.active);
-      console.log(activeUsers)
     return this.state.active ? (
       <div className = "dashboard-view">
         <div className="view">

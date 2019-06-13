@@ -29,8 +29,6 @@ class InviteUser extends React.Component {
 	componentDidMount() {
 		// get user's joinCode from token and setState accordingly. Necessary to invite new team members.
 		const joinCode = jwt_decode(localStorage.getItem("token")).joinCode;
-		console.log(joinCode);
-		console.log(this.state.users.length)
 		this.setState({
 		  joinCode: joinCode
 		});
