@@ -16,7 +16,7 @@ import "./dashboard.css";
 
 //Tour
 import 'intro.js/introjs.css';
-import { Steps} from 'intro.js-react';
+import { Steps } from 'intro.js-react';
 export class Dashboard extends Component {
   state = {
     users: [],
@@ -31,29 +31,32 @@ export class Dashboard extends Component {
     initialStep: 0,
     steps: [
       {
-        element: '.hello',
-        intro: 'Hello step',
+        element: '.noelement',
+        intro: 'Welcome to the reports dashboard, here you can can create new polls for your team.',
       },
       {
         element: '.world',
         intro: 'World step',
       },
-    ]
+    ],
+    doneTour: false
   };
   
   render() {
-    const { stepsEnabled, steps, initialStep, hintsEnabled, hints } = this.state;
+    const { stepsEnabled, steps, initialStep} = this.state;
     if (this.state.isLoading) {
       return <Spinner intent={Intent.PRIMARY} className="loading-spinner" />;
     }
     return (
-      <>
-       <Steps
-          enabled={stepsEnabled}
-          steps={steps}
-          initialStep={initialStep}
-          onExit={this.onExit}
-        />
+      <>{localStorage.getItem('doneTour') === 'yeah!' ? 
+      null :
+      <Steps
+        enabled={stepsEnabled}
+        steps={steps}
+        initialStep={initialStep}
+        onExit={this.onExit}
+    /> 
+    }
       <PageTitle 
       title = "Reports Dashboard"
       />
@@ -160,8 +163,12 @@ export class Dashboard extends Component {
   };
 
   onExit = () => {
-    this.setState(() => ({ stepsEnabled: false }));
+    this.setState(() => ({ stepsEnabled: false, doneTour: true }));
+    localStorage.setItem('doneTour', 'yeah!');
+    console.log(this.state.doneTour, 'tour', localStorage)
   };
+
+  
 
 }
 
