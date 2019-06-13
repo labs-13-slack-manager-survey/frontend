@@ -63,8 +63,6 @@ class myTeam extends Component {
       .catch(err => console.log(err));
 
 
-      
-
     const pollEndpoint = `${baseURL}/reports`
 
       axiosWithAuth()
