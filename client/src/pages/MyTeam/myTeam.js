@@ -53,7 +53,6 @@ class myTeam extends Component {
     axiosWithAuth()
       .get(`${baseURL}/users/team`)
       .then(res => {
-        console.log("TESTING",res)
         this.setState({ users: res.data.users });
 
         if (this.state.users.length > 0) {
@@ -69,6 +68,7 @@ class myTeam extends Component {
         .get(pollEndpoint)
         .then(res=>{
 
+          // below axios call gets the user data for associated polls
           const lastReport = res.data.reports.length -1;
 
           console.log("POLLS COMPLETED",res.data)
@@ -187,16 +187,12 @@ class myTeam extends Component {
           column4 = "Last poll answered"
         />
 
+      {/* This sets the display data for each user in the displayed table */}
         {activeUsers.map(user => (
             <TableHeader 
             column1 = {user.fullName}
             column3 = {this.state.pollCompletion}
             column4 = {this.state.lastAnswerPoll}
-            // report = {report}
-            // role={this.props.role}
-            // archiveReport={this.archiveReport}
-            // archiveModal={this.state.archiveModal}
-            // ConsoleCheck = {this.ConsoleCheck}
             />
         ))}
 
