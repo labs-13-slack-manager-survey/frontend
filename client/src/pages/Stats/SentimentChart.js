@@ -13,6 +13,7 @@ class SentimentChart extends Component {
   };
 
   componentDidMount() {
+    console.log(this.props.data);
     // Labels
     this.props.reports.forEach(report => {
       this.state.labels.push(report.reportName);
@@ -26,8 +27,8 @@ class SentimentChart extends Component {
         labels: this.state.labels,
         datasets: [
           {
-            label: "Sentiment Average",
-            data: this.props.numbers,
+            label: "Response Rate",
+            data: this.props.data,
             backgroundColor: "#055EBE"
           }
         ]
@@ -38,7 +39,7 @@ class SentimentChart extends Component {
             {
               ticks: {
                 min: 0,
-                max: 5
+                max: 100
               }
             }
           ]

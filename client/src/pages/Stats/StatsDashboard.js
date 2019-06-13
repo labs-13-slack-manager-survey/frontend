@@ -11,7 +11,7 @@ import TableHeader from "../../components/TableHeader";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-import CircleProgress from '../../components/circleProgress.js';
+import CircleProgress from "../../components/circleProgress.js";
 
 import "./StatsDashboard.css";
 
@@ -24,8 +24,7 @@ class StatsDashboard extends Component {
       reports: [],
       responses: [],
       barLabels: [],
-      barData: [],
-      numbers: []
+      barData: []
     };
   }
 
@@ -33,31 +32,31 @@ class StatsDashboard extends Component {
     axiosWithAuth()
       .get(`${URL}/reports`)
       .then(res => {
-        const sentimentReports = res.data.reports.filter(report => {
-          if (report.isSentiment) {
-            return report;
-          }
-        });
+        // const sentimentReports = res.data.reports.filter(report => {
+        //   if (report.isSentiment) {
+        //     return report;
+        //   }
+        // });
         this.setState({
-          reports: sentimentReports
+          reports: res.data.reports
         });
       })
       .then(() => {
-        this.getNumbers();
+        this.getResponseRate();
       })
       .catch(err => console.log(err));
   }
 
-  getNumbers = () => {
+  getResponseRate = () => {
     this.state.reports.forEach(report => {
       axiosWithAuth()
-        .get(`${URL}/responses/sentimentAvg/${report.id}`)
+        .get(`${URL}/reports/submissionRate/${report.id}`)
         .then(res => {
+          console.log(res.data.historicalSubmissionRate);
           this.setState({
-            numbers: [...this.state.numbers, res.data[0].average]
+            barData: [...this.state.barData, res.data.historicalSubmissionRate]
           });
         })
-
         .catch(err => console.log(err));
     });
   };
@@ -94,19 +93,19 @@ class StatsDashboard extends Component {
             <SummaryBox title="Total Poll Responses" content="1715/1824" />
             <SummaryBox title="Total Response Rate" content="76%" />
           </div>
-          {this.state.numbers.length === this.state.reports.length && (
+          {this.state.barData.length === this.state.reports.length && (
             <SentimentChart
               reports={this.state.reports}
-              numbers={this.state.numbers}
+              data={this.state.barData}
             />
           )}
 
           <div style={{ marginTop: "50px" }}>
             <TableHeader
-              column1={"Poll Name"}
+              column1={"Report Name"}
               column2={"Date Created"}
               column3={"Schedule"}
-              column4={"Sentiment Avg"}
+              column4={"Response Rate"}
             />
           </div>
           {this.state.reports.map(report => (
@@ -123,13 +122,11 @@ class StatsDashboard extends Component {
         <div className="sidebar">
           {/* <PollCalendar /> */}
 
-          <CircleProgress 
-          title = "Today's Polls"
-//  minorFix
-          percentComplete = "0.8"
+          <CircleProgress
+            title="Today's Polls"
+            //  minorFix
+            percentComplete="0.8"
           />
-
-  
         </div>
       </div>
     );
