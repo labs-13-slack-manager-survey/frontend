@@ -25,7 +25,8 @@ class StatsDashboard extends Component {
       responses: [],
       barLabels: [],
       barData: [],
-      recentResponseRate: null
+      recentResponseRate: null,
+      users: []
     };
   }
 
@@ -41,6 +42,7 @@ class StatsDashboard extends Component {
         this.setState({
           reports: res.data.reports
         });
+        this.setUsers();
       })
       .then(() => {
         this.getResponseRate();
@@ -74,6 +76,16 @@ class StatsDashboard extends Component {
     });
   };
 
+  setUsers = () => {
+    axiosWithAuth()
+      .get(`${baseURL}/users/team`)
+      .then(res => {
+        console.log(res.data.users);
+        this.setState({ users: res.data.users });
+      })
+      .catch(err => console.log(err));
+  };
+
   archiveReport = id => {
     const endpoint = `${baseURL}/reports/${id}`;
     const updatedReport = {
@@ -102,9 +114,20 @@ class StatsDashboard extends Component {
         <div className="view">
           <PageTitle title="Stats Dashboard" />
           <div className="dataSquares">
-            <SummaryBox title="Number of Teams" content="8" />
-            <SummaryBox title="Total Poll Responses" content="1715/1824" />
-            <SummaryBox title="Total Response Rate" content="76%" />
+            <SummaryBox
+              title="no. of team members"
+              content={this.state.users.length}
+            />
+
+            <SummaryBox
+              title="total poll responses"
+              content={this.state.users.length}
+            />
+
+            <SummaryBox
+              title="total polls scheduled"
+              content={this.state.reports.length}
+            />
           </div>
           {this.state.barData.length === this.state.reports.length && (
             <SentimentChart
@@ -136,7 +159,7 @@ class StatsDashboard extends Component {
           {/* <PollCalendar /> */}
 
           <CircleProgress
-            title="Most Recent Poll"
+            title="Today's Polls"
             percentComplete={this.state.recentResponseRate / 100}
           />
         </div>
