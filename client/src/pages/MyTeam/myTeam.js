@@ -15,7 +15,6 @@ import CircleProgress from '../../components/circleProgress.js';
 // style imports
 // import "./view.css";
 import { Card } from "@blueprintjs/core";
-import TableDisplay from "../../components/TableHeader";
 
 // this is the container for ALL of '/dashboard'
 class myTeam extends Component {
@@ -24,6 +23,8 @@ class myTeam extends Component {
     active: true,
     users: [], 
     anchorEl: null,
+    pollCompletion: "0",
+    lastAnswerPoll: "1"
   };
 
 
@@ -119,13 +120,19 @@ class myTeam extends Component {
       });
   };
 
-  // handleClickMenu = e => {
-  //   this.setState({ anchorEl: e.currentTarget });
-  // };
+  pollsCompleted = id =>{
+    const endpoint = `${baseURL}/reports/submissionRate/${id}`
 
-  // handleCloseMenu = () => {
-  //   this.setState({ anchorEl: null });
-  // };
+
+    axiosWithAuth()
+      .get(endpoint)
+      .then(res=>
+        this.setState({
+          pollCompletion: res.data
+        })  
+      )
+
+  }
 
   render() {
     //If user's account is inactive, they cannot see the dashboard
@@ -148,6 +155,8 @@ class myTeam extends Component {
         {activeUsers.map(user => (
             <TableHeader 
             column1 = {user.fullName}
+            column3 = {this.state.pollCompletion}
+            column4 = {this.state.lastAnswerPoll}
             // report = {report}
             // role={this.props.role}
             // archiveReport={this.archiveReport}
