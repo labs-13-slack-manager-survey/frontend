@@ -13,17 +13,11 @@ class SentimentChart extends Component {
   };
 
   componentDidMount() {
-    console.log(this.state);
+    console.log(Array.isArray(this.props.numbers));
+    console.log(this.props.numbers);
+    console.log(this.props.numbers[0]);
+
     // Bar Chart ---------
-    this.props.reports.forEach(report => {
-      axiosWithAuth()
-        .get(`${URL}/responses/sentimentAvg/${report.id}`)
-        .then(res => {
-          this.state.results.push(res.data[0].average);
-        })
-        .catch(err => console.log(err));
-    });
-    console.log(this.state.results);
 
     // Labels
     this.props.reports.forEach(report => {
@@ -39,7 +33,7 @@ class SentimentChart extends Component {
         datasets: [
           {
             label: "Sentiment Average",
-            data: [],
+            data: this.props.numbers,
             backgroundColor: "#055EBE"
           }
         ]
@@ -57,15 +51,16 @@ class SentimentChart extends Component {
         }
       }
     });
-    this.addData(barChart, this.state.results);
+    // this.addData(barChart, [this.state.results]);
   }
 
-  addData = (chart, results) => {
-    chart.data.datasets.forEach(dataset => {
-      dataset.data = [1, 2, 3];
-    });
-    chart.update();
-  };
+  // addData = (chart, results) => {
+  //   console.log(results);
+  //   chart.data.datasets.forEach(dataset => {
+  //     dataset.data = results;
+  //   });
+  //   chart.update();
+  // };
 
   render() {
     return (

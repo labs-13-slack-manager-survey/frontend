@@ -22,7 +22,8 @@ class StatsDashboard extends Component {
       reports: [],
       responses: [],
       barLabels: [],
-      barData: []
+      barData: [],
+      numbers: []
     };
   }
 
@@ -39,10 +40,26 @@ class StatsDashboard extends Component {
           reports: sentimentReports
         });
       })
+      .then(() => {
+        this.getNumbers();
+      })
       .catch(err => console.log(err));
   }
 
-  viewStats = id => {};
+  getNumbers = () => {
+    this.state.reports.forEach(report => {
+      axiosWithAuth()
+        .get(`${URL}/responses/sentimentAvg/${report.id}`)
+        .then(res => {
+          console.log(res.data[0].average);
+          this.setState({
+            numbers: [...this.state.numbers, res.data[0].average]
+          });
+        })
+
+        .catch(err => console.log(err));
+    });
+  };
 
   archiveReport = id => {
     const endpoint = `${baseURL}/reports/${id}`;
@@ -76,7 +93,13 @@ class StatsDashboard extends Component {
             <SummaryBox title="Total Poll Responses" content="1715/1824" />
             <SummaryBox title="Total Response Rate" content="76%" />
           </div>
-          <SentimentChart reports={this.state.reports} />
+          {this.state.numbers.length === this.state.reports.length && (
+            <SentimentChart
+              reports={this.state.reports}
+              numbers={this.state.numbers}
+            />
+          )}
+
           <div style={{ marginTop: "50px" }}>
             <TableHeader
               column1={"Poll Name"}
