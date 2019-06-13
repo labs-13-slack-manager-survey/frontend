@@ -14,9 +14,6 @@ import { Spinner, Intent } from "@blueprintjs/core";
 import { Card, Typography } from "@material-ui/core";
 import "./dashboard.css";
 
-//Tour
-import 'intro.js/introjs.css';
-import { Steps } from 'intro.js-react';
 export class Dashboard extends Component {
   state = {
     users: [],
@@ -26,37 +23,15 @@ export class Dashboard extends Component {
     active: true,
     modal: false,
     anchorEl: null,
-    joinCode: "",
-    stepsEnabled: true,
-    initialStep: 0,
-    steps: [
-      {
-        element: '.noelement',
-        intro: 'Welcome to the reports dashboard, here you can can create new polls for your team.',
-      },
-      {
-        element: '.world',
-        intro: 'World step',
-      },
-    ],
-    doneTour: false
+    joinCode: ""
   };
   
   render() {
-    const { stepsEnabled, steps, initialStep} = this.state;
     if (this.state.isLoading) {
       return <Spinner intent={Intent.PRIMARY} className="loading-spinner" />;
     }
     return (
-      <>{localStorage.getItem('doneTour') === 'yeah!' ? 
-      null :
-      <Steps
-        enabled={stepsEnabled}
-        steps={steps}
-        initialStep={initialStep}
-        onExit={this.onExit}
-    /> 
-    }
+      <>
       <PageTitle 
       title = "Reports Dashboard"
       />
@@ -161,14 +136,6 @@ export class Dashboard extends Component {
   handleCloseMenu = () => {
     this.setState({ anchorEl: null });
   };
-
-  onExit = () => {
-    this.setState(() => ({ stepsEnabled: false, doneTour: true }));
-    localStorage.setItem('doneTour', 'yeah!');
-    console.log(this.state.doneTour, 'tour', localStorage)
-  };
-
-  
 
 }
 
