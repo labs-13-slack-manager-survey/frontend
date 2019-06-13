@@ -105,14 +105,14 @@ class CreateReport extends Component {
     //set manager questions here as well as type of manager BEFORE you add to the managerType
     EngineeringManagerQuestions: [
       "What input or feedback would you like to share with the team?",
-      "What is the top priority for us right now?",
-      "What challenges do you as the manager need to overcome?"
+      "What are the top priorities the team should be working on today?",
+      "As manager, what will you be working on to support the team?"
     ],
     ProjectManagerQuestions: [
       "What input or feedback would you like to share with the team?",
       "What do you think is the most critical part of the objective for today?",
+      "What are the blockers you are facing that will hinder project progress or success?",
       "What upcoming demos or requirements does the team need to know about?",
-      "What are the challenges you are facing for the team to succeed?"
     ]
   };
 
@@ -230,6 +230,7 @@ class CreateReport extends Component {
       }
     }
 
+
     let slackChannelName;
     this.state.channels.forEach(channel => {
       if (channel.id === this.state.slackChannelId)
@@ -267,12 +268,6 @@ class CreateReport extends Component {
       : (report["managerQuestions"] = JSON.stringify(ProjectManagerQuestions));
     console.log("mres after", report.managerResponses);
     const endpoint = `${baseURL}/reports`;
-
-    this.setState({
-      managerResponses:[this.state.resOne,this.state.resTwo,this.state.resThree,this.state.resFour]
-    })
-
-    console.log(this.state.managerResponses)
 
     axiosWithAuth()
       .post(endpoint, report)
@@ -384,7 +379,7 @@ class CreateReport extends Component {
                       variant ="outlined"
                       multiline = {true}
                       id="report-question"
-                      className="input-field"
+                      className= {this.state.resOne ? "input-field": "input-field-empty" }
                       type="text"
                       required= {true}
                       name="resOne"
@@ -399,7 +394,7 @@ class CreateReport extends Component {
                       variant ="outlined"
                       multiline = {true}
                       id="report-question"
-                      className="input-field"
+                      className= {this.state.resTwo ? "input-field": "input-field-empty" }
                       type="text"
                       name="resTwo"
                       placeholder="Enter your response here"
@@ -413,7 +408,7 @@ class CreateReport extends Component {
                       variant ="outlined"
                       multiline = {true}
                       id="report-question"
-                      className="input-field"
+                      className={this.state.resThree ? "input-field": "input-field-empty"}
                       type="text"
                       name="resThree"
                       placeholder="Enter your response here"
@@ -432,7 +427,7 @@ class CreateReport extends Component {
                       variant ="outlined"
                       multiline = {true}
                       id="report-question"
-                      className="input-field"
+                      className={this.state.resOne ? "input-field": "input-field-empty"}
                       type="text"
                       name="resOne"
                       placeholder="Enter your response here"
@@ -445,7 +440,7 @@ class CreateReport extends Component {
                       variant ="outlined"
                       multiline = {true}
                       id="report-question"
-                      className="input-field"
+                      className= {this.state.resTwo ? "input-field": "input-field-empty"}
                       type="text"
                       name="resTwo"
                       placeholder="Enter your response here"
@@ -459,7 +454,7 @@ class CreateReport extends Component {
                       variant ="outlined"
                       multiline = {true}
                       id="report-question"
-                      className="input-field"
+                      className={this.state.resThree ? "input-field": "input-field-empty"}
                       type="text"
                       name="resThree"
                       placeholder="Enter your response here"
@@ -473,7 +468,7 @@ class CreateReport extends Component {
                       variant ="outlined"
                       multiline = {true}
                       id="report-question"
-                      className="input-field"
+                      className={this.state.resFour ? "input-field": "input-field-empty"}
                       type="text"
                       name="resFour"
                       placeholder="Enter your response here"
@@ -482,7 +477,16 @@ class CreateReport extends Component {
                     /></div>
                   </div></ol>
                 )}
-                <button className = "submit-button" onClick={this.addQuestions}>Add Responses</button>
+
+          <Button
+            style={{ display: "block", marginTop: "30px" }}
+            variant="contained"
+            color="primary"
+            type="submit"
+            onClick={this.addQuestions}
+          >
+            Add Responses
+          </Button>
               </React.Fragment>
             )}
           </PopupState>
@@ -552,13 +556,13 @@ class CreateReport extends Component {
               <div className="member-form-title">Report Information</div>
               <div className = "poll-section-description">Name and describe your report</div>
               <FormControl className="report-name report-margin" required>
-                <div className= "manager-poll-question">Report Name*</div>
+                <div className= {this.state.reportName ? "manager-poll-question": "incomplete" } >Report Name*</div>
                 <TextField
                   fullWidth={true} 
                   variant ="outlined"
                   multiline = {true}
                   id="report-name"
-                  className="input-field"
+                  className= {this.state.reportName ? "input-field": "input-field-empty" }
                   required
                   type="text"
                   onChange={this.changeHandler}
