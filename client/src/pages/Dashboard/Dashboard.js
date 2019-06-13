@@ -14,6 +14,7 @@ import { Spinner, Intent } from "@blueprintjs/core";
 import { Card, Typography } from "@material-ui/core";
 import "./dashboard.css";
 
+//imports for tour
 
 export class Dashboard extends Component {
   state = {
@@ -26,7 +27,9 @@ export class Dashboard extends Component {
     anchorEl: null,
     joinCode: ""
   };
+
   render() {
+  
     if (this.state.isLoading) {
       return <Spinner intent={Intent.PRIMARY} className="loading-spinner" />;
     }

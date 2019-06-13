@@ -1,6 +1,6 @@
 {
     "name": "client",
-    "version": "0.1.0",
+    "version": "0.9.0",
     "private": true,
     "dependencies": {
         "@blueprintjs/core": "^3.15.1",
@@ -38,7 +38,7 @@
         "react-router-dom": "^5.0.0",
         "react-scripts": "^3.0.1",
         "react-scroll": "^1.7.11",
-        "react-shepherd": "^0.1.0",
+        "shepherd.js": "^2.9.1",
         "styled-components": "^4.2.0",
         "styled-dropdown-component": "^3.0.1",
         "tippy.js": "^4.3.4"

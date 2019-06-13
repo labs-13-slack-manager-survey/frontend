@@ -9211,13 +9211,6 @@ react-scroll@^1.7.11:
     lodash.throttle "^4.1.1"
     prop-types "^15.5.8"
 
-react-shepherd@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/react-shepherd/-/react-shepherd-0.1.0.tgz#aa969466d8d32bece5b8f522bf892780917e455f"
-  integrity sha512-YCzF4Hl1m4TtQtDEmcwynDw8z004eh6kdx63pJ5/NwHh1OQNDrVo3RYRPiRQp5ERE3hMhNHQfWFDy/w6go7KHQ==
-  dependencies:
-    shepherd.js "^2.5.0"
-
 react-text-mask@^5.4.3:
   version "5.4.3"
   resolved "https://registry.yarnpkg.com/react-text-mask/-/react-text-mask-5.4.3.tgz#991efb4299e30c2e6c2c46d13f617169463e0d2d"
@@ -9938,7 +9931,7 @@ shellwords@^0.1.1:
   resolved "https://registry.yarnpkg.com/shellwords/-/shellwords-0.1.1.tgz#d6b9181c1a48d397324c84871efbcfc73fc0654b"
   integrity sha512-vFwSUfQvqybiICwZY5+DAWIPLKsWO31Q91JSKl3UYv+K5c2QRPzn0qzec6QPu1Qc9eHYItiP3NdJqNVqetYAww==
 
-shepherd.js@^2.5.0:
+shepherd.js@^2.9.1:
   version "2.9.1"
   resolved "https://registry.yarnpkg.com/shepherd.js/-/shepherd.js-2.9.1.tgz#125f61a3893c234c5d25efba241d29679d2f2432"
   integrity sha512-gHHPvDh2v2tSKMd5gcS7Kjmeji3pyqhYn7CHyyIe7o/B0CIXs8MgDt3wC/h72Gat5433/+GtxQwqSr8oDQOpGQ==
