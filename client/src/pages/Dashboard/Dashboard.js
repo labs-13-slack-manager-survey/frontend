@@ -24,7 +24,8 @@ export class Dashboard extends Component {
     active: true,
     modal: false,
     anchorEl: null,
-    joinCode: ""
+    joinCode: "",
+    reports: [],
   };
   render() {
     if (this.state.isLoading) {
@@ -46,7 +47,7 @@ export class Dashboard extends Component {
 
         <SummaryBox 
             title = "total polls scheduled"
-            content = {this.state.users.length}/>
+            content = {this.state.reports.length}/>
       </div>
       </>
     );
@@ -71,6 +72,19 @@ export class Dashboard extends Component {
         }
       })
       .catch(err => console.log(err));
+
+    //get Reports    
+    const endpoint = `${baseURL}/reports`;
+    axiosWithAuth()
+    .get(endpoint)
+    .then(res => {
+      this.setState({
+        message: res.data.message,
+        reports: res.data.reports
+      });
+      this.setState({ isLoading: false });
+    })
+    .catch(err => console.log(err));
   }
 
   updateUser = () => {
