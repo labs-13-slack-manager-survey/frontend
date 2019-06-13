@@ -29,7 +29,8 @@ function Transition(props) {
 
 class TableDisplay extends React.Component {
     state = {
-		dialogOpen: false,
+        dialogOpen: false,
+        totalResponse: 0
 	}
     render() {
         const time = this.props.report.scheduleTime.split(':');
@@ -67,7 +68,7 @@ class TableDisplay extends React.Component {
                 </div>
 
 
-                <div className = "column">hello</div>
+                <div className = "column">{this.state.totalResponse}</div>
 
                 <div className = "action-icons">
                     <Link

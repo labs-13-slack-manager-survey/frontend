@@ -322,7 +322,10 @@ class CreateReport extends Component {
     e.preventDefault();
 
     this.setState({
-      managerResponses:[this.state.resOne,this.state.resTwo,this.state.resThree,this.state.resFour]
+      managerResponses:[this.state.resOne,this.state.resTwo,this.state.resThree,this.state.resFour],
+      resOne:"",
+      resTwo:"",
+      resThree:""
     })
 
     console.log(this.state.managerResponses)
