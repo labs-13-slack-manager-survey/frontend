@@ -24,7 +24,7 @@ class myTeam extends Component {
     users: [], 
     anchorEl: null,
     pollCompletion: 0,
-    lastAnswerPoll: "Labs week 3 stand-up",
+    lastAnswerPoll: "No polls Answered",
 
   };
 
