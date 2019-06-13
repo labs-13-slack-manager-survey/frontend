@@ -159,7 +159,10 @@ class StatsDashboard extends Component {
           {/* <PollCalendar /> */}
 
           <CircleProgress
-            title="Today's Polls"
+            title={
+              "Recent Poll: " +
+              this.state.reports[this.state.reports.length - 1].reportName
+            }
             percentComplete={this.state.recentResponseRate / 100}
           />
         </div>
