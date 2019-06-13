@@ -13,7 +13,6 @@ class SentimentChart extends Component {
   };
 
   componentDidMount() {
-    console.log(this.props.data);
     // Labels
     this.props.reports.forEach(report => {
       this.state.labels.push(report.reportName);

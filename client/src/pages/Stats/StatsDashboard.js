@@ -24,7 +24,8 @@ class StatsDashboard extends Component {
       reports: [],
       responses: [],
       barLabels: [],
-      barData: []
+      barData: [],
+      recentResponseRate: null
     };
   }
 
@@ -43,16 +44,28 @@ class StatsDashboard extends Component {
       })
       .then(() => {
         this.getResponseRate();
+        this.setRecentResponse();
       })
       .catch(err => console.log(err));
   }
+
+  setRecentResponse = () => {
+    let recentReport = this.state.reports[this.state.reports.length - 1];
+    axiosWithAuth()
+      .get(`${URL}/reports/submissionRate/${recentReport.id}`)
+      .then(res => {
+        this.setState({
+          recentResponseRate: res.data.historicalSubmissionRate
+        });
+      })
+      .catch(err => console.log(err));
+  };
 
   getResponseRate = () => {
     this.state.reports.forEach(report => {
       axiosWithAuth()
         .get(`${URL}/reports/submissionRate/${report.id}`)
         .then(res => {
-          console.log(res.data.historicalSubmissionRate);
           this.setState({
             barData: [...this.state.barData, res.data.historicalSubmissionRate]
           });
@@ -123,9 +136,8 @@ class StatsDashboard extends Component {
           {/* <PollCalendar /> */}
 
           <CircleProgress
-            title="Today's Polls"
-            //  minorFix
-            percentComplete="0.8"
+            title="Most Recent Poll"
+            percentComplete={this.state.recentResponseRate / 100}
           />
         </div>
       </div>
