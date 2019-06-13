@@ -5,7 +5,9 @@ import "./circleProgress.css";
 
 class circleProgress extends React.Component {
 
-    componentDidMount() {
+  
+    render() {
+      console.log(this.props.percentComplete);
       $('#circle').circleProgress({
         value: this.props.percentComplete,
         size: 150,
@@ -18,8 +20,6 @@ class circleProgress extends React.Component {
         emptyFill: 'rgb(231, 254, 255)',
 
       });
-    }
-    render() {
           const numericPercent = Math.trunc(this.props.percentComplete *100); 
 
           let today = new Date();
