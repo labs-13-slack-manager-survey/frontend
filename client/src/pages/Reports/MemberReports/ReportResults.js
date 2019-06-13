@@ -142,13 +142,7 @@ class ReportResults extends Component {
                                         <p className="response-container-main-answer">
                                           <div className={ "regular-answer"}>{answer}</div>
                                           <div className ="linebr" />
-
                                         </p>
-                                      <p className="response-container-main-answer">
-                                        <div className={"regular-answer"}>
-                                          {answer}
-                                        </div>
-                                      </p>
                                     </div>
                                   )
                                 )}{" "}
@@ -168,7 +162,7 @@ class ReportResults extends Component {
         <div className="sidebar">
           <CircleProgress
             title="Today's Poll"
-            minorFix
+            // minorFix
             percentComplete={this.state.historicalSubmissionRate}
           />
           <Card
@@ -240,6 +234,7 @@ class ReportResults extends Component {
         responders,
         historicalSubmissionRate
       });
+      console.log(this.state.historicalSubmissionRate);
     } catch (err) {
       console.log(err);
     }
