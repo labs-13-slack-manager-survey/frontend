@@ -60,7 +60,7 @@ function App() {
       <PrivateRoute exact path="/slackr/dashboard" component={View} />
 
           {/* Stats Dashboard */}
-      <Route path="/slackr/dashboard/stats" component={StatsDashboard} />
+      <PrivateRoute path="/slackr/dashboard/stats" component={StatsDashboard} />
 
           {/* Reports */}
       <PrivateRoute path="/slackr/dashboard/reports" component={ReportsDash} />

@@ -42,6 +42,7 @@ class ReportResults extends Component {
     completed: false,
     isSentiment: false,
     secondaryPage: true,
+    percentComplete: 0,
     historicalSubmissionRate: 0
   };
 
@@ -91,11 +92,6 @@ class ReportResults extends Component {
               batch =>
                 batch.responses.length > 0 && (
                   <div key={batch.date}>
-                    {/* <h3 className="report-results-feed-date">
-                        {new Date(batch.date)
-                          .toLocaleDateString("en-US", options)
-                          .replace(",", "")}
-                      </h3> */}
                     {batch.responses.map(response => (
                       <div key={response.userId}>
                         <div className="response-container">
@@ -117,19 +113,38 @@ class ReportResults extends Component {
                             <div className="vertical-timeline" />
                             <div className="response-content">
                               <ol type="1">
-                                {response.questions.map(
-                                  ({
-                                    question,
-                                    answer,
-                                    id,
-                                    sentimentRange
-                                  }) => (
-                                    <div key={id}>
-                                      <div className="response-container-main-question">
-                                        <li className="manager-poll-question">
-                                          {question}
-                                        </li>
-                                      </div>
+                                  {response.questions.map(
+                                    ({ question, answer, id, sentimentRange }) => (
+                                      <div key={id} className = "question-response">
+                                        <div className="response-container-main-question">
+                                        
+                                          <li className = "manager-poll-question">{question}</li>
+                                          
+                                        </div>
+                                        {this.state.isSentiment && 
+                                        <>
+                                            <StyledSlider
+                                              className="slider"
+                                              value={sentimentRange}
+                                              min={1}
+                                              max={5}
+                                              step={1}
+                                            />
+                                              <div className="slider-label">
+                                                <p className={sentimentRange !=1 ? "deselected" : null}>1</p>
+                                                <p className={sentimentRange !=2 ? "deselected" : null}>2</p>
+                                                <p className={sentimentRange !=3 ? "deselected" : null}>3</p>
+                                                <p className={sentimentRange !=4 ? "deselected" : null}>4</p>
+                                                <p className={sentimentRange !=5 ? "deselected" : null}>5</p>
+                                              </div>
+                                          </>
+                                        } 
+                                        <p className="response-container-main-answer">
+                                          <div className={ "regular-answer"}>{answer}</div>
+                                          <div className ="linebr" />
+
+                                        </p>
+                                      {/* </div>
                                       {this.state.isSentiment && (
                                         <>
                                           <StyledSlider
@@ -187,7 +202,7 @@ class ReportResults extends Component {
                                             </p>
                                           </div>
                                         </>
-                                      )}
+                                      )} */}
                                       <p className="response-container-main-answer">
                                         <div className={"regular-answer"}>
                                           {answer}
@@ -240,6 +255,7 @@ class ReportResults extends Component {
       </div>
     );
   }
+
   getData = async () => {
     try {
       const userId = jwt_decode(localStorage.getItem("token")).subject;
@@ -287,46 +303,9 @@ class ReportResults extends Component {
       console.log(err);
     }
   };
+
   componentDidMount() {
     this.getData();
-    // const userId = jwt_decode(localStorage.getItem("token")).subject;
-    // axiosWithAuth()
-    // .get(`${baseURL}/reports/${this.props.match.params.reportId}`)
-    // .then(res => {
-    //   const {
-    //     isSentiment,
-    //   } = res.data.report;
-    //   this.setState({
-    //     isSentiment: isSentiment
-    //   });
-    // })
-    // .catch(err => console.log(err));
-    // axiosWithAuth()
-    // .get(`${baseURL}/responses/${this.props.match.params.reportId}`)
-    //   .then(res => {
-    //     console.log("RES++__++",res);
-    //     const filtered = res.data[0].responses.filter(
-    //       response => response.userId === userId
-    //     );
-    //     // Filter all unique responders and push to state
-    //     const user = [];
-    //     const responders = [];
-    //     res.data.forEach(({ responses }) => {
-    //       responses.length > 0 &&
-    //         responses.forEach(({ userId, profilePic, fullName }) => {
-    //           if (!user.includes(userId)) {
-    //             user.push(userId);
-    //             responders.push({ userId, profilePic, fullName });
-    //           }
-    //         });
-    //     });
-    //     this.setState({
-    //       responses: res.data,
-    //       filteredResponse: filtered,
-    //       responders
-    //     });
-    //   })
-    //   .catch(err => console.log(err));
   }
 
   filter = (date, responder) => {
