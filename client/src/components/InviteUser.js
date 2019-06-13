@@ -35,7 +35,6 @@ class InviteUser extends React.Component {
 		axiosWithAuth()
 		  .get(`${baseURL}/users/team`)
 		  .then(res => {
-			console.log(res);
 			this.setState({ users: res.data.users });
 	
 			if (this.state.users.length > 0) {

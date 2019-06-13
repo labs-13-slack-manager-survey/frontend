@@ -57,11 +57,6 @@ class Reports extends Component {
       });
   };
 
-  // ConsoleCheck = (id) => {
-  //   console.log(id)
-
-  // }
-
   handleClose = () => {
     this.setState({
       slackModal: false
@@ -121,6 +116,7 @@ class Reports extends Component {
               column3 = "Schedule" 
               column4 = "Total Responses"/>
           {activeReports.map(report => (
+            console.log("list of reports",report),
               <TableDisplay 
               content1 = {report.reportName}
               report = {report}
