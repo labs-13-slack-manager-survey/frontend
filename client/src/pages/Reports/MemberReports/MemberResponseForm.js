@@ -38,7 +38,7 @@ class MemberResponseForm extends Component {
     ) : (
       <div>
         {/*need to render this condtionally  */}
-        {this.state.isSentiment || this.state.managerResponses[0] !== "" ? null : (
+        {this.state.isSentiment ? null : (
           <div className = "manager-poll-responses">
             <div className = "poll-header-toggle"  onClick={this.toggleManagerQ}>
               <div className="member-form-title">Managers Thoughts</div>
