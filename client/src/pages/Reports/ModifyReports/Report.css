@@ -1,250 +1,248 @@
 h3 {
-	font-weight: 400;
-	margin: 10px 0;
+  font-weight: 400;
+  margin: 10px 0;
 }
 
 p {
-	font-size: 14px;
-	margin-top: 20px;
-
+  font-size: 14px;
+  margin-top: 20px;
 }
 
 .days-flex {
-	display: flex;
-	height: 30px;
-	justify-content: space-around;
-	max-width: 500px;
-	margin: 30px 0;
-	font-size: 20px;
-	font-weight: 400;
+  display: flex;
+  height: 30px;
+  justify-content: space-around;
+  max-width: 500px;
+  margin: 30px 0;
+  font-size: 20px;
+  font-weight: 400;
 }
 
 .schedule-title {
-	font-size: 20px;
+  font-size: 20px;
 }
 
 .report-time {
-	margin: 20px 0;
-	margin-bottom: 10px;
+  margin: 20px 0;
+  margin-bottom: 10px;
 }
 
-
-
 .delete-icon {
-	width: 30px;
-	height: 30px;
+  width: 30px;
+  height: 30px;
 }
 
 .selected {
-	border: 2px solid #5475ee;
-	color: white;
-	background-color: #5475ee;
+  border: 2px solid #5475ee;
+  color: white;
+  background-color: #5475ee;
+  width: 15px;
 }
 
 .question-flex {
-	display: flex;
-	margin-top: 10px;
-	max-width: 500px;
+  display: flex;
+  margin-top: 10px;
+  max-width: 500px;
 }
 
 .question {
-	max-width: 500px;
-	width: 90%;
-	font-size: 20px;
-	margin: 10px 0;
+  max-width: 500px;
+  width: 90%;
+  font-size: 20px;
+  margin: 10px 0;
 }
 
 .question-button {
-	cursor: pointer;
-	width: 50px;
+  cursor: pointer;
+  width: 50px;
 }
 
 .enter-question {
-	display: flex;
+  display: flex;
 }
 
 .create-report {
-	max-width: 800px;
-	margin: 20px auto;
-	/* border: 1px solid rgb(226, 226, 226); */
-	padding: 20px;
+  max-width: 800px;
+  margin: 20px auto;
+  /* border: 1px solid rgb(226, 226, 226); */
+  padding: 20px;
 }
 
 .edit-report {
-	max-width: 600px;
-	width: 100%;
-	margin: 20px auto;
+  max-width: 600px;
+  width: 100%;
+  margin: 20px auto;
 }
 
 .report-name {
-	max-width: 500px;
-	width: 100%;
-	font-size: 20px;
-	margin: 30px 0;
+  max-width: 500px;
+  width: 100%;
+  font-size: 20px;
+  margin: 30px 0;
 }
 
 .report-margin {
-	margin-top: 20px;
+  margin-top: 20px;
 }
 
 .slack-dropdown {
-	margin: 20px 0;
+  margin: 20px 0;
 }
 
 .button-block {
-	margin: 10px 0;
-	display: block;
+  margin: 10px 0;
+  display: block;
 }
 
 .input-field {
-	max-width: 500px;
-	width: 100%;
-	margin: 10px 0;
+  max-width: 500px;
+  width: 100%;
+  margin: 10px 0;
 }
 
-
 .margin-fix {
-	margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .schedule-card {
-	z-index: 999;
-	margin: 10px 0;
-	padding-bottom: 4rem;
+  z-index: 999;
+  margin: 10px 0;
+  padding-bottom: 4rem;
 }
 
 .schedule-card-content {
-	margin: 24px;
+  margin: 24px;
 }
 
 .divider {
-	margin: 30px 0;
+  margin: 30px 0;
 }
 
 .submit-button {
-	margin: 20px;
+  margin: 20px;
 }
 
 .top-input {
-	max-width: 500px;
-	width: 100%;
-	margin: 10px 0;
-	margin-top: 30px;
+  max-width: 500px;
+  width: 100%;
+  margin: 10px 0;
+  margin-top: 30px;
 }
 .MuiButton-outlinedPrimary-95 {
-	margin: 30px auto;
+  margin: 30px auto;
 }
 
 /* ------------------------- */
 
 .dropbtn {
-	background-color: #3498DB;
-	color: white;
-	padding: 16px;
-	font-size: 16px;
-	border: none;
-	cursor: pointer;
-  }
-  
-  .dropbtn:hover, .dropbtn:focus {
-	background-color: #2980B9;
-  }
-  
-  .dropdown {
-	position: relative;
-	display: inline-block;
-  }
-  /* this is making each question display:none */
-  .dropdown-content {
-	display: none;
-	position: absolute;
-	background-color: #f1f1f1;
-	min-width: 160px;
-	overflow: auto;
-	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-	z-index: 1;
-  }
-  
-  .dropdown-content a {
-	color: black;
-	padding: 12px 16px;
-	text-decoration: none;
-	display: block;
-  }
-  
-  .dropdown a:hover {background-color: #ddd;}
-  
-  .show {display: block}
+  background-color: #3498db;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
 
+.dropbtn:hover,
+.dropbtn:focus {
+  background-color: #2980b9;
+}
 
-  .yesNoButton{
-	 display: flex;
-	 flex-direction: row;
-  }
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+/* this is making each question display:none */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
 
-  .btnnn{
-	  display:none;
-  }
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
 
-  .poll-section-description {
+.dropdown a:hover {
+  background-color: #ddd;
+}
+
+.show {
+  display: block;
+}
+
+.yesNoButton {
+  display: flex;
+  flex-direction: row;
+}
+
+.btnnn {
+  display: none;
+}
+
+.poll-section-description {
   font-size: 14px;
   font-weight: 300;
-	margin-top: 10px;
-	line-height: 22px;
-	padding-bottom: 20px;
-	color: #9C9C9C;
-  }	
+  margin-top: 10px;
+  line-height: 22px;
+  padding-bottom: 20px;
+  color: #9c9c9c;
+}
 
-  .toggle-manager-questions {
-	  display: flex;
-	  flex-direction: row;
-	  justify-content: space-between;
-	  align-items: flex-end;
-  }
+.toggle-manager-questions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+}
 
-  .manager-toggle{
-	  width: 30px;
+.manager-toggle {
+  width: 30px;
+}
 
-  }
+.poll-answer-field {
+  margin-top: 25px;
+}
 
-  .poll-answer-field{
-	  margin-top: 25px;
-  }
+.submit-button {
+  height: 50px;
+  background-color: none;
+}
 
-  .submit-button {
-	  height: 50px;
-	  background-color: none;
+.linebr {
+  height: 20px;
+}
 
-  }
+.response-card-example {
+  border: 1px dashed rgb(226, 226, 226);
+  padding: 30px;
+}
 
-  .linebr {
-	  height: 20px;
-  }
+.response-question {
+  text-align: left;
+  font-style: italic;
+  color: #9c9c9c;
+  font-size: 12px;
+}
 
-  .response-card-example {
-	border: 1px dashed rgb(226, 226, 226);
-	padding: 30px;
-  }
-
-  .response-question {
-	text-align: left;
-	font-style: italic;
-	color: #9C9C9C;
-	font-size: 12px;
-  }
-
-  .incomplete {
-	color: red;
-	font-size: 15px;
-	font-weight: 400;
-	padding-top: 10px;
-	padding-bottom: 15px;
-  }
-
+.incomplete {
+  color: red;
+  font-size: 15px;
+  font-weight: 400;
+  padding-top: 10px;
+  padding-bottom: 15px;
+}
 
 .input-field-empty {
-	background-color: rgb(255, 240, 240);
-	max-width: 500px;
-	width: 100%;
-	margin: 10px 0;
+  background-color: rgb(255, 240, 240);
+  max-width: 500px;
+  width: 100%;
+  margin: 10px 0;
 }
