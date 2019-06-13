@@ -86,7 +86,7 @@ class CreateReport extends Component {
       "Did you have any blockers yesterday?",
       "How are you feeling about your contribution so far?",
       "Are you happy with your teams contribution to this sprint?"
-    ],
+    ], 
     // Temporary State
     channels: [],
     question: "",
@@ -204,14 +204,30 @@ class CreateReport extends Component {
       this.setState({
         errorMessage: "Please enter your report name in the respective field"
       });
-      return this.state.message;
+      console.log(this.state.errorMessage)
+      return this.state.errorMessage;
     }
 
     if (this.state.schedule.length < 1) {
       this.setState({
         errorMessage: "Please choose at least one day two send out your report"
       });
-      return this.state.message;
+      console.log(this.state.errorMessage)
+      console.log(this.state.managerQuestions)
+      return this.state.errorMessage;
+    }
+
+    if(this.state.managerQuestions) {
+      console.log(this.state.resOne)
+      if(this.state.resOne == "" || this.state.resTwo == "" || this.state.resThree == "") {
+        this.setState({
+          errorMessage: "Please enter all answers to the manager polls "
+        });
+        console.log(this.state.managerQuestions)
+        console.log('hello')
+        console.log(this.state.errorMessage)
+        return this.state.errorMessage;
+      }
     }
 
     let slackChannelName;
@@ -251,6 +267,13 @@ class CreateReport extends Component {
       : (report["managerQuestions"] = JSON.stringify(ProjectManagerQuestions));
     console.log("mres after", report.managerResponses);
     const endpoint = `${baseURL}/reports`;
+
+    this.setState({
+      managerResponses:[this.state.resOne,this.state.resTwo,this.state.resThree,this.state.resFour]
+    })
+
+    console.log(this.state.managerResponses)
+
     axiosWithAuth()
       .post(endpoint, report)
       .then(res => {
@@ -353,19 +376,20 @@ class CreateReport extends Component {
 
                   <div>
                     <ol><div className ="poll-answer-field"><li><div className= "manager-poll-question">{this.state.EngineeringManagerQuestions[0]}</div></li>
-                      <TextField
+                    <FormControl className="input-field" required><TextField
                       fullWidth={true} 
                       variant ="outlined"
                       multiline = {true}
                       id="report-question"
                       className="input-field"
                       type="text"
+                      required= {true}
                       name="resOne"
                       placeholder="Enter your response here"
                       value={this.state.resOne}
                       onChange={this.handleChange}
                       onSubmit = {this.add}
-                      /></div>
+                      /></FormControl></div>
                       <div className ="poll-answer-field"><li><div className= "manager-poll-question">{this.state.EngineeringManagerQuestions[1]}</div></li>
                       <TextField
                       fullWidth={true} 
