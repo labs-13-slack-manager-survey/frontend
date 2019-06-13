@@ -99,9 +99,7 @@
 	padding-left: 25px;
 	padding-bottom: 25px;
 }
-.report-results-filter-container {
 
-}
 
 .report-results-filter {
 	display: block;
@@ -187,4 +185,17 @@
 
 .question-response {
 	padding-bottom: 30px;
+}
+
+.filter-by-users{ 
+	display: flex;
+	flex-direction: row; 
+	justify-content: flex-end; 
+}
+
+.username-profile-pic {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-size: 12px;
 }
