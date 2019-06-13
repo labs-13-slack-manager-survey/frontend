@@ -11,7 +11,7 @@ import TableHeader from "../../components/TableHeader";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-import CircleProgress from '../../components/circleProgress.js';
+import CircleProgress from "../../components/circleProgress.js";
 
 import "./StatsDashboard.css";
 
@@ -24,7 +24,9 @@ class StatsDashboard extends Component {
       reports: [],
       responses: [],
       barLabels: [],
-      barData: []
+      barData: [],
+      recentResponseRate: null,
+      users: []
     };
   }
 
@@ -32,19 +34,57 @@ class StatsDashboard extends Component {
     axiosWithAuth()
       .get(`${URL}/reports`)
       .then(res => {
-        const sentimentReports = res.data.reports.filter(report => {
-          if (report.isSentiment) {
-            return report;
-          }
-        });
+        // const sentimentReports = res.data.reports.filter(report => {
+        //   if (report.isSentiment) {
+        //     return report;
+        //   }
+        // });
         this.setState({
-          reports: sentimentReports
+          reports: res.data.reports
         });
+        this.setUsers();
+      })
+      .then(() => {
+        this.getResponseRate();
+        this.setRecentResponse();
       })
       .catch(err => console.log(err));
   }
 
-  viewStats = id => {};
+  setRecentResponse = () => {
+    let recentReport = this.state.reports[this.state.reports.length - 1];
+    axiosWithAuth()
+      .get(`${URL}/reports/submissionRate/${recentReport.id}`)
+      .then(res => {
+        this.setState({
+          recentResponseRate: res.data.historicalSubmissionRate
+        });
+      })
+      .catch(err => console.log(err));
+  };
+
+  getResponseRate = () => {
+    this.state.reports.forEach(report => {
+      axiosWithAuth()
+        .get(`${URL}/reports/submissionRate/${report.id}`)
+        .then(res => {
+          this.setState({
+            barData: [...this.state.barData, res.data.historicalSubmissionRate]
+          });
+        })
+        .catch(err => console.log(err));
+    });
+  };
+
+  setUsers = () => {
+    axiosWithAuth()
+      .get(`${baseURL}/users/team`)
+      .then(res => {
+        console.log(res.data.users);
+        this.setState({ users: res.data.users });
+      })
+      .catch(err => console.log(err));
+  };
 
   archiveReport = id => {
     const endpoint = `${baseURL}/reports/${id}`;
@@ -74,17 +114,34 @@ class StatsDashboard extends Component {
         <div className="view">
           <PageTitle title="Stats Dashboard" />
           <div className="dataSquares">
-            <SummaryBox title="Number of Teams" content="8" />
-            <SummaryBox title="Total Poll Responses" content="1715/1824" />
-            <SummaryBox title="Total Response Rate" content="76%" />
+            <SummaryBox
+              title="no. of team members"
+              content={this.state.users.length}
+            />
+
+            <SummaryBox
+              title="total poll responses"
+              content={this.state.users.length}
+            />
+
+            <SummaryBox
+              title="total polls scheduled"
+              content={this.state.reports.length}
+            />
           </div>
-          <SentimentChart reports={this.state.reports} />
+          {this.state.barData.length === this.state.reports.length && (
+            <SentimentChart
+              reports={this.state.reports}
+              data={this.state.barData}
+            />
+          )}
+
           <div style={{ marginTop: "50px" }}>
             <TableHeader
-              column1={"Poll Name"}
+              column1={"Report Name"}
               column2={"Date Created"}
               column3={"Schedule"}
-              column4={"Sentiment Avg"}
+              column4={"Response Rate"}
             />
           </div>
           {this.state.reports.map(report => (
@@ -101,13 +158,13 @@ class StatsDashboard extends Component {
         <div className="sidebar">
           {/* <PollCalendar /> */}
 
-          <CircleProgress 
-          title = "Today's Polls"
-//  minorFix
-          percentComplete = "0.8"
+          <CircleProgress
+            title={
+              "Recent Poll: " +
+              this.state.reports[this.state.reports.length - 1].reportName
+            }
+            percentComplete={this.state.recentResponseRate / 100}
           />
-
-  
         </div>
       </div>
     );
