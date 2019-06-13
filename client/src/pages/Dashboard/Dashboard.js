@@ -11,7 +11,6 @@ import SummaryBox from '../../components/SummaryBox';
 import { Spinner, Intent } from "@blueprintjs/core";
 import "./dashboard.css";
 
-
 export class Dashboard extends Component {
   state = {
     users: [],
@@ -23,6 +22,7 @@ export class Dashboard extends Component {
     anchorEl: null,
     joinCode: ""
   };
+  
   render() {
     if (this.state.isLoading) {
       return <Spinner intent={Intent.PRIMARY} className="loading-spinner" />;
@@ -48,7 +48,7 @@ export class Dashboard extends Component {
       </>
     );
   }
-
+  
   componentDidMount() {
     // get user's joinCode from token and setState accordingly. Necessary to invite new team members.
     const joinCode = jwt_decode(localStorage.getItem("token")).joinCode;

@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { axiosWithAuth, baseURL } from "../../../config/axiosWithAuth";
+import Slider from "@material-ui/lab/Slider";
+import { fade } from "@material-ui/core/styles/colorManipulator";
+
 
 // imports for time schedule
 import { getHours } from "date-fns";
@@ -21,6 +24,9 @@ import {
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import { TimePicker } from "material-ui-pickers";
+import PageTitle from '../../../components/PageTitle'
+import PollDescription from '../../../components/PollDescription'
+
 
 import "./Report.css";
 
@@ -40,6 +46,31 @@ const styles = theme => ({
     width: 200
   }
 });
+
+const StyledSlider = withStyles({
+  thumb: {
+    height: 24,
+    width: 24,
+    backgroundColor: "#F67B28",
+    border: `3px solid #fff`,
+    "&$focused, &:hover": {
+      boxShadow: `0px 0px 0px ${8}px ${fade("#de235b", 0.16)}`
+    },
+    "&$activated": {
+      boxShadow: `0px 0px 0px ${6}px ${fade("#de235b", 0.16)}`
+    },
+    "&$jumped": {
+      boxShadow: `0px 0px 0px ${2}px ${fade("#de235b", 0.16)}`
+    }
+  },
+  track: {
+    backgroundColor: "#FEBA47",
+    height: 8
+  },
+  trackAfter: {
+    backgroundColor: "#d0d7dc"
+  }
+})(Slider);
 
 class CreateSentiment extends Component {
   state = {
@@ -66,7 +97,8 @@ class CreateSentiment extends Component {
       "Friday",
       "Saturday",
       "Sunday"
-    ]
+    ],
+    exampleSentiment: "3", 
   };
 
   changeHandler = e => {
@@ -207,22 +239,60 @@ class CreateSentiment extends Component {
       .catch(err => console.log(err));
   };
 
+  handleSentimentExample = (event, value) => {
+    this.setState(prevState => ({
+      ...prevState,
+      exampleSentiment: value,
+    }));
+  };
+
   render() {
     const { classes } = this.props;
 
     return (
       <div className="create-report">
-        <Fab onClick={() => this.props.history.goBack()} color="default">
-          <Icon>arrow_back</Icon>
-        </Fab>
-        <form className="create-report">
-          <Card raised={true} className="schedule-card">
-            <section className="schedule-card-content">
-              <h3 className="schedule-title">Report Information</h3>
-              <Divider className="divider" variant="fullWidth" />
+        <PageTitle 
+          title = "New Sentiment Poll"
+          {...this.props}
+          secondaryPage = {true}
+        />
+        <PollDescription description= "Create a sentiment survey of questions to capture how your team feels about their work on a scale of 1-5. Respondents will also have the option of including additional comments to accompany their response."/>
+        <div className = "response-card-example">
+            <div className = "response-question">Sample: How confident are you feeling about completing the tasks assigned to you today?</div>
+            <StyledSlider
+              className="slider"
+              value={this.state.exampleSentiment}
+              min={1}
+              max={5}
+              step={1}
+              // onChange={e => this.props.handleChange(e, this.props.question)}
+              onChange={(e, v) =>
+                this.handleSentimentExample(e, v)
+              }
+            />
+            <div className="slider-label">
+              <p>1</p>
+              <p>2</p>
+              <p>3</p>
+              <p>4</p>
+              <p>5</p>
+            </div>
+
+        </div>
+        
+        <div className = "linebr" />
+        <div className = "vertical-line" />
+        <div className = "linebr" />
+        <section className="response-card">
+            <section className="manager-poll-responses">
+              <div className="member-form-title">Poll Information</div>
+              <div className = "poll-section-description">Name and describe your poll</div>
               <FormControl className="report-name report-margin" required>
-                <InputLabel htmlFor="report-name">Report Name</InputLabel>
-                <Input
+                <div className= "manager-poll-question">Poll Name*</div>
+                <TextField
+                  fullWidth={true} 
+                  variant ="outlined"
+                  multiline = {true}
                   id="report-name"
                   className="input-field"
                   required
@@ -235,10 +305,11 @@ class CreateSentiment extends Component {
               </FormControl>
               <section>
                 <FormControl className="input-field" required>
-                  <InputLabel htmlFor="report-message">
-                    Report Message
-                  </InputLabel>
-                  <Input
+                <div className ="poll-answer-field"><div className= "manager-poll-question">Description</div>
+                  <TextField
+                    fullWidth={true} 
+                    variant ="outlined"
+                    multiline = {true}
                     required
                     className="input-field"
                     id="report-message"
@@ -247,9 +318,10 @@ class CreateSentiment extends Component {
                     name="message"
                     placeholder="Message to be sent with each report"
                     value={this.state.message}
-                  />
+                  /></div>
                 </FormControl>
               </section>
+
               <section>
                 {this.state.channels.length > 0 ? (
                   <div>
@@ -280,11 +352,15 @@ class CreateSentiment extends Component {
                 ) : null}
               </section>
             </section>
-          </Card>
-          <Card raised={true} className="schedule-card">
-            <section className="schedule-card-content">
-              <h3 className="schedule-title">Delivery Schedule</h3>
-              <Divider className="divider" variant="fullWidth" />
+          </section>
+
+
+          <div className = "linebr" />
+          <section className="response-card">
+            <section className="manager-poll-responses">
+              <div className="member-form-title">Delivery schedule</div>
+              <div className = "poll-section-description">When would you like the poll to be sent out to your team?</div>
+
               <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <p style={{ marginTop: "40px" }}>Days</p>
                 <Button
@@ -321,11 +397,12 @@ class CreateSentiment extends Component {
                 />
               </section>
             </section>
-          </Card>
-          <Card raised={true} className="schedule-card">
-            <section className="schedule-card-content">
-              <h3 className="schedule-title">Poll Questions</h3>
-              <Divider className="divider" variant="fullWidth" />
+          </section>
+          
+          <div className="linebr" />
+          <section className="response-card">
+            <section className="manager-poll-responses">
+            <div className="member-form-title">Poll Questions</div>
               <section>
                 {this.state.questions.map(question => (
                   <article className="question-flex" key={question}>
@@ -367,7 +444,8 @@ class CreateSentiment extends Component {
                 </Fab>
               </section>
             </section>
-          </Card>
+          </section>
+
           <Button
             style={{ display: "block", marginTop: "30px" }}
             variant="contained"
@@ -378,7 +456,7 @@ class CreateSentiment extends Component {
           >
             Create Report
           </Button>
-        </form>
+
       </div>
     );
   }

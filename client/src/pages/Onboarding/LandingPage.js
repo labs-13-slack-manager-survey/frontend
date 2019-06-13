@@ -10,7 +10,7 @@ import './onboarding.css';
 const LandingPage = props => {
 	return (
 		<Card className="onboarding">
-			<h2>Welcome to Stand-Em-Ups!</h2>
+			<h2>Welcome to Slackr!</h2>
 			<Card raised={true} className="onboardingCard">
 				<div className="onboarding-card-content">
 					<h3>You can join a team or create your own!</h3>

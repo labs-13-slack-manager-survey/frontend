@@ -23,3 +23,13 @@
     letter-spacing: 0.5px;
     margin-bottom: 50px;
 }
+
+.poll-description {
+    font-size: 14px;
+    text-align: left;
+    margin-top: -25px;
+    color: #9C9C9C;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+    margin-bottom: 30px;
+}
