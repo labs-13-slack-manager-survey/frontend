@@ -144,11 +144,6 @@ class ReportResults extends Component {
                                           <div className ="linebr" />
 
                                         </p>
-                                      <p className="response-container-main-answer">
-                                        <div className={"regular-answer"}>
-                                          {answer}
-                                        </div>
-                                      </p>
                                     </div>
                                   )
                                 )}{" "}

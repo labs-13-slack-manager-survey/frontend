@@ -25,6 +25,7 @@ export class Dashboard extends Component {
     anchorEl: null,
     joinCode: "",
     reports: [],
+    totalResponses: 0,
   };
   
   render() {
@@ -43,7 +44,7 @@ export class Dashboard extends Component {
 
         <SummaryBox 
             title = "total poll responses" 
-            content = {this.state.users.length}/>
+            content = {this.state.totalResponses}/>
 
         <SummaryBox 
             title = "total polls scheduled"
@@ -73,6 +74,17 @@ export class Dashboard extends Component {
       })
       .catch(err => console.log(err));
 
+      axiosWithAuth()
+      .get(`${baseURL}/reports/submissionRate`)
+      .then(res => {
+        console.log(res.data.totalResponses);
+        this.setState({
+          totalResponses: res.data.totalResponses,
+        })
+      })
+      .catch(err => console.log(err))
+
+
     //get Reports    
     const endpoint = `${baseURL}/reports`;
     axiosWithAuth()
@@ -87,6 +99,14 @@ export class Dashboard extends Component {
     .catch(err => console.log(err));
   }
 
+  getTotalPolls = () => {
+    axiosWithAuth()
+    .get(`${baseURL}/reports/submissionRate`)
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => console.log(err))
+  }
   updateUser = () => {
     const endpoint = `${baseURL}/users/`;
     const editedUser = {
