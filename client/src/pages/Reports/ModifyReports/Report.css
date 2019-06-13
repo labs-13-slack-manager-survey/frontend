@@ -102,6 +102,7 @@ p {
 	margin: 10px 0;
 }
 
+
 .margin-fix {
 	margin-bottom: 10px;
 }
@@ -231,3 +232,19 @@ p {
 	color: #9C9C9C;
 	font-size: 12px;
   }
+
+  .incomplete {
+	color: red;
+	font-size: 15px;
+	font-weight: 400;
+	padding-top: 10px;
+	padding-bottom: 15px;
+  }
+
+
+.input-field-empty {
+	background-color: rgb(255, 240, 240);
+	max-width: 500px;
+	width: 100%;
+	margin: 10px 0;
+}
