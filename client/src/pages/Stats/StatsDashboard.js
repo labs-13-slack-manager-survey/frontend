@@ -51,7 +51,6 @@ class StatsDashboard extends Component {
       axiosWithAuth()
         .get(`${URL}/responses/sentimentAvg/${report.id}`)
         .then(res => {
-          console.log(res.data[0].average);
           this.setState({
             numbers: [...this.state.numbers, res.data[0].average]
           });

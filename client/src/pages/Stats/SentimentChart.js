@@ -13,12 +13,6 @@ class SentimentChart extends Component {
   };
 
   componentDidMount() {
-    console.log(Array.isArray(this.props.numbers));
-    console.log(this.props.numbers);
-    console.log(this.props.numbers[0]);
-
-    // Bar Chart ---------
-
     // Labels
     this.props.reports.forEach(report => {
       this.state.labels.push(report.reportName);
@@ -51,16 +45,7 @@ class SentimentChart extends Component {
         }
       }
     });
-    // this.addData(barChart, [this.state.results]);
   }
-
-  // addData = (chart, results) => {
-  //   console.log(results);
-  //   chart.data.datasets.forEach(dataset => {
-  //     dataset.data = results;
-  //   });
-  //   chart.update();
-  // };
 
   render() {
     return (
