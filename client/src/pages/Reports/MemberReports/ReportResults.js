@@ -306,42 +306,6 @@ class ReportResults extends Component {
 
   componentDidMount() {
     this.getData();
-    axiosWithAuth()
-      .get(`${baseURL}/submissionRate/${this.props.match.params.reportId}`)
-      .then(res => {
-        const percent = res.data.historicalSubmissionRate;
-        this.setState({
-          percentComplete: percent,
-        })
-        console.log(percent)
-      })
-
-    // axiosWithAuth()
-    //   .get(`${baseURL}/responses/${this.props.match.params.reportId}`)
-    //   .then(res => {
-    //     console.log("RES++__++",res);
-    //     const filtered = res.data[0].responses.filter(
-    //       response => response.userId === userId
-    //     );
-    //     // Filter all unique responders and push to state
-    //     const user = [];
-    //     const responders = [];
-    //     res.data.forEach(({ responses }) => {
-    //       responses.length > 0 &&
-    //         responses.forEach(({ userId, profilePic, fullName }) => {
-    //           if (!user.includes(userId)) {
-    //             user.push(userId);
-    //             responders.push({ userId, profilePic, fullName });
-    //           }
-    //         });
-    //     });
-    //     this.setState({
-    //       responses: res.data,
-    //       filteredResponse: filtered,
-    //       responders
-    //     });
-    //   })
-    //   .catch(err => console.log(err));
   }
 
   filter = (date, responder) => {
