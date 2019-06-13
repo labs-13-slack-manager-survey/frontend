@@ -92,11 +92,6 @@ class ReportResults extends Component {
               batch =>
                 batch.responses.length > 0 && (
                   <div key={batch.date}>
-                    {/* <h3 className="report-results-feed-date">
-                        {new Date(batch.date)
-                          .toLocaleDateString("en-US", options)
-                          .replace(",", "")}
-                      </h3> */}
                     {batch.responses.map(response => (
                       <div key={response.userId}>
                         <div className="response-container">
@@ -120,7 +115,7 @@ class ReportResults extends Component {
                               <ol type="1">
                                   {response.questions.map(
                                     ({ question, answer, id, sentimentRange }) => (
-                                      <div key={id}>
+                                      <div key={id} className = "question-response">
                                         <div className="response-container-main-question">
                                         
                                           <li className = "manager-poll-question">{question}</li>

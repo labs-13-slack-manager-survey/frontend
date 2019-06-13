@@ -97,7 +97,7 @@
 .response-content {
 	width: 90%;
 	padding-left: 25px;
-	padding-bottom: 35px;
+	padding-bottom: 25px;
 }
 .report-results-filter-container {
 
@@ -183,4 +183,8 @@
 	padding-top:5px;
 	text-align: center;
 	margin-bottom: 10px;
+}
+
+.question-response {
+	padding-bottom: 30px;
 }

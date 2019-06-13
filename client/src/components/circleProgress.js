@@ -20,7 +20,7 @@ class circleProgress extends React.Component {
       });
     }
     render() {
-          const numericPercent = this.props.percentComplete *100; 
+          const numericPercent = Math.trunc(this.props.percentComplete *100); 
 
           let today = new Date();
           const dd = String(today.getDate()).padStart(2,'0');
