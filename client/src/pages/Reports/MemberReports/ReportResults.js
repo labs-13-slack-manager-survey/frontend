@@ -144,65 +144,6 @@ class ReportResults extends Component {
                                           <div className ="linebr" />
 
                                         </p>
-                                      {/* </div>
-                                      {this.state.isSentiment && (
-                                        <>
-                                          <StyledSlider
-                                            className="slider"
-                                            value={sentimentRange}
-                                            min={1}
-                                            max={5}
-                                            step={1}
-                                          />
-                                          <div className="slider-label">
-                                            <p
-                                              className={
-                                                sentimentRange != 1
-                                                  ? "deselected"
-                                                  : null
-                                              }
-                                            >
-                                              1
-                                            </p>
-                                            <p
-                                              className={
-                                                sentimentRange != 2
-                                                  ? "deselected"
-                                                  : null
-                                              }
-                                            >
-                                              2
-                                            </p>
-                                            <p
-                                              className={
-                                                sentimentRange != 3
-                                                  ? "deselected"
-                                                  : null
-                                              }
-                                            >
-                                              3
-                                            </p>
-                                            <p
-                                              className={
-                                                sentimentRange != 4
-                                                  ? "deselected"
-                                                  : null
-                                              }
-                                            >
-                                              4
-                                            </p>
-                                            <p
-                                              className={
-                                                sentimentRange != 5
-                                                  ? "deselected"
-                                                  : null
-                                              }
-                                            >
-                                              5
-                                            </p>
-                                          </div>
-                                        </>
-                                      )} */}
                                       <p className="response-container-main-answer">
                                         <div className={"regular-answer"}>
                                           {answer}
