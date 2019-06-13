@@ -8,13 +8,13 @@ import PageTitle from '../../components/PageTitle'
 import PageDescription from '../../components/PageDescription'
 import TableHeader from '../../components/TableHeader'
 import SlackButton from '../Slack/Slack.js'
+import CircleProgress from '../../components/circleProgress.js';
 // import $ from 'jquery';
 // import jCircle from 'jquery-circle-progress';
 
 // style imports
 // import "./view.css";
 import { Card } from "@blueprintjs/core";
-import TableDisplay from "../../components/TableHeader";
 
 // this is the container for ALL of '/dashboard'
 class myTeam extends Component {
@@ -23,6 +23,9 @@ class myTeam extends Component {
     active: true,
     users: [], 
     anchorEl: null,
+    pollCompletion: 0,
+    lastAnswerPoll: "No polls Answered",
+
   };
 
 
@@ -44,15 +47,13 @@ class myTeam extends Component {
       });
 
     const joinCode = jwt_decode(localStorage.getItem("token")).joinCode;
-    console.log(joinCode);
-    console.log(this.state.users.length)
     this.setState({
       joinCode: joinCode
     });
     axiosWithAuth()
       .get(`${baseURL}/users/team`)
       .then(res => {
-        console.log(res);
+        console.log("TESTING",res)
         this.setState({ users: res.data.users });
 
         if (this.state.users.length > 0) {
@@ -60,6 +61,28 @@ class myTeam extends Component {
         }
       })
       .catch(err => console.log(err));
+
+
+      
+
+    const pollEndpoint = `${baseURL}/reports`
+
+      axiosWithAuth()
+        .get(pollEndpoint)
+        .then(res=>{
+
+          const lastReport = res.data.reports.length -1;
+
+          console.log("POLLS COMPLETED",res.data)
+        
+          this.setState({
+            pollCompletion: res.data.reports.length,
+            lastAnswerPoll:res.data.reports[lastReport].reportName
+          })  
+        })
+        .catch(err => {
+          console.log("ERROR GETTING POLL COMPLETED",err);
+        });
   }
 
   updateUser = () => {
@@ -118,18 +141,40 @@ class myTeam extends Component {
       });
   };
 
-  handleClickMenu = e => {
-    this.setState({ anchorEl: e.currentTarget });
+  lastCompletedPoll = () =>{
+    const endpoint = `${baseURL}/responses`;
+
+    axiosWithAuth()
+      .get(endpoint)
+      .then(res=>{
+        console.log("COMPLETED POLL",res)
+        console.log("last pull answered",res.reports[-1].reportName)
+      })
+      .catch(err=>{
+        console.log("ERR WITH LAST POLL",err)
+      })
+  }
+
+  archiveReport = id => {
+    const endpoint = `${baseURL}/reports/${id}`;
+    const updatedReport = {
+      active: false
+    };
+    axiosWithAuth()
+      .put(endpoint, updatedReport)
+      .then(res => {
+        this.props.getReports();
+        this.handleArchive(); 
+      })
+      .catch(err => console.log(err));
   };
 
-  handleCloseMenu = () => {
-    this.setState({ anchorEl: null });
-  };
+
+
 
   render() {
     //If user's account is inactive, they cannot see the dashboard
     const activeUsers = this.state.users.filter(user => user.active);
-      console.log(activeUsers)
     return this.state.active ? (
       <div className = "dashboard-view">
         <div className="view">
@@ -147,6 +192,8 @@ class myTeam extends Component {
         {activeUsers.map(user => (
             <TableHeader 
             column1 = {user.fullName}
+            column3 = {this.state.pollCompletion}
+            column4 = {this.state.lastAnswerPoll}
             // report = {report}
             // role={this.props.role}
             // archiveReport={this.archiveReport}
@@ -160,6 +207,9 @@ class myTeam extends Component {
           <SlackButton/>
           <InviteUser />
           {/* <PollCalendar /> */}
+          <CircleProgress 
+          title = "Today's Polls"
+          percentComplete = '0.6'/>
         </div>
       </div>
     ) : (

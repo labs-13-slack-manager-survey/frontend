@@ -3,15 +3,12 @@ import { axiosWithAuth, baseURL } from "../../config/axiosWithAuth.js";
 import jwt_decode from "jwt-decode";
 
 // component imports
-import Team from "./Team";
-import InviteUser from "../../components/InviteUser";
 // import Slack from "../Slack/Slack";
 import PageTitle from '../../components/PageTitle'
 import SummaryBox from '../../components/SummaryBox';
 
 // style imports
 import { Spinner, Intent } from "@blueprintjs/core";
-import { Card, Typography } from "@material-ui/core";
 import "./dashboard.css";
 
 export class Dashboard extends Component {
