@@ -323,9 +323,6 @@ class CreateReport extends Component {
 
     this.setState({
       managerResponses:[this.state.resOne,this.state.resTwo,this.state.resThree,this.state.resFour],
-      resOne:"",
-      resTwo:"",
-      resThree:""
     })
 
     console.log(this.state.managerResponses)
