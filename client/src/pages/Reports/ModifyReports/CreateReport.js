@@ -326,10 +326,7 @@ class CreateReport extends Component {
         this.state.resTwo,
         this.state.resThree,
         this.state.resFour
-      ],
-      resOne: "",
-      resTwo: "",
-      resThree: ""
+      ]
     });
 
     console.log(this.state.managerResponses);
