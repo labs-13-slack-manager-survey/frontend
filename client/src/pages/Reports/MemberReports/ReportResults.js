@@ -234,7 +234,7 @@ class ReportResults extends Component {
         responders,
         historicalSubmissionRate
       });
-      console.log(this.state.historicalSubmissionRate);
+   
     } catch (err) {
       console.log(err);
     }

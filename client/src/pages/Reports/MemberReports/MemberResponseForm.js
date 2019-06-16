@@ -21,6 +21,7 @@ class MemberResponseForm extends Component {
     managerQuestions: [],
     managerResponses: [],
     toggleManager: true,
+    isComplete: false
   };
 
   toggleManagerQ = () => {
@@ -29,8 +30,11 @@ class MemberResponseForm extends Component {
     })
     console.log(this.state.toggleManager)
   }
-
+  completeSurvey = () =>{
+  this.setState({isComplete: !this.state.isComplete})
+}
   render() {
+    console.log(this.state)
     return this.state.clientInfo.length > 0 ? (
       <>
         <div>{this.state.clientInfo}</div>
@@ -125,14 +129,6 @@ class MemberResponseForm extends Component {
       })
       .catch(err => console.log(err));
   }
-  //   this.setState(prevState => ({
-  //     ...prevState,
-  //     questions: prevState.questions.map(
-  //       q => (q.question !== question ? q : aObj) // qObj
-  //     )
-  //   }));
-
-  //handling the submit for sentiment functions
   handleSentiment = (event, value, question) => {
     this.setState(prevState => ({
       ...prevState,
@@ -178,17 +174,19 @@ class MemberResponseForm extends Component {
             questions: prevState.questions.map(q => ({
               question: q.question,
               response: "",
-              sentimentRange: 3
+              sentimentRange: 3,
             })),
           }));
+          this.setState({isComplete:true})
         } else {
           this.setState(prevState => ({
             ...prevState,
             questions: prevState.questions.map(q => ({
               question: q.question,
-              response: ""
+              response: "",
             }))
           }));
+          this.setState({isComplete:true})
         }
       })
       .catch(err => {
@@ -199,10 +197,10 @@ class MemberResponseForm extends Component {
   reload = () => {
     window.location.reload()
   }
-
   submitAll = () =>{
     this.submitReport();
     this.reload()
+    this.completeSurvey()
   }
 
 }
