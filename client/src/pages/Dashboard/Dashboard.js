@@ -74,7 +74,6 @@ export class Dashboard extends Component {
       axiosWithAuth()
       .get(`${baseURL}/reports/submissionRate`)
       .then(res => {
-        console.log(res.data.totalResponses);
         this.setState({
           totalResponses: res.data.totalResponses,
         })
