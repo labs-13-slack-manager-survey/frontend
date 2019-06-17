@@ -136,7 +136,7 @@ class StatsDashboard extends Component {
             />
           )}
 
-          <div style={{ marginTop: "50px" }}>
+          {/* <div style={{ marginTop: "50px" }}>
             <TableHeader
               column1={"Report Name"}
               column2={"Date Created"}
@@ -153,18 +153,18 @@ class StatsDashboard extends Component {
               archiveReport={this.archiveReport}
               archiveModal={false}
             />
-          ))}
+          ))} */}
         </div>
         <div className="sidebar">
           {/* <PollCalendar /> */}
 
-          <CircleProgress
+          {/* <CircleProgress
             title={
               "Recent Poll: " +
               this.state.reports[this.state.reports.length - 1].reportName
             }
             percentComplete={this.state.recentResponseRate / 100}
-          />
+          /> */}
         </div>
       </div>
     );
