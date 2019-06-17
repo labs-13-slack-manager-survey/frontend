@@ -94,6 +94,19 @@ class SentimentChart extends Component {
     console.log(this.state.filterBy);
   };
 
+  generateQuarterDates = () => {
+    for (let i = 30; i > 0; i--) {
+      let date = new Date();
+      date.setDate(date.getDate() - i);
+      date = moment(date).format("l");
+      lastQuarter.push(date);
+    }
+    this.setState({
+      labels: lastQuarter
+    });
+    console.log(this.state.filterBy);
+  };
+
   setLabels = e => {
     e.preventDefault();
     switch (this.state.filterBy) {
