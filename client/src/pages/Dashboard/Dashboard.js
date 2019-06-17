@@ -8,7 +8,7 @@ import PageTitle from '../../components/PageTitle'
 import SummaryBox from '../../components/SummaryBox';
 
 // style imports
-import { Spinner, Intent } from "@blueprintjs/core";
+import { Spinner, Intent, Button } from "@blueprintjs/core";
 import "./dashboard.css";
 
 export class Dashboard extends Component {
@@ -31,6 +31,7 @@ export class Dashboard extends Component {
     }
     return (
       <>
+      <Button className="tourButton">?</Button>
       <PageTitle 
       title = "Reports Dashboard"
       />
