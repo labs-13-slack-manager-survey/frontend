@@ -100,14 +100,6 @@
 }
 
 
-.report-results-filter {
-	display: block;
-	font-size: 16px;
-	font-weight: 500;
-	margin: auto;
-	max-width: 280px;
-	opacity: 0.87;
-}
 
 .report-results-filter:first-child {
 	margin-top: 30px;
@@ -121,7 +113,6 @@
 	height: 331px;
 	margin: auto;
 	width: 321px;
-	box-shadow: 0px 0px 15px rgb(230, 230, 230);
 }
 
 .responders {
@@ -181,3 +172,12 @@
 	margin-bottom: 10px;
 }
 
+
+.calendar {
+	position: relative;
+    width: 318px;
+    background-color: white;
+    padding-top:10px;
+    box-shadow: 0px 0px 10px rgb(240, 240, 240);
+    margin-bottom: 30px;
+}

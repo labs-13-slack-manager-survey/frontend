@@ -165,27 +165,22 @@ class ReportResults extends Component {
             // minorFix
             percentComplete={this.state.historicalSubmissionRate}
           />
-          <Card
-            interactive={false}
-            elevation={Elevation.TWO}
-            style={{ marginTop: "30px" }}
-            className="report-results-filter-container"
-          >
-            <h1 className="report-results-filter">Filter by day</h1>
+          <div className="calendar">
+            <h1 className="title">Filter by day</h1>
             <DatePicker
               // getByDate={this.getByDate}
               clickedDate={this.state.clickedDate}
               clickedResponder={this.state.clickedResponder}
               filter={this.filter}
             />
-            <h1 className="report-results-filter">Filter by team member</h1>
+            <h1 className="title">Filter by team member</h1>
             <Responders
               responders={this.state.responders}
               filter={this.filter}
               clickedDate={this.state.clickedDate}
               clickedResponder={this.state.clickedResponder}
             />
-          </Card>
+          </div>
         </div>
       </div>
     );

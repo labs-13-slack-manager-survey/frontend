@@ -472,7 +472,8 @@ class CreateReport extends Component {
                   //questions for marketing manager
                   <ol>
                     <div>
-              
+                    <div className="linebr" />
+
                         <li>
                           <div className="manager-poll-question">
                             {this.state.ProjectManagerQuestions[0]}
@@ -564,7 +565,7 @@ class CreateReport extends Component {
                   />
                 </div>
                 <div className="poll-section-description">
-                  Toggle manager questions on to fill out your own daily survey about your goals for the team to help
+                  Toggle manager questions on to fill out your own daily survey with prescribed questions about your goals for the team to help
                   them prioritize their tasks. These will be displayed at the
                   top of the survey sent out to them each day. 
                 </div>
@@ -758,7 +759,7 @@ class CreateReport extends Component {
 
             <div className="member-form-title">Sentiment Questions</div>
 
-            <div className= "poll-section-description">Create a sentiment survey of questions to capture how your team feels about their work on a scale of 1-5. Respondents will also have the option of including additional comments to accompany their response.</div>
+            <div className= "poll-section-description">Add optional sentiment questions to capture how your team feels about their work on a scale of 1-5. Respondents will also have the option of including additional comments to accompany their response.</div>
             <div className = "response-card-example">
                 <div className = "response-question">Sample: How confident are you feeling about completing the tasks assigned to you today?</div>
                 <StyledSlider
