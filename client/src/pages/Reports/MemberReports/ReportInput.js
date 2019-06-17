@@ -98,7 +98,7 @@ class ReportInput extends React.Component {
             {this.state.userComment ? (
               <TextField
                 fullWidth={true}
-                onChange={e => this.props.handleChange(e, this.props.question)}
+                onChange={e => this.props.handleSentimentComment(e, this.props.sentimentQuestion)}
                 margin="normal"
                 multiline={true}
                 name="response"

@@ -446,193 +446,62 @@ class CreateReport extends Component {
 
                   <div>
                     <ol>
-                      <div className="poll-answer-field">
+                      <div className="linebr" />
                         <li>
                           <div className="manager-poll-question">
                             {this.state.EngineeringManagerQuestions[0]}
                           </div>
                         </li>
-                        <FormControl className="input-field" required>
-                          <TextField
-                            fullWidth={true}
-                            variant="outlined"
-                            multiline={true}
-                            id="report-question"
-                            className={
-                              this.state.resOne
-                                ? "input-field"
-                                : "input-field-empty"
-                            }
-                            type="text"
-                            required={true}
-                            name="resOne"
-                            placeholder="Enter your response here"
-                            value={this.state.resOne}
-                            onChange={this.handleChange}
-                            onSubmit={this.add}
-                          />
-                        </FormControl>
-                      </div>
-                      <div className="poll-answer-field">
+      
                         <li>
                           <div className="manager-poll-question">
                             {this.state.EngineeringManagerQuestions[1]}
                           </div>
                         </li>
-                        <TextField
-                          fullWidth={true}
-                          variant="outlined"
-                          multiline={true}
-                          id="report-question"
-                          className={
-                            this.state.resTwo
-                              ? "input-field"
-                              : "input-field-empty"
-                          }
-                          type="text"
-                          name="resTwo"
-                          placeholder="Enter your response here"
-                          value={this.state.resTwo}
-                          onChange={this.handleChange}
-                          onSubmit={this.add}
-                        />
-                      </div>
-                      <div className="poll-answer-field">
+         
+        
                         <li>
                           <div className="manager-poll-question">
                             {this.state.EngineeringManagerQuestions[2]}
                           </div>
                         </li>
-                        <TextField
-                          fullWidth={true}
-                          variant="outlined"
-                          multiline={true}
-                          id="report-question"
-                          className={
-                            this.state.resThree
-                              ? "input-field"
-                              : "input-field-empty"
-                          }
-                          type="text"
-                          name="resThree"
-                          placeholder="Enter your response here"
-                          value={this.state.resThree}
-                          onChange={this.handleChange}
-                          onSubmit={this.add}
-                        />
-                      </div>
+     
                     </ol>
                   </div>
                 ) : (
                   //questions for marketing manager
                   <ol>
                     <div>
-                      <div className="poll-answer-field">
+              
                         <li>
                           <div className="manager-poll-question">
                             {this.state.ProjectManagerQuestions[0]}
                           </div>
                         </li>
-                        <TextField
-                          fullWidth={true}
-                          variant="outlined"
-                          multiline={true}
-                          id="report-question"
-                          className={
-                            this.state.resOne
-                              ? "input-field"
-                              : "input-field-empty"
-                          }
-                          type="text"
-                          name="resOne"
-                          placeholder="Enter your response here"
-                          value={this.state.resOne}
-                          onChange={this.handleChange}
-                        />
-                      </div>
-                      <div className="poll-answer-field">
+
+
                         <li>
                           <div className="manager-poll-question">
                             {this.state.ProjectManagerQuestions[1]}
                           </div>
                         </li>
-                        <TextField
-                          fullWidth={true}
-                          variant="outlined"
-                          multiline={true}
-                          id="report-question"
-                          className={
-                            this.state.resTwo
-                              ? "input-field"
-                              : "input-field-empty"
-                          }
-                          type="text"
-                          name="resTwo"
-                          placeholder="Enter your response here"
-                          value={this.state.resTwo}
-                          onChange={this.handleChange}
-                        />
-                      </div>
+                        
 
-                      <div className="poll-answer-field">
                         <li>
                           <div className="manager-poll-question">
                             {this.state.ProjectManagerQuestions[2]}
                           </div>
                         </li>
-                        <TextField
-                          fullWidth={true}
-                          variant="outlined"
-                          multiline={true}
-                          id="report-question"
-                          className={
-                            this.state.resThree
-                              ? "input-field"
-                              : "input-field-empty"
-                          }
-                          type="text"
-                          name="resThree"
-                          placeholder="Enter your response here"
-                          value={this.state.resThree}
-                          onChange={this.handleChange}
-                        />
-                      </div>
 
-                      <div className="poll-answer-field">
                         <li>
                           <div className="manager-poll-question">
                             {this.state.ProjectManagerQuestions[3]}
                           </div>
                         </li>
-                        <TextField
-                          fullWidth={true}
-                          variant="outlined"
-                          multiline={true}
-                          id="report-question"
-                          className={
-                            this.state.resFour
-                              ? "input-field"
-                              : "input-field-empty"
-                          }
-                          type="text"
-                          name="resFour"
-                          placeholder="Enter your response here"
-                          value={this.state.resFour}
-                          onChange={this.handleChange}
-                        />
-                      </div>
+    
                     </div>
                   </ol>
                 )}
-                <Button
-                  style={{ display: "block", marginTop: "30px" }}
-                  variant="contained"
-                  color="primary"
-                  type="submit"
-                  onClick={this.addQuestions}
-                >
-                  Add Responses
-                </Button>
               </React.Fragment>
             )}
           </PopupState>
@@ -695,9 +564,9 @@ class CreateReport extends Component {
                   />
                 </div>
                 <div className="poll-section-description">
-                  Answer some questions about your goals for the team to help
+                  Toggle manager questions on to fill out your own daily survey about your goals for the team to help
                   them prioritize their tasks. These will be displayed at the
-                  top of the survey sent out to them.
+                  top of the survey sent out to them each day. 
                 </div>
               </div>
               {this.renderManagerQuestions()}

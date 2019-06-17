@@ -85,7 +85,7 @@ class MemberResponseForm extends Component {
             question={sq.question}
             response={sq.response}
             sentimentRange={sq.sentimentRange}
-            handleChange={this.handleChange}
+            handleSentimentComment={this.handleSentimentComment}
             key={i}
             isSentiment= {true} 
             handleSentiment={this.handleSentiment}
@@ -189,10 +189,36 @@ class MemberResponseForm extends Component {
     }));
   };
 
+
+  handleSentimentComment = (e, question) => {
+    const sqObj = {
+      question,
+      response: e.target.value
+    };
+
+    this.setState(prevState => ({
+      ...prevState,
+      sentimentQuestions: prevState.sentimentQuestions.map(
+        sq =>
+          sq.question !== question
+            ? sq
+            : {
+                question,
+                sentimentRange: sq.sentimentRange,
+                response: sqObj.response
+              } // qObj
+      )
+    }));
+  };
+
   submitReport = () => {
+    const allQuestions = [this.state.questions, this.state.sentimentQuestions]
+    console.log(this.state.questions)
+    console.log(this.state.sentimentQuestions)
+    console.log(allQuestions)
     const endpoint = `${baseURL}/responses/${this.props.match.params.reportId}`;
     axiosWithAuth()
-      .post(endpoint, this.state.questions)
+      .post(endpoint, allQuestions)
       .then(res => {
         if (this.state.isSentiment) {
           this.props.updateWithUserResponse(res);
@@ -204,6 +230,7 @@ class MemberResponseForm extends Component {
               response: "",
               sentimentRange: 3
             })),
+
           }));
         } else {
           this.setState(prevState => ({
@@ -211,6 +238,10 @@ class MemberResponseForm extends Component {
             questions: prevState.questions.map(q => ({
               question: q.question,
               response: ""
+            })),
+            sentimentQuestions: prevState.sentimentQuestions.map(sq=> ({
+              sentimentQuestions: sq.question,
+              response: '', 
             }))
           }));
         }
@@ -226,7 +257,7 @@ class MemberResponseForm extends Component {
 
   submitAll = () =>{
     this.submitReport();
-    this.reload()
+    // this.reload()
   }
 
 }
