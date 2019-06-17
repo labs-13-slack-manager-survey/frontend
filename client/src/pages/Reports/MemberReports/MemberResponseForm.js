@@ -9,6 +9,8 @@ import ChevronDown from '../../../images/icons/chevron-down.png'
 // style imports
 import Button from "@material-ui/core/Button";
 import "./MemberResponseForm.css";
+import ManagerPoll from "../../../components/ManagerPoll";
+
 
 class MemberResponseForm extends Component {
   state = {
@@ -39,6 +41,7 @@ class MemberResponseForm extends Component {
     ) : (
       <div>
         {/*need to render this condtionally  */}
+        <ManagerPoll reportId={this.props.match.params.reportId} />
         {this.state.isSentiment ? null : (
           <div className = "manager-poll-responses">
             <div className = "poll-header-toggle"  onClick={this.toggleManagerQ}>
