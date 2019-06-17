@@ -36,7 +36,6 @@ class ReportsDash extends Component {
             : "ReportSingle"
         }
       >
-
         <div className = "summaryStats">
         </div>
         <Switch>

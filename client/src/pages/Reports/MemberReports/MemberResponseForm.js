@@ -21,6 +21,7 @@ class MemberResponseForm extends Component {
     managerQuestions: [],
     managerResponses: [],
     toggleManager: true,
+    sentimentQuestions: [],
   };
 
   toggleManagerQ = () => {
@@ -104,11 +105,15 @@ class MemberResponseForm extends Component {
           reportName,
           message,
           questions,
+          sentimentQuestions,
           isSentiment,
           managerResponses,
           // typeOfManager, //new manager templates need to be added here so they can be sent to MemberReposonseForm.js
           managerQuestions
         } = res.data.report;
+        console.log(reportName);
+        console.log(sentimentQuestions);
+        console.log(managerQuestions);
         this.setState({
           reportName,
           reportMessage: message,
@@ -117,13 +122,15 @@ class MemberResponseForm extends Component {
             response: "",
             sentimentRange: 3
           })),
-          managerQuestions,
-          managerResponses: JSON.parse(managerResponses),
-          isSentiment: isSentiment
+          sentimentQuestions: sentimentQuestions, 
+          managerQuestions: managerQuestions,
+          managerResponses: managerResponses,
+          isSentiment: isSentiment,
           // sentimentRange: sentimentRange
         });
       })
       .catch(err => console.log(err));
+      console.log(this.state)
   }
   //   this.setState(prevState => ({
   //     ...prevState,
