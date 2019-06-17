@@ -68,6 +68,7 @@ class SentimentChart extends Component {
     });
   }
 
+  // REFACTOR TO BE DRY
   generateWeekDates = () => {
     for (let i = 7; i > 0; i--) {
       let date = new Date();
@@ -95,7 +96,7 @@ class SentimentChart extends Component {
   };
 
   generateQuarterDates = () => {
-    for (let i = 30; i > 0; i--) {
+    for (let i = 90; i > 0; i--) {
       let date = new Date();
       date.setDate(date.getDate() - i);
       date = moment(date).format("l");
@@ -103,6 +104,19 @@ class SentimentChart extends Component {
     }
     this.setState({
       labels: lastQuarter
+    });
+    console.log(this.state.filterBy);
+  };
+
+  generateMonthDates = () => {
+    for (let i = 365; i > 0; i--) {
+      let date = new Date();
+      date.setDate(date.getDate() - i);
+      date = moment(date).format("l");
+      lastYear.push(date);
+    }
+    this.setState({
+      labels: lastYear
     });
     console.log(this.state.filterBy);
   };
