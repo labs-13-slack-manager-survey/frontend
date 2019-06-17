@@ -20,12 +20,6 @@ const URL = process.env.REACT_APP_BASE_URL;
 
 let barChart = {};
 
-// Last week dates array.
-let lastWeek = [];
-let lastMonth = [];
-let lastQuarter = [];
-let lastYear = [];
-
 class SentimentChart extends Component {
   state = {
     results: [],
@@ -68,57 +62,17 @@ class SentimentChart extends Component {
     });
   }
 
-  // REFACTOR TO BE DRY
-  generateWeekDates = () => {
-    for (let i = 7; i > 0; i--) {
+  generateDates = num => {
+    let generatedDates = [];
+    for (let i = num; i > 0; i--) {
       let date = new Date();
       date.setDate(date.getDate() - i);
       date = moment(date).format("l");
-      lastWeek.push(date);
+      generatedDates.push(date);
     }
     this.setState({
-      labels: lastWeek
+      labels: generatedDates
     });
-    console.log(this.state.filterBy);
-  };
-
-  generateMonthDates = () => {
-    for (let i = 30; i > 0; i--) {
-      let date = new Date();
-      date.setDate(date.getDate() - i);
-      date = moment(date).format("l");
-      lastMonth.push(date);
-    }
-    this.setState({
-      labels: lastMonth
-    });
-    console.log(this.state.filterBy);
-  };
-
-  generateQuarterDates = () => {
-    for (let i = 90; i > 0; i--) {
-      let date = new Date();
-      date.setDate(date.getDate() - i);
-      date = moment(date).format("l");
-      lastQuarter.push(date);
-    }
-    this.setState({
-      labels: lastQuarter
-    });
-    console.log(this.state.filterBy);
-  };
-
-  generateYearDates = () => {
-    for (let i = 365; i > 0; i--) {
-      let date = new Date();
-      date.setDate(date.getDate() - i);
-      date = moment(date).format("l");
-      lastYear.push(date);
-    }
-    this.setState({
-      labels: lastYear
-    });
-    console.log(this.state.filterBy);
   };
 
   setLabels = e => {
@@ -126,25 +80,24 @@ class SentimentChart extends Component {
     switch (this.state.filterBy) {
       case "day":
         let today = moment(Date.now()).format("l");
-        console.log(today);
         this.setState({
           labels: [today]
         });
         break;
       case "week":
-        this.generateWeekDates();
+        this.generateDates(7);
         break;
       case "month":
-        this.generateMonthDates();
+        this.generateDates(30);
         break;
       case "quarter":
-        this.generateQuarterDates();
+        this.generateDates(90);
         break;
       case "year":
-        this.generateMonthDates();
+        this.generateDates(365);
         break;
     }
-    console.log(this.state);
+    console.log(this.state.labels);
   };
 
   handleChange = e => {

@@ -80,7 +80,6 @@ class StatsDashboard extends Component {
     axiosWithAuth()
       .get(`${baseURL}/users/team`)
       .then(res => {
-        console.log(res.data.users);
         this.setState({ users: res.data.users });
       })
       .catch(err => console.log(err));
