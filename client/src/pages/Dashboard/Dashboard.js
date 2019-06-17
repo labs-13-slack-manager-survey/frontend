@@ -8,7 +8,7 @@ import PageTitle from '../../components/PageTitle'
 import SummaryBox from '../../components/SummaryBox';
 
 // style imports
-import { Spinner, Intent } from "@blueprintjs/core";
+import { Spinner, Intent, Button } from "@blueprintjs/core";
 import "./dashboard.css";
 
 export class Dashboard extends Component {
@@ -31,6 +31,10 @@ export class Dashboard extends Component {
     }
     return (
       <>
+      <Button 
+      className="tourButton"
+      onClick={this.optIn}
+      >?</Button>
       <PageTitle 
       title = "Reports Dashboard"
       />
@@ -167,6 +171,11 @@ export class Dashboard extends Component {
   handleCloseMenu = () => {
     this.setState({ anchorEl: null });
   };
+
+  optIn = () =>{
+    localStorage.removeItem("doneTour");
+    window.location.reload(true);
+  }
 
 }
 
