@@ -157,3 +157,10 @@ textarea.bp3-input {
 	display: flex;
 	justify-content: flex-start;
 }
+
+.tourButton{
+	margin-top: 20px ;
+	margin-bottom: -60px;
+	display: flex;
+	margin-left: 300px
+}
