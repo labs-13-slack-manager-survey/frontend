@@ -77,6 +77,19 @@ class MemberResponseForm extends Component {
             isSentiment={this.state.isSentiment}
             handleSentiment={this.handleSentiment}
           /></li>
+        ))}
+        
+        
+        {this.state.sentimentQuestions.map((sq, i) => (
+          <li><ReportInput
+            question={sq.question}
+            response={sq.response}
+            sentimentRange={sq.sentimentRange}
+            handleChange={this.handleChange}
+            key={i}
+            isSentiment= {true} 
+            handleSentiment={this.handleSentiment}
+          /></li>
         ))}</ol>
         
         <Button
@@ -122,7 +135,11 @@ class MemberResponseForm extends Component {
             response: "",
             sentimentRange: 3
           })),
-          sentimentQuestions: sentimentQuestions, 
+          sentimentQuestions: sentimentQuestions.map(sq => ({
+            question: sq,
+            response: '',
+            sentimentRange: 3, 
+          })), 
           managerQuestions: managerQuestions,
           managerResponses: managerResponses,
           isSentiment: isSentiment,
@@ -143,10 +160,10 @@ class MemberResponseForm extends Component {
   handleSentiment = (event, value, question) => {
     this.setState(prevState => ({
       ...prevState,
-      questions: prevState.questions.map(q => {
-        return q.question !== question
-          ? q
-          : { question, sentimentRange: value, response: q.response };
+      sentimentQuestions: prevState.sentimentQuestions.map(sq => {
+        return sq.question !== question
+          ? sq
+          : { question, sentimentRange: value, response: sq.response };
       })
     }));
   };
