@@ -3,15 +3,9 @@ import { axiosWithAuth, baseURL } from "../../config/axiosWithAuth";
 
 import SentimentChart from "./SentimentChart";
 import PageTitle from "../../components/PageTitle";
-import TodayPoll from "./TodayPoll";
-import PollCalendar from "../../components/PollCalendar";
 import SummaryBox from "../../components/SummaryBox";
-import TableDisplay from "../../components/TableDisplay";
-import TableHeader from "../../components/TableHeader";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
-
-import CircleProgress from "../../components/circleProgress.js";
 
 import "./StatsDashboard.css";
 
@@ -34,11 +28,6 @@ class StatsDashboard extends Component {
     axiosWithAuth()
       .get(`${URL}/reports`)
       .then(res => {
-        // const sentimentReports = res.data.reports.filter(report => {
-        //   if (report.isSentiment) {
-        //     return report;
-        //   }
-        // });
         this.setState({
           reports: res.data.reports
         });
@@ -117,12 +106,10 @@ class StatsDashboard extends Component {
               title="no. of team members"
               content={this.state.users.length}
             />
-
             <SummaryBox
               title="total poll responses"
               content={this.state.users.length}
             />
-
             <SummaryBox
               title="total polls scheduled"
               content={this.state.reports.length}

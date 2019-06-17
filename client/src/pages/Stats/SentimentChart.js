@@ -1,24 +1,8 @@
 import React, { Component } from "react";
 import Chart from "chart.js";
 import moment from "moment";
-import { makeStyles } from "@material-ui/core/styles";
-import {
-  OutlinedInput,
-  FilledInput,
-  InputLabel,
-  MenuItem,
-  FormHelperText,
-  FormControl,
-  Select
-} from "@material-ui/core";
-import { axiosWithAuth } from "../../config/axiosWithAuth";
 
 import "./SentimentChart.css";
-import { flexbox } from "@material-ui/system";
-
-const URL = process.env.REACT_APP_BASE_URL;
-
-let barChart = {};
 
 class SentimentChart extends Component {
   state = {
@@ -28,14 +12,9 @@ class SentimentChart extends Component {
   };
 
   componentDidMount() {
-    // Labels
-    // this.props.reports.forEach(report => {
-    //   this.state.labels.push(report.reportName);
-    // });
-
     // Chart -------------------------
     const ctx = document.getElementById("chart").getContext("2d");
-    barChart = new Chart(ctx, {
+    new Chart(ctx, {
       type: "bar",
       data: {
         labels: this.state.labels,
@@ -109,39 +88,6 @@ class SentimentChart extends Component {
   render() {
     return (
       <div>
-        <div>
-          <form
-            autoComplete="off"
-            className="form"
-            style={{ display: "flex", flexWrap: "wrap" }}
-          >
-            <FormControl className="formControl">
-              <InputLabel
-                className="inputLabel"
-                style={{ marginBottom: "20px" }}
-              >
-                Filter By
-              </InputLabel>
-
-              <Select
-                value={this.state.filterBy}
-                style={{ marginTop: "20px" }}
-                name="filterBy"
-                onChange={this.handleChange}
-                className="select"
-              >
-                <MenuItem value={"day"}>Day</MenuItem>
-                <MenuItem value={"week"}>Week</MenuItem>
-                <MenuItem value={"month"}>Month</MenuItem>
-                <MenuItem value={"quarter"}>Quarter</MenuItem>
-                <MenuItem value={"year"}>Year</MenuItem>
-              </Select>
-              <button onClick={this.setLabels} style={{ margin: "20px" }}>
-                Filter
-              </button>
-            </FormControl>
-          </form>
-        </div>
         <canvas id="chart" />
       </div>
     );
