@@ -31,7 +31,10 @@ export class Dashboard extends Component {
     }
     return (
       <>
-      <Button className="tourButton">?</Button>
+      <Button 
+      className="tourButton"
+      onClick={this.optIn}
+      >?</Button>
       <PageTitle 
       title = "Reports Dashboard"
       />
@@ -168,6 +171,11 @@ export class Dashboard extends Component {
   handleCloseMenu = () => {
     this.setState({ anchorEl: null });
   };
+
+  optIn = () =>{
+    localStorage.removeItem("doneTour");
+    window.location.reload(true);
+  }
 
 }
 
