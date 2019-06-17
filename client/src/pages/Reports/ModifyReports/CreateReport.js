@@ -118,6 +118,7 @@ class CreateReport extends Component {
     channels: [],
     question: "",
     sentimentQuestion: "",
+    exampleSentiment: 3, 
     week: [
       "Monday",
       "Tuesday",
@@ -322,8 +323,7 @@ class CreateReport extends Component {
       slackChannelName,
       created_at: new Date(),
 
-      sentimentQuestions,
-      exampleSentiment: 3, 
+      sentimentQuestions: JSON.stringify(sentimentQuestions),
     };
     console.log("REPORT++", this.report);
     this.state.managerType === 0
@@ -929,7 +929,7 @@ class CreateReport extends Component {
             <section className="enter-question">
               <FormControl className="input-field" required>
                 <InputLabel htmlFor="report-question">
-                  Enter a question...
+                  Enter a sentiment question...
                 </InputLabel>
                 <Input
                   id="report-question"
