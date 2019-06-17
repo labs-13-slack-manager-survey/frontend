@@ -68,7 +68,7 @@ export default class ChartOptions extends Component {
         this.generateDates(365);
         break;
     }
-    console.log(this.state.labels);
+    console.log(this.state);
   };
 
   handleChange = e => {
@@ -78,7 +78,6 @@ export default class ChartOptions extends Component {
   };
 
   render() {
-    console.log(this.state);
     return (
       <div>
         <form
@@ -109,13 +108,19 @@ export default class ChartOptions extends Component {
             </button>
           </FormControl>
         </form>
-        {console.log(this.state.labels)}
         {this.state.labels > 0 ? (
           <SentimentChart data={this.state.data} labels={this.state.labels} />
         ) : (
-          <p>Set Options</p>
+          <p>Set Options for Graph</p>
         )}
       </div>
     );
   }
 }
+
+/* 
+--- ISSUES ---
+1. Labels getting set a click late.
+2. SentimentChart not rendering after label state gets set. 
+3. Data not getting passed to SentimentChart.
+*/
