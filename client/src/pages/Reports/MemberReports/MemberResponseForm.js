@@ -21,7 +21,8 @@ class MemberResponseForm extends Component {
     managerQuestions: [],
     managerResponses: [],
     toggleManager: true,
-    isComplete: false
+    isComplete: false,
+    test:""
   };
 
   toggleManagerQ = () => {
@@ -110,8 +111,8 @@ class MemberResponseForm extends Component {
           questions,
           isSentiment,
           managerResponses,
-          // typeOfManager, //new manager templates need to be added here so they can be sent to MemberReposonseForm.js
-          managerQuestions
+          managerQuestions,
+      
         } = res.data.report;
         this.setState({
           reportName,
@@ -119,16 +120,16 @@ class MemberResponseForm extends Component {
           questions: questions.map(q => ({
             question: q,
             response: "",
-            sentimentRange: 3
+            sentimentRange: 3,
           })),
           managerQuestions,
           managerResponses: JSON.parse(managerResponses),
-          isSentiment: isSentiment
-          // sentimentRange: sentimentRange
+          isSentiment: isSentiment,
         });
       })
       .catch(err => console.log(err));
   }
+
   handleSentiment = (event, value, question) => {
     this.setState(prevState => ({
       ...prevState,
@@ -168,7 +169,6 @@ class MemberResponseForm extends Component {
       .then(res => {
         if (this.state.isSentiment) {
           this.props.updateWithUserResponse(res);
-
           this.setState(prevState => ({
             ...prevState,
             questions: prevState.questions.map(q => ({
@@ -177,16 +177,15 @@ class MemberResponseForm extends Component {
               sentimentRange: 3,
             })),
           }));
-          this.setState({isComplete:true})
         } else {
           this.setState(prevState => ({
             ...prevState,
             questions: prevState.questions.map(q => ({
               question: q.question,
               response: "",
-            }))
+            })),
+            isComplete:!this.state.isComplete
           }));
-          this.setState({isComplete:true})
         }
       })
       .catch(err => {
@@ -198,9 +197,9 @@ class MemberResponseForm extends Component {
     window.location.reload()
   }
   submitAll = () =>{
+    this.completeSurvey()
     this.submitReport();
     this.reload()
-    this.completeSurvey()
   }
 
 }
