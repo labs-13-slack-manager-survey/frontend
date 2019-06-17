@@ -22,6 +22,9 @@ let barChart = {};
 
 // Last week dates array.
 let lastWeek = [];
+let lastMonth = [];
+let lastQuarter = [];
+let lastYear = [];
 
 class SentimentChart extends Component {
   state = {
@@ -78,19 +81,34 @@ class SentimentChart extends Component {
     console.log(this.state.filterBy);
   };
 
+  generateMonthDates = () => {
+    for (let i = 30; i > 0; i--) {
+      let date = new Date();
+      date.setDate(date.getDate() - i);
+      date = moment(date).format("l");
+      lastMonth.push(date);
+    }
+    this.setState({
+      labels: lastMonth
+    });
+    console.log(this.state.filterBy);
+  };
+
   setLabels = e => {
     e.preventDefault();
     switch (this.state.filterBy) {
       case "day":
-        console.log(moment(Date.now()).format("l"));
+        let today = moment(Date.now()).format("l");
+        console.log(today);
         this.setState({
-          labels: [moment(Date.now()).format("l")]
+          labels: [today]
         });
         break;
       case "week":
         this.generateWeekDates();
         break;
       case "month":
+        this.generateMonthDates();
         break;
       case "quarter":
         break;
