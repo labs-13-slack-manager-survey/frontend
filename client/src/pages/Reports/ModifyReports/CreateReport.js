@@ -21,7 +21,10 @@ import PageTitle from "../../../components/PageTitle";
 import PollDescription from "../../../components/PollDescription";
 import ToggleOn from "../../../images/icons/toggle-on.png";
 import ToggleOff from "../../../images/icons/toggle-off.png";
+import Slider from "@material-ui/lab/Slider";
 import ReportInput from "../MemberReports/ReportInput.js";
+import { fade } from "@material-ui/core/styles/colorManipulator";
+
 
 import MemberResponseForm from "../MemberReports/MemberResponseForm";
 
@@ -53,6 +56,32 @@ const styles = theme => ({
   }
 });
 
+//slider 
+const StyledSlider = withStyles({
+  thumb: {
+    height: 24,
+    width: 24,
+    backgroundColor: "#F67B28",
+    border: `3px solid #fff`,
+    "&$focused, &:hover": {
+      boxShadow: `0px 0px 0px ${8}px ${fade("#de235b", 0.16)}`
+    },
+    "&$activated": {
+      boxShadow: `0px 0px 0px ${6}px ${fade("#de235b", 0.16)}`
+    },
+    "&$jumped": {
+      boxShadow: `0px 0px 0px ${2}px ${fade("#de235b", 0.16)}`
+    }
+  },
+  track: {
+    backgroundColor: "#FEBA47",
+    height: 8
+  },
+  trackAfter: {
+    backgroundColor: "#d0d7dc"
+  }
+})(Slider);
+
 class CreateReport extends Component {
   state = {
     //Questions for survey with new menu
@@ -66,6 +95,7 @@ class CreateReport extends Component {
     errorMessage: "",
     responseM: "",
     questions: [],
+    sentimentQuestions: [],
     managerResponses: [],
     resOne: "",
     resTwo: "",
@@ -164,6 +194,21 @@ class CreateReport extends Component {
     }
   };
 
+  enterSentimentQuestionsHandler = e => {
+    e.preventDefault();
+    const code = e.keyCode || e.which;
+    if (code === 13) {
+      this.setState(prevState => ({
+        sentimentQuestions: [...prevState.sentimentQuestions, this.state.sentimentQuestion],
+        sentimentQuestion: ""
+      }));
+    } else {
+      this.setState({
+        [e.target.name]: e.target.value
+      });
+    }
+  };
+
   questionsHandler = e => {
     e.preventDefault();
     this.setState(prevState => ({
@@ -172,6 +217,15 @@ class CreateReport extends Component {
     }));
   };
 
+  sentimentQuestionsHandler = e => {
+    e.preventDefault();
+    this.setState(prevState => ({
+      sentimentQuestions: [...prevState.sentimentQuestions, this.state.sentimentQuestion],
+      sentimentQuestion: ""
+    }));
+  };
+
+
   removeQuestion = (e, question) => {
     e.preventDefault();
     this.setState(prevState => ({
@@ -179,6 +233,12 @@ class CreateReport extends Component {
     }));
   };
 
+  removeSentimentQuestion = (e, question) => {
+    e.preventDefault();
+    this.setState(prevState => ({
+      sentimentQuestions: prevState.sentimentQuestions.filter(q => q !== question)
+    }));
+  };
   updateSchedule = day => {
     const { schedule } = this.state;
     const includes = schedule.includes(day);
@@ -556,7 +616,6 @@ class CreateReport extends Component {
                     </div>
                   </ol>
                 )}
-
                 <Button
                   style={{ display: "block", marginTop: "30px" }}
                   variant="contained"
@@ -808,6 +867,78 @@ class CreateReport extends Component {
                 color="primary"
                 onClick={this.questionsHandler}
                 disabled={this.state.question.length === 0 ? true : false}
+                type="submit"
+              >
+                <AddIcon />
+              </Fab>
+            </section>
+          </section>
+        </section>
+
+        <div className="linebr" />
+        <section className="response-card">
+          <section className="manager-poll-responses">
+
+            <div className="member-form-title">Sentiment Questions</div>
+
+            <div className= "poll-section-description">Create a sentiment survey of questions to capture how your team feels about their work on a scale of 1-5. Respondents will also have the option of including additional comments to accompany their response.</div>
+            <div className = "response-card-example">
+                <div className = "response-question">Sample: How confident are you feeling about completing the tasks assigned to you today?</div>
+                <StyledSlider
+                  className="slider"
+                  value={this.state.exampleSentiment}
+                  min={1}
+                  max={5}
+                  step={1}
+                  // onChange={e => this.props.handleChange(e, this.props.question)}
+                  onChange={(e, v) =>
+                    this.handleSentimentExample(e, v)
+                  }
+                />
+                <div className="slider-label">
+                  <p>1</p>
+                  <p>2</p>
+                  <p>3</p>
+                  <p>4</p>
+                  <p>5</p>
+                </div>
+
+            </div>
+            <section>
+              {this.state.sentimentQuestion.map(sentimentQuestion => (
+                <article className="question-flex" key={sentimentQuestion}>
+                  <p className="question">{sentimentQuestion}</p>
+                  <Fab
+                    size="small"
+                    color="secondary"
+                    onClick={e => this.removeSentimentQuestion(e, sentimentQuestion)}
+                  >
+                    <Icon>delete_icon</Icon>
+                  </Fab>
+                </article>
+              ))}
+            </section>
+            <section className="enter-question">
+              <FormControl className="input-field" required>
+                <InputLabel htmlFor="report-question">
+                  Enter a question...
+                </InputLabel>
+                <Input
+                  id="report-question"
+                  required
+                  className="input-field"
+                  type="text"
+                  name="sentimentQuestion"
+                  value={this.state.sentimentQuestion}
+                  onChange={this.enterSentimentQuestionsHandler}
+                />
+              </FormControl>
+              <Fab
+                size="small"
+                style={{ display: "block", margin: "10px 0" }}
+                color="primary"
+                onClick={this.sentimentQuestionsHandler}
+                disabled={this.state.sentimentQuestion.length === 0 ? true : false}
                 type="submit"
               >
                 <AddIcon />
