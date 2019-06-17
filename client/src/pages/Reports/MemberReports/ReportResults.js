@@ -173,14 +173,18 @@ class ReportResults extends Component {
               clickedResponder={this.state.clickedResponder}
               filter={this.filter}
             />
+          </div>
+
+          <div className = "responders-component">
             <h1 className="title">Filter by team member</h1>
-            <Responders
+            {this.state.responders.length == 0 ? <div className="error-message"> no responses yet </div> : <Responders
               responders={this.state.responders}
               filter={this.filter}
               clickedDate={this.state.clickedDate}
               clickedResponder={this.state.clickedResponder}
-            />
+            />}
           </div>
+
         </div>
       </div>
     );

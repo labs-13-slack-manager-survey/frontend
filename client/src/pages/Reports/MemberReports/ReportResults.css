@@ -181,3 +181,21 @@
     box-shadow: 0px 0px 10px rgb(240, 240, 240);
     margin-bottom: 30px;
 }
+
+
+.responders-component {
+	position: relative;
+	width: 318px;
+	height: 120px;
+    background-color: white;
+    padding-top:10px;
+    box-shadow: 0px 0px 10px rgb(240, 240, 240);
+    margin-bottom: 30px;
+}
+
+.error-message {
+	font-size: 12px;
+	font-style: italic;
+	padding: 20px 30px 0 30px;
+	color: #9C9C9C;
+}
