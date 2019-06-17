@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Chart from "chart.js";
+import moment from "moment";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   OutlinedInput,
@@ -19,18 +20,21 @@ const URL = process.env.REACT_APP_BASE_URL;
 
 let barChart = {};
 
+// Last week dates array.
+let lastWeek = [];
+
 class SentimentChart extends Component {
   state = {
     results: [],
     labels: [],
-    filterBy: "week"
+    filterBy: ""
   };
 
   componentDidMount() {
     // Labels
-    this.props.reports.forEach(report => {
-      this.state.labels.push(report.reportName);
-    });
+    // this.props.reports.forEach(report => {
+    //   this.state.labels.push(report.reportName);
+    // });
 
     // Chart -------------------------
     const ctx = document.getElementById("chart").getContext("2d");
@@ -61,6 +65,41 @@ class SentimentChart extends Component {
     });
   }
 
+  generateWeekDates = () => {
+    for (let i = 7; i > 0; i--) {
+      let date = new Date();
+      date.setDate(date.getDate() - i);
+      date = moment(date).format("l");
+      lastWeek.push(date);
+    }
+    this.setState({
+      labels: lastWeek
+    });
+    console.log(this.state.filterBy);
+  };
+
+  setLabels = e => {
+    e.preventDefault();
+    switch (this.state.filterBy) {
+      case "day":
+        console.log(moment(Date.now()).format("l"));
+        this.setState({
+          labels: [moment(Date.now()).format("l")]
+        });
+        break;
+      case "week":
+        this.generateWeekDates();
+        break;
+      case "month":
+        break;
+      case "quarter":
+        break;
+      case "year":
+        break;
+    }
+    console.log(this.state);
+  };
+
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
@@ -83,6 +122,7 @@ class SentimentChart extends Component {
               >
                 Filter By
               </InputLabel>
+
               <Select
                 value={this.state.filterBy}
                 style={{ marginTop: "20px" }}
@@ -96,6 +136,9 @@ class SentimentChart extends Component {
                 <MenuItem value={"quarter"}>Quarter</MenuItem>
                 <MenuItem value={"year"}>Year</MenuItem>
               </Select>
+              <button onClick={this.setLabels} style={{ margin: "20px" }}>
+                Filter
+              </button>
             </FormControl>
           </form>
         </div>
