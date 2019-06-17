@@ -323,6 +323,7 @@ class CreateReport extends Component {
       created_at: new Date(),
 
       sentimentQuestions,
+      exampleSentiment: 3, 
     };
     console.log("REPORT++", this.report);
     this.state.managerType === 0
@@ -403,6 +404,14 @@ class CreateReport extends Component {
     this.setState({
       [e.target.name]: e.target.value
     });
+  };
+
+  //handle changes for sentiment report example 
+  handleSentimentExample = (event, value) => {
+    this.setState(prevState => ({
+      ...prevState,
+      exampleSentiment: value,
+    }));
   };
 
   //this is for rendering the manager questions at top of the report
