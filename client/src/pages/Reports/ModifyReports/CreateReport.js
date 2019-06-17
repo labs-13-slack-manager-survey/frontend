@@ -117,6 +117,7 @@ class CreateReport extends Component {
     // Temporary State
     channels: [],
     question: "",
+    sentimentQuestion: "",
     week: [
       "Monday",
       "Tuesday",
@@ -303,6 +304,7 @@ class CreateReport extends Component {
       scheduleTime,
       message,
       questions,
+      sentimentQuestions,
       slackChannelId,
       managerResponses,
       EngineeringManagerQuestions,
@@ -318,7 +320,9 @@ class CreateReport extends Component {
       managerResponses: JSON.stringify(managerResponses),
       slackChannelId,
       slackChannelName,
-      created_at: new Date()
+      created_at: new Date(),
+
+      sentimentQuestions,
     };
     console.log("REPORT++", this.report);
     this.state.managerType === 0
@@ -370,12 +374,7 @@ class CreateReport extends Component {
     }));
   };
 
-  removeQuestion = (e, question) => {
-    e.preventDefault();
-    this.setState(prevState => ({
-      questions: prevState.questions.filter(q => q !== question)
-    }));
-  };
+
 
   addQuestions = e => {
     e.preventDefault();
@@ -643,7 +642,7 @@ class CreateReport extends Component {
               <Button variant="contained" {...bindTrigger(popupState)}>
                 Select Survey Template
               </Button>
-              <Menu {...bindMenu(popupState)} onClick={this.aQuestion}>
+              <Menu {...bindMenu(popupState)} onClick={this.addQuestion}>
                 {this.state.questionExperience.map((type, index) => (
                   <MenuItem
                     key={index}
@@ -905,7 +904,7 @@ class CreateReport extends Component {
 
             </div>
             <section>
-              {this.state.sentimentQuestion.map(sentimentQuestion => (
+              {this.state.sentimentQuestions.map(sentimentQuestion => (
                 <article className="question-flex" key={sentimentQuestion}>
                   <p className="question">{sentimentQuestion}</p>
                   <Fab
