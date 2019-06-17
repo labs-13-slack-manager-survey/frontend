@@ -135,37 +135,8 @@ class StatsDashboard extends Component {
               data={this.state.barData}
             />
           )}
-
-          {/* <div style={{ marginTop: "50px" }}>
-            <TableHeader
-              column1={"Report Name"}
-              column2={"Date Created"}
-              column3={"Schedule"}
-              column4={"Response Rate"}
-            />
-          </div>
-          {this.state.reports.map(report => (
-            <TableDisplay
-              key={report.id}
-              content1={report.reportName}
-              report={report}
-              role={"test"}
-              archiveReport={this.archiveReport}
-              archiveModal={false}
-            />
-          ))} */}
         </div>
-        <div className="sidebar">
-          {/* <PollCalendar /> */}
-
-          {/* <CircleProgress
-            title={
-              "Recent Poll: " +
-              this.state.reports[this.state.reports.length - 1].reportName
-            }
-            percentComplete={this.state.recentResponseRate / 100}
-          /> */}
-        </div>
+        <div className="sidebar" />
       </div>
     );
   }
