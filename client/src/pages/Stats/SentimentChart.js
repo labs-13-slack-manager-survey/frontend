@@ -108,7 +108,7 @@ class SentimentChart extends Component {
     console.log(this.state.filterBy);
   };
 
-  generateMonthDates = () => {
+  generateYearDates = () => {
     for (let i = 365; i > 0; i--) {
       let date = new Date();
       date.setDate(date.getDate() - i);
@@ -138,8 +138,10 @@ class SentimentChart extends Component {
         this.generateMonthDates();
         break;
       case "quarter":
+        this.generateQuarterDates();
         break;
       case "year":
+        this.generateMonthDates();
         break;
     }
     console.log(this.state);
