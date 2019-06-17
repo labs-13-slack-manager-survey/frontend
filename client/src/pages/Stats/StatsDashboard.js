@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { axiosWithAuth, baseURL } from "../../config/axiosWithAuth";
 
-import SentimentChart from "./SentimentChart";
 import PageTitle from "../../components/PageTitle";
 import SummaryBox from "../../components/SummaryBox";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 import "./StatsDashboard.css";
+import ChartOptions from "./ChartOptions";
 
 const URL = process.env.REACT_APP_BASE_URL;
 
@@ -16,10 +16,6 @@ class StatsDashboard extends Component {
     super();
     this.state = {
       reports: [],
-      responses: [],
-      barLabels: [],
-      barData: [],
-      recentResponseRate: null,
       users: []
     };
   }
@@ -34,7 +30,6 @@ class StatsDashboard extends Component {
         this.setUsers();
       })
       .then(() => {
-        this.getResponseRate();
         this.setRecentResponse();
       })
       .catch(err => console.log(err));
@@ -50,19 +45,6 @@ class StatsDashboard extends Component {
         });
       })
       .catch(err => console.log(err));
-  };
-
-  getResponseRate = () => {
-    this.state.reports.forEach(report => {
-      axiosWithAuth()
-        .get(`${URL}/reports/submissionRate/${report.id}`)
-        .then(res => {
-          this.setState({
-            barData: [...this.state.barData, res.data.historicalSubmissionRate]
-          });
-        })
-        .catch(err => console.log(err));
-    });
   };
 
   setUsers = () => {
@@ -115,12 +97,7 @@ class StatsDashboard extends Component {
               content={this.state.reports.length}
             />
           </div>
-          {this.state.barData.length === this.state.reports.length && (
-            <SentimentChart
-              reports={this.state.reports}
-              data={this.state.barData}
-            />
-          )}
+          <ChartOptions reports={this.state.reports} />
         </div>
         <div className="sidebar" />
       </div>
