@@ -326,11 +326,12 @@ class CreateReport extends Component {
       sentimentQuestions: JSON.stringify(sentimentQuestions),
     };
     console.log("REPORT++", this.report);
-    this.state.managerType === 0
+    if (this.state.managerQuestions) {{this.state.managerType === 0
       ? (report["managerQuestions"] = JSON.stringify(
           EngineeringManagerQuestions
         ))
-      : (report["managerQuestions"] = JSON.stringify(ProjectManagerQuestions));
+      : (report["managerQuestions"] = JSON.stringify(ProjectManagerQuestions))}}
+      
     console.log("mres after", report.managerResponses);
     const endpoint = `${baseURL}/reports`;
 

@@ -44,7 +44,7 @@ class MemberResponseForm extends Component {
     ) : (<>
           <div>
             {/*conditional render based on user role and if the manager survey is set*/}
-            {token.roles == "admin" ? (this.state.managerQuestions.length !== 0 ? <>
+            {token.roles == "admin" ? (this.state.managerQuestions && this.state.managerQuestions.length !== 0 ? <>
               <ManagerPoll reportId={this.props.match.params.reportId} />            
                 <Button
                 style={{
@@ -61,7 +61,7 @@ class MemberResponseForm extends Component {
               </Button>
               </> : <div className = "member-form-subtitle">manager survey not set</div>) : <section>
             
-            {this.state.isSentiment ? null : (
+            {/* {this.state.isSentiment ? null : (
               <div className = "manager-poll-responses">
                 <div className = "poll-header-toggle"  onClick={this.toggleManagerQ}>
                   <div className="member-form-title">Managers Thoughts</div>
@@ -83,7 +83,9 @@ class MemberResponseForm extends Component {
                 </> : null }
               
               </div>
-            )}
+            )} */}
+
+
             <div className = "poll-header">
               <div className="member-form-title">{this.state.reportName}</div>
               <p className="member-form-subtitle">{this.state.reportMessage}</p>
