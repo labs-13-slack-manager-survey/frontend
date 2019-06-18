@@ -237,7 +237,7 @@ class MemberResponseForm extends Component {
     console.log(allQuestions)
     const endpoint = `${baseURL}/responses/${this.props.match.params.reportId}`;
     axiosWithAuth()
-      .post(endpoint, allQuestions)
+      .post(endpoint, this.state.questions)
       .then(res => {
         if (this.state.isSentiment) {
           this.props.updateWithUserResponse(res);
@@ -276,7 +276,7 @@ class MemberResponseForm extends Component {
 
   submitAll = () =>{
     this.submitReport();
-    // this.reload()
+    this.reload()
   }
 
 }
