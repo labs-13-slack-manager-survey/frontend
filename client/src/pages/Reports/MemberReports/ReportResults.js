@@ -44,12 +44,8 @@ class ReportResults extends Component {
     secondaryPage: true,
     percentComplete: 0,
     historicalSubmissionRate: 0,
-<<<<<<< HEAD
     managerQuestions: [],
     managerResponses: [], 
-=======
-    isComplete:false
->>>>>>> 74f0c9bc6a0e15ea119650b825850f21e6acfb1d
   };
 
   render() {
@@ -259,11 +255,7 @@ class ReportResults extends Component {
         managerQuestions: JSON.stringify(managerQuestions),
         managerResponses: JSON.stringify(managerResponses),
       });
-<<<<<<< HEAD
       console.log(managerQuestions);
-=======
-   
->>>>>>> 74f0c9bc6a0e15ea119650b825850f21e6acfb1d
     } catch (err) {
       console.log(err);
     }

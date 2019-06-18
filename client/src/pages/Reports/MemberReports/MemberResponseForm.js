@@ -45,7 +45,7 @@ class MemberResponseForm extends Component {
     ) : (<>
           <div>
             {/*conditional render based on user role and if the manager survey is set*/}
-            {token.roles == "admin" ? (this.state.managerQuestions && this.state.managerQuestions.length == 0 ? <>
+            {token.roles == "admin" ? (this.state.managerQuestions ? <>
               <ManagerPoll reportId={this.props.match.params.reportId} />            
               </> : <div className = "member-form-subtitle">manager survey not set</div>) : <section>
             
@@ -95,35 +95,6 @@ class MemberResponseForm extends Component {
                   </li>
                 ))}
 
-<<<<<<< HEAD
-            <ol type="1">{this.state.questions.map((q, i) => (
-              <li><ReportInput
-                question={q.question}
-                response={q.response}
-                sentimentRange={q.sentimentRange}
-                handleChange={this.handleChange}
-                key={i}
-                isSentiment={this.state.isSentiment}
-                handleSentiment={this.handleSentiment}
-              /></li>
-            ))}
-            
-            
-            {this.state.sentimentQuestions.map((sq, i) => (
-              <li><ReportInput
-                question={sq.question}
-                response={sq.response}
-                sentimentRange={sq.sentimentRange}
-                handleSentimentComment={this.handleSentimentComment}
-                key={i}
-                isSentiment= {true} 
-                handleSentiment={this.handleSentiment}
-              /></li>
-            ))}</ol>
-
-            </section>}
-          </div>
-=======
                 {this.state.sentimentQuestions.map((sq, i) => (
                   <li>
                     <ReportInput
@@ -138,7 +109,6 @@ class MemberResponseForm extends Component {
                   </li>
                 ))}
               </ol>
->>>>>>> 74f0c9bc6a0e15ea119650b825850f21e6acfb1d
 
               <Button
                 style={{
@@ -154,7 +124,7 @@ class MemberResponseForm extends Component {
                 Submit Report
               </Button>
             </section>
-          )}
+          }
         </div>
       </>
     );
