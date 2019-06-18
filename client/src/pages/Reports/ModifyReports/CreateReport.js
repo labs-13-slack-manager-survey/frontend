@@ -754,7 +754,7 @@ class CreateReport extends Component {
 
             <div className= "poll-section-description">Add optional sentiment questions to capture how your team feels about their work on a scale of 1-5. Respondents will also have the option of including additional comments to accompany their response.</div>
             <div className = "response-card-example">
-                <div className = "response-question">Sample:  On a scale of 1-5 how do you feel about how confident are you feeling about completing the tasks assigned to you today?</div>
+                <div className = "response-question">Example:  On a scale of 1-5 how do you feel about how confident are you feeling about completing the tasks assigned to you today?</div>
                 <StyledSlider
                   className="slider"
                   value={this.state.exampleSentiment}
