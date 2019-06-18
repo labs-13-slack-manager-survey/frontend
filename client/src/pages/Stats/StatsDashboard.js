@@ -21,7 +21,8 @@ class StatsDashboard extends Component {
       users: [],
       data: [],
       labels: [],
-      filterBy: ""
+      filterBy: "",
+      dataType: ""
     };
   }
 
@@ -171,10 +172,31 @@ class StatsDashboard extends Component {
                 <MenuItem value={"quarter"}>Quarter</MenuItem>
                 <MenuItem value={"year"}>Year</MenuItem>
               </Select>
-              <button onClick={this.setLabels} style={{ margin: "20px" }}>
-                Filter
-              </button>
             </FormControl>
+            <FormControl className="formControl">
+              <InputLabel
+                className="inputLabel"
+                style={{ marginBottom: "20px" }}
+              >
+                Pick Data
+              </InputLabel>
+
+              <Select
+                value={this.state.dataType}
+                style={{ marginTop: "20px" }}
+                name="dataType"
+                onChange={this.handleChange}
+                className="select"
+              >
+                <MenuItem value={"responseRate"}>Response Rate</MenuItem>
+                <MenuItem value={"sentimentAverage"}>
+                  Sentiment Average
+                </MenuItem>
+              </Select>
+            </FormControl>
+            <button onClick={this.setLabels} style={{ margin: "20px" }}>
+              View Graph
+            </button>
           </form>
           <ChartOptions
             reports={this.state.reports}
