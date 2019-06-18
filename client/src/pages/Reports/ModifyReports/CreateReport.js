@@ -792,7 +792,7 @@ class CreateReport extends Component {
             <section className="enter-question">
               <FormControl className="input-field" required>
                 <InputLabel htmlFor="report-question">
-                  Enter a sentiment question...
+                  From a scale of 1-5 how do you feel about....
                 </InputLabel>
                 <Input
                   id="report-question"
