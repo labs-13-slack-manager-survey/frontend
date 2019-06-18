@@ -7,13 +7,10 @@ const URL = process.env.REACT_APP_BASE_URL;
 
 export default class ChartOptions extends Component {
   state = {
-    data: [],
-    labels: [],
-    filterBy: ""
+    data: []
   };
 
   componentDidMount() {
-    console.log("hello");
     console.log(this.props);
     this.getResponseRate();
   }
@@ -23,22 +20,25 @@ export default class ChartOptions extends Component {
       axiosWithAuth()
         .get(`${URL}/reports/submissionRate/${report.id}`)
         .then(res => {
+          console.log(res.data.historicalSubmissionRate);
+          console.log(this.state);
           this.setState({
             data: [...this.state.data, res.data.historicalSubmissionRate]
           });
+          console.log(this.state);
         })
         .catch(err => console.log(err));
     });
+    console.log(this.state);
   };
 
   render() {
+    if (this.props.labels.length === 0) {
+      return <p>Set Options for Graph</p>;
+    }
     return (
       <div>
-        {this.props.labels > 0 ? (
-          <SentimentChart data={this.props.data} labels={this.props.labels} />
-        ) : (
-          <p>Set Options for Graph</p>
-        )}
+        <SentimentChart data={this.state.data} labels={this.props.labels} />
       </div>
     );
   }
