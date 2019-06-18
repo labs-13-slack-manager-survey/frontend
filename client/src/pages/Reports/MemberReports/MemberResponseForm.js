@@ -44,9 +44,23 @@ class MemberResponseForm extends Component {
     ) : (<>
     `
           <div>
-            {/*need to render this condtionally  */}
-            {token.roles == "admin" ? <ManagerPoll reportId={this.props.match.params.reportId} /> :
-            <section>
+            {/*conditional render based on user role and if the manager survey is set*/}
+            {token.roles == "admin" ? (this.state.managerQuestions.length == 0 ? <>
+              <ManagerPoll reportId={this.props.match.params.reportId} />            
+                <Button
+                style={{
+                  display: "block",
+                  margin: "auto",
+                  marginTop: "30px",
+                  marginBottom: "30px"
+                }}
+                variant="outlined"
+                color="primary"
+                onClick={this.submitAll}
+              >
+                Submit Report
+              </Button>
+              </> : <div className = "member-form-subtitle">manager survey not set</div>) : <section>
             
             {this.state.isSentiment ? null : (
               <div className = "manager-poll-responses">
@@ -160,12 +174,6 @@ class MemberResponseForm extends Component {
       .catch(err => console.log(err));
       console.log(this.state)
   }
-  //   this.setState(prevState => ({
-  //     ...prevState,
-  //     questions: prevState.questions.map(
-  //       q => (q.question !== question ? q : aObj) // qObj
-  //     )
-  //   }));
 
   //handling the submit for sentiment functions
   handleSentiment = (event, value, question) => {
