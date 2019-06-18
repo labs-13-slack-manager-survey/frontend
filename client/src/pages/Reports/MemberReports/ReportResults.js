@@ -88,8 +88,9 @@ class ReportResults extends Component {
               <div className="linebr" />
             </>
           )}
-          {/* {this.state.managerQuestions.map(question => <div>{question}</div>)} */}
+
           <section className="report-results-feed">
+            {this.state.managerResponses.map(res => <div>{res}</div>)}
             {this.state.responses.map(
               batch =>
                 batch.responses.length > 0 && (
@@ -252,8 +253,8 @@ class ReportResults extends Component {
         filteredResponse: filtered,
         responders,
         historicalSubmissionRate,
-        managerQuestions: JSON.stringify(managerQuestions),
-        managerResponses: JSON.stringify(managerResponses),
+        managerQuestions: managerQuestions,
+        managerResponses: managerResponses,
       });
       console.log(managerQuestions);
     } catch (err) {
