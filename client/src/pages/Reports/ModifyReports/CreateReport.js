@@ -22,11 +22,7 @@ import PollDescription from "../../../components/PollDescription";
 import ToggleOn from "../../../images/icons/toggle-on.png";
 import ToggleOff from "../../../images/icons/toggle-off.png";
 import Slider from "@material-ui/lab/Slider";
-import ReportInput from "../MemberReports/ReportInput.js";
 import { fade } from "@material-ui/core/styles/colorManipulator";
-
-
-import MemberResponseForm from "../MemberReports/MemberResponseForm";
 
 //importing things from material-ui
 import MenuItem from "@material-ui/core/MenuItem";
@@ -97,10 +93,6 @@ class CreateReport extends Component {
     questions: [],
     sentimentQuestions: [],
     managerResponses: [],
-    resOne: "",
-    resTwo: "",
-    resThree: "",
-    resFour: "",
     slackChannelId: null,
     slackAuthorized: false,
     managerQuestions: false,

@@ -44,7 +44,12 @@ class ReportResults extends Component {
     secondaryPage: true,
     percentComplete: 0,
     historicalSubmissionRate: 0,
+<<<<<<< HEAD
+    managerQuestions: [],
+    managerResponses: [], 
+=======
     isComplete:false
+>>>>>>> 74f0c9bc6a0e15ea119650b825850f21e6acfb1d
   };
 
   render() {
@@ -87,7 +92,7 @@ class ReportResults extends Component {
               <div className="linebr" />
             </>
           )}
-
+          {/* {this.state.managerQuestions.map(question => <div>{question}</div>)} */}
           <section className="report-results-feed">
             {this.state.responses.map(
               batch =>
@@ -195,23 +200,41 @@ class ReportResults extends Component {
     try {
       const userId = jwt_decode(localStorage.getItem("token")).subject;
       // makes 3 api calls to get reports/responses and submission rate
-      const [reportRes, responsesRes, submissionRes] = await Promise.all([
+      const [reportRes, responsesRes, submissionRes, managerRes] = await Promise.all([
+  
         await axiosWithAuth().get(
           `${baseURL}/reports/${this.props.match.params.reportId}`
         ),
+
         await axiosWithAuth().get(
           `${baseURL}/responses/${this.props.match.params.reportId}`
         ),
+
         await axiosWithAuth().get(
           `${baseURL}/reports/submissionRate/${
             this.props.match.params.reportId
           }`
+        ),
+
+        await axiosWithAuth().get(
+          `${baseURL}/responses/managerQuestions/${this.props.match.params.reportId}`
         )
       ]);
+
       const { isSentiment } = reportRes.data.report;
       // format the submissionRate
       let { historicalSubmissionRate } = submissionRes.data;
       historicalSubmissionRate /= 100;
+
+      let managerQuestions = [];
+      let managerResponses = []; 
+
+      managerRes.data.map(res => {
+        console.log(res)
+        managerQuestions.push(res.managerQuestions)
+        managerResponses.push(res.managerResponses)
+      })
+
       const filtered = responsesRes.data[0].responses.filter(
         response => response.userId === userId
       );
@@ -232,9 +255,15 @@ class ReportResults extends Component {
         responses: responsesRes.data,
         filteredResponse: filtered,
         responders,
-        historicalSubmissionRate
+        historicalSubmissionRate,
+        managerQuestions: JSON.stringify(managerQuestions),
+        managerResponses: JSON.stringify(managerResponses),
       });
+<<<<<<< HEAD
+      console.log(managerQuestions);
+=======
    
+>>>>>>> 74f0c9bc6a0e15ea119650b825850f21e6acfb1d
     } catch (err) {
       console.log(err);
     }
