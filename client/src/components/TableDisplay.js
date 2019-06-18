@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { axiosWithAuth, baseURL } from "../config/axiosWithAuth.js";
 
 import editActive from '../images/icons/edit-active.png';
 import edit from '../images/icons/edit.png';
@@ -30,7 +31,7 @@ function Transition(props) {
 class TableDisplay extends React.Component {
     state = {
         dialogOpen: false,
-        totalResponse: 0
+        totalResponses: 0
 	}
     render() {
         const time = this.props.report.scheduleTime.split(':');
@@ -68,7 +69,7 @@ class TableDisplay extends React.Component {
                 </div>
 
 
-                <div className = "column">{this.state.totalResponse}</div>
+                <div className = "column">{this.state.totalResponses}</div>
 
                 {this.props.role == 'admin' ? <div className = "action-icons">
                     <Link
@@ -106,6 +107,18 @@ class TableDisplay extends React.Component {
                             
             </div> 
         )}
+
+    componentDidMount(){
+        axiosWithAuth()
+        .get(`${baseURL}/reports/submissionRate`)
+        .then(res => {
+          this.setState({
+            totalResponses: res.data.totalResponses,
+          })
+        })
+        .catch(err => console.log(err))
+  
+    }
 };
 
 export default TableDisplay; 
