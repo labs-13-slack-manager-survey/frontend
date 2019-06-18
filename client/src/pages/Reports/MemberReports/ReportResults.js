@@ -46,6 +46,8 @@ class ReportResults extends Component {
     historicalSubmissionRate: 0,
     managerQuestions: [],
     managerResponses: [], 
+    managerSubmitted: [],
+    managerFeedback: [],
   };
 
   render() {
@@ -58,16 +60,37 @@ class ReportResults extends Component {
     console.log("REPORT RESULT STATE",this.state)
     console.log(this.state.managerQuestions)
     
-    let managerPoll = [];
+    let managerPollDays = [];
 
-    for (let i=0; i<this.state.managerQuestions.length; i++) {
-      let managerQandA = {};
-      managerQandA.managerQuestions = this.state.managerQuestions[i];
-      managerQandA.managerResponses= this.state.managerResponses[i];
-      managerPoll.push(managerQandA);
+    for (let i = 0; i < this.state.managerFeedback.length; i++ ){
+      for (let j=0; j<this.state.managerFeedback.managerQuestions.length; j++) {
+        let managerQandA = {};
+        managerQandA.managerQuestions = this.state.managerFeedback.managerQuestions[j];
+        managerQandA.managerResponses= this.state.managerFeedback.managerResponses[j];
+        managerQandA.managerSubmitted = this.state.managerFeedback.managerSubmitted;
+        managerPollDays.push(managerQandA);
+      }
     }
     
+    console.log(managerPollDays)
+    
+    //calculating date of the manager report 
     const token = jwt_decode(localStorage.getItem('token'));
+    let today = new Date();
+    const dd = moment(today).format('DD');
+    const mm = moment(today).format('MMMM');
+    const yyyy = moment(today).format('YYYY');
+    today = dd + mm + yyyy
+
+    
+    let managerToday = this.state.managerSubmitted[0]
+    let Day = moment(managerToday).format('DD');
+    let Month = moment(managerToday).format('MMMM')
+    const Year = moment(managerToday).format('YYYY');
+    managerToday = Day + Month + Year
+    console.log(managerToday)
+
+    console.log(this.state.managerFeedback)
 
     return (
       <div className="dashboard-view">
@@ -78,22 +101,20 @@ class ReportResults extends Component {
             secondaryPage={this.state.secondaryPage}
           />
 
-          {this.state.filteredResponse.length > 5 ||
+          {this.state.filteredResponse.length > 0 ||
           this.state.completed === true ? (
             <>
               <div className="confirm-response">
-                {token.roles !== 'admin' ?  "Your response has been recorded ": 
-              
-              <>
-                {managerPoll.map(res =>
+                {managerToday != today  ?  "Your response has been recorded ": 
+                <>
+                {managerPollDays.map(res =>
                 <div classname="manager-feedback">
-                  {this.state.managerSubmitted}
                   <div className= "manager-question">{res.managerQuestions}</div> 
                   <div className= "manager-response">{res.managerResponses}</div> 
                 </div>
                 )}
               </> 
-            }
+              }
                
               </div>
               <div className="linebr" />
@@ -115,12 +136,15 @@ class ReportResults extends Component {
           )}
 
           <section className="report-results-feed">
-            
-          <div classname="manager-feedback">
-                  {this.state.managerSubmitted}
+          {this.state.managerFeedback.map(res => (
+                  <div>{res}</div>
+                ))}
+              {managerPollDays.map(res =>
+                <div classname="manager-feedback">
                   <div className= "manager-question">{res.managerQuestions}</div> 
                   <div className= "manager-response">{res.managerResponses}</div> 
                 </div>
+                )}
 
             {this.state.responses.map(
               batch =>
@@ -254,14 +278,26 @@ class ReportResults extends Component {
       let { historicalSubmissionRate } = submissionRes.data;
       historicalSubmissionRate /= 100;
 
-      let managerQuestions = [];
-      let managerResponses = []; 
-
-      managerRes.data.map(res => {
-        console.log(res)
-        managerQuestions.push(res.managerQuestions)
-        managerResponses.push(res.managerResponses)
+      // let managerQuestions = [];
+      // let managerResponses = []; 
+      // let managerSubmitted = []; 
+      // let managerFeedback= [];
+      
+      const managerFeedback = [];
+      managerRes.data.forEach(({ feedback }) => {
+        feedback.length > 0 &&
+          feedback.forEach(({ managerQuestions, managerResponses, submitted_date }) => {
+            managerFeedback.push({ managerQuestions, managerResponses, submitted_date });
+          })
       })
+
+      // managerRes.data.map(res => {
+      //   console.log(res)
+      //   managerQuestions.push(JSON.parse(res.managerQuestions))
+      //   managerResponses.push(JSON.parse(res.managerResponses))
+      //   managerSubmitted.push(res.submitted_date)
+      //   managerFeedback.push({managerQuestions, managerResponses, managerSubmitted})
+      // })
 
       const filtered = responsesRes.data[0].responses.filter(
         response => response.userId === userId
@@ -284,11 +320,12 @@ class ReportResults extends Component {
         filteredResponse: filtered,
         responders,
         historicalSubmissionRate,
-        managerQuestions: JSON.parse(managerQuestions),
-        managerResponses: JSON.parse(managerResponses),
-        managerSubmitted: managerRes.data.submitted_date,
+        // managerQuestions: JSON.parse(managerQuestions),
+        // managerResponses: JSON.parse(managerResponses),
+        // managerSubmitted: managerSubmitted,
+        managerFeedback: managerFeedback,
       });
-      console.log(managerRes.data)
+      console.log(managerFeedback)
     } catch (err) {
       console.log(err);
     }
