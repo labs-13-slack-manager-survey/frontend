@@ -42,35 +42,14 @@ class MemberResponseForm extends Component {
       <>
         <div>{this.state.clientInfo}</div>
       </>
-    ) : (
-      <>
-        <div>
-          {/*conditional render based on user role and if the manager survey is set*/}
-          {token.roles == "admin" ? (
-            this.state.managerQuestions &&
-            this.state.managerQuestions.length !== 0 ? (
-              <>
-                <ManagerPoll reportId={this.props.match.params.reportId} />
-                <Button
-                  style={{
-                    display: "block",
-                    margin: "auto",
-                    marginTop: "30px",
-                    marginBottom: "30px"
-                  }}
-                  variant="outlined"
-                  color="primary"
-                  onClick={this.submitAll}
-                >
-                  Submit Report
-                </Button>
-              </>
-            ) : (
-              <div className="member-form-subtitle">manager survey not set</div>
-            )
-          ) : (
-            <section>
-              {/* {this.state.isSentiment ? null : (
+    ) : (<>
+          <div>
+            {/*conditional render based on user role and if the manager survey is set*/}
+            {token.roles == "admin" ? (this.state.managerQuestions && this.state.managerQuestions.length == 0 ? <>
+              <ManagerPoll reportId={this.props.match.params.reportId} />            
+              </> : <div className = "member-form-subtitle">manager survey not set</div>) : <section>
+            
+            {/* {this.state.isSentiment ? null : (
               <div className = "manager-poll-responses">
                 <div className = "poll-header-toggle"  onClick={this.toggleManagerQ}>
                   <div className="member-form-title">Managers Thoughts</div>
@@ -116,6 +95,35 @@ class MemberResponseForm extends Component {
                   </li>
                 ))}
 
+<<<<<<< HEAD
+            <ol type="1">{this.state.questions.map((q, i) => (
+              <li><ReportInput
+                question={q.question}
+                response={q.response}
+                sentimentRange={q.sentimentRange}
+                handleChange={this.handleChange}
+                key={i}
+                isSentiment={this.state.isSentiment}
+                handleSentiment={this.handleSentiment}
+              /></li>
+            ))}
+            
+            
+            {this.state.sentimentQuestions.map((sq, i) => (
+              <li><ReportInput
+                question={sq.question}
+                response={sq.response}
+                sentimentRange={sq.sentimentRange}
+                handleSentimentComment={this.handleSentimentComment}
+                key={i}
+                isSentiment= {true} 
+                handleSentiment={this.handleSentiment}
+              /></li>
+            ))}</ol>
+
+            </section>}
+          </div>
+=======
                 {this.state.sentimentQuestions.map((sq, i) => (
                   <li>
                     <ReportInput
@@ -130,6 +138,7 @@ class MemberResponseForm extends Component {
                   </li>
                 ))}
               </ol>
+>>>>>>> 74f0c9bc6a0e15ea119650b825850f21e6acfb1d
 
               <Button
                 style={{
