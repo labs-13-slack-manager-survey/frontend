@@ -39,10 +39,3 @@ export default class ChartOptions extends Component {
     );
   }
 }
-
-/* 
---- ISSUES ---
-1. Labels getting set a click late.
-2. SentimentChart not rendering after label state gets set. 
-3. Data not getting passed to SentimentChart.
-*/
