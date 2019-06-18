@@ -9,6 +9,7 @@ import {
 	Dialog,
     DialogTitle,
     Slide,
+    Button
 } from '@material-ui/core';
 
 const week = [
@@ -44,11 +45,8 @@ class TableDisplay extends React.Component {
             <div className="table-display">
 
             <div className = "content">
-            <Link
-				to={`/slackr/dashboard/reports/${this.props.report.id}`}
-				style={{ textDecoration: 'none' }} className = "column1">
-                <div>{this.props.content1}</div>
-                </Link>
+                <div className = "column1">{this.props.content1} </div>
+
                 <div className = "date">{dateString.getMonth()+1}/{dateString.getDate()}/{dateString.getFullYear()}</div>
 
                 <div className = "schedule-time">
@@ -67,8 +65,15 @@ class TableDisplay extends React.Component {
                         ))}
                 </div>
 
+                <div className = "columnTR" >{this.state.totalResponse}</div> 
 
-                <div className = "column">{this.state.totalResponse}</div>
+                <Button>
+                    <Link
+                        to={`/slackr/dashboard/reports/${this.props.report.id}`}
+                        className = "column">
+                        respond
+                    </Link>
+                </Button>
 
                 <div className = "action-icons">
                     <Link

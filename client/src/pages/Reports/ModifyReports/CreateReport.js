@@ -651,7 +651,7 @@ class CreateReport extends Component {
                   this.state.reportName ? "manager-poll-question" : "incomplete"
                 }
               >
-                Report Name*
+                Report Name
               </div>
               <TextField
                 fullWidth={true}

@@ -198,8 +198,8 @@ class MemberResponseForm extends Component {
   }
   submitAll = () =>{
     this.completeSurvey()
-    this.submitReport();
-    this.reload()
+    // this.submitReport();
+    // this.reload()
   }
 
 }

@@ -57,10 +57,6 @@ class Reports extends Component {
       });
   };
 
-  // ConsoleCheck = (id) => {
-  //   console.log(id)
-
-  // }
 
   handleClose = () => {
     this.setState({
@@ -86,6 +82,7 @@ class Reports extends Component {
   render() {
     //const { stepsEnabled, steps, initialStep } = this.state;
     const activeReports = this.props.reports.filter(report => report.active);
+    console.log("++__++",this.props.reports)
     const activeReportsReverse = activeReports.reverse(); 
 
     return (
