@@ -11,7 +11,6 @@ export default class ChartOptions extends Component {
   };
 
   componentDidMount() {
-    console.log(this.props);
     this.getResponseRate();
   }
 
@@ -20,20 +19,17 @@ export default class ChartOptions extends Component {
       axiosWithAuth()
         .get(`${URL}/reports/submissionRate/${report.id}`)
         .then(res => {
-          console.log(res.data.historicalSubmissionRate);
-          console.log(this.state);
           this.setState({
             data: [...this.state.data, res.data.historicalSubmissionRate]
           });
-          console.log(this.state);
         })
         .catch(err => console.log(err));
     });
-    console.log(this.state);
   };
 
   render() {
-    if (this.props.labels.length === 0) {
+    console.log(this.state.data);
+    if (this.props.labels.length === 0 || this.state.data.length === 0) {
       return <p>Set Options for Graph</p>;
     }
     return (
