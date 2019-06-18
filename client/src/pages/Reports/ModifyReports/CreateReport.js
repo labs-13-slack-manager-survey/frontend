@@ -418,7 +418,7 @@ class CreateReport extends Component {
                 <Button variant="contained" {...bindTrigger(popupState)}>
                   {this.state.managerType === 0
                     ? "Engineering Manager"
-                    : "Project Manager"}
+                    : "Product Manager"}
                 </Button>
                 <Menu {...bindMenu(popupState)} onClick={this.managerType}>
                   {this.state.typeOfManager.map((type, index) => (
