@@ -70,7 +70,7 @@ class TableDisplay extends React.Component {
 
                 <div className = "column">{this.state.totalResponse}</div>
 
-                <div className = "action-icons">
+                {this.props.role == 'admin' ? <div className = "action-icons">
                     <Link
 						to={`/slackr/dashboard/reports/${this.props.report.id}/edit`}
 						id={this.props.role !== 'admin' ? 'display-link' : ''}
@@ -100,7 +100,7 @@ class TableDisplay extends React.Component {
 							}}>No</button>
 					</Dialog>
 
-                </div>
+                </div> : null }
 
             </div>
                             

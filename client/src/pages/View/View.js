@@ -80,6 +80,7 @@ class View extends Component {
       {localStorage.getItem('doneTour') === 'yeah!' ? 
       null :
       <Steps
+        className="step"
         enabled={stepsEnabled}
         steps={steps}
         initialStep={initialStep}
