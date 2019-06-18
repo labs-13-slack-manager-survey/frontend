@@ -43,7 +43,9 @@ class ReportResults extends Component {
     isSentiment: false,
     secondaryPage: true,
     percentComplete: 0,
-    historicalSubmissionRate: 0
+    historicalSubmissionRate: 0,
+    managerQuestions: [],
+    managerResponses: [], 
   };
 
   render() {
@@ -194,23 +196,34 @@ class ReportResults extends Component {
     try {
       const userId = jwt_decode(localStorage.getItem("token")).subject;
       // makes 3 api calls to get reports/responses and submission rate
-      const [reportRes, responsesRes, submissionRes] = await Promise.all([
+      const [reportRes, responsesRes, submissionRes, managerRes] = await Promise.all([
+  
         await axiosWithAuth().get(
           `${baseURL}/reports/${this.props.match.params.reportId}`
         ),
+
         await axiosWithAuth().get(
           `${baseURL}/responses/${this.props.match.params.reportId}`
         ),
+
         await axiosWithAuth().get(
           `${baseURL}/reports/submissionRate/${
             this.props.match.params.reportId
           }`
+        ),
+
+        await axiosWithAuth().get(
+          `${baseURL}/responses/managerQuestions/${this.props.match.params.reportId}`
         )
       ]);
+
       const { isSentiment } = reportRes.data.report;
       // format the submissionRate
       let { historicalSubmissionRate } = submissionRes.data;
       historicalSubmissionRate /= 100;
+
+      let {managerQuestions} = managerRes.data;
+      let {managerResponses} = managerRes.data;
       const filtered = responsesRes.data[0].responses.filter(
         response => response.userId === userId
       );
@@ -231,9 +244,11 @@ class ReportResults extends Component {
         responses: responsesRes.data,
         filteredResponse: filtered,
         responders,
-        historicalSubmissionRate
+        historicalSubmissionRate,
+        managerQuestions,
+        managerResponses,
       });
-      console.log(this.state.historicalSubmissionRate);
+      console.log(managerRes.data);
     } catch (err) {
       console.log(err);
     }
