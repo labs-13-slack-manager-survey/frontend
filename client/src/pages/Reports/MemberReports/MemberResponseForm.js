@@ -23,8 +23,7 @@ class MemberResponseForm extends Component {
     managerQuestions: [],
     managerResponses: [],
     toggleManager: true,
-    isComplete: false,
-    test: ""
+    isComplete: false
   };
 
   toggleManagerQ = () => {
@@ -34,11 +33,11 @@ class MemberResponseForm extends Component {
     console.log(this.state.toggleManager);
   };
   completeSurvey = () => {
-    this.setState({ isComplete: !this.state.isComplete });
+    this.setState({ isComplete: true });
   };
   render() {
+    console.log(this.state)
     const token = jwt_decode(localStorage.getItem("token"));
-    console.log(this.state);
     return this.state.clientInfo.length > 0 ? (
       <>
         <div>{this.state.clientInfo}</div>
@@ -252,6 +251,7 @@ class MemberResponseForm extends Component {
           this.props.updateWithUserResponse(res);
           this.setState(prevState => ({
             ...prevState,
+            isComplete:true,
             questions: prevState.questions.map(q => ({
               question: q.question,
               response: "",
@@ -261,11 +261,11 @@ class MemberResponseForm extends Component {
         } else {
           this.setState(prevState => ({
             ...prevState,
+            isComplete:true,
             questions: prevState.questions.map(q => ({
               question: q.question,
               response: ""
             })),
-            isComplete: !this.state.isComplete
           }));
         }
       })
@@ -275,13 +275,14 @@ class MemberResponseForm extends Component {
   };
 
   reload = () => {
-    window.location.reload();
-  };
-  submitAll = () => {
-    this.completeSurvey();
+    window.location.reload()
+  }
+  submitAll = () =>{
+    this.completeSurvey()
     this.submitReport();
-    this.reload();
-  };
+    this.reload()
+  }
+
 }
 
 export default MemberResponseForm;
