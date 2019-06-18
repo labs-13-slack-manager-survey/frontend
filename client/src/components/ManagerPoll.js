@@ -66,10 +66,10 @@ class ManagerPoll extends React.Component {
         console.log(managerResponses)
         console.log(managerQuestionResponse)
         const endpoint = `${baseURL}/responses/managerQuestions/${this.props.reportId}`;
-        // axiosWithAuth()
-        //   .post(endpoint, managerQuestionResponse)
-        //   .then(res => {
-        //       console.log(res)
+        axiosWithAuth()
+          .post(endpoint, managerQuestionResponse)
+          .then(res => {
+              console.log(res)
             //   this.setState(prevState => ({
             //     ...prevState,
             //     questions: prevState.questions.map(q => ({
@@ -78,7 +78,7 @@ class ManagerPoll extends React.Component {
             //       sentimentRange: 3
             //     })),
     
-            //   });
+              });
         //     } else {
         //       this.setState(prevState => ({
         //         ...prevState,
@@ -100,7 +100,7 @@ class ManagerPoll extends React.Component {
 
       submitAll = () =>{
         this.submitReport();
-        // this.reload()
+        this.reload()
       }
       
       reload = () => {
