@@ -80,6 +80,7 @@ export class Dashboard extends Component {
       axiosWithAuth()
       .get(`${baseURL}/reports/submissionRate`)
       .then(res => {
+        console.log("RES",res)
         this.setState({
           totalResponses: res.data.totalResponses,
         })
