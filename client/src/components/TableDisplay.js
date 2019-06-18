@@ -1,15 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { axiosWithAuth, baseURL } from "../config/axiosWithAuth.js";
 
 import editActive from '../images/icons/edit-active.png';
 import edit from '../images/icons/edit.png';
 import trashCan from '../images/icons/trash.png';
 import './tableDisplay.css';
 import {
-	Dialog,
+    Dialog,
     DialogTitle,
     Slide,
+    Button
 } from '@material-ui/core';
 
 const week = [
@@ -25,14 +25,14 @@ const week = [
 // time refactor for api call
 
 function Transition(props) {
-	return <Slide direction="up" {...props} />;
+    return <Slide direction="up" {...props} />;
 }
 
 class TableDisplay extends React.Component {
     state = {
         dialogOpen: false,
-        totalResponses: 0
-	}
+        totalResponse: 0
+    }
     render() {
         const time = this.props.report.scheduleTime.split(':');
         let timeStr = `${time[0]}:${time[1]}am`;
@@ -45,11 +45,8 @@ class TableDisplay extends React.Component {
             <div className="table-display">
 
             <div className = "content">
-            <Link
-				to={`/slackr/dashboard/reports/${this.props.report.id}`}
-				style={{ textDecoration: 'none' }} className = "column1">
-                <div>{this.props.content1}</div>
-                </Link>
+                <div className = "column1">{this.props.content1} </div>
+
                 <div className = "date">{dateString.getMonth()+1}/{dateString.getDate()}/{dateString.getFullYear()}</div>
 
                 <div className = "schedule-time">
@@ -68,57 +65,52 @@ class TableDisplay extends React.Component {
                         ))}
                 </div>
 
+                <div className = "columnTR" >{this.state.totalResponse}</div> 
 
-                <div className = "column">{this.state.totalResponses}</div>
-
-                {this.props.role == 'admin' ? <div className = "action-icons">
+                <Button>
                     <Link
-						to={`/slackr/dashboard/reports/${this.props.report.id}/edit`}
-						id={this.props.role !== 'admin' ? 'display-link' : ''}
-					>
+                        to={`/slackr/dashboard/reports/${this.props.report.id}`}
+                        className = "column">
+                        respond
+                    </Link>
+                </Button>
+
+                <div className = "action-icons">
+                    <Link
+                        to={`/slackr/dashboard/reports/${this.props.report.id}/edit`}
+                        id={this.props.role !== 'admin' ? 'display-link' : ''}
+                    >
                         <img className ="action" src={edit} />
                     </Link>
 
                     <img onClick={() => this.setState({dialogOpen: true})} id={this.props.role !== 'admin' ? 'display-link' : ''} className ="action" src={trashCan} />
 
                     <Dialog
-						open={this.state.dialogOpen}
-						TransitionComponent={Transition}
-						keepMounted
-						onClose={this.props.clearError}
-						aria-labelledby="alert-dialog-slide-title"
-						aria-describedby="alert-dialog-slide-description"
-					>
-						<DialogTitle id="alert-dialog-slide-title">
-							Are you sure you'd like to archive this report? 
-						</DialogTitle>
+                        open={this.state.dialogOpen}
+                        TransitionComponent={Transition}
+                        keepMounted
+                        onClose={this.props.clearError}
+                        aria-labelledby="alert-dialog-slide-title"
+                        aria-describedby="alert-dialog-slide-description"
+                    >
+                        <DialogTitle id="alert-dialog-slide-title">
+                            Are you sure you'd like to archive this report? 
+                        </DialogTitle>
 
-						<button onClick={() => this.props.archiveReport(this.props.report.id)}>
-							Yes
-						</button>
-						<button onClick={() => {
-							this.setState({dialogOpen: false})
-							}}>No</button>
-					</Dialog>
+                        <button onClick={() => this.props.archiveReport(this.props.report.id)}>
+                            Yes
+                        </button>
+                        <button onClick={() => {
+                            this.setState({dialogOpen: false})
+                            }}>No</button>
+                    </Dialog>
 
-                </div> : null }
+                </div>
 
             </div>
                             
             </div> 
         )}
-
-    componentDidMount(){
-        axiosWithAuth()
-        .get(`${baseURL}/reports/submissionRate`)
-        .then(res => {
-          this.setState({
-            totalResponses: res.data.totalResponses,
-          })
-        })
-        .catch(err => console.log(err))
-  
-    }
 };
 
 export default TableDisplay; 

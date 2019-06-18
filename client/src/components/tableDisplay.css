@@ -52,9 +52,25 @@
 }
 
 .column {
+  text-align: left;
+  color: white;
+  font-size: 10px;
+  font-weight: 100px;
+  padding: 0 3px;
+  border:1px solid orangered;
+  background-color: orange;
+  border-radius: 3px;
+}
+.column:hover{
+  text-decoration: none;
+  color:white;
+  background-color: rgb(219, 88, 40);
+}
+
+.columnTR{
   width: 22%;
   text-align: left;
-  /* padding-left: 5px; */
+  padding-left: 70px;
   color: #555555;
   font-size: 13px;
   font-weight: 100px;
