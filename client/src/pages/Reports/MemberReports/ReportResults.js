@@ -43,7 +43,8 @@ class ReportResults extends Component {
     isSentiment: false,
     secondaryPage: true,
     percentComplete: 0,
-    historicalSubmissionRate: 0
+    historicalSubmissionRate: 0,
+    isComplete:false
   };
 
   render() {
@@ -53,7 +54,7 @@ class ReportResults extends Component {
       month: "long",
       day: "numeric"
     };
-
+    console.log("REPORT RESULT STATE",this.state)
     return (
       <div className="dashboard-view">
         <main className="view">
@@ -165,27 +166,26 @@ class ReportResults extends Component {
             // minorFix
             percentComplete={this.state.historicalSubmissionRate}
           />
-          <Card
-            interactive={false}
-            elevation={Elevation.TWO}
-            style={{ marginTop: "30px" }}
-            className="report-results-filter-container"
-          >
-            <h1 className="report-results-filter">Filter by day</h1>
+          <div className="calendar">
+            <h1 className="title">Filter by day</h1>
             <DatePicker
               // getByDate={this.getByDate}
               clickedDate={this.state.clickedDate}
               clickedResponder={this.state.clickedResponder}
               filter={this.filter}
             />
-            <h1 className="report-results-filter">Filter by team member</h1>
-            <Responders
+          </div>
+
+          <div className = "responders-component">
+            <h1 className="title">Filter by team member</h1>
+            {this.state.responders.length == 0 ? <div className="error-message"> no responses yet </div> : <Responders
               responders={this.state.responders}
               filter={this.filter}
               clickedDate={this.state.clickedDate}
               clickedResponder={this.state.clickedResponder}
-            />
-          </Card>
+            />}
+          </div>
+
         </div>
       </div>
     );
@@ -234,7 +234,7 @@ class ReportResults extends Component {
         responders,
         historicalSubmissionRate
       });
-      console.log(this.state.historicalSubmissionRate);
+   
     } catch (err) {
       console.log(err);
     }
@@ -258,9 +258,11 @@ class ReportResults extends Component {
         console.log(err);
       });
   };
-
   updateWithUserResponse = res => {
-    this.setState({ responses: res.data, completed: true });
+    this.setState({ responses: res.data, 
+                    completed: true,
+                    isComplete: true
+                  });
   };
 }
 

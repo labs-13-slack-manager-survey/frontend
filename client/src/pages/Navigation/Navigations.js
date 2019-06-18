@@ -104,12 +104,12 @@ class Navigation extends React.Component {
           </div>
           <div className="horizontal-buttons">
             {token.roles == "admin" ? (
-              <NavLink to="/slackr/dashboard/reports/choose">
+              <NavLink to="/slackr/dashboard/reports/new">
                 <button
                   className="menu-bar-add-poll"
                   onClick={token.roles !== "admin" ? this.slackAuthCheck : null}
                 >
-                  <span>+</span>Add Poll
+                  <span>+</span>Schedule Survey
                 </button>
               </NavLink>
             ) : null}

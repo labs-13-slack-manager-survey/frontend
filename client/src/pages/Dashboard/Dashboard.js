@@ -6,9 +6,10 @@ import jwt_decode from "jwt-decode";
 // import Slack from "../Slack/Slack";
 import PageTitle from '../../components/PageTitle'
 import SummaryBox from '../../components/SummaryBox';
+import UserCard from '../../components/UserCard.js';
 
 // style imports
-import { Spinner, Intent } from "@blueprintjs/core";
+import { Spinner, Intent, Button } from "@blueprintjs/core";
 import "./dashboard.css";
 
 export class Dashboard extends Component {
@@ -26,15 +27,20 @@ export class Dashboard extends Component {
   };
   
   render() {
+    const token = jwt_decode(localStorage.getItem("token"));
     if (this.state.isLoading) {
       return <Spinner intent={Intent.PRIMARY} className="loading-spinner" />;
     }
     return (
       <>
+      <Button 
+      className="tourButton"
+      onClick={this.optIn}
+      >?</Button>
       <PageTitle 
       title = "Reports Dashboard"
       />
-      <div className = "summary-boxes">
+       {token.roles == "admin" ? <div className = "summary-boxes">
         <SummaryBox 
             title = "no. of team members"
             content = {this.state.users.length}/>
@@ -46,7 +52,7 @@ export class Dashboard extends Component {
         <SummaryBox 
             title = "total polls scheduled"
             content = {this.state.reports.length}/>
-      </div>
+      </div> : null }
       </>
     );
   }
@@ -74,7 +80,6 @@ export class Dashboard extends Component {
       axiosWithAuth()
       .get(`${baseURL}/reports/submissionRate`)
       .then(res => {
-        console.log(res.data.totalResponses);
         this.setState({
           totalResponses: res.data.totalResponses,
         })
@@ -167,6 +172,11 @@ export class Dashboard extends Component {
   handleCloseMenu = () => {
     this.setState({ anchorEl: null });
   };
+
+  optIn = () =>{
+    localStorage.removeItem("doneTour");
+    window.location.reload(true);
+  }
 
 }
 

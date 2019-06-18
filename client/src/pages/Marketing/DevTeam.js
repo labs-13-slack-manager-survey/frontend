@@ -14,6 +14,7 @@ import Mckay from '../../images/mckay.png';
 import Ben from '../../images/Ben.png';
 import Erica from '../../images/erica.png';
 import Taylor from "../../images/Taylor.png"
+import Gannon from "../../images/Gannon.jpg"
 
 class DevTeam extends Component {
 	scrollToTop() {
@@ -28,6 +29,24 @@ class DevTeam extends Component {
 				>
 					Meet The Developers
 				</Typography>
+				<TeamContainer>
+				<TeamMember>
+						<MemberImage src={Gannon} alt="Gannon Darcy" />
+						<Typography variant="h4">Gannon Darcy</Typography>
+						<p>Project Manager</p>
+						<MemberLinks>
+							<a target="blank" href="https://github.com/GannonDetroit">
+								<FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
+							</a>
+							<a
+								target="blank"
+								href="https://www.linkedin.com/in/gannon-darcy/"
+							>
+								<FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
+							</a>
+						</MemberLinks>
+					</TeamMember>
+				</TeamContainer>
 				<TeamContainer>
 					<TeamMember>
 						<MemberImage src={Ben} alt="Ben Tsao" />

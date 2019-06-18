@@ -80,6 +80,7 @@ class View extends Component {
       {localStorage.getItem('doneTour') === 'yeah!' ? 
       null :
       <Steps
+        className="step"
         enabled={stepsEnabled}
         steps={steps}
         initialStep={initialStep}
@@ -97,7 +98,7 @@ class View extends Component {
         <div className="sidebar">
           <div className="two">
           <CircleProgress
-            title="Today's Polls"
+            title="Today's Surveys"
             percentComplete={this.state.rate}
           />
           </div>
