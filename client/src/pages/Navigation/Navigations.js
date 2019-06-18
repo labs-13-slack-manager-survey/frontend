@@ -109,7 +109,7 @@ class Navigation extends React.Component {
                   className="menu-bar-add-poll"
                   onClick={token.roles !== "admin" ? this.slackAuthCheck : null}
                 >
-                  <span>+</span> New Survey
+                  <span>+</span>Schedule Survey
                 </button>
               </NavLink>
             ) : null}

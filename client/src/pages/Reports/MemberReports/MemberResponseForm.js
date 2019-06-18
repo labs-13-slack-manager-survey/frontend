@@ -24,7 +24,8 @@ class MemberResponseForm extends Component {
     managerQuestions: [],
     managerResponses: [],
     toggleManager: true,
-    sentimentQuestions: [],
+    isComplete: false,
+    test:""
   };
 
   toggleManagerQ = () => {
@@ -33,10 +34,11 @@ class MemberResponseForm extends Component {
     })
     console.log(this.state.toggleManager)
   }
-
+  completeSurvey = () =>{
+  this.setState({isComplete: !this.state.isComplete})
+}
   render() {
-    const token = jwt_decode(localStorage.getItem("token"));
-
+    console.log(this.state)
     return this.state.clientInfo.length > 0 ? (
       <>
         <div>{this.state.clientInfo}</div>
@@ -147,8 +149,8 @@ class MemberResponseForm extends Component {
           sentimentQuestions,
           isSentiment,
           managerResponses,
-          // typeOfManager, //new manager templates need to be added here so they can be sent to MemberReposonseForm.js
-          managerQuestions
+          managerQuestions,
+      
         } = res.data.report;
         console.log(reportName);
         console.log(sentimentQuestions);
@@ -159,24 +161,17 @@ class MemberResponseForm extends Component {
           questions: questions.map(q => ({
             question: q,
             response: "",
-            sentimentRange: 3
+            sentimentRange: 3,
           })),
-          sentimentQuestions: sentimentQuestions.map(sq => ({
-            question: sq,
-            response: '',
-            sentimentRange: 3, 
-          })), 
-          managerQuestions: managerQuestions,
-          managerResponses: managerResponses,
+          managerQuestions,
+          managerResponses: JSON.parse(managerResponses),
           isSentiment: isSentiment,
-          // sentimentRange: sentimentRange
         });
       })
       .catch(err => console.log(err));
       console.log(this.state)
   }
 
-  //handling the submit for sentiment functions
   handleSentiment = (event, value, question) => {
     this.setState(prevState => ({
       ...prevState,
@@ -242,13 +237,12 @@ class MemberResponseForm extends Component {
       .then(res => {
         if (this.state.isSentiment) {
           this.props.updateWithUserResponse(res);
-
           this.setState(prevState => ({
             ...prevState,
             questions: prevState.questions.map(q => ({
               question: q.question,
               response: "",
-              sentimentRange: 3
+              sentimentRange: 3,
             })),
 
           }));
@@ -257,12 +251,9 @@ class MemberResponseForm extends Component {
             ...prevState,
             questions: prevState.questions.map(q => ({
               question: q.question,
-              response: ""
+              response: "",
             })),
-            sentimentQuestions: prevState.sentimentQuestions.map(sq=> ({
-              sentimentQuestions: sq.question,
-              response: '', 
-            }))
+            isComplete:!this.state.isComplete
           }));
         }
       })
@@ -274,8 +265,8 @@ class MemberResponseForm extends Component {
   reload = () => {
     window.location.reload()
   }
-
   submitAll = () =>{
+    this.completeSurvey()
     this.submitReport();
     this.reload()
   }

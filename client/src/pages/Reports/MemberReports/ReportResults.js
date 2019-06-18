@@ -43,7 +43,8 @@ class ReportResults extends Component {
     isSentiment: false,
     secondaryPage: true,
     percentComplete: 0,
-    historicalSubmissionRate: 0
+    historicalSubmissionRate: 0,
+    isComplete:false
   };
 
   render() {
@@ -53,7 +54,7 @@ class ReportResults extends Component {
       month: "long",
       day: "numeric"
     };
-
+    console.log("REPORT RESULT STATE",this.state)
     return (
       <div className="dashboard-view">
         <main className="view">
@@ -233,7 +234,7 @@ class ReportResults extends Component {
         responders,
         historicalSubmissionRate
       });
-      console.log(this.state.historicalSubmissionRate);
+   
     } catch (err) {
       console.log(err);
     }
@@ -257,9 +258,11 @@ class ReportResults extends Component {
         console.log(err);
       });
   };
-
   updateWithUserResponse = res => {
-    this.setState({ responses: res.data, completed: true });
+    this.setState({ responses: res.data, 
+                    completed: true,
+                    isComplete: true
+                  });
   };
 }
 

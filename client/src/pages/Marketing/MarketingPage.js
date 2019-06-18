@@ -29,9 +29,9 @@ class MarketingPage extends Component {
 		return (
 			<MarketingContainer>
 				<Header>
-					<Typography variant="h1">Stand-Em-Ups</Typography>
+					<Typography variant="h1">Slackr</Typography>
 					<BodyText>
-						Stand-Em-Ups is an asynchronous stand-up platform for fast-paced
+						Slackr is an asynchronous stand-up platform for fast-paced
 						teams.
 					</BodyText>
 					<HeaderButtons>
@@ -63,7 +63,7 @@ class MarketingPage extends Component {
 					<SectionDivider>
 						<SectionTitle>Your Team, Fully Transparent</SectionTitle>
 						<BodyText>
-							Stand-Em-Ups allows admins and peers to review team members' responses in Slack or on the web app, whenever is most convienient for you.
+							Slackr allows admins and peers to review team members' responses in Slack or on the web app, whenever is most convienient for you.
 						</BodyText>
 					</SectionDivider>
 					<MarketingImg src={undrawStatus} />
@@ -72,14 +72,14 @@ class MarketingPage extends Component {
 					<SectionDivider>
 						<SectionTitle>Record Your Progress</SectionTitle>
 						<BodyText>
-							Stand-Em-Ups allows you access your team's historical reports, so you can hold each other accountable. 
+							Slackr allows you access your team's historical reports, so you can hold each other accountable. 
 						</BodyText>
 					</SectionDivider>
 					<MarketingImg src={undrawDeveloper} />
 				</MarketingSection>
 				<GetStartedSection>
 					<Typography variant='h3'>Get Started!</Typography>
-					<BodyText>Let Stand-Em-Ups optimize your team's valuable time</BodyText>
+					<BodyText>Let Slackr optimize your team's valuable time</BodyText>
 					<Link to='/login'>
 						<Fab variant="extended"
 							color="primary"
