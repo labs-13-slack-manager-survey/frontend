@@ -276,22 +276,22 @@ class CreateReport extends Component {
       return this.state.errorMessage;
     }
 
-    if (this.state.managerQuestions) {
-      console.log(this.state.resOne);
-      if (
-        this.state.resOne == "" ||
-        this.state.resTwo == "" ||
-        this.state.resThree == ""
-      ) {
-        this.setState({
-          errorMessage: "Please enter all answers to the manager polls "
-        });
-        console.log(this.state.managerQuestions);
-        console.log("hello");
-        console.log(this.state.errorMessage);
-        return this.state.errorMessage;
-      }
-    }
+    // if (this.state.managerQuestions) {
+    //   console.log(this.state.resOne);
+    //   if (
+    //     this.state.resOne == "" ||
+    //     this.state.resTwo == "" ||
+    //     this.state.resThree == ""
+    //   ) {
+    //     this.setState({
+    //       errorMessage: "Please enter all answers to the manager polls "
+    //     });
+    //     console.log(this.state.managerQuestions);
+    //     console.log("hello");
+    //     console.log(this.state.errorMessage);
+    //     return this.state.errorMessage;
+    //   }
+    // }
 
     let slackChannelName;
     this.state.channels.forEach(channel => {
@@ -307,18 +307,18 @@ class CreateReport extends Component {
       questions,
       sentimentQuestions,
       slackChannelId,
-      managerResponses,
+      // managerResponses,
       EngineeringManagerQuestions,
       ProjectManagerQuestions
     } = this.state;
-    console.log("mRes", managerResponses);
+
     let report = {
       reportName,
       schedule: JSON.stringify(schedule),
       scheduleTime,
       message,
       questions: JSON.stringify(questions),
-      managerResponses: JSON.stringify(managerResponses),
+      // managerResponses: JSON.stringify(managerResponses),
       slackChannelId,
       slackChannelName,
       created_at: new Date(),

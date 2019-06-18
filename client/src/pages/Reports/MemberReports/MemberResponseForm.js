@@ -42,10 +42,9 @@ class MemberResponseForm extends Component {
         <div>{this.state.clientInfo}</div>
       </>
     ) : (<>
-    `
           <div>
             {/*conditional render based on user role and if the manager survey is set*/}
-            {token.roles == "admin" ? (this.state.managerQuestions.length == 0 ? <>
+            {token.roles == "admin" ? (this.state.managerQuestions.length !== 0 ? <>
               <ManagerPoll reportId={this.props.match.params.reportId} />            
                 <Button
                 style={{
