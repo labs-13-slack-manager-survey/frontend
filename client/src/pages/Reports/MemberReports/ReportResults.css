@@ -197,6 +197,24 @@
 	font-size: 12px;
 	font-style: italic;
 	padding: 20px 30px 0 30px;
-	
+
 	color: #9C9C9C;
+}
+
+.manager-feedback {
+	text-align: left;
+	padding: 18px;
+}
+
+.manager-question {
+	text-align: left;
+	font-size: 14px;
+	padding-bottom: 10px;
+	font-weight: 600;
+}
+
+.manager-response {
+	text-align: left;
+	font-size: 12px;
+	padding-bottom: 15px;
 }

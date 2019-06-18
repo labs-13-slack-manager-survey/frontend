@@ -56,6 +56,19 @@ class ReportResults extends Component {
       day: "numeric"
     };
     console.log("REPORT RESULT STATE",this.state)
+    console.log(this.state.managerQuestions)
+    
+    let managerPoll = [];
+
+    for (let i=0; i<this.state.managerQuestions.length; i++) {
+      let managerQandA = {};
+      managerQandA.managerQuestions = this.state.managerQuestions[i];
+      managerQandA.managerResponses= this.state.managerResponses[i];
+      managerPoll.push(managerQandA);
+    }
+    
+    const token = jwt_decode(localStorage.getItem('token'));
+
     return (
       <div className="dashboard-view">
         <main className="view">
@@ -65,11 +78,23 @@ class ReportResults extends Component {
             secondaryPage={this.state.secondaryPage}
           />
 
-          {this.state.filteredResponse.length > 0 ||
+          {this.state.filteredResponse.length > 5 ||
           this.state.completed === true ? (
             <>
               <div className="confirm-response">
-                Your response has been recorded
+                {token.roles !== 'admin' ?  "Your response has been recorded ": 
+              
+              <>
+                {managerPoll.map(res =>
+                <div classname="manager-feedback">
+                  {this.state.managerSubmitted}
+                  <div className= "manager-question">{res.managerQuestions}</div> 
+                  <div className= "manager-response">{res.managerResponses}</div> 
+                </div>
+                )}
+              </> 
+            }
+               
               </div>
               <div className="linebr" />
             </>
@@ -90,7 +115,13 @@ class ReportResults extends Component {
           )}
 
           <section className="report-results-feed">
-            {this.state.managerResponses.map(res => <div>{res}</div>)}
+            
+          <div classname="manager-feedback">
+                  {this.state.managerSubmitted}
+                  <div className= "manager-question">{res.managerQuestions}</div> 
+                  <div className= "manager-response">{res.managerResponses}</div> 
+                </div>
+
             {this.state.responses.map(
               batch =>
                 batch.responses.length > 0 && (
@@ -253,10 +284,11 @@ class ReportResults extends Component {
         filteredResponse: filtered,
         responders,
         historicalSubmissionRate,
-        managerQuestions: managerQuestions,
-        managerResponses: managerResponses,
+        managerQuestions: JSON.parse(managerQuestions),
+        managerResponses: JSON.parse(managerResponses),
+        managerSubmitted: managerRes.data.submitted_date,
       });
-      console.log(managerQuestions);
+      console.log(managerRes.data)
     } catch (err) {
       console.log(err);
     }
