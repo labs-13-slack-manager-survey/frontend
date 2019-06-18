@@ -44,8 +44,11 @@ class ManagerPoll extends React.Component {
                 </div>
                 <p className="member-form-subtitle">respond to the manager poll to guide your team's responses to their stand up survey for today ({today})</p> 
                 <div className = "vertical-line" />
-                <div className = "manager-poll-question">{this.state.managerQuestions[0]}</div>
-                <TextField
+
+                {this.state.managerQuestions.map(question => (
+                    <>
+                    <div className = "manager-poll-question">{question}</div>
+                    <TextField
                     fullWidth={true}
                     onChange={e => this.props.handleChange(e, this.props.question)}
                     margin="normal"
@@ -53,14 +56,16 @@ class ManagerPoll extends React.Component {
                     name="response"
                     value={this.props.response}
                     variant="outlined"
-                />
-                <div className = "manager-poll-question">{this.state.managerQuestions[1]}</div>
+                    />                
+                    <div className="linebr" /></>
+                ))}
+                {/* <div className = "manager-poll-question">{this.state.managerQuestions[1]}</div>
                 <div className = "manager-poll-response">{this.state.managerResponses[1]}</div>
                 <div className = "manager-poll-question">{this.state.managerQuestions[2]}</div>
                 <div className = "manager-poll-response">{this.state.managerResponses[2]}</div>
                 <div className = "manager-poll-question">{this.state.managerQuestions[3]}</div>
                 <div className = "manager-poll-response">{this.state.managerResponses[3]}</div>
-                <div className = "vertical-line" />
+                <div className = "vertical-line" /> */}
           </div>
         )}
 };
