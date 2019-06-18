@@ -130,7 +130,7 @@ class CreateReport extends Component {
     ],
     hidden: true,
     managerType: 0,
-    typeOfManager: ["Engineering Manager", "Project Manager"],
+    typeOfManager: ["Engineering Manager", "Product Manager"],
     //set manager questions here as well as type of manager BEFORE you add to the managerType
     EngineeringManagerQuestions: [
       "What input or feedback would you like to share with the team?",
