@@ -15,7 +15,6 @@ import undrawStatus from "../../images/undraw_status_update_jjgk.svg";
 import undrawDeveloper from "../../images/undraw_developer_activity_bv83.svg";
 
 class MarketingPage extends Component {
-<<<<<<< HEAD
   scrollTo() {
     scroller.scrollTo("MarketingSection", {
       duration: 800,
@@ -119,96 +118,6 @@ class MarketingPage extends Component {
       </MarketingContainer>
     );
   }
-=======
-	scrollTo() {
-		scroller.scrollTo('MarketingSection', {
-			duration: 800,
-			delay: 0,
-			smooth: 'easeInOutQuart'
-		});
-	}
-	scrollToTop() {
-		animateScroll.scrollToTop();
-	}
-	render() {
-		return (
-			<MarketingContainer>
-				<Header>
-					<Typography variant="h1">Slackr</Typography>
-					<BodyText>
-						Slackr is an asynchronous stand-up platform for fast-paced
-						teams.
-					</BodyText>
-					<HeaderButtons>
-						<Link to='/login'>
-							<Fab variant="extended"
-								color="primary"
-								aria-label="Add"
-								style={{
-									borderRadius: '35px',
-									fontSize: '18px',
-									height: '70px',
-									width: '170px'
-								}}
-							>
-								Get Started
-							</Fab>
-						</Link>
-					</HeaderButtons>
-				</Header>
-
-				<MarketingSection name='MarketingSection'>
-					<SectionDivider>
-						<SectionTitle>Manage Your Team With Efficency</SectionTitle>
-						<BodyText>Say goodbye to long stand-ups! Discover the blockers your team is facing without all the commentary. Daily reports are customizable, so you only ask the questions you care about, and only get the answers that matter. </BodyText>
-					</SectionDivider>
-					<MarketingImg src={undrawCollab} />
-				</MarketingSection>
-				<MarketingSection1>
-					<SectionDivider>
-						<SectionTitle>Your Team, Fully Transparent</SectionTitle>
-						<BodyText>
-							Slackr allows admins and peers to review team members' responses in Slack or on the web app, whenever is most convienient for you.
-						</BodyText>
-					</SectionDivider>
-					<MarketingImg src={undrawStatus} />
-				</MarketingSection1>
-				<MarketingSection>
-					<SectionDivider>
-						<SectionTitle>Record Your Progress</SectionTitle>
-						<BodyText>
-							Slackr allows you access your team's historical reports, so you can hold each other accountable. 
-						</BodyText>
-					</SectionDivider>
-					<MarketingImg src={undrawDeveloper} />
-				</MarketingSection>
-				<GetStartedSection>
-					<Typography variant='h3'>Get Started!</Typography>
-					<BodyText>Let Slackr optimize your team's valuable time</BodyText>
-					<Link to='/login'>
-						<Fab variant="extended"
-							color="primary"
-							aria-label="Add"
-							style={{
-								borderRadius: '35px',
-								fontSize: '18px',
-								height: '70px',
-								width: '170px'
-							}}
-						>
-							Get Started
-						</Fab>
-					</Link>		
-				</GetStartedSection>
-				<MarketingFooter>
-					<Link to='/' style={{color: '#FFFFFF', fontSize: '1.4rem'}}>Home</Link>
-					<Link to="/team" style={{color: '#FFFFFF', fontSize: '1.4rem'}}>Team</Link>
-					<ArrowUpward onClick={() => this.scrollToTop()} style={{width: '50px', height: '50px'}}/>
-				</MarketingFooter>
-			</MarketingContainer>
-		);
-	}
->>>>>>> 08db50b45b787e1a769006d1382edced8bee7631
 }
 
 export default MarketingPage;
