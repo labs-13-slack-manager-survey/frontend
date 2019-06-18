@@ -124,7 +124,7 @@ class StatsDashboard extends Component {
     if (this.state.reports.length === 0) {
       return (
         <div>
-          <CircularProgress />
+          <p>No reports yet! Add a report to see stats.</p>
         </div>
       );
     }
