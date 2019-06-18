@@ -33,7 +33,7 @@ class MemberResponseForm extends Component {
     console.log(this.state.toggleManager);
   };
   completeSurvey = () => {
-    this.setState({ isComplete: !this.state.isComplete });
+    this.setState({ isComplete: true });
   };
   render() {
     console.log(this.state)
