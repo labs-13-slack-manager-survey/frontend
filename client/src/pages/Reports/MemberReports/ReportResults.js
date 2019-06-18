@@ -40,11 +40,13 @@ class ReportResults extends Component {
     clickedResponder: null,
     responders: [],
     completed: false,
+    isComplete:false,
     isSentiment: false,
     secondaryPage: true,
     percentComplete: 0,
     historicalSubmissionRate: 0,
-    isComplete:false
+    managerQuestions: [],
+    managerResponses: [], 
   };
 
   render() {
@@ -89,6 +91,7 @@ class ReportResults extends Component {
           )}
 
           <section className="report-results-feed">
+            {this.state.managerResponses.map(res => <div>{res}</div>)}
             {this.state.responses.map(
               batch =>
                 batch.responses.length > 0 && (
@@ -166,27 +169,26 @@ class ReportResults extends Component {
             // minorFix
             percentComplete={this.state.historicalSubmissionRate}
           />
-          <Card
-            interactive={false}
-            elevation={Elevation.TWO}
-            style={{ marginTop: "30px" }}
-            className="report-results-filter-container"
-          >
-            <h1 className="report-results-filter">Filter by day</h1>
+          <div className="calendar">
+            <h1 className="title">Filter by day</h1>
             <DatePicker
               // getByDate={this.getByDate}
               clickedDate={this.state.clickedDate}
               clickedResponder={this.state.clickedResponder}
               filter={this.filter}
             />
-            <h1 className="report-results-filter">Filter by team member</h1>
-            <Responders
+          </div>
+
+          <div className = "responders-component">
+            <h1 className="title">Filter by team member</h1>
+            {this.state.responders.length == 0 ? <div className="error-message"> no responses yet </div> : <Responders
               responders={this.state.responders}
               filter={this.filter}
               clickedDate={this.state.clickedDate}
               clickedResponder={this.state.clickedResponder}
-            />
-          </Card>
+            />}
+          </div>
+
         </div>
       </div>
     );
@@ -196,23 +198,41 @@ class ReportResults extends Component {
     try {
       const userId = jwt_decode(localStorage.getItem("token")).subject;
       // makes 3 api calls to get reports/responses and submission rate
-      const [reportRes, responsesRes, submissionRes] = await Promise.all([
+      const [reportRes, responsesRes, submissionRes, managerRes] = await Promise.all([
+  
         await axiosWithAuth().get(
           `${baseURL}/reports/${this.props.match.params.reportId}`
         ),
+
         await axiosWithAuth().get(
           `${baseURL}/responses/${this.props.match.params.reportId}`
         ),
+
         await axiosWithAuth().get(
           `${baseURL}/reports/submissionRate/${
             this.props.match.params.reportId
           }`
+        ),
+
+        await axiosWithAuth().get(
+          `${baseURL}/responses/managerQuestions/${this.props.match.params.reportId}`
         )
       ]);
+
       const { isSentiment } = reportRes.data.report;
       // format the submissionRate
       let { historicalSubmissionRate } = submissionRes.data;
       historicalSubmissionRate /= 100;
+
+      let managerQuestions = [];
+      let managerResponses = []; 
+
+      managerRes.data.map(res => {
+        console.log(res)
+        managerQuestions.push(res.managerQuestions)
+        managerResponses.push(res.managerResponses)
+      })
+
       const filtered = responsesRes.data[0].responses.filter(
         response => response.userId === userId
       );
@@ -233,9 +253,11 @@ class ReportResults extends Component {
         responses: responsesRes.data,
         filteredResponse: filtered,
         responders,
-        historicalSubmissionRate
+        historicalSubmissionRate,
+        managerQuestions: managerQuestions,
+        managerResponses: managerResponses,
       });
-   
+      console.log(managerQuestions);
     } catch (err) {
       console.log(err);
     }

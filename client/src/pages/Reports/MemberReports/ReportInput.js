@@ -89,23 +89,19 @@ class ReportInput extends React.Component {
               <p>4</p>
               <p>5</p>
             </div>
-          <img
-          className="toggleComments"
-          src={this.state.userComment ? Cancel : Comment}
-          onClick={this.toggleComment}
-        /> 
 
-            {this.state.userComment ? (
-              <TextField
+            {!this.state.userComment ? (
+              <div className="comment-field"><TextField
                 fullWidth={true}
-                onChange={e => this.props.handleChange(e, this.props.question)}
+                onChange={e => this.props.handleSentimentComment(e, this.props.sentimentQuestion)}
                 margin="normal"
                 multiline={true}
                 name="response"
                 value={this.props.response}
                 variant="outlined"
               />
-            ) : null}
+              <img className="toggleComments" src={Cancel} onClick = {this.toggleComment} /></div>
+            ) : <div onClick={this.toggleComment} className="toggleComments">add a comment</div>}
           </>
         ) : (
           <TextField

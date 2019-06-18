@@ -21,9 +21,8 @@ import PageTitle from "../../../components/PageTitle";
 import PollDescription from "../../../components/PollDescription";
 import ToggleOn from "../../../images/icons/toggle-on.png";
 import ToggleOff from "../../../images/icons/toggle-off.png";
-import ReportInput from "../MemberReports/ReportInput.js";
-
-import MemberResponseForm from "../MemberReports/MemberResponseForm";
+import Slider from "@material-ui/lab/Slider";
+import { fade } from "@material-ui/core/styles/colorManipulator";
 
 //importing things from material-ui
 import MenuItem from "@material-ui/core/MenuItem";
@@ -53,6 +52,32 @@ const styles = theme => ({
   }
 });
 
+//slider 
+const StyledSlider = withStyles({
+  thumb: {
+    height: 24,
+    width: 24,
+    backgroundColor: "#F67B28",
+    border: `3px solid #fff`,
+    "&$focused, &:hover": {
+      boxShadow: `0px 0px 0px ${8}px ${fade("#de235b", 0.16)}`
+    },
+    "&$activated": {
+      boxShadow: `0px 0px 0px ${6}px ${fade("#de235b", 0.16)}`
+    },
+    "&$jumped": {
+      boxShadow: `0px 0px 0px ${2}px ${fade("#de235b", 0.16)}`
+    }
+  },
+  track: {
+    backgroundColor: "#FEBA47",
+    height: 8
+  },
+  trackAfter: {
+    backgroundColor: "#d0d7dc"
+  }
+})(Slider);
+
 class CreateReport extends Component {
   state = {
     //Questions for survey with new menu
@@ -66,11 +91,8 @@ class CreateReport extends Component {
     errorMessage: "",
     responseM: "",
     questions: [],
+    sentimentQuestions: [],
     managerResponses: [],
-    resOne: "",
-    resTwo: "",
-    resThree: "",
-    resFour: "",
     slackChannelId: null,
     slackAuthorized: false,
     managerQuestions: false,
@@ -87,6 +109,8 @@ class CreateReport extends Component {
     // Temporary State
     channels: [],
     question: "",
+    sentimentQuestion: "",
+    exampleSentiment: 3, 
     week: [
       "Monday",
       "Tuesday",
@@ -98,7 +122,7 @@ class CreateReport extends Component {
     ],
     hidden: true,
     managerType: 0,
-    typeOfManager: ["Engineering Manager", "Project Manager"],
+    typeOfManager: ["Engineering Manager", "Product Manager"],
     //set manager questions here as well as type of manager BEFORE you add to the managerType
     EngineeringManagerQuestions: [
       "What input or feedback would you like to share with the team?",
@@ -164,6 +188,21 @@ class CreateReport extends Component {
     }
   };
 
+  enterSentimentQuestionsHandler = e => {
+    e.preventDefault();
+    const code = e.keyCode || e.which;
+    if (code === 13) {
+      this.setState(prevState => ({
+        sentimentQuestions: [...prevState.sentimentQuestions, this.state.sentimentQuestion],
+        sentimentQuestion: ""
+      }));
+    } else {
+      this.setState({
+        [e.target.name]: e.target.value
+      });
+    }
+  };
+
   questionsHandler = e => {
     e.preventDefault();
     this.setState(prevState => ({
@@ -172,6 +211,15 @@ class CreateReport extends Component {
     }));
   };
 
+  sentimentQuestionsHandler = e => {
+    e.preventDefault();
+    this.setState(prevState => ({
+      sentimentQuestions: [...prevState.sentimentQuestions, this.state.sentimentQuestion],
+      sentimentQuestion: ""
+    }));
+  };
+
+
   removeQuestion = (e, question) => {
     e.preventDefault();
     this.setState(prevState => ({
@@ -179,6 +227,12 @@ class CreateReport extends Component {
     }));
   };
 
+  removeSentimentQuestion = (e, question) => {
+    e.preventDefault();
+    this.setState(prevState => ({
+      sentimentQuestions: prevState.sentimentQuestions.filter(q => q !== question)
+    }));
+  };
   updateSchedule = day => {
     const { schedule } = this.state;
     const includes = schedule.includes(day);
@@ -214,22 +268,22 @@ class CreateReport extends Component {
       return this.state.errorMessage;
     }
 
-    if (this.state.managerQuestions) {
-      console.log(this.state.resOne);
-      if (
-        this.state.resOne == "" ||
-        this.state.resTwo == "" ||
-        this.state.resThree == ""
-      ) {
-        this.setState({
-          errorMessage: "Please enter all answers to the manager polls "
-        });
-        console.log(this.state.managerQuestions);
-        console.log("hello");
-        console.log(this.state.errorMessage);
-        return this.state.errorMessage;
-      }
-    }
+    // if (this.state.managerQuestions) {
+    //   console.log(this.state.resOne);
+    //   if (
+    //     this.state.resOne == "" ||
+    //     this.state.resTwo == "" ||
+    //     this.state.resThree == ""
+    //   ) {
+    //     this.setState({
+    //       errorMessage: "Please enter all answers to the manager polls "
+    //     });
+    //     console.log(this.state.managerQuestions);
+    //     console.log("hello");
+    //     console.log(this.state.errorMessage);
+    //     return this.state.errorMessage;
+    //   }
+    // }
 
     let slackChannelName;
     this.state.channels.forEach(channel => {
@@ -243,29 +297,33 @@ class CreateReport extends Component {
       scheduleTime,
       message,
       questions,
+      sentimentQuestions,
       slackChannelId,
-      managerResponses,
+      // managerResponses,
       EngineeringManagerQuestions,
       ProjectManagerQuestions
     } = this.state;
-    console.log("mRes", managerResponses);
+
     let report = {
       reportName,
       schedule: JSON.stringify(schedule),
       scheduleTime,
       message,
       questions: JSON.stringify(questions),
-      managerResponses: JSON.stringify(managerResponses),
+      // managerResponses: JSON.stringify(managerResponses),
       slackChannelId,
       slackChannelName,
-      created_at: new Date()
+      created_at: new Date(),
+
+      sentimentQuestions: JSON.stringify(sentimentQuestions),
     };
     console.log("REPORT++", this.report);
-    this.state.managerType === 0
+    if (this.state.managerQuestions) {{this.state.managerType === 0
       ? (report["managerQuestions"] = JSON.stringify(
           EngineeringManagerQuestions
         ))
-      : (report["managerQuestions"] = JSON.stringify(ProjectManagerQuestions));
+      : (report["managerQuestions"] = JSON.stringify(ProjectManagerQuestions))}}
+      
     console.log("mres after", report.managerResponses);
     const endpoint = `${baseURL}/reports`;
 
@@ -310,12 +368,7 @@ class CreateReport extends Component {
     }));
   };
 
-  removeQuestion = (e, question) => {
-    e.preventDefault();
-    this.setState(prevState => ({
-      questions: prevState.questions.filter(q => q !== question)
-    }));
-  };
+
 
   addQuestions = e => {
     e.preventDefault();
@@ -346,6 +399,14 @@ class CreateReport extends Component {
     });
   };
 
+  //handle changes for sentiment report example 
+  handleSentimentExample = (event, value) => {
+    this.setState(prevState => ({
+      ...prevState,
+      exampleSentiment: value,
+    }));
+  };
+
   //this is for rendering the manager questions at top of the report
   renderManagerQuestions = () => {
     if (this.state.managerQuestions) {
@@ -357,7 +418,7 @@ class CreateReport extends Component {
                 <Button variant="contained" {...bindTrigger(popupState)}>
                   {this.state.managerType === 0
                     ? "Engineering Manager"
-                    : "Project Manager"}
+                    : "Product Manager"}
                 </Button>
                 <Menu {...bindMenu(popupState)} onClick={this.managerType}>
                   {this.state.typeOfManager.map((type, index) => (
@@ -378,194 +439,63 @@ class CreateReport extends Component {
 
                   <div>
                     <ol>
-                      <div className="poll-answer-field">
+                      <div className="linebr" />
                         <li>
                           <div className="manager-poll-question">
                             {this.state.EngineeringManagerQuestions[0]}
                           </div>
                         </li>
-                        <FormControl className="input-field" required>
-                          <TextField
-                            fullWidth={true}
-                            variant="outlined"
-                            multiline={true}
-                            id="report-question"
-                            className={
-                              this.state.resOne
-                                ? "input-field"
-                                : "input-field-empty"
-                            }
-                            type="text"
-                            required={true}
-                            name="resOne"
-                            placeholder="Enter your response here"
-                            value={this.state.resOne}
-                            onChange={this.handleChange}
-                            onSubmit={this.add}
-                          />
-                        </FormControl>
-                      </div>
-                      <div className="poll-answer-field">
+      
                         <li>
                           <div className="manager-poll-question">
                             {this.state.EngineeringManagerQuestions[1]}
                           </div>
                         </li>
-                        <TextField
-                          fullWidth={true}
-                          variant="outlined"
-                          multiline={true}
-                          id="report-question"
-                          className={
-                            this.state.resTwo
-                              ? "input-field"
-                              : "input-field-empty"
-                          }
-                          type="text"
-                          name="resTwo"
-                          placeholder="Enter your response here"
-                          value={this.state.resTwo}
-                          onChange={this.handleChange}
-                          onSubmit={this.add}
-                        />
-                      </div>
-                      <div className="poll-answer-field">
+         
+        
                         <li>
                           <div className="manager-poll-question">
                             {this.state.EngineeringManagerQuestions[2]}
                           </div>
                         </li>
-                        <TextField
-                          fullWidth={true}
-                          variant="outlined"
-                          multiline={true}
-                          id="report-question"
-                          className={
-                            this.state.resThree
-                              ? "input-field"
-                              : "input-field-empty"
-                          }
-                          type="text"
-                          name="resThree"
-                          placeholder="Enter your response here"
-                          value={this.state.resThree}
-                          onChange={this.handleChange}
-                          onSubmit={this.add}
-                        />
-                      </div>
+     
                     </ol>
                   </div>
                 ) : (
                   //questions for marketing manager
                   <ol>
                     <div>
-                      <div className="poll-answer-field">
+                    <div className="linebr" />
+
                         <li>
                           <div className="manager-poll-question">
                             {this.state.ProjectManagerQuestions[0]}
                           </div>
                         </li>
-                        <TextField
-                          fullWidth={true}
-                          variant="outlined"
-                          multiline={true}
-                          id="report-question"
-                          className={
-                            this.state.resOne
-                              ? "input-field"
-                              : "input-field-empty"
-                          }
-                          type="text"
-                          name="resOne"
-                          placeholder="Enter your response here"
-                          value={this.state.resOne}
-                          onChange={this.handleChange}
-                        />
-                      </div>
-                      <div className="poll-answer-field">
+
+
                         <li>
                           <div className="manager-poll-question">
                             {this.state.ProjectManagerQuestions[1]}
                           </div>
                         </li>
-                        <TextField
-                          fullWidth={true}
-                          variant="outlined"
-                          multiline={true}
-                          id="report-question"
-                          className={
-                            this.state.resTwo
-                              ? "input-field"
-                              : "input-field-empty"
-                          }
-                          type="text"
-                          name="resTwo"
-                          placeholder="Enter your response here"
-                          value={this.state.resTwo}
-                          onChange={this.handleChange}
-                        />
-                      </div>
+                        
 
-                      <div className="poll-answer-field">
                         <li>
                           <div className="manager-poll-question">
                             {this.state.ProjectManagerQuestions[2]}
                           </div>
                         </li>
-                        <TextField
-                          fullWidth={true}
-                          variant="outlined"
-                          multiline={true}
-                          id="report-question"
-                          className={
-                            this.state.resThree
-                              ? "input-field"
-                              : "input-field-empty"
-                          }
-                          type="text"
-                          name="resThree"
-                          placeholder="Enter your response here"
-                          value={this.state.resThree}
-                          onChange={this.handleChange}
-                        />
-                      </div>
 
-                      <div className="poll-answer-field">
                         <li>
                           <div className="manager-poll-question">
                             {this.state.ProjectManagerQuestions[3]}
                           </div>
                         </li>
-                        <TextField
-                          fullWidth={true}
-                          variant="outlined"
-                          multiline={true}
-                          id="report-question"
-                          className={
-                            this.state.resFour
-                              ? "input-field"
-                              : "input-field-empty"
-                          }
-                          type="text"
-                          name="resFour"
-                          placeholder="Enter your response here"
-                          value={this.state.resFour}
-                          onChange={this.handleChange}
-                        />
-                      </div>
+    
                     </div>
                   </ol>
                 )}
-
-                <Button
-                  style={{ display: "block", marginTop: "30px" }}
-                  variant="contained"
-                  color="primary"
-                  type="submit"
-                  onClick={this.addQuestions}
-                >
-                  Add Responses
-                </Button>
               </React.Fragment>
             )}
           </PopupState>
@@ -584,7 +514,7 @@ class CreateReport extends Component {
               <Button variant="contained" {...bindTrigger(popupState)}>
                 Select Survey Template
               </Button>
-              <Menu {...bindMenu(popupState)} onClick={this.aQuestion}>
+              <Menu {...bindMenu(popupState)} onClick={this.addQuestion}>
                 {this.state.questionExperience.map((type, index) => (
                   <MenuItem
                     key={index}
@@ -628,9 +558,9 @@ class CreateReport extends Component {
                   />
                 </div>
                 <div className="poll-section-description">
-                  Answer some questions about your goals for the team to help
+                  Toggle manager questions on to fill out your own daily survey with prescribed questions about your goals for the team to help
                   them prioritize their tasks. These will be displayed at the
-                  top of the survey sent out to them.
+                  top of the survey sent out to them each day. 
                 </div>
               </div>
               {this.renderManagerQuestions()}
@@ -808,6 +738,78 @@ class CreateReport extends Component {
                 color="primary"
                 onClick={this.questionsHandler}
                 disabled={this.state.question.length === 0 ? true : false}
+                type="submit"
+              >
+                <AddIcon />
+              </Fab>
+            </section>
+          </section>
+        </section>
+
+        <div className="linebr" />
+        <section className="response-card">
+          <section className="manager-poll-responses">
+
+            <div className="member-form-title">Sentiment Questions</div>
+
+            <div className= "poll-section-description">Add optional sentiment questions to capture how your team feels about their work on a scale of 1-5. Respondents will also have the option of including additional comments to accompany their response.</div>
+            <div className = "response-card-example">
+                <div className = "response-question">Sample: How confident are you feeling about completing the tasks assigned to you today?</div>
+                <StyledSlider
+                  className="slider"
+                  value={this.state.exampleSentiment}
+                  min={1}
+                  max={5}
+                  step={1}
+                  // onChange={e => this.props.handleChange(e, this.props.question)}
+                  onChange={(e, v) =>
+                    this.handleSentimentExample(e, v)
+                  }
+                />
+                <div className="slider-label">
+                  <p>1</p>
+                  <p>2</p>
+                  <p>3</p>
+                  <p>4</p>
+                  <p>5</p>
+                </div>
+
+            </div>
+            <section>
+              {this.state.sentimentQuestions.map(sentimentQuestion => (
+                <article className="question-flex" key={sentimentQuestion}>
+                  <p className="question">{sentimentQuestion}</p>
+                  <Fab
+                    size="small"
+                    color="secondary"
+                    onClick={e => this.removeSentimentQuestion(e, sentimentQuestion)}
+                  >
+                    <Icon>delete_icon</Icon>
+                  </Fab>
+                </article>
+              ))}
+            </section>
+            <section className="enter-question">
+              <FormControl className="input-field" required>
+                <InputLabel htmlFor="report-question">
+                  Enter a sentiment question...
+                </InputLabel>
+                <Input
+                  id="report-question"
+                  required
+                  className="input-field"
+                  type="text"
+                  name="sentimentQuestion"
+                  value={this.state.sentimentQuestion}
+                  onChange={this.enterSentimentQuestionsHandler}
+                />
+              </FormControl>
+              <Fab
+                size="small"
+                style={{ display: "block", margin: "10px 0" }}
+                color="primary"
+                onClick={this.sentimentQuestionsHandler}
+                disabled={this.state.sentimentQuestion.length === 0 ? true : false}
                 type="submit"
               >
                 <AddIcon />

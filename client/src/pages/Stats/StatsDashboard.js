@@ -1,19 +1,13 @@
 import React, { Component } from "react";
 import { axiosWithAuth, baseURL } from "../../config/axiosWithAuth";
 
-import SentimentChart from "./SentimentChart";
 import PageTitle from "../../components/PageTitle";
-import TodayPoll from "./TodayPoll";
-import PollCalendar from "../../components/PollCalendar";
 import SummaryBox from "../../components/SummaryBox";
-import TableDisplay from "../../components/TableDisplay";
-import TableHeader from "../../components/TableHeader";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-import CircleProgress from "../../components/circleProgress.js";
-
 import "./StatsDashboard.css";
+import ChartOptions from "./ChartOptions";
 
 const URL = process.env.REACT_APP_BASE_URL;
 
@@ -22,10 +16,6 @@ class StatsDashboard extends Component {
     super();
     this.state = {
       reports: [],
-      responses: [],
-      barLabels: [],
-      barData: [],
-      recentResponseRate: null,
       users: []
     };
   }
@@ -34,18 +24,12 @@ class StatsDashboard extends Component {
     axiosWithAuth()
       .get(`${URL}/reports`)
       .then(res => {
-        // const sentimentReports = res.data.reports.filter(report => {
-        //   if (report.isSentiment) {
-        //     return report;
-        //   }
-        // });
         this.setState({
           reports: res.data.reports
         });
         this.setUsers();
       })
       .then(() => {
-        this.getResponseRate();
         this.setRecentResponse();
       })
       .catch(err => console.log(err));
@@ -63,24 +47,10 @@ class StatsDashboard extends Component {
       .catch(err => console.log(err));
   };
 
-  getResponseRate = () => {
-    this.state.reports.forEach(report => {
-      axiosWithAuth()
-        .get(`${URL}/reports/submissionRate/${report.id}`)
-        .then(res => {
-          this.setState({
-            barData: [...this.state.barData, res.data.historicalSubmissionRate]
-          });
-        })
-        .catch(err => console.log(err));
-    });
-  };
-
   setUsers = () => {
     axiosWithAuth()
       .get(`${baseURL}/users/team`)
       .then(res => {
-        console.log(res.data.users);
         this.setState({ users: res.data.users });
       })
       .catch(err => console.log(err));
@@ -118,54 +88,18 @@ class StatsDashboard extends Component {
               title="no. of team members"
               content={this.state.users.length}
             />
-
             <SummaryBox
               title="total poll responses"
               content={this.state.users.length}
             />
-
             <SummaryBox
               title="total polls scheduled"
               content={this.state.reports.length}
             />
           </div>
-          {this.state.barData.length === this.state.reports.length && (
-            <SentimentChart
-              reports={this.state.reports}
-              data={this.state.barData}
-            />
-          )}
-
-          <div style={{ marginTop: "50px" }}>
-            <TableHeader
-              column1={"Report Name"}
-              column2={"Date Created"}
-              column3={"Schedule"}
-              column4={"Response Rate"}
-            />
-          </div>
-          {this.state.reports.map(report => (
-            <TableDisplay
-              key={report.id}
-              content1={report.reportName}
-              report={report}
-              role={"test"}
-              archiveReport={this.archiveReport}
-              archiveModal={false}
-            />
-          ))}
+          <ChartOptions reports={this.state.reports} />
         </div>
-        <div className="sidebar">
-          {/* <PollCalendar /> */}
-
-          <CircleProgress
-            title={
-              "Recent Poll: " +
-              this.state.reports[this.state.reports.length - 1].reportName
-            }
-            percentComplete={this.state.recentResponseRate / 100}
-          />
-        </div>
+        <div className="sidebar" />
       </div>
     );
   }
