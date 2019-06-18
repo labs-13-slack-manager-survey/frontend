@@ -117,7 +117,6 @@ class StatsDashboard extends Component {
         this.generateDates(365);
         break;
     }
-    console.log(this.state);
   };
 
   render() {
@@ -125,6 +124,84 @@ class StatsDashboard extends Component {
       return (
         <div>
           <p>No reports yet! Add a report to see stats.</p>
+        </div>
+      );
+    }
+    if (this.state.dataType === "") {
+      // REFACTOR TO BE DRY
+      return (
+        <div className="dashboard-view">
+          <div className="view">
+            <PageTitle title="Stats Dashboard" />
+            <div className="dataSquares">
+              <SummaryBox
+                title="no. of team members"
+                content={this.state.users.length}
+              />
+              <SummaryBox
+                title="total poll responses"
+                content={this.state.users.length}
+              />
+              <SummaryBox
+                title="total polls scheduled"
+                content={this.state.reports.length}
+              />
+            </div>
+            <form
+              autoComplete="off"
+              className="form"
+              style={{ display: "flex", flexWrap: "wrap" }}
+            >
+              <FormControl className="formControl">
+                <InputLabel
+                  className="inputLabel"
+                  style={{ marginBottom: "20px" }}
+                >
+                  Filter By
+                </InputLabel>
+
+                <Select
+                  value={this.state.filterBy}
+                  style={{ marginTop: "20px" }}
+                  name="filterBy"
+                  onChange={this.handleChange}
+                  className="select"
+                >
+                  <MenuItem value={"day"}>Day</MenuItem>
+                  <MenuItem value={"week"}>Week</MenuItem>
+                  <MenuItem value={"month"}>Month</MenuItem>
+                  <MenuItem value={"quarter"}>Quarter</MenuItem>
+                  <MenuItem value={"year"}>Year</MenuItem>
+                </Select>
+              </FormControl>
+              <FormControl className="formControl">
+                <InputLabel
+                  className="inputLabel"
+                  style={{ marginBottom: "20px" }}
+                >
+                  Pick Data
+                </InputLabel>
+
+                <Select
+                  value={this.state.dataType}
+                  style={{ marginTop: "20px" }}
+                  name="dataType"
+                  onChange={this.handleChange}
+                  className="select"
+                >
+                  <MenuItem value={"responseRate"}>Response Rate</MenuItem>
+                  <MenuItem value={"sentimentAverage"}>
+                    Sentiment Average
+                  </MenuItem>
+                </Select>
+              </FormControl>
+              <button onClick={this.setLabels} style={{ margin: "20px" }}>
+                View Graph
+              </button>
+            </form>
+            <p>Select options to see graph.</p>
+          </div>
+          <div className="sidebar" />
         </div>
       );
     }
@@ -203,6 +280,7 @@ class StatsDashboard extends Component {
             reports={this.state.reports}
             data={this.state.data}
             labels={this.state.labels}
+            dataType={this.state.dataType}
           />
         </div>
         <div className="sidebar" />

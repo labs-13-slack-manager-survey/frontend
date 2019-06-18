@@ -11,6 +11,7 @@ export default class ChartOptions extends Component {
   };
 
   componentDidMount() {
+    console.log(this.props);
     this.getResponseRate();
   }
 
@@ -27,10 +28,20 @@ export default class ChartOptions extends Component {
     });
   };
 
+  getSentimentAverage = () => {
+    this.props.reports.forEach(report => {
+      axiosWithAuth
+        .get(`${URL}/responses/sentimentAvg/${report.id}`)
+        .then(res => {
+          console.log(res.data);
+        })
+        .catch(err => console.log(err));
+    });
+  };
+
   render() {
-    console.log(this.state.data);
     if (this.props.labels.length === 0 || this.state.data.length === 0) {
-      return <p>Set Options for Graph</p>;
+      return <p>Set options to display graph.</p>;
     }
     return (
       <div>
