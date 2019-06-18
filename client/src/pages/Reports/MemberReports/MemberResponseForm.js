@@ -24,8 +24,7 @@ class MemberResponseForm extends Component {
     managerQuestions: [],
     managerResponses: [],
     toggleManager: true,
-    isComplete: false,
-    test:""
+    isComplete: false
   };
 
   toggleManagerQ = () => {
@@ -39,6 +38,7 @@ class MemberResponseForm extends Component {
 }
   render() {
     console.log(this.state)
+    const token = jwt_decode(localStorage.getItem("token"));
     return this.state.clientInfo.length > 0 ? (
       <>
         <div>{this.state.clientInfo}</div>
@@ -267,8 +267,8 @@ class MemberResponseForm extends Component {
   }
   submitAll = () =>{
     this.completeSurvey()
-    this.submitReport();
-    this.reload()
+    // this.submitReport();
+    // this.reload()
   }
 
 }
