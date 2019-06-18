@@ -40,6 +40,7 @@ class ReportResults extends Component {
     clickedResponder: null,
     responders: [],
     completed: false,
+    isComplete:false,
     isSentiment: false,
     secondaryPage: true,
     percentComplete: 0,
