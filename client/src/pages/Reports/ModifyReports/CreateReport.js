@@ -655,7 +655,7 @@ class CreateReport extends Component {
         <div className="linebr" />
         <section className="response-card">
           <section className="manager-poll-responses">
-            <div className="member-form-title">Delivery schedule</div>
+            <div className="member-form-title">Delivery Schedule</div>
             <div className="poll-section-description">
               When would you like the survey to be sent out to your team?
             </div>
@@ -692,7 +692,7 @@ class CreateReport extends Component {
               <TimePicker
                 name="scheduleTime"
                 value={this.state.timePickDate}
-                minutesStep={30}
+                minutesStep={5}
                 onChange={this.timeChangeHandler}
               />
             </section>
