@@ -88,7 +88,7 @@ class ReportResults extends Component {
               <div className="linebr" />
             </>
           )}
-
+          {/* {this.state.managerQuestions.map(question => <div>{question}</div>)} */}
           <section className="report-results-feed">
             {this.state.responses.map(
               batch =>
@@ -222,8 +222,15 @@ class ReportResults extends Component {
       let { historicalSubmissionRate } = submissionRes.data;
       historicalSubmissionRate /= 100;
 
-      let {managerQuestions} = managerRes.data;
-      let {managerResponses} = managerRes.data;
+      let managerQuestions = [];
+      let managerResponses = []; 
+
+      managerRes.data.map(res => {
+        console.log(res)
+        managerQuestions.push(res.managerQuestions)
+        managerResponses.push(res.managerResponses)
+      })
+
       const filtered = responsesRes.data[0].responses.filter(
         response => response.userId === userId
       );
@@ -245,10 +252,10 @@ class ReportResults extends Component {
         filteredResponse: filtered,
         responders,
         historicalSubmissionRate,
-        managerQuestions,
-        managerResponses,
+        managerQuestions: JSON.stringify(managerQuestions),
+        managerResponses: JSON.stringify(managerResponses),
       });
-      console.log(managerRes.data);
+      console.log(managerQuestions);
     } catch (err) {
       console.log(err);
     }
