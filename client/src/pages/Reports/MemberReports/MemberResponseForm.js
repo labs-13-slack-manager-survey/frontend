@@ -251,6 +251,7 @@ class MemberResponseForm extends Component {
           this.props.updateWithUserResponse(res);
           this.setState(prevState => ({
             ...prevState,
+            isComplete:true,
             questions: prevState.questions.map(q => ({
               question: q.question,
               response: "",
@@ -260,11 +261,11 @@ class MemberResponseForm extends Component {
         } else {
           this.setState(prevState => ({
             ...prevState,
+            isComplete:true,
             questions: prevState.questions.map(q => ({
               question: q.question,
               response: ""
             })),
-            isComplete: !this.state.isComplete
           }));
         }
       })
@@ -278,8 +279,8 @@ class MemberResponseForm extends Component {
   }
   submitAll = () =>{
     this.completeSurvey()
-    // this.submitReport();
-    // this.reload()
+    this.submitReport();
+    this.reload()
   }
 
 }
