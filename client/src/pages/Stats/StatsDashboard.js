@@ -117,6 +117,7 @@ class StatsDashboard extends Component {
         this.generateDates(365);
         break;
     }
+    console.log(this.state);
   };
 
   render() {
