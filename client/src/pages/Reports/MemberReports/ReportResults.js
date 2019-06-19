@@ -47,8 +47,15 @@ class ReportResults extends Component {
     historicalSubmissionRate: 0,
     managerQuestions: [],
     managerResponses: [], 
+    managerSubmitted: [],
+    managerFeedback: [],
   };
 
+
+  getDate = (date) => {
+    let formatted = moment(date).format('DD MMMM YYYY');
+    return formatted;
+  }
   render() {
     const options = {
       weekday: "long",
@@ -56,7 +63,34 @@ class ReportResults extends Component {
       month: "long",
       day: "numeric"
     };
-    console.log("REPORT RESULT STATE",this.state)
+    // console.log("REPORT RESULT STATE",this.state)
+    // console.log(this.state.managerQuestions)
+    
+    let managerPollDays = [];
+
+    for (let i = 0; i < this.state.managerFeedback.length; i++ ){
+        let managerQandA = {};
+        managerQandA.managerQuestions = JSON.parse(this.state.managerFeedback[i].managerQuestions);
+        managerQandA.managerResponses= JSON.parse(this.state.managerFeedback[i].managerResponses);
+        managerQandA.managerSubmitted = this.state.managerFeedback[i].managerSubmitted;
+        managerPollDays.push(managerQandA);
+    }
+    
+
+    console.log(managerPollDays)
+    
+    //calculating date of the manager report 
+    const token = jwt_decode(localStorage.getItem('token'));
+
+    let today = new Date();
+    today = moment(today).format('DD MMMM YYYY');
+
+    
+    let managerToday = managerPollDays.length && managerPollDays[managerPollDays.length-1].managerSubmitted
+    managerToday = moment(managerToday).format('DD MMMM YYYY');
+
+    console.log(managerToday)
+
     return (
       <div className="dashboard-view">
         <main className="view">
@@ -70,7 +104,23 @@ class ReportResults extends Component {
           this.state.completed === true ? (
             <>
               <div className="confirm-response">
-                Your response has been recorded
+                {managerToday != today  ?  "Your response has been recorded ": 
+                <>
+                <div classname="manager-feedback">
+                  <div className= "manager-question">{managerPollDays[managerPollDays.length-1].managerQuestions[0]}</div> 
+                  <div className= "manager-response">{managerPollDays[managerPollDays.length-1].managerResponses[0]}</div> 
+                  <div className= "manager-question">{managerPollDays[managerPollDays.length-1].managerQuestions[1]}</div> 
+                  <div className= "manager-response">{managerPollDays[managerPollDays.length-1].managerResponses[1]}</div> 
+                  <div className= "manager-question">{managerPollDays[managerPollDays.length-1].managerQuestions[2]}</div> 
+                  <div className= "manager-response">{managerPollDays[managerPollDays.length-1].managerResponses[2]}</div> 
+                  {managerPollDays[managerPollDays.length-1].managerQuestions.length === 4 ? <>
+                    <div className= "manager-question">{managerPollDays[managerPollDays.length-1].managerQuestions[3]}</div> 
+                    <div className= "manager-response">{managerPollDays[managerPollDays.length-1].managerResponses[3]}</div></> : null }
+
+                </div>
+              </> 
+              }
+               
               </div>
               <div className="linebr" />
             </>
@@ -91,7 +141,31 @@ class ReportResults extends Component {
           )}
 
           <section className="report-results-feed">
-            {this.state.managerResponses.map(res => <div>{res}</div>)}
+          {/* {this.state.managerFeedback.map(res => (
+                  <div>{res}</div>
+                ))} */}
+      
+              {managerPollDays.map(res => {
+                if (this.getDate(res.submittedDate) === today) {
+                  return null 
+                } else {return <>
+                    <div classname="manager-feedback">
+                    <div className= "manager-question">{res.managerQuestions[0]}</div> 
+                    <div className= "manager-response">{res.managerResponses[0]}</div> 
+                    <div className= "manager-question">{res.managerQuestions[1]}</div> 
+                    <div className= "manager-response">{res.managerResponses[1]}</div> 
+                    <div className= "manager-question">{res.managerQuestions[2]}</div> 
+                    <div className= "manager-response">{res.managerResponses[2]}</div> 
+                    {res.managerQuestions.length === 4 ? <>
+                      <div className= "manager-question">{res.managerQuestions[3]}</div> 
+                      <div className= "manager-response">{res.managerResponses[3]}</div></> : null }
+                    </div>
+                    </>
+                  }
+                }
+             
+              )}
+
             {this.state.responses.map(
               batch =>
                 batch.responses.length > 0 && (
@@ -224,14 +298,27 @@ class ReportResults extends Component {
       let { historicalSubmissionRate } = submissionRes.data;
       historicalSubmissionRate /= 100;
 
-      let managerQuestions = [];
-      let managerResponses = []; 
-
-      managerRes.data.map(res => {
-        console.log(res)
-        managerQuestions.push(res.managerQuestions)
-        managerResponses.push(res.managerResponses)
+      // let managerQuestions = [];
+      // let managerResponses = []; 
+      // let managerSubmitted = []; 
+      // let managerFeedback= [];
+      
+      const managerFeedback = [];
+      managerRes.data.forEach(feedback => {
+        managerFeedback.push({ managerQuestions: feedback.managerQuestions,
+           managerResponses: feedback.managerResponses, 
+           submitted_date: feedback.submitted_date }); 
+       
       })
+      console.log(managerRes.data)
+
+      // managerRes.data.map(res => {
+      //   console.log(res)
+      //   managerQuestions.push(JSON.parse(res.managerQuestions))
+      //   managerResponses.push(JSON.parse(res.managerResponses))
+      //   managerSubmitted.push(res.submitted_date)
+      //   managerFeedback.push({managerQuestions, managerResponses, managerSubmitted})
+      // })
 
       const filtered = responsesRes.data[0].responses.filter(
         response => response.userId === userId
@@ -254,10 +341,12 @@ class ReportResults extends Component {
         filteredResponse: filtered,
         responders,
         historicalSubmissionRate,
-        managerQuestions: managerQuestions,
-        managerResponses: managerResponses,
+        // managerQuestions: JSON.parse(managerQuestions),
+        // managerResponses: JSON.parse(managerResponses),
+        // managerSubmitted: managerSubmitted,
+        managerFeedback: managerFeedback,
       });
-      console.log(managerQuestions);
+      console.log(managerFeedback)
     } catch (err) {
       console.log(err);
     }
