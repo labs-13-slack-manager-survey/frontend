@@ -155,7 +155,7 @@
 .confirm-response {
 	font-size: 13px;
 	border: 1px dashed rgb(226, 226, 226);
-	padding: 15px;
+	padding: 25px;
 	margin-top: -20px;
 }
 
@@ -210,11 +210,13 @@
 	text-align: left;
 	font-size: 14px;
 	padding-bottom: 10px;
-	font-weight: 600;
+	font-weight: 500;
 }
 
 .manager-response {
 	text-align: left;
-	font-size: 12px;
-	padding-bottom: 15px;
+	font-size: 14px;
+	padding-top: 10px;
+	padding-bottom: 30px;
+	padding-left: 20px;
 }

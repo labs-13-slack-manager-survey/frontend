@@ -50,6 +50,11 @@ class ReportResults extends Component {
     managerFeedback: [],
   };
 
+
+  getDate = (date) => {
+    let formatted = moment(date).format('DD MMMM YYYY');
+    return formatted;
+  }
   render() {
     const options = {
       weekday: "long",
@@ -75,18 +80,14 @@ class ReportResults extends Component {
     
     //calculating date of the manager report 
     const token = jwt_decode(localStorage.getItem('token'));
+
     let today = new Date();
-    const dd = moment(today).format('DD');
-    const mm = moment(today).format('MMMM');
-    const yyyy = moment(today).format('YYYY');
-    today = dd + mm + yyyy
+    today = moment(today).format('DD MMMM YYYY');
 
     
     let managerToday = managerPollDays.length && managerPollDays[managerPollDays.length-1].managerSubmitted
-    let Day = moment(managerToday).format('DD');
-    let Month = moment(managerToday).format('MMMM')
-    const Year = moment(managerToday).format('YYYY');
-    managerToday = Day + Month + Year
+    managerToday = moment(managerToday).format('DD MMMM YYYY');
+
     console.log(managerToday)
 
     return (
@@ -143,7 +144,10 @@ class ReportResults extends Component {
                   <div>{res}</div>
                 ))} */}
       
-              {managerPollDays.map(res =>
+              {managerPollDays.map(res => {
+                if (this.getDate(res.submittedDate) === today) {
+                  return null 
+                } else {return <>
                     <div classname="manager-feedback">
                     <div className= "manager-question">{res.managerQuestions[0]}</div> 
                     <div className= "manager-response">{res.managerResponses[0]}</div> 
@@ -154,9 +158,12 @@ class ReportResults extends Component {
                     {res.managerQuestions.length === 4 ? <>
                       <div className= "manager-question">{res.managerQuestions[3]}</div> 
                       <div className= "manager-response">{res.managerResponses[3]}</div></> : null }
-
                     </div>
-                )}
+                    </>
+                  }
+                }
+             
+              )}
 
             {this.state.responses.map(
               batch =>
