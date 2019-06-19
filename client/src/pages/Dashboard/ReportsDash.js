@@ -113,6 +113,7 @@ class ReportsDash extends Component {
     axiosWithAuth()
       .get(endpoint)
       .then(res => {
+        console.log(res.data.reports)
         this.setState({
           message: res.data.message,
           reports: res.data.reports

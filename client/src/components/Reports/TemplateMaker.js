@@ -222,7 +222,7 @@ class TemplateMaker extends Component {
               <h3 className="schedule-title">Report Information</h3>
               <Divider className="divider" variant="fullWidth" />
               <FormControl className="report-name report-margin" required>
-                <InputLabel htmlFor="report-name">Report</InputLabel>
+                <InputLabel htmlFor="report-name">Report Name</InputLabel>
                 <Input
                   id="report-name"
                   className="input-field"
