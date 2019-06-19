@@ -12,6 +12,8 @@ import Slider from "@material-ui/lab/Slider";
 import { withStyles } from "@material-ui/core/styles";
 import CircleProgress from "../../../components/circleProgress.js";
 import { Card, Elevation } from "@blueprintjs/core";
+import ToggleOn from "../../../images/icons/chevron-down.png";
+import ToggleOff from "../../../images/icons/chevron-up.png";
 
 import "./ReportResults.css";
 
@@ -115,7 +117,13 @@ class ReportResults extends Component {
                   <>
                   <div classname="manager-feedback-for-users" onClick = {this.toggleManagerQ}>
                     <div className="poll-header">
-                    <div className="member-form-title">Manager Comments</div>
+                      <div className = "toggle-manager-questions">
+                          <div className="member-form-title">Manager Comments</div>
+                          <img
+                          className="manager-toggle"
+                          src={this.state.seeMangerQ ? ToggleOff : ToggleOn }
+                        />
+                       </div>
                     <p className="member-form-subtitle">
                       View your manager's responses to his poll to guide your responses and goals for the day
                     </p>
