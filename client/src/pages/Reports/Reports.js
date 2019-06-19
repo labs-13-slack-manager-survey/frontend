@@ -1,20 +1,14 @@
 import React, { Component } from "react";
 import { axiosWithAuth, baseURL } from "../../config/axiosWithAuth";
-import { Link } from "react-router-dom";
 
 import {
-  Fab,
-  Typography,
   Button,
   Dialog,
   DialogTitle,
   Slide,
-  Icon
 } from "@material-ui/core";
-import AddIcon from "@material-ui/icons/Add";
 
 import Slack from "../Slack/Slack.js";
-import SingleReport from "./SingleReport";
 import "./reports.css";
 import TableHeader from '../../components/TableHeader'
 import TableDisplay from '../../components/TableDisplay'
@@ -81,7 +75,6 @@ class Reports extends Component {
   render() {
     //const { stepsEnabled, steps, initialStep } = this.state;
     const activeReports = this.props.reports.filter(report => report.active);
-    console.log("++__++",this.props.reports)
     const activeReportsReverse = activeReports.reverse(); 
 
     return (

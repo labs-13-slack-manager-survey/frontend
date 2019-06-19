@@ -35,23 +35,22 @@ class TableDisplay extends React.Component {
 	}
     render() {
         const time = this.props.report.scheduleTime.split(':');
+        const reportId = this.props.report.id;
+        const dateString  = new Date(this.props.report.created_at);
         let timeStr = `${time[0]}:${time[1]}am`;
+
         if (time[0] > 12) {
             timeStr = `${time[0] - 12}:${time[1]}pm`;
         }
-        const reportId = this.props.report.id;
-        const dateString  = new Date(this.props.report.created_at);
+
         return (
             <div className="table-display">
 
             <div className = "content">
-            <Link
-				to={`/slackr/dashboard/reports/${this.props.report.id}`}
-				style={{ textDecoration: 'none' }} className = "column1">
-                <div>{this.props.content1}</div>
-                </Link>
-                <div className = "date">{dateString.getMonth()+1}/{dateString.getDate()}/{dateString.getFullYear()}</div>
-
+            <div style={{ textDecoration: 'none' }} className = "column1">
+                {this.props.content1}
+            </div>
+            <div className = "date">{dateString.getMonth()+1}/{dateString.getDate()}/{dateString.getFullYear()}</div>
                 <div className = "schedule-time">
                     {week.map((day, idx) => (
                             <div
@@ -67,9 +66,7 @@ class TableDisplay extends React.Component {
                             </div>
                         ))}
                 </div>
-
                 <div className = "columnTR" >{this.state.totalResponse}</div> 
-
                 <Button>
                     <Link
                         to={`/slackr/dashboard/reports/${this.props.report.id}`}
