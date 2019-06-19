@@ -46,11 +46,11 @@ export class Dashboard extends Component {
             content = {this.state.users.length}/>
 
         <SummaryBox 
-            title = "total poll responses" 
+            title = "total survey responses" 
             content = {this.state.totalResponses}/>
 
         <SummaryBox 
-            title = "total polls scheduled"
+            title = "total surveys scheduled"
             content = {this.state.reports.length}/>
       </div> : null }
       </>
@@ -77,6 +77,7 @@ export class Dashboard extends Component {
       })
       .catch(err => console.log(err));
 
+      //get total submission rate for team
       axiosWithAuth()
       .get(`${baseURL}/reports/submissionRate`)
       .then(res => {
