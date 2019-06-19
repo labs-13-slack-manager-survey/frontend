@@ -46,11 +46,11 @@ export class Dashboard extends Component {
             content = {this.state.users.length}/>
 
         <SummaryBox 
-            title = "total poll responses" 
+            title = "total survey responses" 
             content = {this.state.totalResponses}/>
 
         <SummaryBox 
-            title = "total polls scheduled"
+            title = "total surveys scheduled"
             content = {this.state.reports.length}/>
       </div> : null }
       </>
@@ -60,15 +60,12 @@ export class Dashboard extends Component {
   componentDidMount() {
     // get user's joinCode from token and setState accordingly. Necessary to invite new team members.
     const joinCode = jwt_decode(localStorage.getItem("token")).joinCode;
-    console.log(joinCode);
-    console.log(this.state.users.length)
     this.setState({
       joinCode: joinCode
     });
     axiosWithAuth()
       .get(`${baseURL}/users/team`)
       .then(res => {
-        console.log(res);
         this.setState({ users: res.data.users });
 
         if (this.state.users.length > 0) {
@@ -77,6 +74,7 @@ export class Dashboard extends Component {
       })
       .catch(err => console.log(err));
 
+      //get total submission rate for team
       axiosWithAuth()
       .get(`${baseURL}/reports/submissionRate`)
       .then(res => {
