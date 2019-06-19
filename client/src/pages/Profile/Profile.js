@@ -16,6 +16,7 @@ import {
 	FormControl
 } from '@material-ui/core';
 
+
 // this is the whole profile page (dashboard/profile)
 // admin and memeber views are different
 
@@ -39,8 +40,11 @@ class Profile extends Component {
 				<div className="view">
 				<PageTitle title = "My Profile"/>
 
-				<Card raised={true} className="top-user-card">
 					<div className="userCard-content">
+						<img className="profile-picture-username"
+							src={this.state.profileInfo.profilePic}
+							alt="a headshot, preferably"
+						/>
 						<div className="profileCard-content">
 							<h3>{this.state.profileInfo.fullName}</h3>
 							<TextField
@@ -106,12 +110,9 @@ class Profile extends Component {
 								</Collapse>
 							</div>
 						</div>
-						<img
-							src={this.state.profileInfo.profilePic}
-							alt="a headshot, preferably"
-						/>
 					</div>
-				</Card>
+					<div className="sidebar" />
+		
 
 				</div>
 				

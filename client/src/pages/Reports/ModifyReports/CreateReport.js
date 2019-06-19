@@ -703,6 +703,7 @@ class CreateReport extends Component {
         <section className="response-card">
           <section className="manager-poll-responses">
             <div className="member-form-title">Survey Questions</div>
+            <div className="linebr" />
             <section>
               {this.state.questions.map(question => (
                 <article className="question-flex" key={question}>
