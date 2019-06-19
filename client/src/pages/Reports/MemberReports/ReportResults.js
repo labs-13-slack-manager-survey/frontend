@@ -11,7 +11,7 @@ import PageTitle from "../../../components/PageTitle";
 import Slider from "@material-ui/lab/Slider";
 import { withStyles } from "@material-ui/core/styles";
 import CircleProgress from "../../../components/circleProgress.js";
-import { Card, Elevation } from "@blueprintjs/core";
+import { Elevation } from "@blueprintjs/core";
 import ToggleOn from "../../../images/icons/chevron-down.png";
 import ToggleOff from "../../../images/icons/chevron-up.png";
 
@@ -111,9 +111,9 @@ class ReportResults extends Component {
             secondaryPage={this.state.secondaryPage}
           />
 
-          {token.roles != "admin" && this.state.isManagerActivated ? 
+          {token.roles !== "admin" && this.state.isManagerActivated ? 
             <div className="confirm-response" >
-                 {managerToday != today ? "Poll unavailable: No manager response has been recorded for today" : 
+                 {managerToday !== today ? "Poll unavailable: No manager response has been recorded for today" : 
                   <>
                   <div classname="manager-feedback-for-users" onClick = {this.toggleManagerQ}>
                     <div className="poll-header">
@@ -145,7 +145,7 @@ class ReportResults extends Component {
                 </div>
             : 
             
-            managerToday != today ?  <div
+            managerToday !== today ?  <div
             className="response-card"
             interactive={false}
             elevation={Elevation.TWO}
@@ -160,7 +160,7 @@ class ReportResults extends Component {
           this.state.managerCompleted === true ? (
             <>
               <div className="confirm-response">
-                {managerToday != today  ?  "Your response has been recorded ": 
+                {managerToday !== today  ?  "Your response has been recorded ": 
                 <>
                 <div classname="manager-feedback">
                   <div className= "manager-question">{managerPollDays[managerPollDays.length-1].managerQuestions[0]}</div> 
