@@ -8,9 +8,8 @@
 .userCard-content {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-around;
-	align-items: center;
-	margin: 24px;
+	justify-content: left;
+	align-items: flex-start;
 }
 
 @media (max-width: 800px) {
@@ -34,6 +33,7 @@
 	flex-direction: column;
 	align-items: flex-start;
 	margin: 24px;
+	width: 100%;
 }
 
 .userCard input {
@@ -170,4 +170,12 @@ button {
 
 #edit-user-content {
 	display: block;
+}
+
+.profile-picture-username { 
+	height: 100px;
+	width: 100px;
+	margin-right: 20px;
+	border-radius: 100px;
+	margin-top: 40px;
 }
