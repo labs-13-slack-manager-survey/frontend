@@ -9,7 +9,7 @@ import {
 	Dialog,
     DialogTitle,
     Slide,
-    Button,
+    Button
 } from '@material-ui/core';
 
 const week = [
@@ -98,12 +98,12 @@ class TableDisplay extends React.Component {
                         <DialogTitle id="alert-dialog-slide-title">
                             Are you sure you'd like to archive this report? 
                         </DialogTitle>
-                        <button onClick={() => this.props.archiveReport(reportId)}>
+                        <Button onClick={() => this.props.archiveReport(reportId)}>
                             Yes
-                        </button>
-                        <button onClick={() => {
+                        </Button>
+                        <Button onClick={() => {
                             this.setState({dialogOpen: false})
-                            }}>No</button>
+                            }}>No</Button>
                     </Dialog>
                 </div>
             </div>
