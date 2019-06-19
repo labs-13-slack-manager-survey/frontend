@@ -12,6 +12,8 @@ import Slider from "@material-ui/lab/Slider";
 import { withStyles } from "@material-ui/core/styles";
 import CircleProgress from "../../../components/circleProgress.js";
 import { Card, Elevation } from "@blueprintjs/core";
+import ToggleOn from "../../../images/icons/chevron-down.png";
+import ToggleOff from "../../../images/icons/chevron-up.png";
 
 import "./ReportResults.css";
 
@@ -40,17 +42,25 @@ class ReportResults extends Component {
     clickedResponder: null,
     responders: [],
     completed: false,
+    managerCompleted: false,
     isComplete:false,
     isSentiment: false,
     secondaryPage: true,
+    isManagerActivated: true,
     percentComplete: 0,
     historicalSubmissionRate: 0,
     managerQuestions: [],
     managerResponses: [], 
     managerSubmitted: [],
     managerFeedback: [],
+    seeManagerQ: true, 
   };
 
+  toggleManagerQ = () => {
+    this.setState({
+      seeManagerQ: !this.state.seeManagerQ
+    });
+  };
 
   getDate = (date) => {
     let formatted = moment(date).format('DD MMMM YYYY');
@@ -77,7 +87,7 @@ class ReportResults extends Component {
     }
     
 
-    console.log(managerPollDays)
+    console.log(this.state.managerQuestions)
     
     //calculating date of the manager report 
     const token = jwt_decode(localStorage.getItem('token'));
@@ -94,14 +104,60 @@ class ReportResults extends Component {
     return (
       <div className="dashboard-view">
         <main className="view">
+          
           <PageTitle
             title="Report"
             {...this.props}
             secondaryPage={this.state.secondaryPage}
           />
 
+          {token.roles != "admin" && this.state.isManagerActivated ? 
+            <div className="confirm-response" >
+                 {managerToday != today ? "Poll unavailable: No manager response has been recorded for today" : 
+                  <>
+                  <div classname="manager-feedback-for-users" onClick = {this.toggleManagerQ}>
+                    <div className="poll-header">
+                      <div className = "toggle-manager-questions">
+                          <div className="member-form-title">Manager Comments</div>
+                          <img
+                          className="manager-toggle"
+                          src={this.state.seeMangerQ ? ToggleOff : ToggleOn }
+                        />
+                       </div>
+                    <p className="member-form-subtitle">
+                      View your manager's responses to his poll to guide your responses and goals for the day
+                    </p>
+                  </div>
+                    {this.state.seeManagerQ ? <> 
+                      <div className="vertical-line" />
+                    <div className= "manager-question">{managerPollDays[managerPollDays.length-1].managerQuestions[0]}</div> 
+                    <div className= "manager-response">{managerPollDays[managerPollDays.length-1].managerResponses[0]}</div> 
+                    <div className= "manager-question">{managerPollDays[managerPollDays.length-1].managerQuestions[1]}</div> 
+                    <div className= "manager-response">{managerPollDays[managerPollDays.length-1].managerResponses[1]}</div> 
+                    <div className= "manager-question">{managerPollDays[managerPollDays.length-1].managerQuestions[2]}</div> 
+                    <div className= "manager-response">{managerPollDays[managerPollDays.length-1].managerResponses[2]}</div> 
+                    {managerPollDays[managerPollDays.length-1].managerQuestions.length === 4 ? <>
+                      <div className= "manager-question">{managerPollDays[managerPollDays.length-1].managerQuestions[3]}</div> 
+                      <div className= "manager-response">{managerPollDays[managerPollDays.length-1].managerResponses[3]}</div></> : null }</> : null}
+
+                  </div>
+                    </> }
+                </div>
+            : 
+            
+            managerToday != today ?  <div
+            className="response-card"
+            interactive={false}
+            elevation={Elevation.TWO}
+          >
+            <MemberResponseForm
+              {...this.props}
+              updateWithUserResponse={this.updateWithManagerResponse}
+            /> 
+        </div> : null } 
+
           {this.state.filteredResponse.length > 0 ||
-          this.state.completed === true ? (
+          this.state.managerCompleted === true ? (
             <>
               <div className="confirm-response">
                 {managerToday != today  ?  "Your response has been recorded ": 
@@ -126,16 +182,17 @@ class ReportResults extends Component {
             </>
           ) : (
             <>
-              <div
-                className="response-card"
-                interactive={false}
-                elevation={Elevation.TWO}
-              >
-                <MemberResponseForm
-                  {...this.props}
-                  updateWithUserResponse={this.updateWithUserResponse}
-                />
-              </div>
+              {managerToday == today ?
+                <div
+                  className="response-card"
+                  interactive={false}
+                  elevation={Elevation.TWO}
+                >
+                  <MemberResponseForm
+                    {...this.props}
+                    updateWithUserResponse={this.updateWithManagerResponse}
+                  /> 
+              </div> : null} 
               <div className="linebr" />
             </>
           )}
@@ -310,7 +367,7 @@ class ReportResults extends Component {
            submitted_date: feedback.submitted_date }); 
        
       })
-      console.log(managerRes.data)
+      console.log(reportRes.data.report.managerQuestions)
 
       // managerRes.data.map(res => {
       //   console.log(res)
@@ -336,6 +393,7 @@ class ReportResults extends Component {
           });
       });
       this.setState({
+        isManagerActivated: reportRes.data.report.managerQuestions,
         isSentiment,
         responses: responsesRes.data,
         filteredResponse: filtered,
@@ -346,7 +404,6 @@ class ReportResults extends Component {
         // managerSubmitted: managerSubmitted,
         managerFeedback: managerFeedback,
       });
-      console.log(managerFeedback)
     } catch (err) {
       console.log(err);
     }
@@ -373,6 +430,13 @@ class ReportResults extends Component {
   updateWithUserResponse = res => {
     this.setState({ responses: res.data, 
                     completed: true,
+                    isComplete: true
+                  });
+  };
+
+  updateWithUserResponse = res => {
+    this.setState({ responses: res.data, 
+                    managerCompleted: true,
                     isComplete: true
                   });
   };
