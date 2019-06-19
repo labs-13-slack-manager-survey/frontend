@@ -42,7 +42,10 @@ class View extends Component {
         intro: 'This displays the percentage of completed reports.'
       },
       {
-        intro: 'To view more in depth statistics about the well being of your team click on the stats button on the left.'
+        intro: 'To add people to your team click the my team button on the left.'
+      },
+      {
+        intro: 'To view more in depth statistics about the well being of your team and reports filled out by day click on the stats button on the left.'
       },
       {
         intro: 'To create your first report click on the + button on top right of the screen.'

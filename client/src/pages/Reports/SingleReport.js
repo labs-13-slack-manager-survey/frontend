@@ -49,7 +49,7 @@ class SingleReport extends React.Component {
 	return (
 		<div>
 			{/* <TableDisplay 
-			  content1 = {this.props.report.reportName}
+			content1 = {this.props.report.reportName}
 			  /> */}
 			<div className="single-report-header">
 				<Link
