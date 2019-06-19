@@ -16,6 +16,65 @@ export default class ChartOptions extends Component {
     this.sortResponses();
   }
 
+  sortResponses = () => {
+    let daySortedReports = [];
+
+    this.props.reports.forEach(report => {
+      report.created_at = moment(report.created_at).format("l");
+    });
+
+    axiosWithAuth()
+      .get(`${URL}/reports/submissionRate/${this.props.reports[0].id}`)
+      .then(res => {
+        let report = {
+          report: this.props.reports[0],
+          submissionRate: res.data.historicalSubmissionRate
+        };
+        daySortedReports.push([report]);
+      })
+      .then(() => {
+        let arrIndex = 0;
+        for (let i = 1; i < this.props.reports.length; i++) {
+          if (
+            this.props.reports[i].created_at ===
+            daySortedReports[arrIndex][0].report.created_at
+          ) {
+            axiosWithAuth()
+              .get(`${URL}/reports/submissionRate/${this.props.reports[i].id}`)
+              .then(res => {
+                let report = {
+                  report: this.props.reports[i],
+                  submissionRate: res.data.historicalSubmissionRate
+                };
+                daySortedReports[arrIndex].push(report);
+              })
+              .catch(err => console.log(err));
+          } else {
+            axiosWithAuth()
+              .get(`${URL}/reports/submissionRate/${this.props.reports[i].id}`)
+              .then(res => {
+                let report = {
+                  report: this.props.reports[i],
+                  submissionRate: res.data.historicalSubmissionRate
+                };
+                daySortedReports.push([report]);
+              })
+              .catch(err => console.log(err));
+            arrIndex++;
+          }
+        }
+      })
+      .then(() => {
+        this.setState({
+          sortedReports: daySortedReports
+        });
+      })
+      .then(() => {
+        this.fetchSpecifiedData();
+      })
+      .catch(err => console.log(err));
+  };
+
   fetchSpecifiedData = () => {
     if (this.props.dataType === "responseRate") {
       this.getResponseRateByDate();
@@ -24,60 +83,8 @@ export default class ChartOptions extends Component {
     }
   };
 
-  sortResponses = () => {
-    /*
-      1. Clean up dates.
-      2. If report dates are equal, group them together.
-      3. Get data for each group.
-      4. Pass in data.
-      */
-
-    let daySortedReports = [];
-
-    // 1. Clean up data.
-    this.props.reports.forEach(report => {
-      report.created_at = moment(report.created_at).format("l");
-    });
-
-    daySortedReports.push([this.props.reports[0]]);
-
-    // 2. If report dates are equal, group them together.
-    let arrIndex = 0;
-    for (let i = 1; i < this.props.reports.length; i++) {
-      let arrArrIndex = 0;
-      if (
-        this.props.reports[i].created_at ===
-        daySortedReports[arrIndex][arrArrIndex].created_at
-      ) {
-        daySortedReports[arrIndex].push(this.props.reports[i]);
-      } else {
-        daySortedReports.push([this.props.reports[i]]);
-        arrIndex++;
-      }
-    }
-
-    this.setState({
-      sortedReports: daySortedReports
-    });
-  };
-
   getResponseRateByDate = () => {
     let dataArr = [];
-    this.state.sortedReports.forEach(arr => {
-      console.log(arr);
-      arr.forEach(report => {
-        console.log(report);
-        axiosWithAuth()
-          .get(`${URL}/reports/submissionRate/${report.id}`)
-          .then(res => {
-            console.log(res.data.historicalSubmissionRate);
-            dataArr.push(res.data.historicalSubmissionRate);
-            console.log(dataArr);
-          })
-          .catch(err => console.log(err));
-      });
-    });
-    console.log(this.state.data);
   };
 
   getSentimentAvgByDate = () => {};
@@ -107,7 +114,7 @@ export default class ChartOptions extends Component {
   };
 
   render() {
-    this.fetchSpecifiedData();
+    // this.fetchSpecifiedData();
     if (this.props.labels.length === 0 || this.state.data.length === 0) {
       return <p>Set options to display graph.</p>;
     }
