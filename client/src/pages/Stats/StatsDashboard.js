@@ -6,7 +6,6 @@ import PageTitle from "../../components/PageTitle";
 import SummaryBox from "../../components/SummaryBox";
 
 import { InputLabel, MenuItem, FormControl, Select } from "@material-ui/core";
-import CircularProgress from "@material-ui/core/CircularProgress";
 
 import "./StatsDashboard.css";
 import ChartOptions from "./ChartOptions";
@@ -196,7 +195,7 @@ class StatsDashboard extends Component {
                 </Select>
               </FormControl>
               <button onClick={this.setLabels} style={{ margin: "20px" }}>
-                View Graph
+                Generate Graph
               </button>
             </form>
             <p>Select options to see graph.</p>
@@ -244,11 +243,11 @@ class StatsDashboard extends Component {
                 onChange={this.handleChange}
                 className="select"
               >
-                <MenuItem value={"day"}>Day</MenuItem>
-                <MenuItem value={"week"}>Week</MenuItem>
-                <MenuItem value={"month"}>Month</MenuItem>
-                <MenuItem value={"quarter"}>Quarter</MenuItem>
-                <MenuItem value={"year"}>Year</MenuItem>
+                <MenuItem value={"day"}>Today</MenuItem>
+                <MenuItem value={"week"}>Last 7 Days</MenuItem>
+                <MenuItem value={"month"}>Last 30 Days</MenuItem>
+                <MenuItem value={"quarter"}>Last 90 Days</MenuItem>
+                <MenuItem value={"year"}>Last 365 Days</MenuItem>
               </Select>
             </FormControl>
             <FormControl className="formControl">

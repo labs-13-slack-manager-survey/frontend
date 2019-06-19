@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { axiosWithAuth } from "../../config/axiosWithAuth";
+import moment from "moment";
 
 import SentimentChart from "./SentimentChart";
 
@@ -7,13 +8,57 @@ const URL = process.env.REACT_APP_BASE_URL;
 
 export default class ChartOptions extends Component {
   state = {
-    data: []
+    data: [],
+    sortedReports: []
   };
 
   componentDidMount() {
-    console.log(this.props);
+    this.sortResponses();
     this.getResponseRate();
   }
+
+  sortResponses = () => {
+    /*
+      1. Clean up dates.
+      2. If report dates are equal, group them together.
+      3. Get data for each group.
+      4. Pass in data.
+      */
+
+    let daySortedReports = [];
+
+    // 1. Clean up data.
+    this.props.reports.forEach(report => {
+      report.created_at = moment(report.created_at).format("l");
+    });
+
+    daySortedReports.push([this.props.reports[0]]);
+
+    // 2. If report dates are equal, group them together.
+    let arrIndex = 0;
+    for (let i = 1; i < this.props.reports.length; i++) {
+      let arrArrIndex = 0;
+      if (
+        this.props.reports[i].created_at ===
+        daySortedReports[arrIndex][arrArrIndex].created_at
+      ) {
+        daySortedReports[arrIndex].push(this.props.reports[i]);
+      } else {
+        daySortedReports.push([this.props.reports[i]]);
+        arrIndex++;
+      }
+    }
+
+    this.setState({
+      sortedReports: daySortedReports
+    });
+
+    // 3. Get data for each group.
+    // 4. Pass in data.
+  };
+
+  getResponseRateByDate = () => {};
+  getSentimentAvgByDate = () => {};
 
   getResponseRate = () => {
     this.props.reports.forEach(report => {
