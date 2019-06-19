@@ -40,6 +40,7 @@ class ReportResults extends Component {
     clickedResponder: null,
     responders: [],
     completed: false,
+    managerCompleted: false,
     isComplete:false,
     isSentiment: false,
     secondaryPage: true,
@@ -77,7 +78,7 @@ class ReportResults extends Component {
     }
     
 
-    console.log(managerPollDays)
+    console.log(this.state.managerQuestions)
     
     //calculating date of the manager report 
     const token = jwt_decode(localStorage.getItem('token'));
@@ -94,14 +95,43 @@ class ReportResults extends Component {
     return (
       <div className="dashboard-view">
         <main className="view">
+          
           <PageTitle
             title="Report"
             {...this.props}
             secondaryPage={this.state.secondaryPage}
           />
 
+          {token.roles != "admin"  ? 
+            <div className="confirm-response" >
+                 {managerToday != today ? "No manager response has been recorded for today" : 
+                  <>
+                  <div classname="manager-feedback-for-users">
+                    <div className="poll-header">
+                    <div className="member-form-title">Manager View</div>
+                    <p className="member-form-subtitle">
+                      View your manager's responses to his poll to guide your responses and goals for the day
+                    </p>
+                  </div>
+                  <div className="vertical-line" />
+
+                    <div className= "manager-question">{managerPollDays[managerPollDays.length-1].managerQuestions[0]}</div> 
+                    <div className= "manager-response">{managerPollDays[managerPollDays.length-1].managerResponses[0]}</div> 
+                    <div className= "manager-question">{managerPollDays[managerPollDays.length-1].managerQuestions[1]}</div> 
+                    <div className= "manager-response">{managerPollDays[managerPollDays.length-1].managerResponses[1]}</div> 
+                    <div className= "manager-question">{managerPollDays[managerPollDays.length-1].managerQuestions[2]}</div> 
+                    <div className= "manager-response">{managerPollDays[managerPollDays.length-1].managerResponses[2]}</div> 
+                    {managerPollDays[managerPollDays.length-1].managerQuestions.length === 4 ? <>
+                      <div className= "manager-question">{managerPollDays[managerPollDays.length-1].managerQuestions[3]}</div> 
+                      <div className= "manager-response">{managerPollDays[managerPollDays.length-1].managerResponses[3]}</div></> : null }
+
+                  </div>
+                    </> }
+                </div>
+            : null } 
+
           {this.state.filteredResponse.length > 0 ||
-          this.state.completed === true ? (
+          this.state.managerCompleted === true ? (
             <>
               <div className="confirm-response">
                 {managerToday != today  ?  "Your response has been recorded ": 
@@ -133,7 +163,7 @@ class ReportResults extends Component {
               >
                 <MemberResponseForm
                   {...this.props}
-                  updateWithUserResponse={this.updateWithUserResponse}
+                  updateWithUserResponse={this.updateWithManagerResponse}
                 />
               </div>
               <div className="linebr" />
@@ -373,6 +403,13 @@ class ReportResults extends Component {
   updateWithUserResponse = res => {
     this.setState({ responses: res.data, 
                     completed: true,
+                    isComplete: true
+                  });
+  };
+
+  updateWithUserResponse = res => {
+    this.setState({ responses: res.data, 
+                    managerCompleted: true,
                     isComplete: true
                   });
   };
