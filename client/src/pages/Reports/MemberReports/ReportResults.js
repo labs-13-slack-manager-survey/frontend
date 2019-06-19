@@ -44,6 +44,7 @@ class ReportResults extends Component {
     isComplete:false,
     isSentiment: false,
     secondaryPage: true,
+    isManagerActivated: true,
     percentComplete: 0,
     historicalSubmissionRate: 0,
     managerQuestions: [],
@@ -102,9 +103,9 @@ class ReportResults extends Component {
             secondaryPage={this.state.secondaryPage}
           />
 
-          {token.roles != "admin"  ? 
+          {token.roles != "admin" && this.state.isManagerActivated ? 
             <div className="confirm-response" >
-                 {managerToday != today ? "No manager response has been recorded for today" : 
+                 {managerToday != today ? "Poll unavailable: No manager response has been recorded for today" : 
                   <>
                   <div classname="manager-feedback-for-users">
                     <div className="poll-header">
@@ -128,7 +129,18 @@ class ReportResults extends Component {
                   </div>
                     </> }
                 </div>
-            : null } 
+            : 
+            
+            managerToday != today ?  <div
+            className="response-card"
+            interactive={false}
+            elevation={Elevation.TWO}
+          >
+            <MemberResponseForm
+              {...this.props}
+              updateWithUserResponse={this.updateWithManagerResponse}
+            /> 
+        </div> : null } 
 
           {this.state.filteredResponse.length > 0 ||
           this.state.managerCompleted === true ? (
@@ -156,16 +168,17 @@ class ReportResults extends Component {
             </>
           ) : (
             <>
-              <div
-                className="response-card"
-                interactive={false}
-                elevation={Elevation.TWO}
-              >
-                <MemberResponseForm
-                  {...this.props}
-                  updateWithUserResponse={this.updateWithManagerResponse}
-                />
-              </div>
+              {managerToday == today ?
+                <div
+                  className="response-card"
+                  interactive={false}
+                  elevation={Elevation.TWO}
+                >
+                  <MemberResponseForm
+                    {...this.props}
+                    updateWithUserResponse={this.updateWithManagerResponse}
+                  /> 
+              </div> : null} 
               <div className="linebr" />
             </>
           )}
@@ -340,7 +353,7 @@ class ReportResults extends Component {
            submitted_date: feedback.submitted_date }); 
        
       })
-      console.log(managerRes.data)
+      console.log(reportRes.data.report.managerQuestions)
 
       // managerRes.data.map(res => {
       //   console.log(res)
@@ -366,6 +379,7 @@ class ReportResults extends Component {
           });
       });
       this.setState({
+        isManagerActivated: reportRes.data.report.managerQuestions,
         isSentiment,
         responses: responsesRes.data,
         filteredResponse: filtered,
@@ -376,7 +390,6 @@ class ReportResults extends Component {
         // managerSubmitted: managerSubmitted,
         managerFeedback: managerFeedback,
       });
-      console.log(managerFeedback)
     } catch (err) {
       console.log(err);
     }
