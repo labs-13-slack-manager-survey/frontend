@@ -14,7 +14,11 @@ export default class ChartOptions extends Component {
 
   componentDidMount() {
     this.sortResponses();
-    this.getResponseRate();
+    if (this.props.dataType === "responseRate") {
+      this.getResponseRateByDate();
+    } else if (this.props.dataType === "sentimentAverage") {
+      this.getSentimentAvgByDate();
+    }
   }
 
   sortResponses = () => {
@@ -57,8 +61,13 @@ export default class ChartOptions extends Component {
     // 4. Pass in data.
   };
 
-  getResponseRateByDate = () => {};
-  getSentimentAvgByDate = () => {};
+  getResponseRateByDate = () => {
+    console.log("response");
+  };
+
+  getSentimentAvgByDate = () => {
+    console.log("sentiment");
+  };
 
   getResponseRate = () => {
     this.props.reports.forEach(report => {
@@ -73,7 +82,7 @@ export default class ChartOptions extends Component {
     });
   };
 
-  getSentimentAverage = () => {
+  getSentimentAvg = () => {
     this.props.reports.forEach(report => {
       axiosWithAuth
         .get(`${URL}/responses/sentimentAvg/${report.id}`)
