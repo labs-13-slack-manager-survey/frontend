@@ -23,7 +23,8 @@ class MemberResponseForm extends Component {
     managerQuestions: [],
     managerResponses: [],
     toggleManager: true,
-    isComplete: false
+    isComplete: false,
+    sentimentQuestions: [], 
   };
 
   toggleManagerQ = () => {
@@ -95,7 +96,7 @@ class MemberResponseForm extends Component {
                   </li>
                 ))}
 
-                {/* {this.state.sentimentQuestions.map((sq, i) => (
+                {this.state.sentimentQuestions && this.state.sentimentQuestions.map((sq, i) => (
                   <li>
                     <ReportInput
                       question={sq.question}
@@ -107,7 +108,7 @@ class MemberResponseForm extends Component {
                       handleSentiment={this.handleSentiment}
                     />
                   </li>
-                ))} */}
+                ))}
               </ol>
 
               <Button
@@ -139,12 +140,13 @@ class MemberResponseForm extends Component {
           reportName,
           message,
           questions,
-          // sentimentQuestions,
+          sentimentQuestions,
           isSentiment,
           managerResponses,
           managerQuestions
         } = res.data.report;
         console.log('axios call', questions);
+        console.log(res.data.report)
         this.setState({
           reportName,
           reportMessage: message,
@@ -155,22 +157,27 @@ class MemberResponseForm extends Component {
           })),
           managerQuestions,
           managerResponses: JSON.parse(managerResponses),
-          isSentiment: isSentiment
+          isSentiment: isSentiment,
+          sentimentQuestions: JSON.parse(sentimentQuestions).map(q => ({
+            question: q,
+            response: "",
+            sentimentRange: 3
+          })),
         });
       })
       .catch(err => console.log(err));
   }
 
-  // handleSentiment = (event, value, question) => {
-  //   this.setState(prevState => ({
-  //     ...prevState,
-  //     sentimentQuestions: prevState.sentimentQuestions.map(sq => {
-  //       return sq.question !== question
-  //         ? sq
-  //         : { question, sentimentRange: value, response: sq.response };
-  //     })
-  //   }));
-  // };
+  handleSentiment = (event, value, question) => {
+    this.setState(prevState => ({
+      ...prevState,
+      sentimentQuestions: prevState.sentimentQuestions.map(sq => {
+        return sq.question !== question
+          ? sq
+          : { question, sentimentRange: value, response: sq.response };
+      })
+    }));
+  };
 
   handleChange = (e, question) => {
     const qObj = {
@@ -193,26 +200,26 @@ class MemberResponseForm extends Component {
     }));
   };
 
-  // handleSentimentComment = (e, question) => {
-  //   const sqObj = {
-  //     question,
-  //     response: e.target.value
-  //   };
+  handleSentimentComment = (e, question) => {
+    const sqObj = {
+      question,
+      response: e.target.value
+    };
 
-  //   this.setState(prevState => ({
-  //     ...prevState,
-  //     sentimentQuestions: prevState.sentimentQuestions.map(
-  //       sq =>
-  //         sq.question !== question
-  //           ? sq
-  //           : {
-  //               question,
-  //               sentimentRange: sq.sentimentRange,
-  //               response: sqObj.response
-  //             } // qObj
-  //     )
-  //   }));
-  // };
+    this.setState(prevState => ({
+      ...prevState,
+      sentimentQuestions: prevState.sentimentQuestions.map(
+        sq =>
+          sq.question !== question
+            ? sq
+            : {
+                question,
+                sentimentRange: sq.sentimentRange,
+                response: sqObj.response
+              } // qObj
+      )
+    }));
+  };
 
   submitReport = () => {
     const allQuestions = [this.state.questions];
