@@ -299,7 +299,6 @@ class CreateReport extends Component {
       questions,
       sentimentQuestions,
       slackChannelId,
-      // managerResponses,
       EngineeringManagerQuestions,
       ProjectManagerQuestions
     } = this.state;
@@ -310,14 +309,13 @@ class CreateReport extends Component {
       scheduleTime,
       message,
       questions: JSON.stringify(questions),
-      // managerResponses: JSON.stringify(managerResponses),
+      sentimentQuestions: JSON.stringify(sentimentQuestions),
       slackChannelId,
       slackChannelName,
       created_at: new Date(),
 
       sentimentQuestions: JSON.stringify(sentimentQuestions),
     };
-    console.log("REPORT++", this.report);
     if (this.state.managerQuestions) {{this.state.managerType === 0
       ? (report["managerQuestions"] = JSON.stringify(
           EngineeringManagerQuestions
