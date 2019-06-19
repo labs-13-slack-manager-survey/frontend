@@ -264,7 +264,7 @@ class MemberResponseForm extends Component {
     console.log('submitted')
     this.completeSurvey()
     this.submitReport();
-    // this.reload()
+    this.reload()
   }
 
 }
