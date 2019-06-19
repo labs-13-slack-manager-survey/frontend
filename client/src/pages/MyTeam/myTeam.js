@@ -199,10 +199,7 @@ class myTeam extends Component {
             // ConsoleCheck = {this.ConsoleCheck}
             />
         ))}
-        </div>
-        <div className = "sidebar">
-            <SlackButton/>
-            <InviteUser />
+
         </div>
       </div>
     ) : (
