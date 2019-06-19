@@ -60,15 +60,12 @@ export class Dashboard extends Component {
   componentDidMount() {
     // get user's joinCode from token and setState accordingly. Necessary to invite new team members.
     const joinCode = jwt_decode(localStorage.getItem("token")).joinCode;
-    console.log(joinCode);
-    console.log(this.state.users.length)
     this.setState({
       joinCode: joinCode
     });
     axiosWithAuth()
       .get(`${baseURL}/users/team`)
       .then(res => {
-        console.log(res);
         this.setState({ users: res.data.users });
 
         if (this.state.users.length > 0) {
@@ -81,7 +78,6 @@ export class Dashboard extends Component {
       axiosWithAuth()
       .get(`${baseURL}/reports/submissionRate`)
       .then(res => {
-        console.log("RES",res)
         this.setState({
           totalResponses: res.data.totalResponses,
         })
