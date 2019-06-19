@@ -41,8 +41,6 @@ class TableDisplay extends React.Component {
 
         let timeStr = `${time[0]}:${time[1]}am`;
 
-        console.log("STATE",this.state)
-
         if (time[0] > 12) {
             timeStr = `${time[0] - 12}:${time[1]}pm`;
         }
@@ -115,7 +113,7 @@ class TableDisplay extends React.Component {
 
 
     componentDidMount(){
-        
+
         const reportId = this.props.report.id;
 
         axiosWithAuth()
