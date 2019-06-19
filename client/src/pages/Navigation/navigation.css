@@ -41,9 +41,9 @@
 
 .menu-bar-add-poll {
 	width: 114px;
-	height: 30px;
-	font-size: 13px;
-	border-radius: 0px;
+	height: 32px;
+	font-size: 12px;
+	border-radius: 3px;
 	color: white;
 	font-weight: 500;
 	background-color: rgb(248, 147, 23);
