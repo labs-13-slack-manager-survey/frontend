@@ -116,6 +116,7 @@ class TableDisplay extends React.Component {
 
         const reportId = this.props.report.id;
 
+        //getting the number of responses for a given report
         axiosWithAuth()
         .get(`${baseURL}/reports/submissionRate/${reportId}`)
         .then(res => {
