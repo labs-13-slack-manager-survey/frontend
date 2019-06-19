@@ -14,12 +14,15 @@ export default class ChartOptions extends Component {
 
   componentDidMount() {
     this.sortResponses();
+  }
+
+  fetchSpecifiedData = () => {
     if (this.props.dataType === "responseRate") {
       this.getResponseRateByDate();
     } else if (this.props.dataType === "sentimentAverage") {
       this.getSentimentAvgByDate();
     }
-  }
+  };
 
   sortResponses = () => {
     /*
@@ -56,18 +59,28 @@ export default class ChartOptions extends Component {
     this.setState({
       sortedReports: daySortedReports
     });
-
-    // 3. Get data for each group.
-    // 4. Pass in data.
   };
 
   getResponseRateByDate = () => {
-    console.log("response");
+    let dataArr = [];
+    this.state.sortedReports.forEach(arr => {
+      console.log(arr);
+      arr.forEach(report => {
+        console.log(report);
+        axiosWithAuth()
+          .get(`${URL}/reports/submissionRate/${report.id}`)
+          .then(res => {
+            console.log(res.data.historicalSubmissionRate);
+            dataArr.push(res.data.historicalSubmissionRate);
+            console.log(dataArr);
+          })
+          .catch(err => console.log(err));
+      });
+    });
+    console.log(this.state.data);
   };
 
-  getSentimentAvgByDate = () => {
-    console.log("sentiment");
-  };
+  getSentimentAvgByDate = () => {};
 
   getResponseRate = () => {
     this.props.reports.forEach(report => {
@@ -94,6 +107,7 @@ export default class ChartOptions extends Component {
   };
 
   render() {
+    this.fetchSpecifiedData();
     if (this.props.labels.length === 0 || this.state.data.length === 0) {
       return <p>Set options to display graph.</p>;
     }
