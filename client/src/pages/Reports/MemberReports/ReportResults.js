@@ -51,8 +51,14 @@ class ReportResults extends Component {
     managerResponses: [], 
     managerSubmitted: [],
     managerFeedback: [],
+    seeManagerQ: true, 
   };
 
+  toggleManagerQ = () => {
+    this.setState({
+      seeManagerQ: !this.state.seeManagerQ
+    });
+  };
 
   getDate = (date) => {
     let formatted = moment(date).format('DD MMMM YYYY');
@@ -107,15 +113,15 @@ class ReportResults extends Component {
             <div className="confirm-response" >
                  {managerToday != today ? "Poll unavailable: No manager response has been recorded for today" : 
                   <>
-                  <div classname="manager-feedback-for-users">
+                  <div classname="manager-feedback-for-users" onClick = {this.toggleManagerQ}>
                     <div className="poll-header">
-                    <div className="member-form-title">Manager View</div>
+                    <div className="member-form-title">Manager Comments</div>
                     <p className="member-form-subtitle">
                       View your manager's responses to his poll to guide your responses and goals for the day
                     </p>
                   </div>
-                  <div className="vertical-line" />
-
+                    {this.state.seeManagerQ ? <> 
+                      <div className="vertical-line" />
                     <div className= "manager-question">{managerPollDays[managerPollDays.length-1].managerQuestions[0]}</div> 
                     <div className= "manager-response">{managerPollDays[managerPollDays.length-1].managerResponses[0]}</div> 
                     <div className= "manager-question">{managerPollDays[managerPollDays.length-1].managerQuestions[1]}</div> 
@@ -124,7 +130,7 @@ class ReportResults extends Component {
                     <div className= "manager-response">{managerPollDays[managerPollDays.length-1].managerResponses[2]}</div> 
                     {managerPollDays[managerPollDays.length-1].managerQuestions.length === 4 ? <>
                       <div className= "manager-question">{managerPollDays[managerPollDays.length-1].managerQuestions[3]}</div> 
-                      <div className= "manager-response">{managerPollDays[managerPollDays.length-1].managerResponses[3]}</div></> : null }
+                      <div className= "manager-response">{managerPollDays[managerPollDays.length-1].managerResponses[3]}</div></> : null }</> : null}
 
                   </div>
                     </> }
