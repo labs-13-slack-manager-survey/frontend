@@ -69,7 +69,7 @@ class TableDisplay extends React.Component {
                 <div className = "columnTR" >{this.state.totalResponse}</div> 
                 <Button>
                     <Link
-                        to={`/slackr/dashboard/reports/${this.props.report.id}`}
+                        to={`/slackr/dashboard/reports/${reportId}`}
                         className = "column">
                         respond
                     </Link>
@@ -77,7 +77,7 @@ class TableDisplay extends React.Component {
 
                 <div className = "action-icons">
                     <Link
-                        to={`/slackr/dashboard/reports/${this.props.report.id}/edit`}
+                        to={`/slackr/dashboard/reports/${reportId}/edit`}
                         id={this.props.role !== 'admin' ? 'display-link' : ''}
                     >
                         <img className ="action" src={edit} />
@@ -96,7 +96,7 @@ class TableDisplay extends React.Component {
                         <DialogTitle id="alert-dialog-slide-title">
                             Are you sure you'd like to archive this report? 
                         </DialogTitle>
-                        <button onClick={() => this.props.archiveReport(this.props.report.id)}>
+                        <button onClick={() => this.props.archiveReport(reportId)}>
                             Yes
                         </button>
                         <button onClick={() => {
@@ -112,11 +112,13 @@ class TableDisplay extends React.Component {
 
     componentDidMount(){
 
+        console.log("PROPS COMING IN",this.props)
+        const reportId = this.props.report.id;
 
         axiosWithAuth()
-        .get(`${baseURL}/reports/submissionRate`)
+        .get(`${baseURL}/reports/submissionRate/${reportId}`)
         .then(res => {
-            console.log("RES",res)
+            console.log("+++++++",res)
             this.setState({
                 totalResponses: res.data.totalResponses,
             })
