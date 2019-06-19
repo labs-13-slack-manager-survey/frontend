@@ -75,8 +75,10 @@ class EditReport extends Component {
           scheduleTime,
           message,
           questions,
+          sentimentQuestions,
           slackChannelId
         } = res.data.report;
+        console.log("RES++__++",res)
         this.setState({
           reportName,
           schedule,
@@ -84,6 +86,7 @@ class EditReport extends Component {
           timePickDate: new Date(`2000-01-01T${scheduleTime}`),
           message,
           questions,
+          sentimentQuestions,
           slackChannelId
         });
       })
@@ -151,6 +154,37 @@ class EditReport extends Component {
     }));
   };
 
+  enterSentimentHandler = e => {
+    e.preventDefault();
+    const code = e.keyCode || e.which;
+    if (code === 13) {
+      this.setState(prevState => ({
+        sentimentQuestions: [...prevState.sentimentQuestions, this.state.sentimentQuestions],
+        sentimentQuestions: ""
+      }));
+    } else {
+      this.setState({
+        [e.target.name]: e.target.value
+      });
+    }
+  };
+
+  sentimentHandler = e => {
+    e.preventDefault();
+    this.setState(prevState => ({
+      sentimentQuestions: [...prevState.sentimentQuestions, this.state.sentimentQuestions],
+      sentimentQuestions: ""
+    }));
+  };
+
+  removeSentiment = (e, sentimentQuestions) => {
+    e.preventDefault();
+    this.setState(prevState => ({
+      sentimentQuestions: prevState.sentimentQuestions.filter(q => q !== sentimentQuestions)
+    }));
+  };
+
+
   updateSchedule = day => {
     const { schedule } = this.state;
     const includes = schedule.includes(day);
@@ -178,6 +212,7 @@ class EditReport extends Component {
       scheduleTime,
       message,
       questions,
+      sentimentQuestions,
       slackChannelId
     } = this.state;
     const report = {
@@ -186,6 +221,7 @@ class EditReport extends Component {
       scheduleTime,
       message,
       questions: JSON.stringify(questions),
+      sentimentQuestions: JSON.stringify(sentimentQuestions),
       slackChannelId,
       slackChannelName
     };
@@ -201,7 +237,6 @@ class EditReport extends Component {
 
   render() {
     const { classes } = this.props;
-
     return (
       <div className="create-report">
         <Fab onClick={() => this.props.history.goBack()} color="default">
@@ -351,6 +386,55 @@ class EditReport extends Component {
                   color="primary"
                   onClick={this.questionsHandler}
                   disabled={this.state.question.length === 0 ? true : false}
+                  type="submit"
+                >
+                  <AddIcon />
+                </Fab>
+              </section>
+            </section>
+          </Card>
+          <Card raised={true} className="schedule-card">
+            <section className="schedule-card-content">
+              <h3 className="schedule-title">Sentiment Questions</h3>
+              <Divider className="divider" variant="fullWidth" />
+              <section>
+                {/* The questions need to be changed over to sentiment questions */}
+                {this.state.questions.map(question => (
+                  <article className="question-flex" key={question}>
+                    <p className="question">{question}</p>
+                    <Fab
+                      size="small"
+                      color="secondary"
+                      onClick={e => this.removeQuestion(e, question)}
+                    >
+                      <Icon>delete_icon</Icon>
+                    </Fab>
+                  </article>
+                ))}
+              </section>
+              <section className="enter-question">
+                <FormControl className="input-field" required>
+                  <InputLabel htmlFor="edit-report-question">
+                    Enter a question...
+                  </InputLabel>
+                  <Input
+                    id="edit-report-question"
+                    required
+                    className="input-field"
+                    type="text"
+                    name="question"
+                // The questions need to be changed over to sentiment questions 
+                    value={this.state.questions}
+                    onChange={this.enterSentimentHandler}
+                  />
+                </FormControl>
+                <Fab
+                  size="small"
+                  style={{ display: "block", margin: "10px 0" }}
+                  color="primary"
+                  onClick={this.sentimentHandler}
+                // The questions need to be changed over to sentiment questions 
+                  disabled={this.state.questions.length === 0 ? true : false}
                   type="submit"
                 >
                   <AddIcon />
