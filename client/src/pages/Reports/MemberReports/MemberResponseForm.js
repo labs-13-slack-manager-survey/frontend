@@ -24,7 +24,7 @@ class MemberResponseForm extends Component {
     managerResponses: [],
     toggleManager: true,
     isComplete: false,
-    sentimentQuestions: [], 
+    sentimentQuestions: []
   };
 
   toggleManagerQ = () => {
@@ -37,20 +37,27 @@ class MemberResponseForm extends Component {
     this.setState({ isComplete: true });
   };
   render() {
-    console.log(this.state.questions)
     const token = jwt_decode(localStorage.getItem("token"));
     return this.state.clientInfo.length > 0 ? (
       <>
         <div>{this.state.clientInfo}</div>
       </>
-    ) : (<>
-          <div>
-            {/*conditional render based on user role and if the manager survey is set*/}
-            {token.roles == "admin" ? (this.state.managerQuestions && this.state.managerQuestions.length > 0 ? <>
-              <ManagerPoll reportId={this.props.match.params.reportId} />            
-              </> : <div className = "member-form-subtitle">manager survey not set</div>) : <section>
-            
-            {/* {this.state.isSentiment ? null : (
+    ) : (
+      <>
+        <div>
+          {/*conditional render based on user role and if the manager survey is set*/}
+          {token.roles == "admin" ? (
+            this.state.managerQuestions &&
+            this.state.managerQuestions.length > 0 ? (
+              <>
+                <ManagerPoll reportId={this.props.match.params.reportId} />
+              </>
+            ) : (
+              <div className="member-form-subtitle">manager survey not set</div>
+            )
+          ) : (
+            <section>
+              {/* {this.state.isSentiment ? null : (
               <div className = "manager-poll-responses">
                 <div className = "poll-header-toggle"  onClick={this.toggleManagerQ}>
                   <div className="member-form-title">Managers Thoughts</div>
@@ -82,33 +89,35 @@ class MemberResponseForm extends Component {
               </div>
 
               <ol type="1">
-                {this.state.questions && this.state.questions.map((q, i) => (
-                  <li>
-                    <ReportInput
-                      question={q.question}
-                      response={q.response}
-                      sentimentRange={q.sentimentRange}
-                      handleChange={this.handleChange}
-                      key={i}
-                      isSentiment={this.state.isSentiment}
-                      handleSentiment={this.handleSentiment}
-                    />
-                  </li>
-                ))}
+                {this.state.questions &&
+                  this.state.questions.map((q, i) => (
+                    <li>
+                      <ReportInput
+                        question={q.question}
+                        response={q.response}
+                        sentimentRange={q.sentimentRange}
+                        handleChange={this.handleChange}
+                        key={i}
+                        isSentiment={this.state.isSentiment}
+                        handleSentiment={this.handleSentiment}
+                      />
+                    </li>
+                  ))}
 
-                {this.state.sentimentQuestions && this.state.sentimentQuestions.map((sq, i) => (
-                  <li>
-                    <ReportInput
-                      question={sq.question}
-                      response={sq.response}
-                      sentimentRange={sq.sentimentRange}
-                      handleSentimentComment={this.handleSentimentComment}
-                      key={i}
-                      isSentiment={true}
-                      handleSentiment={this.handleSentiment}
-                    />
-                  </li>
-                ))}
+                {this.state.sentimentQuestions &&
+                  this.state.sentimentQuestions.map((sq, i) => (
+                    <li>
+                      <ReportInput
+                        question={sq.question}
+                        response={sq.response}
+                        sentimentRange={sq.sentimentRange}
+                        handleSentimentComment={this.handleSentimentComment}
+                        key={i}
+                        isSentiment={true}
+                        handleSentiment={this.handleSentiment}
+                      />
+                    </li>
+                  ))}
               </ol>
 
               <Button
@@ -125,7 +134,7 @@ class MemberResponseForm extends Component {
                 Submit Report
               </Button>
             </section>
-          }
+          )}
         </div>
       </>
     );
@@ -145,8 +154,8 @@ class MemberResponseForm extends Component {
           managerResponses,
           managerQuestions
         } = res.data.report;
-        console.log('axios call', questions);
-        console.log(res.data.report)
+        console.log("axios call", questions);
+        console.log(res.data.report);
         this.setState({
           reportName,
           reportMessage: message,
@@ -162,7 +171,7 @@ class MemberResponseForm extends Component {
             question: q,
             response: "",
             sentimentRange: 3
-          })),
+          }))
         });
       })
       .catch(err => console.log(err));
@@ -180,6 +189,7 @@ class MemberResponseForm extends Component {
   };
 
   handleChange = (e, question) => {
+    console.log("sq", e.target.value);
     const qObj = {
       question,
       response: e.target.value
@@ -201,11 +211,12 @@ class MemberResponseForm extends Component {
   };
 
   handleSentimentComment = (e, question) => {
+    console.log("senq", e.target.value);
     const sqObj = {
       question,
       response: e.target.value
     };
-
+    console.log("obj", sqObj);
     this.setState(prevState => ({
       ...prevState,
       sentimentQuestions: prevState.sentimentQuestions.map(
@@ -222,19 +233,24 @@ class MemberResponseForm extends Component {
   };
 
   submitReport = () => {
-    const allQuestions = [this.state.questions];
-    console.log(this.state.questions);
-    console.log(this.state.sentimentQuestions);
-    console.log(allQuestions);
+    const allQuestions = {
+      questions: this.state.questions,
+      sentimentQuestions: this.state.sentimentQuestions
+    };
+    // format the body to be as follows
+    // {
+    //   questions:[{q,r,sval}]
+    //   sentimentQuestions:[{q,r,sval}]
+    // }
     const endpoint = `${baseURL}/responses/${this.props.match.params.reportId}`;
     axiosWithAuth()
-      .post(endpoint, this.state.questions)
+      .post(endpoint, allQuestions)
       .then(res => {
         if (this.state.isSentiment) {
           this.props.updateWithUserResponse(res);
           this.setState(prevState => ({
             ...prevState,
-            isComplete:true,
+            isComplete: true,
             questions: prevState.questions.map(q => ({
               question: q.question,
               response: "",
@@ -244,11 +260,11 @@ class MemberResponseForm extends Component {
         } else {
           this.setState(prevState => ({
             ...prevState,
-            isComplete:true,
+            isComplete: true,
             questions: prevState.questions.map(q => ({
               question: q.question,
               response: ""
-            })),
+            }))
           }));
         }
       })
@@ -258,15 +274,14 @@ class MemberResponseForm extends Component {
   };
 
   reload = () => {
-    window.location.reload()
-  }
-  submitAll = () =>{
-    console.log('submitted')
-    this.completeSurvey()
+    window.location.reload();
+  };
+  submitAll = () => {
+    console.log("submitted");
+    this.completeSurvey();
     this.submitReport();
     // this.reload()
-  }
-
+  };
 }
 
 export default MemberResponseForm;
