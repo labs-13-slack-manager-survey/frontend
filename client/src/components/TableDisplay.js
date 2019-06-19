@@ -31,13 +31,17 @@ function Transition(props) {
 class TableDisplay extends React.Component {
     state = {
         dialogOpen: false,
-        totalResponse: 0
+        totalResponses:0
 	}
     render() {
+
         const time = this.props.report.scheduleTime.split(':');
         const reportId = this.props.report.id;
         const dateString  = new Date(this.props.report.created_at);
+
         let timeStr = `${time[0]}:${time[1]}am`;
+
+        console.log("STATE",this.state)
 
         if (time[0] > 12) {
             timeStr = `${time[0] - 12}:${time[1]}pm`;
@@ -66,7 +70,7 @@ class TableDisplay extends React.Component {
                             </div>
                         ))}
                 </div>
-                <div className = "columnTR" >{this.state.totalResponse}</div> 
+                <div className = "columnTR" >{this.state.totalResponses}</div> 
                 <Button>
                     <Link
                         to={`/slackr/dashboard/reports/${reportId}`}
@@ -111,16 +115,14 @@ class TableDisplay extends React.Component {
 
 
     componentDidMount(){
-
-        console.log("PROPS COMING IN",this.props)
+        
         const reportId = this.props.report.id;
 
         axiosWithAuth()
         .get(`${baseURL}/reports/submissionRate/${reportId}`)
         .then(res => {
-            console.log("+++++++",res)
             this.setState({
-                totalResponses: res.data.totalResponses,
+                totalResponses: res.data.historicalSubmissionRate,
             })
         })
         .catch(err => console.log(err))
