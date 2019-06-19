@@ -199,12 +199,15 @@ class myTeam extends Component {
             // ConsoleCheck = {this.ConsoleCheck}
             />
         ))}
+
         </div>
+
         <div className = "sidebar">
             <SlackButton/>
             <InviteUser />
         </div>
-      </div>
+        </div>
+      
     ) : (
       <Card style={{ textAlign: "center" }}>
         Looks like your account has been deactivated. If you believe this is an

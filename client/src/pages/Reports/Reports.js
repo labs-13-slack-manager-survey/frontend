@@ -35,6 +35,7 @@ class Reports extends Component {
       .get(endpoint)
       .then(res => {
         if (res.status !== 200) {
+          console.log("56");
           this.setState({
             slackModal: true
           });
