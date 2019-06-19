@@ -57,21 +57,20 @@ class ReportResults extends Component {
       month: "long",
       day: "numeric"
     };
-    console.log("REPORT RESULT STATE",this.state)
-    console.log(this.state.managerQuestions)
+    // console.log("REPORT RESULT STATE",this.state)
+    // console.log(this.state.managerQuestions)
     
     let managerPollDays = [];
 
     for (let i = 0; i < this.state.managerFeedback.length; i++ ){
-      for (let j=0; j<this.state.managerFeedback.managerQuestions.length; j++) {
         let managerQandA = {};
-        managerQandA.managerQuestions = this.state.managerFeedback.managerQuestions[j];
-        managerQandA.managerResponses= this.state.managerFeedback.managerResponses[j];
-        managerQandA.managerSubmitted = this.state.managerFeedback.managerSubmitted;
+        managerQandA.managerQuestions = JSON.parse(this.state.managerFeedback[i].managerQuestions);
+        managerQandA.managerResponses= JSON.parse(this.state.managerFeedback[i].managerResponses);
+        managerQandA.managerSubmitted = this.state.managerFeedback[i].managerSubmitted;
         managerPollDays.push(managerQandA);
-      }
     }
     
+
     console.log(managerPollDays)
     
     //calculating date of the manager report 
@@ -83,14 +82,12 @@ class ReportResults extends Component {
     today = dd + mm + yyyy
 
     
-    let managerToday = this.state.managerSubmitted[0]
+    let managerToday = managerPollDays.length && managerPollDays[managerPollDays.length-1].managerSubmitted
     let Day = moment(managerToday).format('DD');
     let Month = moment(managerToday).format('MMMM')
     const Year = moment(managerToday).format('YYYY');
     managerToday = Day + Month + Year
     console.log(managerToday)
-
-    console.log(this.state.managerFeedback)
 
     return (
       <div className="dashboard-view">
@@ -107,12 +104,18 @@ class ReportResults extends Component {
               <div className="confirm-response">
                 {managerToday != today  ?  "Your response has been recorded ": 
                 <>
-                {managerPollDays.map(res =>
                 <div classname="manager-feedback">
-                  <div className= "manager-question">{res.managerQuestions}</div> 
-                  <div className= "manager-response">{res.managerResponses}</div> 
+                  <div className= "manager-question">{managerPollDays[managerPollDays.length-1].managerQuestions[0]}</div> 
+                  <div className= "manager-response">{managerPollDays[managerPollDays.length-1].managerResponses[0]}</div> 
+                  <div className= "manager-question">{managerPollDays[managerPollDays.length-1].managerQuestions[1]}</div> 
+                  <div className= "manager-response">{managerPollDays[managerPollDays.length-1].managerResponses[1]}</div> 
+                  <div className= "manager-question">{managerPollDays[managerPollDays.length-1].managerQuestions[2]}</div> 
+                  <div className= "manager-response">{managerPollDays[managerPollDays.length-1].managerResponses[2]}</div> 
+                  {managerPollDays[managerPollDays.length-1].managerQuestions.length === 4 ? <>
+                    <div className= "manager-question">{managerPollDays[managerPollDays.length-1].managerQuestions[3]}</div> 
+                    <div className= "manager-response">{managerPollDays[managerPollDays.length-1].managerResponses[3]}</div></> : null }
+
                 </div>
-                )}
               </> 
               }
                
@@ -136,14 +139,23 @@ class ReportResults extends Component {
           )}
 
           <section className="report-results-feed">
-          {this.state.managerFeedback.map(res => (
+          {/* {this.state.managerFeedback.map(res => (
                   <div>{res}</div>
-                ))}
+                ))} */}
+      
               {managerPollDays.map(res =>
-                <div classname="manager-feedback">
-                  <div className= "manager-question">{res.managerQuestions}</div> 
-                  <div className= "manager-response">{res.managerResponses}</div> 
-                </div>
+                    <div classname="manager-feedback">
+                    <div className= "manager-question">{res.managerQuestions[0]}</div> 
+                    <div className= "manager-response">{res.managerResponses[0]}</div> 
+                    <div className= "manager-question">{res.managerQuestions[1]}</div> 
+                    <div className= "manager-response">{res.managerResponses[1]}</div> 
+                    <div className= "manager-question">{res.managerQuestions[2]}</div> 
+                    <div className= "manager-response">{res.managerResponses[2]}</div> 
+                    {res.managerQuestions.length === 4 ? <>
+                      <div className= "manager-question">{res.managerQuestions[3]}</div> 
+                      <div className= "manager-response">{res.managerResponses[3]}</div></> : null }
+
+                    </div>
                 )}
 
             {this.state.responses.map(
@@ -284,12 +296,13 @@ class ReportResults extends Component {
       // let managerFeedback= [];
       
       const managerFeedback = [];
-      managerRes.data.forEach(({ feedback }) => {
-        feedback.length > 0 &&
-          feedback.forEach(({ managerQuestions, managerResponses, submitted_date }) => {
-            managerFeedback.push({ managerQuestions, managerResponses, submitted_date });
-          })
+      managerRes.data.forEach(feedback => {
+        managerFeedback.push({ managerQuestions: feedback.managerQuestions,
+           managerResponses: feedback.managerResponses, 
+           submitted_date: feedback.submitted_date }); 
+       
       })
+      console.log(managerRes.data)
 
       // managerRes.data.map(res => {
       //   console.log(res)
