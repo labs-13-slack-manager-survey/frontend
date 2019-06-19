@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { axiosWithAuth, baseURL } from "../config/axiosWithAuth"
 
-import editActive from '../images/icons/edit-active.png';
 import edit from '../images/icons/edit.png';
 import trashCan from '../images/icons/trash.png';
 import './tableDisplay.css';
@@ -108,5 +108,20 @@ class TableDisplay extends React.Component {
                             
             </div> 
         )}
+
+
+    componentDidMount(){
+
+
+        axiosWithAuth()
+        .get(`${baseURL}/reports/submissionRate`)
+        .then(res => {
+            console.log("RES",res)
+            this.setState({
+                totalResponses: res.data.totalResponses,
+            })
+        })
+        .catch(err => console.log(err))
+    }
 };
 export default TableDisplay; 
