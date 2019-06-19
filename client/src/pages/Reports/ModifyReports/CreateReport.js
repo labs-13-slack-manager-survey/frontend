@@ -268,23 +268,6 @@ class CreateReport extends Component {
       return this.state.errorMessage;
     }
 
-    // if (this.state.managerQuestions) {
-    //   console.log(this.state.resOne);
-    //   if (
-    //     this.state.resOne == "" ||
-    //     this.state.resTwo == "" ||
-    //     this.state.resThree == ""
-    //   ) {
-    //     this.setState({
-    //       errorMessage: "Please enter all answers to the manager polls "
-    //     });
-    //     console.log(this.state.managerQuestions);
-    //     console.log("hello");
-    //     console.log(this.state.errorMessage);
-    //     return this.state.errorMessage;
-    //   }
-    // }
-
     let slackChannelName;
     this.state.channels.forEach(channel => {
       if (channel.id === this.state.slackChannelId)
@@ -312,9 +295,7 @@ class CreateReport extends Component {
       sentimentQuestions: JSON.stringify(sentimentQuestions),
       slackChannelId,
       slackChannelName,
-      created_at: new Date(),
-
-      sentimentQuestions: JSON.stringify(sentimentQuestions),
+      created_at: new Date()
     };
     if (this.state.managerQuestions) {{this.state.managerType === 0
       ? (report["managerQuestions"] = JSON.stringify(
