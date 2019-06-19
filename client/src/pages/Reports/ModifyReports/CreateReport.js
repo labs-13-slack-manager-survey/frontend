@@ -253,7 +253,7 @@ class CreateReport extends Component {
 
     if (this.state.reportName.length < 1) {
       this.setState({
-        errorMessage: "Please enter your report name in the respective field"
+        errorMessage: "Please enter your report name"
       });
       console.log(this.state.errorMessage);
       return this.state.errorMessage;
@@ -261,7 +261,7 @@ class CreateReport extends Component {
 
     if (this.state.schedule.length < 1) {
       this.setState({
-        errorMessage: "Please choose at least one day two send out your report"
+        errorMessage: "Please choose at least one day to send out your report"
       });
       console.log(this.state.errorMessage);
       console.log(this.state.managerQuestions);
