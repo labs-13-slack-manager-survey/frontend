@@ -36,7 +36,7 @@ class MemberResponseForm extends Component {
     this.setState({ isComplete: true });
   };
   render() {
-    console.log(this.state)
+    console.log(this.state.questions)
     const token = jwt_decode(localStorage.getItem("token"));
     return this.state.clientInfo.length > 0 ? (
       <>
@@ -81,7 +81,7 @@ class MemberResponseForm extends Component {
               </div>
 
               <ol type="1">
-                {this.state.questions.map((q, i) => (
+                {this.state.questions && this.state.questions.map((q, i) => (
                   <li>
                     <ReportInput
                       question={q.question}
@@ -95,7 +95,7 @@ class MemberResponseForm extends Component {
                   </li>
                 ))}
 
-                {this.state.sentimentQuestions.map((sq, i) => (
+                {/* {this.state.sentimentQuestions.map((sq, i) => (
                   <li>
                     <ReportInput
                       question={sq.question}
@@ -107,7 +107,7 @@ class MemberResponseForm extends Component {
                       handleSentiment={this.handleSentiment}
                     />
                   </li>
-                ))}
+                ))} */}
               </ol>
 
               <Button
@@ -139,14 +139,12 @@ class MemberResponseForm extends Component {
           reportName,
           message,
           questions,
-          sentimentQuestions,
+          // sentimentQuestions,
           isSentiment,
           managerResponses,
           managerQuestions
         } = res.data.report;
-        console.log(reportName);
-        console.log(sentimentQuestions);
-        console.log(managerQuestions);
+        console.log('axios call', questions);
         this.setState({
           reportName,
           reportMessage: message,
@@ -161,19 +159,18 @@ class MemberResponseForm extends Component {
         });
       })
       .catch(err => console.log(err));
-    console.log(this.state);
   }
 
-  handleSentiment = (event, value, question) => {
-    this.setState(prevState => ({
-      ...prevState,
-      sentimentQuestions: prevState.sentimentQuestions.map(sq => {
-        return sq.question !== question
-          ? sq
-          : { question, sentimentRange: value, response: sq.response };
-      })
-    }));
-  };
+  // handleSentiment = (event, value, question) => {
+  //   this.setState(prevState => ({
+  //     ...prevState,
+  //     sentimentQuestions: prevState.sentimentQuestions.map(sq => {
+  //       return sq.question !== question
+  //         ? sq
+  //         : { question, sentimentRange: value, response: sq.response };
+  //     })
+  //   }));
+  // };
 
   handleChange = (e, question) => {
     const qObj = {
@@ -196,29 +193,29 @@ class MemberResponseForm extends Component {
     }));
   };
 
-  handleSentimentComment = (e, question) => {
-    const sqObj = {
-      question,
-      response: e.target.value
-    };
+  // handleSentimentComment = (e, question) => {
+  //   const sqObj = {
+  //     question,
+  //     response: e.target.value
+  //   };
 
-    this.setState(prevState => ({
-      ...prevState,
-      sentimentQuestions: prevState.sentimentQuestions.map(
-        sq =>
-          sq.question !== question
-            ? sq
-            : {
-                question,
-                sentimentRange: sq.sentimentRange,
-                response: sqObj.response
-              } // qObj
-      )
-    }));
-  };
+  //   this.setState(prevState => ({
+  //     ...prevState,
+  //     sentimentQuestions: prevState.sentimentQuestions.map(
+  //       sq =>
+  //         sq.question !== question
+  //           ? sq
+  //           : {
+  //               question,
+  //               sentimentRange: sq.sentimentRange,
+  //               response: sqObj.response
+  //             } // qObj
+  //     )
+  //   }));
+  // };
 
   submitReport = () => {
-    const allQuestions = [this.state.questions, this.state.sentimentQuestions];
+    const allQuestions = [this.state.questions];
     console.log(this.state.questions);
     console.log(this.state.sentimentQuestions);
     console.log(allQuestions);
@@ -257,9 +254,10 @@ class MemberResponseForm extends Component {
     window.location.reload()
   }
   submitAll = () =>{
+    console.log('submitted')
     this.completeSurvey()
     this.submitReport();
-    this.reload()
+    // this.reload()
   }
 
 }
