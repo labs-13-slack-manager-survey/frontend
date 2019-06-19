@@ -64,9 +64,6 @@ const JoinTeam = props => {
 				>
 					<Icon>arrow_back</Icon>
 				</Fab>
-				<Button variant="outlined" onClick={props.createToggle}>
-					Create Team
-				</Button>
 			</div>
 			<Dialog
 				open={props.errorModal}
