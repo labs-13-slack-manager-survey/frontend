@@ -157,6 +157,7 @@
 	border: 1px dashed rgb(226, 226, 226);
 	padding: 25px;
 	margin-top: -20px;
+	margin-bottom: 20px;
 }
 
 .calendar-top {
@@ -205,6 +206,12 @@
 	text-align: left;
 	padding: 18px;
 }
+
+.manager-feedback-for-users {
+	text-align: left;
+	padding: 18px;
+}
+
 
 .manager-question {
 	text-align: left;
