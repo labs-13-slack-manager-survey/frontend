@@ -122,7 +122,7 @@ class CreateReport extends Component {
     ],
     hidden: true,
     managerType: 0,
-    typeOfManager: ["Engineering Manager", "Project Manager"],
+    typeOfManager: ["Engineering Manager", "Product Manager"],
     //set manager questions here as well as type of manager BEFORE you add to the managerType
     EngineeringManagerQuestions: [
       "What input or feedback would you like to share with the team?",
@@ -655,7 +655,7 @@ class CreateReport extends Component {
         <div className="linebr" />
         <section className="response-card">
           <section className="manager-poll-responses">
-            <div className="member-form-title">Delivery schedule</div>
+            <div className="member-form-title">Delivery Schedule</div>
             <div className="poll-section-description">
               When would you like the survey to be sent out to your team?
             </div>
@@ -692,7 +692,7 @@ class CreateReport extends Component {
               <TimePicker
                 name="scheduleTime"
                 value={this.state.timePickDate}
-                minutesStep={30}
+                minutesStep={5}
                 onChange={this.timeChangeHandler}
               />
             </section>
@@ -754,7 +754,7 @@ class CreateReport extends Component {
 
             <div className= "poll-section-description">Add optional sentiment questions to capture how your team feels about their work on a scale of 1-5. Respondents will also have the option of including additional comments to accompany their response.</div>
             <div className = "response-card-example">
-                <div className = "response-question">Sample: How confident are you feeling about completing the tasks assigned to you today?</div>
+                <div className = "response-question">Example:  On a scale of 1-5 how do you feel about how confident are you feeling about completing the tasks assigned to you today?</div>
                 <StyledSlider
                   className="slider"
                   value={this.state.exampleSentiment}
@@ -792,7 +792,7 @@ class CreateReport extends Component {
             <section className="enter-question">
               <FormControl className="input-field" required>
                 <InputLabel htmlFor="report-question">
-                  Enter a sentiment question...
+                  On a scale of 1-5 how do you feel about....
                 </InputLabel>
                 <Input
                   id="report-question"

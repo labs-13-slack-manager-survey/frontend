@@ -31,11 +31,11 @@ class View extends Component {
     initialStep: 0,
     steps: [
       {
-        intro: 'Welcome to the Slackr reports dashboard! From here managers have access to all essentials and team members can view polls that have been created.',
+        intro: 'Welcome to the Slackr dashboard! From here managers have access to all essentials and team members can view the stand up reports that their managers have created.',
       },
       {
         element: '.one',
-        intro: 'Here you can see all the reports. Managers can edit and delete existing reports. To select a specific report click on it\'s name.'
+        intro: 'Here you can see all the reports. Managers can edit and delete existing reports. To select a specific report click on the respond button.'
       },
       {
         element: '.two',
@@ -45,7 +45,7 @@ class View extends Component {
         intro: 'To view more in depth statistics about the well being of your team click on the stats button on the left.'
       },
       {
-        intro: 'To create your first report click on the Add Poll button on top of the screen.'
+        intro: 'To create your first report click on the + button on top right of the screen.'
       }
     ]
   };
