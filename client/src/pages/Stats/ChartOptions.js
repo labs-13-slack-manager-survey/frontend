@@ -65,26 +65,70 @@ export default class ChartOptions extends Component {
         }
       })
       .then(() => {
+        console.log(daySortedReports);
+        console.log(daySortedReports[0][0].submissionRate);
+        console.log(daySortedReports[0][1]);
         this.setState({
           sortedReports: daySortedReports
         });
       })
       .then(() => {
-        this.fetchSpecifiedData();
+        this.dataByFilter();
       })
       .catch(err => console.log(err));
   };
 
-  fetchSpecifiedData = () => {
-    if (this.props.dataType === "responseRate") {
-      this.getResponseRateByDate();
-    } else if (this.props.dataType === "sentimentAverage") {
-      this.getSentimentAvgByDate();
+  dataByFilter = () => {
+    switch (this.props.filterBy) {
+      case "day":
+        if (this.props.dataType === "responseRate") {
+          this.getResponseRateByDate(1);
+        } else if (this.props.dataType === "sentimentAverage") {
+          this.getSentimentAvgByDate(1);
+        }
+        break;
+      case "week":
+        if (this.props.dataType === "responseRate") {
+          this.getResponseRateByDate(7);
+        } else if (this.props.dataType === "sentimentAverage") {
+          this.getSentimentAvgByDate(7);
+        }
+        break;
+      case "month":
+        if (this.props.dataType === "responseRate") {
+          this.getResponseRateByDate(30);
+        } else if (this.props.dataType === "sentimentAverage") {
+          this.getSentimentAvgByDate(30);
+        }
+        break;
+      case "quarter":
+        if (this.props.dataType === "responseRate") {
+          this.getResponseRateByDate(90);
+        } else if (this.props.dataType === "sentimentAverage") {
+          this.getSentimentAvgByDate(90);
+        }
+        break;
+      case "year":
+        if (this.props.dataType === "responseRate") {
+          this.getResponseRateByDate(365);
+        } else if (this.props.dataType === "sentimentAverage") {
+          this.getSentimentAvgByDate(365);
+        }
+        break;
     }
   };
 
-  getResponseRateByDate = () => {
+  getResponseRateByDate = num => {
     let dataArr = [];
+    for (let i = 0; i < num; i++) {
+      dataArr.push(50);
+    }
+    // this.state.sortedReports.forEach(arr => {
+    //   dataArr.push(arr[0].submissionRate);
+    // });
+    this.setState({
+      data: dataArr
+    });
   };
 
   getSentimentAvgByDate = () => {};
