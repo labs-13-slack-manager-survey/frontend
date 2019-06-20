@@ -53,7 +53,8 @@ class ReportResults extends Component {
     managerResponses: [], 
     managerSubmitted: [],
     managerFeedback: [],
-    seeManagerQ: true, 
+    seeManagerQ: true,
+    seeManagerQList: false, 
   };
 
   toggleManagerQ = () => {
@@ -62,10 +63,17 @@ class ReportResults extends Component {
     });
   };
 
+  toggleManagerQList = () => {
+    this.setState({
+      seeManagerQList: !this.state.seeManagerQList
+    });
+  }; 
+
   getDate = (date) => {
     let formatted = moment(date).format('DD MMMM YYYY');
     return formatted;
   }
+
   render() {
     const options = {
       weekday: "long",
@@ -82,10 +90,38 @@ class ReportResults extends Component {
         let managerQandA = {};
         managerQandA.managerQuestions = JSON.parse(this.state.managerFeedback[i].managerQuestions);
         managerQandA.managerResponses= JSON.parse(this.state.managerFeedback[i].managerResponses);
-        managerQandA.managerSubmitted = this.state.managerFeedback[i].managerSubmitted;
+        managerQandA.managerSubmitted = this.state.managerFeedback[i].submitted_date;
         managerPollDays.push(managerQandA);
     }
+
+    let filteredManagerAndResponsesDate = [];
+
+    if (this.state.responses) {
+      let userResponses = this.state.responses;
+      let dateUser = ""
+
+      managerPollDays.forEach(function(response) {
+        let dateManager = moment(response.managerSubmitted).format('DDMMMMYYYY')
+        let newManagerUserDay = []
+        console.log(response);
+        newManagerUserDay.push({managerResponse:response});
+        
+        for (let i = 0; i <userResponses.length; i++) {
+          dateUser = moment(userResponses[i].date).format('DDMMMMYYYY')
+
+          if( dateUser === dateManager ) {
+            newManagerUserDay.push({userResponse: userResponses[i]});
+            }
+          }
+
+        filteredManagerAndResponsesDate.push(newManagerUserDay)   
+        })
+        console.log(filteredManagerAndResponsesDate[0])
+      }
     
+      
+ 
+    console.log(managerPollDays)
 
     console.log(this.state.managerQuestions)
     
@@ -95,11 +131,17 @@ class ReportResults extends Component {
     let today = new Date();
     today = moment(today).format('DD MMMM YYYY');
 
+    let today2 = new Date();
+    today2 = moment(today).format('DD MMMM YYYY');
+
     
     let managerToday = managerPollDays.length && managerPollDays[managerPollDays.length-1].managerSubmitted
+    // let managerToday = this.state.managerFeedback.length && this.getDate(this.state.managerFeedback[this.state.managerFeedback.length-1].submitted_date) != today
     managerToday = moment(managerToday).format('DD MMMM YYYY');
 
     console.log(managerToday)
+    console.log(today)
+    console.log(managerPollDays)
 
     return (
       <div className="dashboard-view">
@@ -110,10 +152,11 @@ class ReportResults extends Component {
             {...this.props}
             secondaryPage={this.state.secondaryPage}
           />
-
+          
           {token.roles != "admin" && this.state.isManagerActivated ? 
             <div className="confirm-response" >
-                 {managerToday != today ? "Poll unavailable: No manager response has been recorded for today" : 
+                {managerToday != today || this.state.filteredResponse.length > 0 ? <div> {this.state.filteredResponse.length > 0 ? "Your response has been recorded" :  "Poll unavailable: No manager response has been recorded for today" } </div> 
+                : 
                   <>
                   <div classname="manager-feedback-for-users" onClick = {this.toggleManagerQ}>
                     <div className="poll-header">
@@ -145,7 +188,7 @@ class ReportResults extends Component {
                 </div>
             : 
             
-            managerToday != today ?  <div
+            managerToday != today && token.roles === "admin" ?  <div
             className="response-card"
             interactive={false}
             elevation={Elevation.TWO}
@@ -154,25 +197,36 @@ class ReportResults extends Component {
               {...this.props}
               updateWithUserResponse={this.updateWithManagerResponse}
             /> 
-        </div> : null } 
+        </div> : null }
 
           {this.state.filteredResponse.length > 0 ||
           this.state.managerCompleted === true ? (
             <>
               <div className="confirm-response">
-                {managerToday != today  ?  "Your response has been recorded ": 
+                {managerToday != today ? "Your response has been recorded " : 
                 <>
                 <div classname="manager-feedback">
-                  <div className= "manager-question">{managerPollDays[managerPollDays.length-1].managerQuestions[0]}</div> 
-                  <div className= "manager-response">{managerPollDays[managerPollDays.length-1].managerResponses[0]}</div> 
-                  <div className= "manager-question">{managerPollDays[managerPollDays.length-1].managerQuestions[1]}</div> 
-                  <div className= "manager-response">{managerPollDays[managerPollDays.length-1].managerResponses[1]}</div> 
-                  <div className= "manager-question">{managerPollDays[managerPollDays.length-1].managerQuestions[2]}</div> 
-                  <div className= "manager-response">{managerPollDays[managerPollDays.length-1].managerResponses[2]}</div> 
-                  {managerPollDays[managerPollDays.length-1].managerQuestions.length === 4 ? <>
-                    <div className= "manager-question">{managerPollDays[managerPollDays.length-1].managerQuestions[3]}</div> 
-                    <div className= "manager-response">{managerPollDays[managerPollDays.length-1].managerResponses[3]}</div></> : null }
-
+                  <div className = "user-info">
+                    <div className="month-day">
+                      <div className="calendar-top">{moment(this.state.managerFeedback[this.state.managerFeedback.length-1].submitted_date).format("DD")}</div>
+                      <div className="calendar-bot">{moment(this.state.managerFeedback[this.state.managerFeedback.length-1].submitted_date).format("MMMM")}</div>
+                    </div>
+                    <div className = "manager-response-header-text">
+                      <div className = "response-container-main-name-manager">Manager Comments</div>
+                    </div>
+                  </div>
+                  <div className="linebr"/>
+                  <div className = "response-content" >
+                    <div className= "manager-question">{managerPollDays[managerPollDays.length-1].managerQuestions[0]}</div> 
+                    <div className= "manager-response">{managerPollDays[managerPollDays.length-1].managerResponses[0]}</div> 
+                    <div className= "manager-question">{managerPollDays[managerPollDays.length-1].managerQuestions[1]}</div> 
+                    <div className= "manager-response">{managerPollDays[managerPollDays.length-1].managerResponses[1]}</div> 
+                    <div className= "manager-question">{managerPollDays[managerPollDays.length-1].managerQuestions[2]}</div> 
+                    <div className= "manager-response">{managerPollDays[managerPollDays.length-1].managerResponses[2]}</div> 
+                    {managerPollDays[managerPollDays.length-1].managerQuestions.length === 4 ? <>
+                      <div className= "manager-question">{managerPollDays[managerPollDays.length-1].managerQuestions[3]}</div> 
+                      <div className= "manager-response">{managerPollDays[managerPollDays.length-1].managerResponses[3]}</div></> : null }
+                  </div>
                 </div>
               </> 
               }
@@ -203,25 +257,56 @@ class ReportResults extends Component {
                 ))} */}
       
               {managerPollDays.map(res => {
-                if (this.getDate(res.submittedDate) === today) {
+                if (this.getDate(this.state.managerFeedback[this.state.managerFeedback.length-1].submitted_date) === today) {
                   return null 
                 } else {return <>
-                    <div classname="manager-feedback">
-                    <div className= "manager-question">{res.managerQuestions[0]}</div> 
-                    <div className= "manager-response">{res.managerResponses[0]}</div> 
-                    <div className= "manager-question">{res.managerQuestions[1]}</div> 
-                    <div className= "manager-response">{res.managerResponses[1]}</div> 
-                    <div className= "manager-question">{res.managerQuestions[2]}</div> 
-                    <div className= "manager-response">{res.managerResponses[2]}</div> 
-                    {res.managerQuestions.length === 4 ? <>
-                      <div className= "manager-question">{res.managerQuestions[3]}</div> 
-                      <div className= "manager-response">{res.managerResponses[3]}</div></> : null }
+                    <div className="response-container-manager" onClick={this.toggleManagerQList}>
+                      <div className = "user-info">
+                        <div className="month-day">
+                          <div className="calendar-top">{moment(this.state.managerFeedback[this.state.managerFeedback.length-1].submitted_date).format("DD")}</div>
+                          <div className="calendar-bot">{moment(this.state.managerFeedback[this.state.managerFeedback.length-1].submitted_date).format("MMMM")}</div>
+                        </div>
+                        <div className = "manager-response-header-text">
+                          <div className = "response-container-main-name-manager">Manager Comments</div>
+                          <img className="manager-toggle-list" src={this.state.seeManagerQList ? ToggleOn : ToggleOff} />
+                        </div>
+                      </div>
+                      {this.state.seeManagerQList ? <>
+                        
+                        <div className = "linebr" /><div className="response-container-main">
+                        
+                        <div className="response-content">
+                          <div className= "manager-question">{res.managerQuestions[0]}</div> 
+                          <div className= "manager-response ">{res.managerResponses[0]}</div> 
+                          <div className ="linebr" />
+
+                          <div className= "manager-question">{res.managerQuestions[1]}</div> 
+                          <div className= "manager-response ">{res.managerResponses[1]}</div> 
+                          <div className ="linebr" />
+
+                          <div className= "manager-question">{res.managerQuestions[2]}</div> 
+                          <div className= "manager-response ">{res.managerResponses[2]}</div> 
+                          {res.managerQuestions.length === 4 ? <>
+                            <div className ="linebr" />
+                            <div className= "manager-question">{res.managerQuestions[3]}</div> 
+                            <div className= "manager-response ">{res.managerResponses[3]}</div>
+                            </> : null }
+                        </div> 
+                      </div></> : null }
                     </div>
                     </>
                   }
                 }
              
               )}
+      
+             
+      {filteredManagerAndResponsesDate ? filteredManagerAndResponsesDate.map(day => 
+        <div>{day[0].managerResponse.managerQuestions[0]}</div>)
+      : "none" }
+
+
+
 
             {this.state.responses.map(
               batch =>
@@ -367,7 +452,7 @@ class ReportResults extends Component {
            submitted_date: feedback.submitted_date }); 
        
       })
-      console.log(reportRes.data.report.managerQuestions)
+      console.log(managerFeedback)
 
       // managerRes.data.map(res => {
       //   console.log(res)
