@@ -19,28 +19,6 @@ import Logout from '../../images/icons/logout.png';
 
 
 const styles = {
-  // root: {
-  // 	flexGrow: 1,
-  // 	color: 'white'
-  // },
-  // grow: {
-  // 	flexGrow: 1,
-  // 	color: 'white'
-  // },
-  // menuButton: {
-  // 	marginLeft: 0,
-  // 	marginRight: 0
-  // },
-  // logoLink: {
-  //   borderRight: "1px solid #FFF"
-  // },
-  // appBar: {
-  // 	height: 50,
-  // 	backgroundColor: 'white',
-  // 	boxShadow: 'none',
-  // 	borderBottom: '2px solid #F5F5F5'
-  // },
-
   navLinks: {
     display: "flex"
   }

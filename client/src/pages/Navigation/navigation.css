@@ -30,6 +30,7 @@
 	z-index: 4;
 }
 
+
 .left-horizontal {
 	display: flex;
 	flex-direction: row; 
@@ -40,19 +41,19 @@
 }
 
 .menu-bar-add-poll {
-	width: 114px;
-	height: 32px;
-	font-size: 12px;
-	border-radius: 3px;
-	color: white;
+	width: 200px;
+	height: 40px;
+	font-size: 13px;
+	border-radius: 0px;
+	color:  #F67B28;
 	font-weight: 500;
-	background-color: rgb(248, 147, 23);
-	border: 2px solid #F67B28;
+	border: 1px solid #F67B28;
 }
 
 
 .menu-bar-add-poll:hover{ 
 	background-color: #F67B28;
+	color: white;
 	cursor: pointer;
 }
 
@@ -102,6 +103,14 @@ span {
 	padding-bottom: 20px;
 }
 
+
+@media(max-width: 800px) {
+	.verticalBar { 
+		width: 100%;
+		height: 20px;
+	}
+
+}
 
 .vert-buttons{
 	width: 70px; 

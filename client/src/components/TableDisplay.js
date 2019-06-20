@@ -49,9 +49,12 @@ class TableDisplay extends React.Component {
             <div className="table-display">
 
             <div className = "content">
-            <div style={{ textDecoration: 'none' }} className = "column1">
-                {this.props.content1}
+
+            <Link to={`/slackr/dashboard/reports/${this.props.report.id}`}
+            style={{ textDecoration: 'none' }} className = "column1">
+                <div>{this.props.content1}
             </div>
+            </Link>
             <div className = "date">{dateString.getMonth()+1}/{dateString.getDate()}/{dateString.getFullYear()}</div>
                 <div className = "schedule-time">
                     {week.map((day, idx) => (
