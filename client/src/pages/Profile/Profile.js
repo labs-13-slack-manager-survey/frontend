@@ -107,15 +107,17 @@ class Profile extends Component {
 											Submit
 										</Button>
 										<Button
-											style={{ display: 'block', margin: '10px 0' }}
-											
+											style={{ display: 'block',
+											margin: '10px 0'}}
 											variant="contained"
 											color="secondary"
 											type="submit"
 											onClick={this.deleteProfile}
-										>
+											>
 											<Link
-                        					to={``}>
+											style={{color:'white' }}
+                        					to={`/login`}
+											>
 											Delete Account
 											</Link>
 										</Button>
@@ -358,7 +360,15 @@ class Profile extends Component {
 	};
 
 	deleteProfile = () =>{
-		console.log('EXTERMINATE')
+		const endpoint = `${baseURL}/users/`;
+		axiosWithAuth()
+		.delete(endpoint)
+			.then(res => {
+				console.log(res);
+			})
+			.catch(err => {
+				console.log('bad',err);
+			});
 	}
 }
 
