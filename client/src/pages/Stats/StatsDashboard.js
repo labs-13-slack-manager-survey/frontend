@@ -280,6 +280,7 @@ class StatsDashboard extends Component {
             data={this.state.data}
             labels={this.state.labels}
             dataType={this.state.dataType}
+            filterBy={this.state.filterBy}
           />
         </div>
         <div className="sidebar" />
