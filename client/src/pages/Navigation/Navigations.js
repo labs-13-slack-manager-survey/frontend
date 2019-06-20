@@ -91,6 +91,39 @@ class Navigation extends React.Component {
               </NavLink>
             ) : null}
           </div>
+          <>
+            <div className="vert-buttons2 mobile-nav">
+              <NavLink to="/slackr/dashboard/profile" className="menu-button">
+                <img
+                  className="menu-icon"
+                  src={
+                    this.props.history.location.pathname ===
+                    "/slackr/dashboard/profile"
+                      ? UserActive
+                      : User
+                  }
+                />
+                <div
+                  className={
+                    this.props.history.location.pathname ===
+                    "/slackr/dashboard/profile"
+                      ? "button-label-active"
+                      : "button-label"
+                  }
+                >
+                  user
+                </div>
+              </NavLink>
+              <NavLink
+                to="/login"
+                onClick={this.handleLogout}
+                className="menu-button"
+              >
+                <img className="menu-icon" src={Logout} />
+                <div className="button-label-logout">logout</div>
+              </NavLink>{" "}
+            </div>{" "}
+          </>
         </div>
         <div className="verticalBar">
           {loggedIn && token.teamId ? (
