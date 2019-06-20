@@ -79,7 +79,7 @@ class Navigation extends React.Component {
             </NavLink>
             <div className="logo-text">slackr</div>
           </div>
-          <div className="horizontal-buttons">
+          <div className="horizontal-buttons mobile-add-poll">
             {token.roles == "admin" ? (
               <NavLink to="/slackr/dashboard/reports/new">
                 <button
