@@ -134,7 +134,7 @@ class ReportResults extends Component {
     today2 = moment(today).format('DD MMMM YYYY');
 
     
-    let managerToday = managerPollDays.length && managerPollDays[managerPollDays.length-1].managerSubmitted
+    let managerToday = managerPollDays.length && managerPollDays[managerPollDays.length-1].managerSubmitted;
     managerToday = moment(managerToday).format('DD MMMM YYYY');
 
     console.log(managerToday)
@@ -234,7 +234,7 @@ class ReportResults extends Component {
             </>
           ) : (
             <>
-              {managerToday == today ?
+              {managerToday != today && this.state.filteredResponse.length !== 0 || token.roles != "admin" ?
                 <div
                   className="response-card"
                   interactive={false}
