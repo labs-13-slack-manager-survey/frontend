@@ -121,11 +121,15 @@ export default class ChartOptions extends Component {
   getResponseRateByDate = num => {
     let dataArr = [];
     for (let i = 0; i < num; i++) {
-      dataArr.push(50);
+      dataArr.push(Math.random() * 100);
     }
-    // this.state.sortedReports.forEach(arr => {
-    //   dataArr.push(arr[0].submissionRate);
-    // });
+    for (let i = 0; i < this.state.sortedReports.length; i++) {
+      dataArr.splice(
+        dataArr.length - i - 1,
+        1,
+        this.state.sortedReports[i][0].submissionRate
+      );
+    }
     this.setState({
       data: dataArr
     });
