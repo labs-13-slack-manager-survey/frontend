@@ -110,10 +110,10 @@ class ReportResults extends Component {
             {...this.props}
             secondaryPage={this.state.secondaryPage}
           />
-
+          
           {token.roles != "admin" && this.state.isManagerActivated ? 
             <div className="confirm-response" >
-                 {managerToday != today ? "Poll unavailable: No manager response has been recorded for today" : 
+                {managerToday != today || this.state.filteredResponse.length > 0 ? <div> {this.state.filteredResponse.length > 0 ? "Your response has been recorded" :  "Poll unavailable: No manager response has been recorded for today" } </div> : 
                   <>
                   <div classname="manager-feedback-for-users" onClick = {this.toggleManagerQ}>
                     <div className="poll-header">
@@ -154,7 +154,7 @@ class ReportResults extends Component {
               {...this.props}
               updateWithUserResponse={this.updateWithManagerResponse}
             /> 
-        </div> : null } 
+        </div> : null }
 
           {this.state.filteredResponse.length > 0 ||
           this.state.managerCompleted === true ? (
