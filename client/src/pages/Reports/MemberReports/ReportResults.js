@@ -100,7 +100,7 @@ class ReportResults extends Component {
       let userResponses = this.state.responses;
       let dateUser = ""
 
-      managerPollDays.forEach(function(response) {
+      managerPollDays.reverse().forEach(function(response) {
         let dateManager = moment(response.managerSubmitted).format('DDMMMMYYYY')
         let newManagerUserDay = []
         console.log(response);
@@ -304,13 +304,13 @@ class ReportResults extends Component {
              
       {filteredManagerAndResponsesDate ? filteredManagerAndResponsesDate.map(day => <>
                           
-                          <div className="response-container-manager" onClick={this.toggleManagerQList}>
+                          <div className="response-container-manager">
                           <div className = "user-info">
                             <div className="month-day">
                               <div className="calendar-top">{moment(day[0].managerResponse.managerSubmitted).format("DD")}</div>
                               <div className="calendar-bot">{moment(day[0].managerResponse.managerSubmitted).format("MMMM")}</div>
                             </div>
-                            <div className = "manager-response-header-text">
+                            <div className = "manager-response-header-text" onClick={this.toggleManagerQList}>
                               <div className = "response-container-main-name-manager">Manager Comments</div>
                               <img className="manager-toggle-list" src={this.state.seeManagerQList ? ToggleOn : ToggleOff} />
                             </div>
@@ -342,8 +342,6 @@ class ReportResults extends Component {
 
                             <div className="response-container" onClick={this.toggleManagerQList}>
                                 <div className = "response-content">
-                                <div className = "linebr" />
-
                                 {day[1].userResponse.responses.map( userRes => <>
                                 <div className="response-container-main">
                                   <div className="vertical-timeline" />
@@ -363,27 +361,27 @@ class ReportResults extends Component {
                                     <ol> {userRes.questions.map(userQA => 
                                       <> 
                                       <li><div className= "response-container-main-question">{userQA.question}</div></li>
-                                      <div className= "response-container-main-answer ">A: {userQA.answer}</div>
-                                      <div className ="linebr" /> 
+                                      {userQA.sentimentRange ? null : <><div className= "response-container-main-answer "><span>A:</span> {userQA.answer}</div>  <div className ="linebr" /> </>}
+
+                                      {userQA.sentimentRange ? <>
+                                          <StyledSlider
+                                            className="slider"
+                                            value={userQA.sentimentRange}
+                                            min={1}
+                                            max={5}
+                                            step={1}
+                                          />
+                                            <div className="slider-label">
+                                              <p className={userQA.sentimentRange !=1 ? "deselected" : null}>1</p>
+                                              <p className={userQA.sentimentRange !=2 ? "deselected" : null}>2</p>
+                                              <p className={userQA.sentimentRange !=3 ? "deselected" : null}>3</p>
+                                              <p className={userQA.sentimentRange !=4 ? "deselected" : null}>4</p>
+                                              <p className={userQA.sentimentRange !=5 ? "deselected" : null}>5</p>
+                                            </div>
+                                            <div className ="linebr" />
+                                            {userQA.answer ? <><div className= "response-container-main-comment "><span>Comment:</span> {userQA.answer}</div>   <div className ="linebr" /> </>: null }
+                                            </> : null }
                                       </> 
-                                    // else{<>
-                                    //   <div className= "manager-question">{userQA.question}</div> 
-                                    //       <StyledSlider
-                                    //         className="slider"
-                                    //         value={userQA.sentimentRange}
-                                    //         min={1}
-                                    //         max={5}
-                                    //         step={1}
-                                    //       />
-                                    //         <div className="slider-label">
-                                    //           <p className={userQA.sentimentRange !=1 ? "deselected" : null}>1</p>
-                                    //           <p className={userQA.sentimentRange !=2 ? "deselected" : null}>2</p>
-                                    //           <p className={userQA.sentimentRange !=3 ? "deselected" : null}>3</p>
-                                    //           <p className={userQA.sentimentRange !=4 ? "deselected" : null}>4</p>
-                                    //           <p className={userQA.sentimentRange !=5 ? "deselected" : null}>5</p>
-                                    //         </div>
-                                    //         <div className= "manager-response ">{userQA.answer}</div></>
-                                    // }
                                   )}</ol>
                                 
                                         </div>

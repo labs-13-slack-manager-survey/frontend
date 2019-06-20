@@ -110,6 +110,14 @@
 	/* padding-left: 10px; */
 }
 
+.response-container-main-comment {
+	font-size: 15px;
+	font-weight: 300;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	/* padding-left: 10px; */
+}
+
 .deselected {
 	color: #9B9B9B;
 }
@@ -131,9 +139,15 @@
 
 .response-content {
 	width: 90%;
-	padding-left: 25px;
+	
 }
 
+span {
+	color: #9B9B9B;
+	font-style: italic;
+	font-size: 12px;
+	padding-right: 5px;
+}
 
 
 .report-results-filter:first-child {
