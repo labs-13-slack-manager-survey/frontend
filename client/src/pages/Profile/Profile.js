@@ -1,6 +1,7 @@
 import './profile.css';
 import React, { Component } from 'react';
 import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
+import { Link } from 'react-router-dom';
 
 
 import PageTitle from '../../components/PageTitle'
@@ -111,9 +112,12 @@ class Profile extends Component {
 											variant="contained"
 											color="secondary"
 											type="submit"
-											onClick=""
+											onClick={this.deleteProfile}
 										>
+											<Link
+                        					to={``}>
 											Delete Account
+											</Link>
 										</Button>
 										<div />
 									</form>
@@ -352,6 +356,10 @@ class Profile extends Component {
 				console.log(err);
 			});
 	};
+
+	deleteProfile = () =>{
+		console.log('EXTERMINATE')
+	}
 }
 
 export default Profile;
