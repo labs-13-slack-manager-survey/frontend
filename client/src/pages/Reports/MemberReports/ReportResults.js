@@ -116,7 +116,8 @@ class ReportResults extends Component {
 
         filteredManagerAndResponsesDate.push(newManagerUserDay)   
         })
-        console.log(filteredManagerAndResponsesDate[0])
+        console.log("filteredmanagerqs")
+        console.log(filteredManagerAndResponsesDate)
       }
     
       
@@ -301,9 +302,98 @@ class ReportResults extends Component {
               )}
       
              
-      {filteredManagerAndResponsesDate ? filteredManagerAndResponsesDate.map(day => 
-        <div>{day[0].managerResponse.managerQuestions[0]}</div>)
-      : "none" }
+      {filteredManagerAndResponsesDate ? filteredManagerAndResponsesDate.map(day => <>
+                          
+                          <div className="response-container-manager" onClick={this.toggleManagerQList}>
+                          <div className = "user-info">
+                            <div className="month-day">
+                              <div className="calendar-top">{moment(day[0].managerResponse.managerSubmitted).format("DD")}</div>
+                              <div className="calendar-bot">{moment(day[0].managerResponse.managerSubmitted).format("MMMM")}</div>
+                            </div>
+                            <div className = "manager-response-header-text">
+                              <div className = "response-container-main-name-manager">Manager Comments</div>
+                              <img className="manager-toggle-list" src={this.state.seeManagerQList ? ToggleOn : ToggleOff} />
+                            </div>
+                          </div>
+                          {this.state.seeManagerQList ? <>
+                            
+                            <div className = "linebr" />
+                            <div className="response-container-main">
+                            <div className="response-content">
+                              <div className= "manager-question">{day[0].managerResponse.managerQuestions[0]}</div> 
+                              <div className= "manager-response ">{day[0].managerResponse.managerResponses[0]}</div> 
+                              <div className ="linebr" />
+    
+                              <div className= "manager-question">{day[0].managerResponse.managerQuestions[1]}</div> 
+                              <div className= "manager-response ">{day[0].managerResponse.managerResponses[1]}</div> 
+                              <div className ="linebr" />
+    
+                              <div className= "manager-question">{day[0].managerResponse.managerQuestions[2]}</div> 
+                              <div className= "manager-response ">{day[0].managerResponse.managerResponses[2]}</div> 
+                              {day[0].managerResponse.managerQuestions.length === 4 ? <>
+                                <div className ="linebr" />
+                                <div className= "manager-question">{day[0].managerResponse.managerQuestions[3]}</div> 
+                                <div className= "manager-response ">{day[0].managerResponse.managerResponses[3]}</div>
+                                </> : null } 
+                                </div>
+                            </div></> : null}
+                            </div>
+                            
+
+                            <div className="response-container" onClick={this.toggleManagerQList}>
+                                <div className = "response-content">
+
+                                    <div className = "user-info">
+                                    <div className="month-day">
+                                      <div className="calendar-top">{moment(day[1].userResponse.date).format("DD")}</div>
+                                      <div className="calendar-bot">{moment(day[1].userResponse.date).format("MMMM")}</div>
+                                    </div>
+                                  </div>
+
+                                {day[1].userResponse.responses.map( userRes => <>
+                                <div className = "linebr" />
+                                <div className="response-container-main">
+                                <div className="response-content">
+
+                                <div className = "manager-response-header-text">
+                                  <div className = "response-container-main-name-manager">{userRes.fullName}</div>
+                                </div>
+                                   <div className="vertical-timeline" />
+                                  {userRes.questions.map(userQA => 
+                                    <> 
+                                    <div className= "manager-question">{userQA.question}</div> 
+                                    <div className= "manager-response ">{userQA.answer}</div>
+                                    <div className ="linebr" /> 
+                                    </> 
+                                    // else{<>
+                                    //   <div className= "manager-question">{userQA.question}</div> 
+                                    //       <StyledSlider
+                                    //         className="slider"
+                                    //         value={userQA.sentimentRange}
+                                    //         min={1}
+                                    //         max={5}
+                                    //         step={1}
+                                    //       />
+                                    //         <div className="slider-label">
+                                    //           <p className={userQA.sentimentRange !=1 ? "deselected" : null}>1</p>
+                                    //           <p className={userQA.sentimentRange !=2 ? "deselected" : null}>2</p>
+                                    //           <p className={userQA.sentimentRange !=3 ? "deselected" : null}>3</p>
+                                    //           <p className={userQA.sentimentRange !=4 ? "deselected" : null}>4</p>
+                                    //           <p className={userQA.sentimentRange !=5 ? "deselected" : null}>5</p>
+                                    //         </div>
+                                    //         <div className= "manager-response ">{userQA.answer}</div></>
+                                    // }
+                                  )}
+                                
+                                        </div>
+                                      </div></>
+                                  )}
+                               </div>
+                            </div>
+
+
+                            </>)
+                    : "none" }
 
 
 
@@ -365,13 +455,16 @@ class ReportResults extends Component {
                                         </p>
                                     </div>
                                   )
-                                )}{" "}
+                                )}
                               </ol>
                             </div>
                           </div>
                         </div>
                       </div>
                     ))}
+
+
+
                   </div>
                 )
             )}
