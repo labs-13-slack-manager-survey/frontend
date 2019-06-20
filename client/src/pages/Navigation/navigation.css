@@ -174,7 +174,11 @@ span {
 .app-name {
   padding-left: 10px;
 }
-
+.mobile-nav {
+  display: none;
+}
+/* 2nd iteration */
+/* 
 @media (max-width: 500px) {
   .horizontalMenuBar {
     padding: 0;
@@ -190,7 +194,6 @@ span {
     justify-content: center;
     width: auto;
   }
-  /* button */
   .horizontal-buttons {
     position: absolute;
     bottom: 0;
@@ -234,5 +237,67 @@ span {
   .vert-buttons2 .button-label,
   .vert-buttons2 .button-label-logout {
     display: none;
+  }
+} */
+
+/* 3rd iteration */
+@media (max-width: 500px) {
+  .horizontalMenuBar {
+    padding: 0 30px;
+    border-bottom: 1px solid rgb(226, 226, 226);
+    position: fixed;
+  }
+  .left-horizontal {
+    width: auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .horizontal-buttons {
+    display: none;
+  }
+  .mobile-nav.vert-buttons2 {
+    padding: 0;
+    display: flex;
+    height: auto;
+    flex-direction: row;
+    width: 100%;
+  }
+  .logo {
+    padding: 0;
+  }
+  .logo-text {
+    display: none;
+  }
+  .mobile-nav .menu-button .button-label,
+  .mobile-nav .menu-button .button-label-logout {
+    display: none;
+  }
+  .verticalBar {
+    z-index: 999;
+    border-top: 1px solid rgb(226, 226, 226);
+    width: 100%;
+    height: auto;
+    justify-content: space-around;
+    padding: 0;
+    bottom: 0;
+    top: initial;
+  }
+  .vert-buttons2 {
+    display: none;
+  }
+  .vert-buttons {
+    height: 70px;
+    padding: 0;
+    margin: 0;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+  }
+  .menu-button {
+    transform: scale(1.1);
+  }
+  .vert-buttons .menu-button:nth-child(2) {
+    order: -1;
   }
 }
