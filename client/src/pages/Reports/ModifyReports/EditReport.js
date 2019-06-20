@@ -48,10 +48,12 @@ class EditReport extends Component {
     timePickDate: new Date("2000-01-01T18:00:00"),
     message: "",
     questions: [],
+    sentimentQuestions:[],
     slackChannelId: null,
     // Temporary State
     channels: [],
     question: "",
+    sentimentQuestion:"",
     week: [
       "Monday",
       "Tuesday",
@@ -60,7 +62,7 @@ class EditReport extends Component {
       "Friday",
       "Saturday",
       "Sunday"
-    ]
+    ],
   };
 
   componentDidMount() {
@@ -69,16 +71,17 @@ class EditReport extends Component {
     axiosWithAuth()
       .get(endpoint)
       .then(res => {
+        let parseSentiment = JSON.parse(res.data.report.sentimentQuestions)
+
         const {
           reportName,
           schedule,
           scheduleTime,
           message,
           questions,
-          sentimentQuestions,
           slackChannelId
         } = res.data.report;
-        console.log("RES++__++",res)
+
         this.setState({
           reportName,
           schedule,
@@ -86,7 +89,7 @@ class EditReport extends Component {
           timePickDate: new Date(`2000-01-01T${scheduleTime}`),
           message,
           questions,
-          sentimentQuestions,
+          sentimentQuestions: parseSentiment,
           slackChannelId
         });
       })
@@ -159,8 +162,8 @@ class EditReport extends Component {
     const code = e.keyCode || e.which;
     if (code === 13) {
       this.setState(prevState => ({
-        sentimentQuestions: [...prevState.sentimentQuestions, this.state.sentimentQuestions],
-        sentimentQuestions: ""
+        sentimentQuestions: [...prevState.sentimentQuestions, this.state.sentimentQuestion],
+        sentimentQuestion: ""
       }));
     } else {
       this.setState({
@@ -172,15 +175,15 @@ class EditReport extends Component {
   sentimentHandler = e => {
     e.preventDefault();
     this.setState(prevState => ({
-      sentimentQuestions: [...prevState.sentimentQuestions, this.state.sentimentQuestions],
-      sentimentQuestions: ""
+      sentimentQuestions: [...prevState.sentimentQuestions, this.state.sentimentQuestion],
+      sentimentQuestion: ""
     }));
   };
 
-  removeSentiment = (e, sentimentQuestions) => {
+  removeSentiment = (e, sentimentQuestion) => {
     e.preventDefault();
     this.setState(prevState => ({
-      sentimentQuestions: prevState.sentimentQuestions.filter(q => q !== sentimentQuestions)
+      sentimentQuestions: prevState.sentimentQuestions.filter(q => q !== sentimentQuestion)
     }));
   };
 
@@ -393,19 +396,20 @@ class EditReport extends Component {
               </section>
             </section>
           </Card>
+
+
           <Card raised={true} className="schedule-card">
             <section className="schedule-card-content">
               <h3 className="schedule-title">Sentiment Questions</h3>
               <Divider className="divider" variant="fullWidth" />
               <section>
-                {/* The questions need to be changed over to sentiment questions */}
-                {this.state.questions.map(question => (
-                  <article className="question-flex" key={question}>
-                    <p className="question">{question}</p>
+                {this.state.sentimentQuestions.map(sentimentQuestion => (
+                  <article className="question-flex" key={sentimentQuestion}>
+                    <p className="question">{sentimentQuestion}</p>
                     <Fab
                       size="small"
                       color="secondary"
-                      onClick={e => this.removeQuestion(e, question)}
+                      onClick={e => this.removeSentiment(e, sentimentQuestion)}
                     >
                       <Icon>delete_icon</Icon>
                     </Fab>
@@ -415,16 +419,15 @@ class EditReport extends Component {
               <section className="enter-question">
                 <FormControl className="input-field" required>
                   <InputLabel htmlFor="edit-report-question">
-                    Enter a question...
+                    Enter a sentiment question...
                   </InputLabel>
                   <Input
                     id="edit-report-question"
                     required
                     className="input-field"
                     type="text"
-                    name="question"
-                // The questions need to be changed over to sentiment questions 
-                    value={this.state.questions}
+                    name="sentimentQuestion"
+                    value={this.state.sentimentQuestion}
                     onChange={this.enterSentimentHandler}
                   />
                 </FormControl>
@@ -434,14 +437,14 @@ class EditReport extends Component {
                   color="primary"
                   onClick={this.sentimentHandler}
                 // The questions need to be changed over to sentiment questions 
-                  disabled={this.state.questions.length === 0 ? true : false}
+                  disabled={this.state.sentimentQuestion.length === 0 ? true : false}
                   type="submit"
                 >
                   <AddIcon />
                 </Fab>
               </section>
             </section>
-          </Card>
+          </Card> 
 
           <Button
             style={{ display: "block", marginTop: "30px" }}
