@@ -354,7 +354,7 @@ class ReportResults extends Component {
                                     <ol> {userRes.questions.map(userQA => 
                                       <> 
                                       <li><div className= "response-container-main-question">{userQA.question}</div></li>
-                                      {userQA.sentimentRange ? null : <><div className= "response-container-main-answer "><span>A:</span> {userQA.answer}</div>  <div className ="linebr" /> </>}
+                                      {userQA.sentimentRange ? null : <><div className= "response-container-main-answer "><em>A:</em> {userQA.answer}</div>  <div className ="linebr" /> </>}
 
                                       {userQA.sentimentRange ? <>
                                           <StyledSlider
@@ -372,7 +372,7 @@ class ReportResults extends Component {
                                               <p className={userQA.sentimentRange !=5 ? "deselected" : null}>5</p>
                                             </div>
                                             <div className ="linebr" />
-                                            {userQA.answer ? <><div className= "response-container-main-comment "><span>Comment:</span> {userQA.answer}</div>   <div className ="linebr" /> </>: null }
+                                            {userQA.answer ? <><div className= "response-container-main-comment "><em>Comment:</em> {userQA.answer}</div>   <div className ="linebr" /> </>: null }
                                             </> : null }
                                       </> 
                                   )}</ol>
