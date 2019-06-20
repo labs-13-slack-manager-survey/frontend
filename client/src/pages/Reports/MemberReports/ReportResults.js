@@ -145,7 +145,7 @@ class ReportResults extends Component {
                 </div>
             : 
             
-            managerToday != today ?  <div
+            managerToday != today && token.roles === "admin" ?  <div
             className="response-card"
             interactive={false}
             elevation={Elevation.TWO}
