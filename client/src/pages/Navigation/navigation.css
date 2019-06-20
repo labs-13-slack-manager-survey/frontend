@@ -175,65 +175,72 @@ span {
   padding-left: 10px;
 }
 
-/* @media (min-width: 550px) {
-  .narrow-nav {
-    display: none;
-  }
-}
-
-@media (max-width: 550px) {
-  .wide-nav {
-    display: none;
-  }
-} */
 @media (max-width: 500px) {
-  .horizontalMenuBar {
-    all: initial;
-    position: fixed;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 99;
+  .App {
+    display: flex;
+
+    flex-direction: column;
   }
-  .horizontalMenuBar .left-horizontal {
-    all: initial;
+  .horizontalMenuBar {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
     width: auto;
   }
-  .horizontalMenuBar .left-horizontal div {
+  .logo {
+    padding: 0;
+  }
+  .left-horizontal {
+    justify-content: center;
+    width: auto;
+  }
+  /* button */
+  .horizontal-buttons {
+    position: absolute;
+    bottom: 0;
+    right: 0;
     display: none;
   }
-  .horizontalMenuBar .left-horizontal .logo {
-    padding: 0;
-    padding-top: 10px;
-  }
-  .horizontalMenuBar .horizontal-buttons {
-    position: absolute;
+  .logo-text {
     display: none;
   }
   .verticalBar {
-    width: 100%;
-    height: 69px;
-    display: flex;
-    justify-content: center;
     padding: 0;
-    border-bottom: 1px solid rgb(226, 226, 226);
+    flex-direction: column-reverse;
+    width: 100%;
   }
-  .vert-buttons {
-    position: absolute;
-    padding: 0;
-    width: 100%;
+  .vert-buttons,
+  .vert-buttons2 {
     flex-direction: row;
-    display: none;
+    width: 100%;
+    padding-top: 0;
+    height: auto;
+  }
+
+  .vert-buttons {
+    justify-content: space-around;
+    border-top: 1px solid rgb(226, 226, 226);
   }
   .vert-buttons2 {
-    width: 100%;
-    height: auto;
-    flex-direction: row;
-    padding: 0 10px;
+    height: 71px;
+    padding: 0 25px;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(226, 226, 226);
   }
-  .vert-buttons2 .menu-button .button-label {
+
+  .vert-buttons .menu-button {
+    margin: 15px 0;
+    transform: scale(1.2);
+  }
+  .vert-buttons .menu-button:nth-child(2) {
+    order: -1;
+  }
+  .vert-buttons2 .button-label,
+  .vert-buttons2 .button-label-logout {
     display: none;
   }
-  .vert-buttons2 .menu-button .button-label-logout {
-    display: none;
+  .dashboard-view {
+    border: 1px solid red;
   }
 }
