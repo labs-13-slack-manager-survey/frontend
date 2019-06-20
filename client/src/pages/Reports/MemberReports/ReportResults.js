@@ -11,7 +11,7 @@ import PageTitle from "../../../components/PageTitle";
 import Slider from "@material-ui/lab/Slider";
 import { withStyles } from "@material-ui/core/styles";
 import CircleProgress from "../../../components/circleProgress.js";
-import { Card, Elevation } from "@blueprintjs/core";
+import { Elevation } from "@blueprintjs/core";
 import ToggleOn from "../../../images/icons/chevron-down.png";
 import ToggleOff from "../../../images/icons/chevron-up.png";
 
