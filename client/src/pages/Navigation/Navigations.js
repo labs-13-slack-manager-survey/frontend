@@ -4,19 +4,18 @@ import jwt_decode from "jwt-decode";
 import { axiosWithAuth, baseURL } from "../../config/axiosWithAuth";
 
 // style imports
-import './navigation.css';
-import { withStyles } from '@material-ui/core/styles';
-import Logo from '../../images/slackr_icon.png';
-import Reports from '../../images/icons/reports.png';
-import ReportsActive from '../../images/icons/reports-active.png';
-import Teams from '../../images/icons/teams.png';
-import TeamsActive from '../../images/icons/teams-active.png';
-import User from '../../images/icons/user.png';
-import UserActive from '../../images/icons/user-active.png';
-import Stats from '../../images/icons/stats.png';
-import StatsActive from '../../images/icons/stats_active.png'
-import Logout from '../../images/icons/logout.png';
-
+import "./navigation.css";
+import { withStyles } from "@material-ui/core/styles";
+import Logo from "../../images/slackr_icon.png";
+import Reports from "../../images/icons/reports.png";
+import ReportsActive from "../../images/icons/reports-active.png";
+import Teams from "../../images/icons/teams.png";
+import TeamsActive from "../../images/icons/teams-active.png";
+import User from "../../images/icons/user.png";
+import UserActive from "../../images/icons/user-active.png";
+import Stats from "../../images/icons/stats.png";
+import StatsActive from "../../images/icons/stats_active.png";
+import Logout from "../../images/icons/logout.png";
 
 const styles = {
   navLinks: {
@@ -78,9 +77,9 @@ class Navigation extends React.Component {
             >
               <img className="logo" src={Logo} />
             </NavLink>
-            <div>slackr</div>
+            <div className="logo-text">slackr</div>
           </div>
-          <div className="horizontal-buttons">
+          <div className="horizontal-buttons mobile-add-poll">
             {token.roles == "admin" ? (
               <NavLink to="/slackr/dashboard/reports/new">
                 <button
@@ -92,6 +91,39 @@ class Navigation extends React.Component {
               </NavLink>
             ) : null}
           </div>
+          <>
+            <div className="vert-buttons2 mobile-nav">
+              <NavLink to="/slackr/dashboard/profile" className="menu-button">
+                <img
+                  className="menu-icon"
+                  src={
+                    this.props.history.location.pathname ===
+                    "/slackr/dashboard/profile"
+                      ? UserActive
+                      : User
+                  }
+                />
+                <div
+                  className={
+                    this.props.history.location.pathname ===
+                    "/slackr/dashboard/profile"
+                      ? "button-label-active"
+                      : "button-label"
+                  }
+                >
+                  user
+                </div>
+              </NavLink>
+              <NavLink
+                to="/login"
+                onClick={this.handleLogout}
+                className="menu-button"
+              >
+                <img className="menu-icon" src={Logout} />
+                <div className="button-label-logout">logout</div>
+              </NavLink>{" "}
+            </div>{" "}
+          </>
         </div>
         <div className="verticalBar">
           {loggedIn && token.teamId ? (

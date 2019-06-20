@@ -5,195 +5,309 @@
 } */
 
 .nav-header {
-	color: white;
+  color: white;
 }
 
 .nav-links {
-	display: flex;
-	justify-content: space-between;
-	width: 95%;
+  display: flex;
+  justify-content: space-between;
+  width: 95%;
 }
-
 
 .horizontalMenuBar {
-	height: 70px; 
-	background-color: white; 
-	border-bottom: 2px solid #F5F5F5;
-	width: 100%;
-	position: sticky; 
-	top: 0;
-	display: flex;
-	flex-direction: row; 
-	justify-content: space-between; 
-	align-items: center;
-	padding-right: 25px;
-	z-index: 4;
+  height: 70px;
+  background-color: white;
+  border-bottom: 2px solid #f5f5f5;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 25px;
+  z-index: 4;
 }
 
-
 .left-horizontal {
-	display: flex;
-	flex-direction: row; 
-	justify-content: space-between; 
-	width: 115px;
-	align-items: center;
-
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 115px;
+  align-items: center;
 }
 
 .menu-bar-add-poll {
-	width: 200px;
-	height: 40px;
-	font-size: 13px;
-	border-radius: 0px;
-	color:  #F67B28;
-	font-weight: 500;
-	border: 1px solid #F67B28;
+  width: 200px;
+  height: 40px;
+  font-size: 13px;
+  border-radius: 0px;
+  color: #f67b28;
+  font-weight: 500;
+  border: 1px solid #f67b28;
 }
 
-
-.menu-bar-add-poll:hover{ 
-	background-color: #F67B28;
-	color: white;
-	cursor: pointer;
+.menu-bar-add-poll:hover {
+  background-color: #f67b28;
+  color: white;
+  cursor: pointer;
 }
-
 
 .menu-bar-add-team {
-	width: 114px;
-	height: 30px;
-	font-size: 13px;
-	border-radius: 100px;
-	color: white;
-	font-weight: 500;
-	background-color: #2076DB;
-	border: 2px solid rgb(7, 93, 190);
-	margin-left: 10px;
-	margin-right: 20px;
+  width: 114px;
+  height: 30px;
+  font-size: 13px;
+  border-radius: 100px;
+  color: white;
+  font-weight: 500;
+  background-color: #2076db;
+  border: 2px solid rgb(7, 93, 190);
+  margin-left: 10px;
+  margin-right: 20px;
 }
 
-.menu-bar-add-team:hover{ 
-	background-color: rgb(7, 93, 190);
-	cursor: pointer;
+.menu-bar-add-team:hover {
+  background-color: rgb(7, 93, 190);
+  cursor: pointer;
 }
 
 .horizontal-buttons {
-	display: flex;
-	flex-direction: row; 
-	align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 span {
-	font-size: 15px;
-
+  font-size: 15px;
 }
 
-.verticalBar { 
-	position: fixed;
-	left: 0; 
-	width: 70px;
-	height: 100%;
-	background-color: white;
-	border-right: 2px solid #F5F5F5;
-	top: 0;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	align-items: center;
-	padding-top: 90px;
-	padding-bottom: 20px;
+.verticalBar {
+  position: fixed;
+  left: 0;
+  width: 70px;
+  height: 100%;
+  background-color: white;
+  border-right: 2px solid #f5f5f5;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 90px;
+  padding-bottom: 20px;
 }
 
-
-@media(max-width: 800px) {
-	.verticalBar { 
-		width: 100%;
-		height: 20px;
-	}
-
+/* @media (max-width: 800px) {
+  .verticalBar {
+    width: 100%;
+    height: 20px;
+  }
+} */
+.vert-buttons {
+  width: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 235px;
+  padding-top: 30px;
 }
 
-.vert-buttons{
-	width: 70px; 
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between; 
-	align-items: center;
-	height: 235px;
-	padding-top: 30px;
+.vert-buttons2 {
+  width: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 150px;
+  padding-top: 30px;
 }
 
-.vert-buttons2{
-	width: 70px; 
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between; 
-	align-items: center;
-	height: 150px;
-	padding-top: 30px;
+.empty-buttons {
+  width: 50px;
+  height: 90px;
 }
-
-.empty-buttons{
-	width: 50px;
-	height: 90px;
-}
-
 
 .menu-icon {
-	width: 25px;
-	height: 25px;
+  width: 25px;
+  height: 25px;
 }
 
-
-.menu-logout-button{
-	height: 45px;
+.menu-logout-button {
+  height: 45px;
 }
 
 .menu-button {
-	display: flex;
-	align-items: center; 
-	flex-direction: column; 
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .menu-button:hover {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 .button-label {
-	font-size: 10px; 
-	color: #9B9B9B;
-	padding-top: 3px;
+  font-size: 10px;
+  color: #9b9b9b;
+  padding-top: 3px;
 }
 
-.button-label-logout{
-	color: #F16363;
-	padding-top: 3px;
-	font-size: 10px; 
+.button-label-logout {
+  color: #f16363;
+  padding-top: 3px;
+  font-size: 10px;
 }
 
 .button-label-active {
-	font-size: 10px; 
-	color: #2076DB;
-	padding-top: 3px;
+  font-size: 10px;
+  color: #2076db;
+  padding-top: 3px;
 }
 
 .logo {
-	height: 50px;
-	padding-left: 8px;
-	padding-top:4px;
-	padding-right: 15px;
+  height: 50px;
+  padding-left: 8px;
+  padding-top: 4px;
+  padding-right: 15px;
 }
-.app-name{
-	padding-left: 10px;
+.app-name {
+  padding-left: 10px;
 }
+.mobile-nav {
+  display: none;
+}
+/* 2nd iteration */
+/* 
+@media (max-width: 500px) {
+  .horizontalMenuBar {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    width: auto;
+  }
+  .logo {
+    padding: 0;
+  }
+  .left-horizontal {
+    justify-content: center;
+    width: auto;
+  }
+  .horizontal-buttons {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: none;
+  }
+  .logo-text {
+    display: none;
+  }
+  .verticalBar {
+    padding: 0;
+    flex-direction: column-reverse;
+    width: 100%;
+  }
+  .vert-buttons,
+  .vert-buttons2 {
+    flex-direction: row;
+    width: 100%;
+    padding-top: 0;
+    height: auto;
+  }
 
-@media (min-width: 550px) {
-	.narrow-nav {
-		display: none
-	}
-}
+  .vert-buttons {
+    justify-content: space-around;
+    border-top: 1px solid rgb(226, 226, 226);
+  }
+  .vert-buttons2 {
+    height: 71px;
+    padding: 0 25px;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(226, 226, 226);
+  }
 
-@media (max-width: 550px) {
-	.wide-nav {
-		display: none
-	}
+  .vert-buttons .menu-button {
+    margin: 15px 0;
+    transform: scale(1.2);
+  }
+  .vert-buttons .menu-button:nth-child(2) {
+    order: -1;
+  }
+  .vert-buttons2 .button-label,
+  .vert-buttons2 .button-label-logout {
+    display: none;
+  }
+} */
+
+/* 3rd iteration */
+@media (max-width: 500px) {
+  .horizontalMenuBar {
+    padding: 0 30px;
+    border-bottom: 1px solid rgb(226, 226, 226);
+    position: fixed;
+  }
+  .left-horizontal {
+    width: auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .horizontal-buttons {
+    position: absolute;
+    right: 20px;
+    bottom: -73vh;
+  }
+  .menu-bar-add-poll {
+    border-radius: 50%;
+    /* color: transparent; */
+    width: 70px;
+    height: 70px;
+  }
+  .mobile-nav.vert-buttons2 {
+    padding: 0;
+    display: flex;
+    height: auto;
+    flex-direction: row;
+    width: 100%;
+  }
+  .logo {
+    padding: 0;
+  }
+  .logo-text {
+    display: none;
+  }
+  .mobile-nav .menu-button .button-label,
+  .mobile-nav .menu-button .button-label-logout {
+    display: none;
+  }
+  .verticalBar {
+    z-index: 999;
+    border-top: 1px solid rgb(226, 226, 226);
+    width: 100%;
+    height: auto;
+    justify-content: space-around;
+    padding: 0;
+    bottom: 0;
+    top: initial;
+  }
+  .vert-buttons2 {
+    display: none;
+  }
+  .vert-buttons {
+    height: 70px;
+    padding: 0;
+    margin: 0;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+  }
+  .menu-button {
+    transform: scale(1.1);
+  }
+  .vert-buttons .menu-button:nth-child(2) {
+    order: -1;
+  }
+  .mobile-add-poll {
+  }
 }
