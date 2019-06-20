@@ -48,10 +48,12 @@ class EditReport extends Component {
     timePickDate: new Date("2000-01-01T18:00:00"),
     message: "",
     questions: [],
+    sentimentQuestions:[],
     slackChannelId: null,
     // Temporary State
     channels: [],
     question: "",
+    sentimentQuestion:"",
     week: [
       "Monday",
       "Tuesday",
@@ -60,7 +62,7 @@ class EditReport extends Component {
       "Friday",
       "Saturday",
       "Sunday"
-    ]
+    ],
   };
 
   componentDidMount() {
@@ -69,6 +71,8 @@ class EditReport extends Component {
     axiosWithAuth()
       .get(endpoint)
       .then(res => {
+        let parseSentiment = JSON.parse(res.data.report.sentimentQuestions)
+
         const {
           reportName,
           schedule,
@@ -77,6 +81,7 @@ class EditReport extends Component {
           questions,
           slackChannelId
         } = res.data.report;
+
         this.setState({
           reportName,
           schedule,
@@ -84,6 +89,7 @@ class EditReport extends Component {
           timePickDate: new Date(`2000-01-01T${scheduleTime}`),
           message,
           questions,
+          sentimentQuestions: parseSentiment,
           slackChannelId
         });
       })
@@ -151,6 +157,37 @@ class EditReport extends Component {
     }));
   };
 
+  enterSentimentHandler = e => {
+    e.preventDefault();
+    const code = e.keyCode || e.which;
+    if (code === 13) {
+      this.setState(prevState => ({
+        sentimentQuestions: [...prevState.sentimentQuestions, this.state.sentimentQuestion],
+        sentimentQuestion: ""
+      }));
+    } else {
+      this.setState({
+        [e.target.name]: e.target.value
+      });
+    }
+  };
+
+  sentimentHandler = e => {
+    e.preventDefault();
+    this.setState(prevState => ({
+      sentimentQuestions: [...prevState.sentimentQuestions, this.state.sentimentQuestion],
+      sentimentQuestion: ""
+    }));
+  };
+
+  removeSentiment = (e, sentimentQuestion) => {
+    e.preventDefault();
+    this.setState(prevState => ({
+      sentimentQuestions: prevState.sentimentQuestions.filter(q => q !== sentimentQuestion)
+    }));
+  };
+
+
   updateSchedule = day => {
     const { schedule } = this.state;
     const includes = schedule.includes(day);
@@ -178,6 +215,7 @@ class EditReport extends Component {
       scheduleTime,
       message,
       questions,
+      sentimentQuestions,
       slackChannelId
     } = this.state;
     const report = {
@@ -186,6 +224,7 @@ class EditReport extends Component {
       scheduleTime,
       message,
       questions: JSON.stringify(questions),
+      sentimentQuestions: JSON.stringify(sentimentQuestions),
       slackChannelId,
       slackChannelName
     };
@@ -201,7 +240,6 @@ class EditReport extends Component {
 
   render() {
     const { classes } = this.props;
-
     return (
       <div className="create-report">
         <Fab onClick={() => this.props.history.goBack()} color="default">
@@ -359,6 +397,55 @@ class EditReport extends Component {
             </section>
           </Card>
 
+
+          <Card raised={true} className="schedule-card">
+            <section className="schedule-card-content">
+              <h3 className="schedule-title">Sentiment Questions</h3>
+              <Divider className="divider" variant="fullWidth" />
+              <section>
+                {this.state.sentimentQuestions.map(sentimentQuestion => (
+                  <article className="question-flex" key={sentimentQuestion}>
+                    <p className="question">{sentimentQuestion}</p>
+                    <Fab
+                      size="small"
+                      color="secondary"
+                      onClick={e => this.removeSentiment(e, sentimentQuestion)}
+                    >
+                      <Icon>delete_icon</Icon>
+                    </Fab>
+                  </article>
+                ))}
+              </section>
+              <section className="enter-question">
+                <FormControl className="input-field" required>
+                  <InputLabel htmlFor="edit-report-question">
+                    Enter a sentiment question...
+                  </InputLabel>
+                  <Input
+                    id="edit-report-question"
+                    required
+                    className="input-field"
+                    type="text"
+                    name="sentimentQuestion"
+                    value={this.state.sentimentQuestion}
+                    onChange={this.enterSentimentHandler}
+                  />
+                </FormControl>
+                <Fab
+                  size="small"
+                  style={{ display: "block", margin: "10px 0" }}
+                  color="primary"
+                  onClick={this.sentimentHandler}
+                // The questions need to be changed over to sentiment questions 
+                  disabled={this.state.sentimentQuestion.length === 0 ? true : false}
+                  type="submit"
+                >
+                  <AddIcon />
+                </Fab>
+              </section>
+            </section>
+          </Card> 
+
           <Button
             style={{ display: "block", marginTop: "30px" }}
             variant="contained"
@@ -371,113 +458,6 @@ class EditReport extends Component {
       </div>
     );
   }
-
-  changeHandler = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  };
-
-  timeChangeHandler = date => {
-    const hours = getHours(date);
-    const min = getMinutes(date);
-    const militaryTime = `${hours}:${min}`;
-
-    this.setState({
-      scheduleTime: militaryTime,
-      timePickDate: date
-    });
-  };
-
-  fetchSlackChannels = () => {
-    const endpoint = `${baseURL}/slack/channels`;
-    axiosWithAuth()
-      .get(endpoint)
-      .then(res => {
-        this.setState({
-          channels: res.data
-        });
-      })
-      .catch(err => console.log(err));
-  };
-
-  enterQuestionsHandler = e => {
-    e.preventDefault();
-    const code = e.keyCode || e.which;
-    if (code === 13) {
-      this.setState(prevState => ({
-        questions: [...prevState.questions, this.state.question],
-        question: ""
-      }));
-    } else {
-      this.setState({
-        [e.target.name]: e.target.value
-      });
-    }
-  };
-
-  questionsHandler = e => {
-    e.preventDefault();
-    this.setState(prevState => ({
-      questions: [...prevState.questions, this.state.question],
-      question: ""
-    }));
-  };
-
-  removeQuestion = (e, question) => {
-    e.preventDefault();
-    // this.setState(prevState => ({
-    // 	questions: prevState.questions.filter(q => q !== question)
-    // }));
-  };
-
-  updateSchedule = day => {
-    const { schedule } = this.state;
-    const includes = schedule.includes(day);
-    this.setState({
-      schedule: includes ? schedule.filter(d => d !== day) : [...schedule, day]
-    });
-  };
-
-  selectWeekdays = () => {
-    this.setState({
-      schedule: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
-    });
-  };
-
-  updateReport = e => {
-    e.preventDefault();
-    let slackChannelName;
-    this.state.channels.forEach(channel => {
-      if (channel.id === this.state.slackChannelId)
-        slackChannelName = channel.name;
-    });
-    const {
-      reportName,
-      schedule,
-      scheduleTime,
-      message,
-      questions,
-      slackChannelId
-    } = this.state;
-    const report = {
-      reportName,
-      schedule: JSON.stringify(schedule),
-      scheduleTime,
-      message,
-      questions: JSON.stringify(questions),
-      slackChannelId,
-      slackChannelName
-    };
-    const endpoint = `${baseURL}/reports/${this.props.match.params.reportId}`;
-    axiosWithAuth()
-      .put(endpoint, report)
-      .then(res => {
-        this.props.setResponseAsState(res.data);
-        this.props.history.push("/slackr/dashboard");
-      })
-      .catch(err => console.log(err));
-  };
 }
 
 export default withStyles(styles)(EditReport);
