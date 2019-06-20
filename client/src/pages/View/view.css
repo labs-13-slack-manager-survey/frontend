@@ -29,6 +29,10 @@
 
 
 @media(max-width: 800px){
+	.dashboard-view {
+		flex-direction: column; 
+	}
+
 	.view {
 		flex-direction: column;
 		align-items: center;

@@ -36,6 +36,11 @@
   flex-direction: row;
   justify-content: space-between;
   padding: 20px 10px;
+  align-items: center;
+}
+
+.content:nth-child(2) {
+  background-color: grey;
 }
 
 .content:hover {

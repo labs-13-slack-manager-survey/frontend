@@ -97,7 +97,7 @@ p {
 .input-field {
   max-width: 500px;
   width: 100%;
-  margin: 10px 0;
+  margin: 10px 0 10px 0;
 }
 
 .margin-fix {
@@ -223,6 +223,7 @@ p {
 .response-card-example {
   border: 1px dashed rgb(226, 226, 226);
   padding: 30px;
+  margin-bottom: 15px;
 }
 
 .response-question {
