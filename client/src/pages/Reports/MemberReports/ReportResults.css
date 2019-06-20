@@ -77,7 +77,6 @@
 .response-container-main-name-manager {
 	font-size: 15px;
 	font-weight: 400;
-	margin-top: 17px;
 	padding-left: 20px;
 	font-style: italic;
 }
@@ -100,11 +99,18 @@
 }
 
 .vertical-timeline {
-	
 	width:1px;
 	background-color: rgb(206, 206, 206);
 	margin-right: 20px;
 	margin-left: 20px;
+}
+
+.manager-response-header-text {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 100%;
+	align-items: center;
 }
 
 .response-content {
@@ -219,6 +225,11 @@
 .manager-feedback {
 	text-align: left;
 	padding: 18px;
+}
+
+.manager-toggle-list{
+	width: 25px;
+	height: 25px;
 }
 
 .manager-feedback-list {
