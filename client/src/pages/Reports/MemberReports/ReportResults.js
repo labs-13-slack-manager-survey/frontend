@@ -81,8 +81,6 @@ class ReportResults extends Component {
       month: "long",
       day: "numeric"
     };
-    // console.log("REPORT RESULT STATE",this.state)
-    // console.log(this.state.managerQuestions)
     
     let managerPollDays = [];
 
@@ -100,7 +98,7 @@ class ReportResults extends Component {
       let userResponses = this.state.responses;
       let dateUser = ""
 
-      managerPollDays.forEach(function(response) {
+      managerPollDays.reverse().forEach(function(response) {
         let dateManager = moment(response.managerSubmitted).format('DDMMMMYYYY')
         let newManagerUserDay = []
         console.log(response);
@@ -116,7 +114,8 @@ class ReportResults extends Component {
 
         filteredManagerAndResponsesDate.push(newManagerUserDay)   
         })
-        console.log(filteredManagerAndResponsesDate[0])
+        console.log("filteredmanagerqs")
+        console.log(filteredManagerAndResponsesDate)
       }
     
       
@@ -136,7 +135,6 @@ class ReportResults extends Component {
 
     
     let managerToday = managerPollDays.length && managerPollDays[managerPollDays.length-1].managerSubmitted
-    // let managerToday = this.state.managerFeedback.length && this.getDate(this.state.managerFeedback[this.state.managerFeedback.length-1].submitted_date) != today
     managerToday = moment(managerToday).format('DD MMMM YYYY');
 
     console.log(managerToday)
@@ -252,10 +250,6 @@ class ReportResults extends Component {
           )}
 
           <section className="report-results-feed">
-          {/* {this.state.managerFeedback.map(res => (
-                  <div>{res}</div>
-                ))} */}
-      
               {managerPollDays.map(res => {
                 if (this.getDate(this.state.managerFeedback[this.state.managerFeedback.length-1].submitted_date) === today) {
                   return null 
@@ -301,80 +295,97 @@ class ReportResults extends Component {
               )}
       
              
-      {filteredManagerAndResponsesDate ? filteredManagerAndResponsesDate.map(day => 
-        <div>{day[0].managerResponse.managerQuestions[0]}</div>)
-      : "none" }
-
-
-
-
-            {this.state.responses.map(
-              batch =>
-                batch.responses.length > 0 && (
-                  <div key={batch.date}>
-                    {batch.responses.map(response => (
-                      <div key={response.userId}>
-                        <div className="response-container">
-                          <div className="user-info">
+      {filteredManagerAndResponsesDate ? filteredManagerAndResponsesDate.map(day => <>
+                          
+                          <div className="response-container-manager">
+                          <div className = "user-info">
                             <div className="month-day">
-                              <div className="calendar-top">
-                                {moment(batch.date).format("DD")}
-                              </div>
-                              <div className="calendar-bot">
-                                {moment(batch.date).format("MMMM")}
-                              </div>
+                              <div className="calendar-top">{moment(day[0].managerResponse.managerSubmitted).format("DD")}</div>
+                              <div className="calendar-bot">{moment(day[0].managerResponse.managerSubmitted).format("MMMM")}</div>
                             </div>
-                            <div className="response-container-main-name">
-                              {response.fullName}
+                            <div className = "manager-response-header-text" onClick={this.toggleManagerQList}>
+                              <div className = "response-container-main-name-manager">Manager Comments</div>
+                              <img className="manager-toggle-list" src={this.state.seeManagerQList ? ToggleOn : ToggleOff} />
                             </div>
                           </div>
-
-                          <div className="response-container-main">
-                            <div className="vertical-timeline" />
+                          {this.state.seeManagerQList ? <>
+                            
+                            <div className = "linebr" />
+                            <div className="response-container-main">
                             <div className="response-content">
-                              <ol type="1">
-                                  {response.questions.map(
-                                    ({ question, answer, id, sentimentRange }) => (
-                                      <div key={id} className = "question-response">
-                                        <div className="response-container-main-question">
-                                        
-                                          <li className = "manager-poll-question">{question}</li>
-                                          
-                                        </div>
-                                        {this.state.isSentiment && 
-                                        <>
-                                            <StyledSlider
-                                              className="slider"
-                                              value={sentimentRange}
-                                              min={1}
-                                              max={5}
-                                              step={1}
-                                            />
-                                              <div className="slider-label">
-                                                <p className={sentimentRange !=1 ? "deselected" : null}>1</p>
-                                                <p className={sentimentRange !=2 ? "deselected" : null}>2</p>
-                                                <p className={sentimentRange !=3 ? "deselected" : null}>3</p>
-                                                <p className={sentimentRange !=4 ? "deselected" : null}>4</p>
-                                                <p className={sentimentRange !=5 ? "deselected" : null}>5</p>
-                                              </div>
-                                          </>
-                                        } 
-                                        <p className="response-container-main-answer">
-                                          <div className={ "regular-answer"}>{answer}</div>
-                                          <div className ="linebr" />
-                                        </p>
-                                    </div>
-                                  )
-                                )}{" "}
-                              </ol>
+                              <div className= "manager-question">{day[0].managerResponse.managerQuestions[0]}</div> 
+                              <div className= "manager-response ">{day[0].managerResponse.managerResponses[0]}</div> 
+                              <div className ="linebr" />
+    
+                              <div className= "manager-question">{day[0].managerResponse.managerQuestions[1]}</div> 
+                              <div className= "manager-response ">{day[0].managerResponse.managerResponses[1]}</div> 
+                              <div className ="linebr" />
+    
+                              <div className= "manager-question">{day[0].managerResponse.managerQuestions[2]}</div> 
+                              <div className= "manager-response ">{day[0].managerResponse.managerResponses[2]}</div> 
+                              {day[0].managerResponse.managerQuestions.length === 4 ? <>
+                                <div className ="linebr" />
+                                <div className= "manager-question">{day[0].managerResponse.managerQuestions[3]}</div> 
+                                <div className= "manager-response ">{day[0].managerResponse.managerResponses[3]}</div>
+                                </> : null } 
+                                </div>
+                            </div></> : null}
                             </div>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )
-            )}
+                            
+
+                            <div className="response-container" onClick={this.toggleManagerQList}>
+                                <div className = "response-content">
+                                {day[1].userResponse.responses.map( userRes => <>
+                                <div className="response-container-main">
+                                  <div className="vertical-timeline" />
+                                  <div className="response-content">
+                                  
+                                  <div className = "user-response-header">
+                                    <div className= "user-info">
+                                        <img className = "response-container-profile-pic" src={userRes.profilePic} />
+                                        <div className = "response-container-main-name-user">{userRes.fullName}</div></div>
+                                    <div>
+                                      <div className="month-day">
+                                        <div className="calendar-top">{moment(day[1].userResponse.date).format("MMMM DD")}</div>
+                                      </div>
+                                    </div>
+                                  </div>
+                    
+                                    <ol> {userRes.questions.map(userQA => 
+                                      <> 
+                                      <li><div className= "response-container-main-question">{userQA.question}</div></li>
+                                      {userQA.sentimentRange ? null : <><div className= "response-container-main-answer "><span>A:</span> {userQA.answer}</div>  <div className ="linebr" /> </>}
+
+                                      {userQA.sentimentRange ? <>
+                                          <StyledSlider
+                                            className="slider"
+                                            value={userQA.sentimentRange}
+                                            min={1}
+                                            max={5}
+                                            step={1}
+                                          />
+                                            <div className="slider-label">
+                                              <p className={userQA.sentimentRange !=1 ? "deselected" : null}>1</p>
+                                              <p className={userQA.sentimentRange !=2 ? "deselected" : null}>2</p>
+                                              <p className={userQA.sentimentRange !=3 ? "deselected" : null}>3</p>
+                                              <p className={userQA.sentimentRange !=4 ? "deselected" : null}>4</p>
+                                              <p className={userQA.sentimentRange !=5 ? "deselected" : null}>5</p>
+                                            </div>
+                                            <div className ="linebr" />
+                                            {userQA.answer ? <><div className= "response-container-main-comment "><span>Comment:</span> {userQA.answer}</div>   <div className ="linebr" /> </>: null }
+                                            </> : null }
+                                      </> 
+                                  )}</ol>
+                                
+                                        </div>
+                                      </div></>
+                                  )}
+                               </div>
+                            </div>
+
+
+                            </>)
+                    : "none" }
           </section>
         </main>
 
@@ -388,7 +399,6 @@ class ReportResults extends Component {
           <div className="calendar">
             <h1 className="title">Filter by day</h1>
             <DatePicker
-              // getByDate={this.getByDate}
               clickedDate={this.state.clickedDate}
               clickedResponder={this.state.clickedResponder}
               filter={this.filter}
@@ -439,11 +449,6 @@ class ReportResults extends Component {
       // format the submissionRate
       let { historicalSubmissionRate } = submissionRes.data;
       historicalSubmissionRate /= 100;
-
-      // let managerQuestions = [];
-      // let managerResponses = []; 
-      // let managerSubmitted = []; 
-      // let managerFeedback= [];
       
       const managerFeedback = [];
       managerRes.data.forEach(feedback => {
@@ -453,15 +458,6 @@ class ReportResults extends Component {
        
       })
       console.log(managerFeedback)
-
-      // managerRes.data.map(res => {
-      //   console.log(res)
-      //   managerQuestions.push(JSON.parse(res.managerQuestions))
-      //   managerResponses.push(JSON.parse(res.managerResponses))
-      //   managerSubmitted.push(res.submitted_date)
-      //   managerFeedback.push({managerQuestions, managerResponses, managerSubmitted})
-      // })
-
       const filtered = responsesRes.data[0].responses.filter(
         response => response.userId === userId
       );
@@ -484,9 +480,6 @@ class ReportResults extends Component {
         filteredResponse: filtered,
         responders,
         historicalSubmissionRate,
-        // managerQuestions: JSON.parse(managerQuestions),
-        // managerResponses: JSON.parse(managerResponses),
-        // managerSubmitted: managerSubmitted,
         managerFeedback: managerFeedback,
       });
     } catch (err) {
