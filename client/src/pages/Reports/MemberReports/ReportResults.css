@@ -38,10 +38,15 @@
 .response-container {
 	display: flex;
 	flex-direction: column;
-	/* margin-top: 24px;
-	padding-top: 24px; */
-
 }
+
+.response-container-manager {
+	display: flex;
+	flex-direction: column;
+	border: 1px dashed rgb(206, 206, 206);
+	padding: 10px;
+}
+
 
 .user-info {
 	display: flex;
@@ -69,6 +74,13 @@
 	padding-left: 20px;
 }
 
+.response-container-main-name-manager {
+	font-size: 15px;
+	font-weight: 400;
+	padding-left: 20px;
+	font-style: italic;
+}
+
 .response-container-main-question {
 	font-size: 18px;
 	font-weight: 500;
@@ -87,11 +99,18 @@
 }
 
 .vertical-timeline {
-	
 	width:1px;
 	background-color: rgb(206, 206, 206);
 	margin-right: 20px;
 	margin-left: 20px;
+}
+
+.manager-response-header-text {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 100%;
+	align-items: center;
 }
 
 .response-content {
@@ -187,9 +206,10 @@
 .responders-component {
 	position: relative;
 	width: 318px;
-	height: 120px;
+	height: 150px;
     background-color: white;
-    padding-top:10px;
+	padding-top:10px;
+	padding-left: 20px;
     box-shadow: 0px 0px 10px rgb(240, 240, 240);
     margin-bottom: 30px;
 }
@@ -207,6 +227,15 @@
 	padding: 18px;
 }
 
+.manager-toggle-list{
+	width: 25px;
+	height: 25px;
+}
+
+.manager-feedback-list {
+	background-color: blue;
+}
+
 .manager-feedback-for-users {
 	text-align: left;
 	padding: 18px;
@@ -215,14 +244,14 @@
 
 .manager-question {
 	text-align: left;
-	font-size: 14px;
+	font-size: 15px;
 	padding-bottom: 10px;
 	font-weight: 500;
 }
 
 .manager-response {
 	text-align: left;
-	font-size: 14px;
+	font-size: 15px;
 	padding-top: 10px;
 	padding-bottom: 30px;
 	padding-left: 20px;
