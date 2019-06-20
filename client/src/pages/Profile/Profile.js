@@ -105,6 +105,16 @@ class Profile extends Component {
 										>
 											Submit
 										</Button>
+										<Button
+											style={{ display: 'block', margin: '10px 0' }}
+											
+											variant="contained"
+											color="secondary"
+											type="submit"
+											onClick=""
+										>
+											Delete Account
+										</Button>
 										<div />
 									</form>
 								</Collapse>
