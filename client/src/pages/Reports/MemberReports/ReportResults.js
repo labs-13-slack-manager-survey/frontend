@@ -93,7 +93,34 @@ class ReportResults extends Component {
         managerQandA.managerSubmitted = this.state.managerFeedback[i].submitted_date;
         managerPollDays.push(managerQandA);
     }
+
+    let filteredManagerAndResponsesDate = [];
+
+    if (this.state.responses) {
+      let userResponses = this.state.responses;
+      let dateUser = ""
+
+      managerPollDays.forEach(function(response) {
+        let dateManager = moment(response.managerSubmitted).format('DDMMMMYYYY')
+        let newManagerUserDay = []
+        console.log(response);
+        newManagerUserDay.push({managerResponse:response});
+        
+        for (let i = 0; i <userResponses.length; i++) {
+          dateUser = moment(userResponses[i].date).format('DDMMMMYYYY')
+
+          if( dateUser === dateManager ) {
+            newManagerUserDay.push({userResponse: userResponses[i]});
+            }
+          }
+
+        filteredManagerAndResponsesDate.push(newManagerUserDay)   
+        })
+        console.log(filteredManagerAndResponsesDate[0])
+      }
     
+      
+ 
     console.log(managerPollDays)
 
     console.log(this.state.managerQuestions)
@@ -114,7 +141,7 @@ class ReportResults extends Component {
 
     console.log(managerToday)
     console.log(today)
-    console.log(this.state.managerFeedback)
+    console.log(managerPollDays)
 
     return (
       <div className="dashboard-view">
@@ -274,7 +301,12 @@ class ReportResults extends Component {
               )}
       
              
-            
+      {/* {filteredManagerAndResponsesDate ? filteredManagerAndResponsesDate.map(day => 
+        <div>{day[0].managerResponse.managerQuestions[0]}</div>)
+      : "none" } */}
+
+
+
 
             {this.state.responses.map(
               batch =>
@@ -420,7 +452,7 @@ class ReportResults extends Component {
            submitted_date: feedback.submitted_date }); 
        
       })
-      console.log(reportRes.data.report.managerQuestions)
+      console.log(managerFeedback)
 
       // managerRes.data.map(res => {
       //   console.log(res)
