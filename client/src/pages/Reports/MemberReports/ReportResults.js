@@ -81,8 +81,6 @@ class ReportResults extends Component {
       month: "long",
       day: "numeric"
     };
-    // console.log("REPORT RESULT STATE",this.state)
-    // console.log(this.state.managerQuestions)
     
     let managerPollDays = [];
 
@@ -137,7 +135,6 @@ class ReportResults extends Component {
 
     
     let managerToday = managerPollDays.length && managerPollDays[managerPollDays.length-1].managerSubmitted
-    // let managerToday = this.state.managerFeedback.length && this.getDate(this.state.managerFeedback[this.state.managerFeedback.length-1].submitted_date) != today
     managerToday = moment(managerToday).format('DD MMMM YYYY');
 
     console.log(managerToday)
@@ -253,10 +250,6 @@ class ReportResults extends Component {
           )}
 
           <section className="report-results-feed">
-          {/* {this.state.managerFeedback.map(res => (
-                  <div>{res}</div>
-                ))} */}
-      
               {managerPollDays.map(res => {
                 if (this.getDate(this.state.managerFeedback[this.state.managerFeedback.length-1].submitted_date) === today) {
                   return null 
@@ -393,13 +386,6 @@ class ReportResults extends Component {
 
                             </>)
                     : "none" }
-
-
-
-
-
-
-  
           </section>
         </main>
 
@@ -413,7 +399,6 @@ class ReportResults extends Component {
           <div className="calendar">
             <h1 className="title">Filter by day</h1>
             <DatePicker
-              // getByDate={this.getByDate}
               clickedDate={this.state.clickedDate}
               clickedResponder={this.state.clickedResponder}
               filter={this.filter}
@@ -464,11 +449,6 @@ class ReportResults extends Component {
       // format the submissionRate
       let { historicalSubmissionRate } = submissionRes.data;
       historicalSubmissionRate /= 100;
-
-      // let managerQuestions = [];
-      // let managerResponses = []; 
-      // let managerSubmitted = []; 
-      // let managerFeedback= [];
       
       const managerFeedback = [];
       managerRes.data.forEach(feedback => {
@@ -478,15 +458,6 @@ class ReportResults extends Component {
        
       })
       console.log(managerFeedback)
-
-      // managerRes.data.map(res => {
-      //   console.log(res)
-      //   managerQuestions.push(JSON.parse(res.managerQuestions))
-      //   managerResponses.push(JSON.parse(res.managerResponses))
-      //   managerSubmitted.push(res.submitted_date)
-      //   managerFeedback.push({managerQuestions, managerResponses, managerSubmitted})
-      // })
-
       const filtered = responsesRes.data[0].responses.filter(
         response => response.userId === userId
       );
@@ -509,9 +480,6 @@ class ReportResults extends Component {
         filteredResponse: filtered,
         responders,
         historicalSubmissionRate,
-        // managerQuestions: JSON.parse(managerQuestions),
-        // managerResponses: JSON.parse(managerResponses),
-        // managerSubmitted: managerSubmitted,
         managerFeedback: managerFeedback,
       });
     } catch (err) {
