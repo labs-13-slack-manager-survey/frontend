@@ -51,6 +51,7 @@
 .user-info {
 	display: flex;
 	flex-direction: row;
+	align-items: center;
 }
 .response-container-image {
 	border-radius: 50%;
@@ -81,16 +82,31 @@
 	font-style: italic;
 }
 
+.response-container-main-name-user {
+	font-size: 15px;
+	font-weight: 400;
+	font-style: italic;
+}
+
+.response-container-profile-pic {
+	height: 30px;
+	width: 30px;
+	border-radius: 40px;
+	margin-right: 20px;
+}
+
 .response-container-main-question {
-	font-size: 18px;
+	font-size: 15px;
 	font-weight: 500;
 	padding-top: 0px;
+	margin-bottom: 20px;
 }
 
 .response-container-main-answer {
 	font-size: 15px;
 	font-weight: 300;
 	margin-top: 0px;
+	margin-bottom: 20px;
 	/* padding-left: 10px; */
 }
 
@@ -182,6 +198,8 @@
 .calendar-top {
 	font-size: 15px;
 	margin-top: 13px;
+	color: #9c9c9c;
+
 }
 .calendar-bot {
 	width: 40px;
@@ -255,4 +273,13 @@
 	padding-top: 10px;
 	padding-bottom: 30px;
 	padding-left: 20px;
+}
+
+.user-response-header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 30px;
+	margin-top: 20px;
 }

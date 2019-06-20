@@ -342,29 +342,30 @@ class ReportResults extends Component {
 
                             <div className="response-container" onClick={this.toggleManagerQList}>
                                 <div className = "response-content">
-
-                                    <div className = "user-info">
-                                    <div className="month-day">
-                                      <div className="calendar-top">{moment(day[1].userResponse.date).format("DD")}</div>
-                                      <div className="calendar-bot">{moment(day[1].userResponse.date).format("MMMM")}</div>
-                                    </div>
-                                  </div>
+                                <div className = "linebr" />
 
                                 {day[1].userResponse.responses.map( userRes => <>
-                                <div className = "linebr" />
                                 <div className="response-container-main">
-                                <div className="response-content">
-
-                                <div className = "manager-response-header-text">
-                                  <div className = "response-container-main-name-manager">{userRes.fullName}</div>
-                                </div>
-                                   <div className="vertical-timeline" />
-                                  {userRes.questions.map(userQA => 
-                                    <> 
-                                    <div className= "manager-question">{userQA.question}</div> 
-                                    <div className= "manager-response ">{userQA.answer}</div>
-                                    <div className ="linebr" /> 
-                                    </> 
+                                  <div className="vertical-timeline" />
+                                  <div className="response-content">
+                                  
+                                  <div className = "user-response-header">
+                                    <div className= "user-info">
+                                        <img className = "response-container-profile-pic" src={userRes.profilePic} />
+                                        <div className = "response-container-main-name-user">{userRes.fullName}</div></div>
+                                    <div>
+                                      <div className="month-day">
+                                        <div className="calendar-top">{moment(day[1].userResponse.date).format("MMMM DD")}</div>
+                                      </div>
+                                    </div>
+                                  </div>
+                    
+                                    <ol> {userRes.questions.map(userQA => 
+                                      <> 
+                                      <li><div className= "response-container-main-question">{userQA.question}</div></li>
+                                      <div className= "response-container-main-answer ">A: {userQA.answer}</div>
+                                      <div className ="linebr" /> 
+                                      </> 
                                     // else{<>
                                     //   <div className= "manager-question">{userQA.question}</div> 
                                     //       <StyledSlider
@@ -383,7 +384,7 @@ class ReportResults extends Component {
                                     //         </div>
                                     //         <div className= "manager-response ">{userQA.answer}</div></>
                                     // }
-                                  )}
+                                  )}</ol>
                                 
                                         </div>
                                       </div></>
@@ -398,76 +399,9 @@ class ReportResults extends Component {
 
 
 
-            {this.state.responses.map(
-              batch =>
-                batch.responses.length > 0 && (
-                  <div key={batch.date}>
-                    {batch.responses.map(response => (
-                      <div key={response.userId}>
-                        <div className="response-container">
-                          <div className="user-info">
-                            <div className="month-day">
-                              <div className="calendar-top">
-                                {moment(batch.date).format("DD")}
-                              </div>
-                              <div className="calendar-bot">
-                                {moment(batch.date).format("MMMM")}
-                              </div>
-                            </div>
-                            <div className="response-container-main-name">
-                              {response.fullName}
-                            </div>
-                          </div>
-
-                          <div className="response-container-main">
-                            <div className="vertical-timeline" />
-                            <div className="response-content">
-                              <ol type="1">
-                                  {response.questions.map(
-                                    ({ question, answer, id, sentimentRange }) => (
-                                      <div key={id} className = "question-response">
-                                        <div className="response-container-main-question">
-                                        
-                                          <li className = "manager-poll-question">{question}</li>
-                                          
-                                        </div>
-                                        {this.state.isSentiment && 
-                                        <>
-                                            <StyledSlider
-                                              className="slider"
-                                              value={sentimentRange}
-                                              min={1}
-                                              max={5}
-                                              step={1}
-                                            />
-                                              <div className="slider-label">
-                                                <p className={sentimentRange !=1 ? "deselected" : null}>1</p>
-                                                <p className={sentimentRange !=2 ? "deselected" : null}>2</p>
-                                                <p className={sentimentRange !=3 ? "deselected" : null}>3</p>
-                                                <p className={sentimentRange !=4 ? "deselected" : null}>4</p>
-                                                <p className={sentimentRange !=5 ? "deselected" : null}>5</p>
-                                              </div>
-                                          </>
-                                        } 
-                                        <p className="response-container-main-answer">
-                                          <div className={ "regular-answer"}>{answer}</div>
-                                          <div className ="linebr" />
-                                        </p>
-                                    </div>
-                                  )
-                                )}
-                              </ol>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
 
 
-
-                  </div>
-                )
-            )}
+  
           </section>
         </main>
 
