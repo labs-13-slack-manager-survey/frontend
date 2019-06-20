@@ -66,6 +66,7 @@ class ReportResults extends Component {
     let formatted = moment(date).format('DD MMMM YYYY');
     return formatted;
   }
+
   render() {
     const options = {
       weekday: "long",
@@ -86,6 +87,7 @@ class ReportResults extends Component {
         managerPollDays.push(managerQandA);
     }
     
+    console.log(managerPollDays)
 
     console.log(this.state.managerQuestions)
     
@@ -95,11 +97,16 @@ class ReportResults extends Component {
     let today = new Date();
     today = moment(today).format('DD MMMM YYYY');
 
+    let today2 = new Date();
+    today2 = moment(today).format('DD MMMM YYYY');
+
     
     let managerToday = managerPollDays.length && managerPollDays[managerPollDays.length-1].managerSubmitted
     managerToday = moment(managerToday).format('DD MMMM YYYY');
 
     console.log(managerToday)
+    console.log(today)
+    console.log(this.state.managerFeedback)
 
     return (
       <div className="dashboard-view">
@@ -203,7 +210,7 @@ class ReportResults extends Component {
                 ))} */}
       
               {managerPollDays.map(res => {
-                if (this.getDate(res.submittedDate) === today) {
+                if (this.getDate(this.state.managerFeedback[this.state.managerFeedback.length-1].submitted_date) === today) {
                   return null 
                 } else {return <>
                     <div classname="manager-feedback">
@@ -222,6 +229,9 @@ class ReportResults extends Component {
                 }
              
               )}
+      
+             
+            
 
             {this.state.responses.map(
               batch =>
