@@ -1,6 +1,7 @@
 import './profile.css';
 import React, { Component } from 'react';
 import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
+import { Link } from 'react-router-dom';
 
 
 import PageTitle from '../../components/PageTitle'
@@ -104,6 +105,21 @@ class Profile extends Component {
 											onClick={this.openUserEdit}
 										>
 											Submit
+										</Button>
+										<Button
+											style={{ display: 'block',
+											margin: '10px 0'}}
+											variant="contained"
+											color="secondary"
+											type="submit"
+											onClick={this.deleteProfile}
+											>
+											<Link
+											style={{color:'white' }}
+                        					to={`/login`}
+											>
+											Delete Account
+											</Link>
 										</Button>
 										<div />
 									</form>
@@ -342,6 +358,18 @@ class Profile extends Component {
 				console.log(err);
 			});
 	};
+
+	deleteProfile = () =>{
+		const endpoint = `${baseURL}/users/`;
+		axiosWithAuth()
+		.delete(endpoint)
+			.then(res => {
+				console.log(res);
+			})
+			.catch(err => {
+				console.log('bad',err);
+			});
+	}
 }
 
 export default Profile;
