@@ -38,10 +38,15 @@
 .response-container {
 	display: flex;
 	flex-direction: column;
-	/* margin-top: 24px;
-	padding-top: 24px; */
-
 }
+
+.response-container-manager {
+	display: flex;
+	flex-direction: column;
+	border: 1px dashed rgb(206, 206, 206);
+	padding: 10px;
+}
+
 
 .user-info {
 	display: flex;
@@ -67,6 +72,14 @@
 	font-weight: 400;
 	margin-top: 17px;
 	padding-left: 20px;
+}
+
+.response-container-main-name-manager {
+	font-size: 15px;
+	font-weight: 400;
+	margin-top: 17px;
+	padding-left: 20px;
+	font-style: italic;
 }
 
 .response-container-main-question {
@@ -208,6 +221,10 @@
 	padding: 18px;
 }
 
+.manager-feedback-list {
+	background-color: blue;
+}
+
 .manager-feedback-for-users {
 	text-align: left;
 	padding: 18px;
@@ -216,14 +233,14 @@
 
 .manager-question {
 	text-align: left;
-	font-size: 14px;
+	font-size: 15px;
 	padding-bottom: 10px;
 	font-weight: 500;
 }
 
 .manager-response {
 	text-align: left;
-	font-size: 14px;
+	font-size: 15px;
 	padding-top: 10px;
 	padding-bottom: 30px;
 	padding-left: 20px;
