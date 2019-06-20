@@ -254,7 +254,15 @@ span {
     transform: translateX(-50%);
   }
   .horizontal-buttons {
-    display: none;
+    position: absolute;
+    right: 20px;
+    bottom: -73vh;
+  }
+  .menu-bar-add-poll {
+    border-radius: 50%;
+    /* color: transparent; */
+    width: 70px;
+    height: 70px;
   }
   .mobile-nav.vert-buttons2 {
     padding: 0;
@@ -299,5 +307,7 @@ span {
   }
   .vert-buttons .menu-button:nth-child(2) {
     order: -1;
+  }
+  .mobile-add-poll {
   }
 }
