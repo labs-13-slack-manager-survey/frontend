@@ -176,11 +176,6 @@ span {
 }
 
 @media (max-width: 500px) {
-  .App {
-    display: flex;
-
-    flex-direction: column;
-  }
   .horizontalMenuBar {
     padding: 0;
     display: flex;
@@ -239,8 +234,5 @@ span {
   .vert-buttons2 .button-label,
   .vert-buttons2 .button-label-logout {
     display: none;
-  }
-  .dashboard-view {
-    border: 1px solid red;
   }
 }
