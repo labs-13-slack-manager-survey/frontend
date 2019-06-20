@@ -301,9 +301,9 @@ class ReportResults extends Component {
               )}
       
              
-      {/* {filteredManagerAndResponsesDate ? filteredManagerAndResponsesDate.map(day => 
+      {filteredManagerAndResponsesDate ? filteredManagerAndResponsesDate.map(day => 
         <div>{day[0].managerResponse.managerQuestions[0]}</div>)
-      : "none" } */}
+      : "none" }
 
 
 

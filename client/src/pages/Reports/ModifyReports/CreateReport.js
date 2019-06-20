@@ -253,7 +253,7 @@ class CreateReport extends Component {
 
     if (this.state.reportName.length < 1) {
       this.setState({
-        errorMessage: "Please enter your report name in the respective field"
+        errorMessage: "Please enter your report name"
       });
       console.log(this.state.errorMessage);
       return this.state.errorMessage;
@@ -261,29 +261,12 @@ class CreateReport extends Component {
 
     if (this.state.schedule.length < 1) {
       this.setState({
-        errorMessage: "Please choose at least one day two send out your report"
+        errorMessage: "Please choose at least one day to send out your report"
       });
       console.log(this.state.errorMessage);
       console.log(this.state.managerQuestions);
       return this.state.errorMessage;
     }
-
-    // if (this.state.managerQuestions) {
-    //   console.log(this.state.resOne);
-    //   if (
-    //     this.state.resOne == "" ||
-    //     this.state.resTwo == "" ||
-    //     this.state.resThree == ""
-    //   ) {
-    //     this.setState({
-    //       errorMessage: "Please enter all answers to the manager polls "
-    //     });
-    //     console.log(this.state.managerQuestions);
-    //     console.log("hello");
-    //     console.log(this.state.errorMessage);
-    //     return this.state.errorMessage;
-    //   }
-    // }
 
     let slackChannelName;
     this.state.channels.forEach(channel => {
@@ -299,7 +282,6 @@ class CreateReport extends Component {
       questions,
       sentimentQuestions,
       slackChannelId,
-      // managerResponses,
       EngineeringManagerQuestions,
       ProjectManagerQuestions
     } = this.state;
@@ -310,14 +292,11 @@ class CreateReport extends Component {
       scheduleTime,
       message,
       questions: JSON.stringify(questions),
-      // managerResponses: JSON.stringify(managerResponses),
+      sentimentQuestions: JSON.stringify(sentimentQuestions),
       slackChannelId,
       slackChannelName,
-      created_at: new Date(),
-
-      sentimentQuestions: JSON.stringify(sentimentQuestions),
+      created_at: new Date()
     };
-    console.log("REPORT++", this.report);
     if (this.state.managerQuestions) {{this.state.managerType === 0
       ? (report["managerQuestions"] = JSON.stringify(
           EngineeringManagerQuestions
