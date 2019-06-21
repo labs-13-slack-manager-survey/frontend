@@ -119,7 +119,7 @@ export default class ChartOptions extends Component {
   };
 
   getResponseRateByDate = num => {
-    let dataArr = [];
+let dataArr = [];
     for (let i = 0; i < num; i++) {
       dataArr.push(Math.random() * 100);
     }
