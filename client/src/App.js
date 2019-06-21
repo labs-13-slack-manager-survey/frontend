@@ -36,19 +36,10 @@ import SlackRedirect from "./pages/Slack/SlackRedirect";
 import PrivateRoute from "./auth/PrivateRoute";
 import NewUserRoute from "./auth/NewUserRoute";
 
-//Google Analytics
-import ReactGA from 'react-ga';
-
 // CSS
 import "./App.css";
 
 function App() {
-
-  function initializeReactGA() {
-    ReactGA.initialize('UA-142549131-1');
-    ReactGA.pageview('/slackr');
-  }
-
   return (
     <div className = "App">
 
