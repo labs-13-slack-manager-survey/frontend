@@ -21,6 +21,11 @@
 .top-user-card {
   margin: 24px;
 }
+@media (max-width: 500px) {
+  .top-user-card {
+    margin-top: 0;
+  }
+}
 
 .profileCard-content {
   display: flex;
@@ -188,18 +193,33 @@ button {
   }
   .userCard-content {
     width: 100%;
-    border: 1px solid red;
     flex-direction: column;
     align-items: center;
   }
   .profileCard-content {
-    border: 1px solid red;
     /* margin: 20px 40px; */
     /* display: block; */
     align-items: center;
     margin: 20px;
   }
+  .editUser {
+    width: 100%;
+  }
   .userForm {
-    border: 1px solid red;
+    display: flex;
+    padding: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+  }
+  .userForm div:nth-child(1),
+  .userForm div:nth-child(2) {
+    width: 100%;
+  }
+
+  .userForm button {
+    margin: 0;
+    width: 100%;
   }
 }
