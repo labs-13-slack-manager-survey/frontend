@@ -201,15 +201,13 @@ class myTeam extends Component {
         ))}
 
         </div>
+
         <div className = "sidebar">
-          <SlackButton/>
-          <InviteUser />
-          {/* <PollCalendar /> */}
-          <CircleProgress 
-          title = "Today's Polls"
-          percentComplete = '0.6'/>
+            <SlackButton/>
+            <InviteUser />
         </div>
-      </div>
+        </div>
+      
     ) : (
       <Card style={{ textAlign: "center" }}>
         Looks like your account has been deactivated. If you believe this is an

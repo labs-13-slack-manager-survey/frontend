@@ -94,9 +94,9 @@ You can find the project at [https://stand-em-ups.netlify.com](https://stand-em-
 
 # APIs
 ## Firebase Auth
-Stand-Em-Ups is using Firebase Auth for our OAuth implementation. There is no native login/signup method in our application.
+Slackr is using Firebase Auth for our OAuth implementation. There is no native login/signup method in our application.
 ## Slack API
-Stand-Em-Ups is using the Slack API for OAuth to connect the team to the workspace so that our application can send the reports as a DM. To send the DM we are using webhooks made available from the Slack Interactive Components website.
+Slackr is using the Slack API for OAuth to connect the team to the workspace so that our application can send the reports as a DM. To send the DM we are using webhooks made available from the Slack Interactive Components website.
 
 # Environment Variables
 In order for the app to function correctly, the user must set up their own environment variables. There should be a .env file containing the following:

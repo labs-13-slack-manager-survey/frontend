@@ -1,4 +1,5 @@
 .slider { 
+
     height: 60px;
     align-items: center;
     display: flex;
@@ -15,7 +16,7 @@
 .toggleComments {
    display: flex;
    flex-direction: row-reverse;
-   height: 20px;
+   height: 30px;
    margin: 25px;
 }
 
@@ -34,4 +35,12 @@
 	font-weight: 500;
     padding-top: 10px;
     margin-bottom: -10px;
+}
+
+.comment-field{
+    padding-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }

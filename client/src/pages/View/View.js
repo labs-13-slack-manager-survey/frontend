@@ -31,21 +31,24 @@ class View extends Component {
     initialStep: 0,
     steps: [
       {
-        intro: 'Welcome to the Slackr reports dashboard! From here managers have access to all essentials and team members can view polls that have been created.',
+        intro: 'Welcome to the Slackr dashboard! From here managers have access to all essentials and team members can view the stand up reports that their managers have created.',
       },
       {
         element: '.one',
-        intro: 'Here you can see all the reports. Managers can edit and delete existing reports. To select a specific report click on it\'s name.'
+        intro: 'Here you can see all the reports. Managers can edit and delete existing reports. To select a specific report click on the respond button.'
       },
       {
         element: '.two',
         intro: 'This displays the percentage of completed reports.'
       },
       {
-        intro: 'To view more in depth statistics about the well being of your team click on the stats button on the left.'
+        intro: 'To add people to your team click the my team button on the left.'
       },
       {
-        intro: 'To create your first report click on the Add Poll button on top of the screen.'
+        intro: 'To view more in depth statistics about the well being of your team and reports filled out by day click on the stats button on the left.'
+      },
+      {
+        intro: 'To create your first report click on the + button on top right of the screen.'
       }
     ]
   };
@@ -80,6 +83,7 @@ class View extends Component {
       {localStorage.getItem('doneTour') === 'yeah!' ? 
       null :
       <Steps
+        className="step"
         enabled={stepsEnabled}
         steps={steps}
         initialStep={initialStep}
@@ -97,7 +101,7 @@ class View extends Component {
         <div className="sidebar">
           <div className="two">
           <CircleProgress
-            title="Today's Polls"
+            title="Today's Surveys"
             percentComplete={this.state.rate}
           />
           </div>

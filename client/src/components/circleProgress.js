@@ -7,7 +7,6 @@ class circleProgress extends React.Component {
 
   
     render() {
-      console.log(this.props.percentComplete);
       $('#circle').circleProgress({
         value: this.props.percentComplete,
         size: 150,

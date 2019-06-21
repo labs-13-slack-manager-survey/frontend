@@ -29,8 +29,8 @@ class Onboarding extends Component {
     this.setState({ createToggle: false });
   };
   createToggle = () => {
-    this.setState({ createToggle: !this.state.createToggle });
     this.setState({ joinToggle: false });
+    this.createTeam();
   };
   toggleAllOff = () => {
     this.setState({ createToggle: false });
