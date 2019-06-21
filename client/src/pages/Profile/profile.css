@@ -1,181 +1,225 @@
 .userCard {
-	max-width: 800px;
-	width: 100%;
-	max-height: 100%;
-	margin: 0 auto;
+  max-width: 800px;
+  width: 100%;
+  max-height: 100%;
+  margin: 0 auto;
 }
 
 .userCard-content {
-	display: flex;
-	flex-direction: row;
-	justify-content: left;
-	align-items: flex-start;
-}
-
-@media (max-width: 800px) {
-	.userCard-content {
-		flex-direction: column-reverse;
-	}
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: flex-start;
 }
 
 .userCard img {
-	width: 300px;
-	height: 300px;
-	border-radius: 50%;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
 }
 
 .top-user-card {
-	margin: 24px;
+  margin: 24px;
+}
+@media (max-width: 500px) {
+  .top-user-card {
+    margin-top: 0;
+  }
 }
 
 .profileCard-content {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	margin: 24px;
-	width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 24px;
+  width: 100%;
 }
 
 .userCard input {
-	border-radius: 3px;
+  border-radius: 3px;
 }
 .userCard div h3 {
-	font-size: 40px;
-	margin: 40px auto;
-	text-align: center;
+  font-size: 40px;
+  margin: 40px auto;
+  text-align: center;
 }
 .userForm {
-	display: block;
+  display: block;
 }
 .profileForms {
-	margin: 24px;
+  margin: 24px;
 }
 
 .email-field {
-	max-width: 400px;
-	width: 100%;
+  max-width: 400px;
+  width: 100%;
 }
 
 .email-field::placeholder {
-	color: black;
+  color: black;
 }
 
 .userCard .bp3-button {
-	background-color: #fafafad2;
+  background-color: #fafafad2;
 }
 
 #profilePic {
-	max-width: 50px;
-	width: 100%;
-	height: 50px;
-	border-radius: 50px;
-	margin: 5px auto;
+  max-width: 50px;
+  width: 100%;
+  height: 50px;
+  border-radius: 50px;
+  margin: 5px auto;
 }
 
 .admin-controls {
-	display: flex;
-	align-content: center;
-	justify-content: space-between;
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
 }
 
 @media (max-width: 810px) {
-	.admin-controls {
-		display: block;
-	}
+  .admin-controls {
+    display: block;
+  }
 }
 
 .join-code {
-	max-width: 15%;
-	width: 100%;
-	margin: 0 auto;
+  max-width: 15%;
+  width: 100%;
+  margin: 0 auto;
 }
 
 @media (max-width: 810px) {
-	.join-code {
-		max-width: 90%;
-	}
+  .join-code {
+    max-width: 90%;
+  }
 }
 
 .deactivated-users {
-	max-width: 40%;
-	width: 100%;
-	margin: 0 auto;
-	display: flex;
-	flex-direction: column;
+  max-width: 40%;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 
 @media (max-width: 810px) {
-	.deactivated-users {
-		max-width: 90%;
-	}
+  .deactivated-users {
+    max-width: 90%;
+  }
 }
 
 .deactivated-reports {
-	max-width: 40%;
-	width: 100%;
-	margin: 0 auto;
-	display: flex;
-	flex-direction: column;
+  max-width: 40%;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 
 @media (max-width: 810px) {
-	.deactivated-reports {
-		max-width: 90%;
-	}
+  .deactivated-reports {
+    max-width: 90%;
+  }
 }
 
 .inactive-user-card {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-around;
-	align-content: center;
-	margin: 24px;
-	align-items: baseline;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-content: center;
+  margin: 24px;
+  align-items: baseline;
 }
 
 .inactive-user-content {
-	display: flex;
-	flex-direction: column;
-	align-content: center;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
 }
 
 .inactive-user-card h4,
 button {
-	margin: 0 auto;
+  margin: 0 auto;
 }
 
 .inactive-user-card button {
-	flex-grow: initial;
+  flex-grow: initial;
 }
 
 .inactive-reports-content {
-	margin: 24px;
+  margin: 24px;
 }
 
 .report-title {
-	margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .edit-user-toggle {
-	margin: 10px;
+  margin: 10px;
 }
 
 .display-button {
-	display: none;
+  display: none;
 }
 
 #edit-user-button {
-	display: block;
+  display: block;
 }
 
 #edit-user-content {
-	display: block;
+  display: block;
 }
 
-.profile-picture-username { 
-	height: 100px;
-	width: 100px;
-	margin-right: 20px;
-	border-radius: 100px;
-	margin-top: 40px;
+.profile-picture-username {
+  height: 100px;
+  width: 100px;
+  margin-right: 20px;
+  border-radius: 50px;
+  margin-top: 40px;
+  border: 5px solid #efefef;
+}
+@media (max-width: 800px) {
+  .userCard-content {
+    flex-direction: column-reverse;
+  }
+}
+@media (max-width: 500px) {
+  .MuiFormControl-root {
+    display: none;
+  }
+  .profile-picture-username {
+    margin: 0;
+  }
+  .userCard-content {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+  .profileCard-content {
+    /* margin: 20px 40px; */
+    /* display: block; */
+    align-items: center;
+    margin: 20px;
+  }
+  .editUser {
+    width: 100%;
+  }
+  .userForm {
+    display: flex;
+    padding: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+  }
+  .userForm div:nth-child(1),
+  .userForm div:nth-child(2) {
+    width: 100%;
+  }
+
+  .userForm button {
+    margin: 0;
+    width: 100%;
+  }
 }
