@@ -14,7 +14,7 @@ class SentimentChart extends Component {
         labels: this.props.labels,
         datasets: [
           {
-            label: "Response Rate",
+            label: this.props.label,
             data: this.props.data,
             backgroundColor: "#055EBE"
           }
@@ -26,7 +26,7 @@ class SentimentChart extends Component {
             {
               ticks: {
                 min: 0,
-                max: 100
+                max: this.props.max
               }
             }
           ]

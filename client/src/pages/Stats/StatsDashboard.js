@@ -75,17 +75,27 @@ class StatsDashboard extends Component {
       .catch(err => console.log(err));
   };
 
-  generateDates = num => {
-    let generatedDates = [];
-    for (let i = num; i > 0; i--) {
-      let date = new Date();
-      date.setDate(date.getDate() - i);
-      date = moment(date).format("l");
-      generatedDates.push(date);
+  generateLabels = num => {
+    if (this.state.dataType === "responseRate") {
+      let generatedDates = [];
+      for (let i = num; i > 0; i--) {
+        let date = new Date();
+        date.setDate(date.getDate() - i);
+        date = moment(date).format("l");
+        generatedDates.push(date);
+      }
+      this.setState({
+        labels: generatedDates
+      });
+    } else if (this.state.dataType === "sentimentAverage") {
+      let reportNames = [];
+      this.state.reports.forEach(report => {
+        reportNames.push(report.reportName);
+      });
+      this.setState({
+        labels: reportNames
+      });
     }
-    this.setState({
-      labels: generatedDates
-    });
   };
 
   handleChange = e => {
@@ -98,22 +108,27 @@ class StatsDashboard extends Component {
     e.preventDefault();
     switch (this.state.filterBy) {
       case "day":
-        let today = moment(Date.now()).format("l");
-        this.setState({
-          labels: [today]
-        });
+        if (this.state.dataType === "responseRate") {
+          let today = moment(Date.now()).format("l");
+          this.setState({
+            labels: [today]
+          });
+        } else if (this.state.dataType === "sentimentAverage") {
+          this.generateLabels(1);
+        }
+
         break;
       case "week":
-        this.generateDates(7);
+        this.generateLabels(7);
         break;
       case "month":
-        this.generateDates(30);
+        this.generateLabels(30);
         break;
       case "quarter":
-        this.generateDates(90);
+        this.generateLabels(90);
         break;
       case "year":
-        this.generateDates(365);
+        this.generateLabels(365);
         break;
     }
   };
