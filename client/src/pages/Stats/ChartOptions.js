@@ -58,9 +58,6 @@ export default class ChartOptions extends Component {
           arrIndex++;
         }
       }
-      console.log(daySortedReports);
-      console.log(daySortedReports[0][0].submissionRate);
-      console.log(daySortedReports[0][1]);
       this.setState({
         sortedReports: daySortedReports
       });
@@ -112,55 +109,63 @@ export default class ChartOptions extends Component {
 
   getResponseRateByDate = num => {
     let dataArr = [];
+    let avgs = [];
+
     for (let i = 0; i < num; i++) {
       dataArr.push(Math.random() * 100);
     }
+
+    this.state.sortedReports.forEach(arr => {
+      let dayAvg = 0;
+      arr.forEach(report => {
+        dayAvg += report.submissionRate;
+      });
+      dayAvg = dayAvg / this.state.sortedReports.length;
+      avgs.push(dayAvg);
+    });
+
     for (let i = 0; i < this.state.sortedReports.length; i++) {
-      dataArr.splice(
-        dataArr.length - i - 1,
-        1,
-        this.state.sortedReports[i][0].submissionRate
-      );
+      dataArr.splice(dataArr.length - i - 1, 1, avgs[i]);
     }
+
     this.setState({
       data: dataArr
     });
   };
 
-  getSentimentAvgByDate = () => {};
-
-  getResponseRate = () => {
+  getSentimentAvgByDate = () => {
+    let avgs = [];
     this.props.reports.forEach(report => {
       axiosWithAuth()
-        .get(`${URL}/reports/submissionRate/${report.id}`)
+        .get(`${URL}/responses/sentimentAvg/${report.id}`)
         .then(res => {
-          this.setState({
-            data: [...this.state.data, res.data.historicalSubmissionRate]
-          });
+          console.log(res.data[0].average);
+          avgs.push(res.data[0].average);
         })
         .catch(err => console.log(err));
     });
-  };
 
-  getSentimentAvg = () => {
-    this.props.reports.forEach(report => {
-      axiosWithAuth
-        .get(`${URL}/responses/sentimentAvg/${report.id}`)
-        .then(res => {
-          console.log(res.data);
-        })
-        .catch(err => console.log(err));
+    this.setState({
+      data: avgs
     });
   };
 
   render() {
-    // this.fetchSpecifiedData();
     if (this.props.labels.length === 0 || this.state.data.length === 0) {
       return <p>Set options to display graph.</p>;
     }
     return (
       <div>
-        <SentimentChart data={this.state.data} labels={this.props.labels} />
+        <SentimentChart
+          data={this.state.data}
+          labels={this.props.labels}
+          max={this.props.dataType === "responseRate" ? 100 : 5}
+          label={
+            this.props.dataType === "responseRate"
+              ? "Response Rate"
+              : "Sentiment Average"
+          }
+        />
       </div>
     );
   }
