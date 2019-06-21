@@ -23,3 +23,11 @@ h2 {
   margin: 20px 0;
   display: flex;
 }
+
+@media (max-width: 500px) {
+  .dataSquares {
+    display: flex;
+    flex-direction: column;
+    margin-top: -15px;
+  }
+}
