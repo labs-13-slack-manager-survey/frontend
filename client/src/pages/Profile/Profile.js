@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import PageTitle from "../../components/PageTitle";
 
 // style imports
+import Hidden from "@material-ui/core/Hidden";
+import withWidth from "@material-ui/core/withWidth";
 import { Collapse } from "@blueprintjs/core";
 import {
   Card,
@@ -46,6 +48,19 @@ class Profile extends Component {
             />
             <div className="profileCard-content">
               <h3>{this.state.profileInfo.fullName}</h3>
+              <Hidden smDown>
+                <TextField
+                  InputLabelProps={{ shrink: true }}
+                  className="email-field"
+                  label="Email"
+                  placeholder={this.state.profileInfo.email}
+                  margin="normal"
+                  variant="outlined"
+                  color="primary"
+                  fullWidth
+                  disabled
+                />
+              </Hidden>
               <div className="editUser">
                 <Button
                   style={{ margin: "10px 0" }}
@@ -56,56 +71,58 @@ class Profile extends Component {
                   {this.state.openEditUser === false ? "Edit" : "Cancel"}
                 </Button>
                 <Collapse isOpen={this.state.openEditUser}>
-                  <form className="userForm" onSubmit={this.updateUser}>
-                    <FormControl id="edit-user-content">
-                      <InputLabel htmlFor="custom-css-standard-input">
-                        Edit Name
-                      </InputLabel>
-                      <Input
-                        id="custom-css-standard-input"
-                        type="text"
-                        value={this.state.newName}
-                        name="newName"
-                        onChange={this.changeHandler}
-                        placeholder="Enter new name"
-                      />
-                    </FormControl>
-                    <FormControl>
-                      <InputLabel htmlFor="custom-css-standard-input">
-                        Edit Picture
-                      </InputLabel>
-                      <Input
-                        id="custom-css-standard-input"
-                        type="text"
-                        value={this.state.newPic}
-                        name="newPic"
-                        placeholder="Enter new picture Link"
-                        onChange={this.changeHandler}
-                      />
-                    </FormControl>
-                    <Button
-                      style={{ display: "block", margin: "10px 0" }}
-                      id="edit-user-button"
-                      variant="contained"
-                      color="primary"
-                      type="submit"
-                      onClick={this.openUserEdit}
-                    >
-                      Submit
-                    </Button>
-                    <Button
-                      style={{ display: "block", margin: "10px 0" }}
-                      variant="contained"
-                      color="secondary"
-                      type="submit"
-                      onClick={this.deleteProfile}
-                    >
-                      <Link style={{ color: "white" }} to={`/login`}>
-                        Delete Account
-                      </Link>
-                    </Button>
-                    <div />
-                  </form>
+                  <Card raised={true}>
+                    <form className="userForm" onSubmit={this.updateUser}>
+                      <FormControl id="edit-user-content">
+                        <InputLabel htmlFor="custom-css-standard-input">
+                          Edit Name
+                        </InputLabel>
+                        <Input
+                          id="custom-css-standard-input"
+                          type="text"
+                          value={this.state.newName}
+                          name="newName"
+                          onChange={this.changeHandler}
+                          placeholder="Enter new name"
+                        />
+                      </FormControl>
+                      <FormControl>
+                        <InputLabel htmlFor="custom-css-standard-input">
+                          Edit Picture
+                        </InputLabel>
+                        <Input
+                          id="custom-css-standard-input"
+                          type="text"
+                          value={this.state.newPic}
+                          name="newPic"
+                          placeholder="Enter new picture Link"
+                          onChange={this.changeHandler}
+                        />
+                      </FormControl>
+                      <Button
+                        style={{ display: "block", margin: "10px 0" }}
+                        id="edit-user-button"
+                        variant="contained"
+                        color="primary"
+                        type="submit"
+                        onClick={this.openUserEdit}
+                      >
+                        Submit
+                      </Button>
+                      <Button
+                        style={{ display: "block", margin: "10px 0" }}
+                        variant="contained"
+                        color="secondary"
+                        type="submit"
+                        onClick={this.deleteProfile}
+                      >
+                        <Link style={{ color: "white" }} to={`/login`}>
+                          Delete Account
+                        </Link>
+                      </Button>
+                      <div />
+                    </form>
+                  </Card>
                 </Collapse>
               </div>
             </div>
@@ -351,4 +368,4 @@ class Profile extends Component {
   };
 }
 
-export default Profile;
+export default withWidth()(Profile);
