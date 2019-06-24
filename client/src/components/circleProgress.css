@@ -65,6 +65,41 @@
     color: #9C9C9C;
 }
 
+@media (max-width: 1100px) {
+    .circle-graph {
+        width: 100%;
+        box-shadow: none;
+        outline: 1px solid #efefef;
+        margin-bottom: 30px;
+    }
+
+    .circle {
+        margin-left: 5rem;
+    }
+
+    .circle-background {
+        margin-left: 4.3rem;
+    }
+
+    .text-description {
+        margin-left: 30px;
+    }
+}
+
+@media (max-width: 800px) {
+
+    .circle {
+        margin-left: 8%;
+    }
+
+    .circle-background {
+        margin-left: 7%;
+    }
+
+    .text-description {
+        margin-left: 3%;
+    }
+}
 @media (max-width: 500px) {
     .circle-graph {
         width: 87%;
