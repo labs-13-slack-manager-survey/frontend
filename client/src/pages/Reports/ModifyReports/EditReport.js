@@ -407,7 +407,7 @@ class EditReport extends Component {
           {/* Sentiment Card */}
           <Card raised={true} className="schedule-card">
             <section className="schedule-card-content">
-              <h3 className="schedule-title">sentiment Questions</h3>
+              <h3 className="schedule-title">Sentiment Questions</h3>
               <Divider className="divider" variant="fullWidth" />
               <section>
                 {this.state.sentimentQuestions.map(question => (
