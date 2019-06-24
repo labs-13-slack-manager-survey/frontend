@@ -131,7 +131,7 @@ class MemberResponseForm extends Component {
                 color="primary"
                 onClick={this.submitAll}
               >
-                Submit Report
+                Submit Survey
               </Button>
             </section>
           )}

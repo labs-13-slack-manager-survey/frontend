@@ -219,10 +219,10 @@ class TemplateMaker extends Component {
         <form className="create-report">
           <Card raised={true} className="schedule-card">
             <section className="schedule-card-content">
-              <h3 className="schedule-title">Report Information</h3>
+              <h3 className="schedule-title">Survey Information</h3>
               <Divider className="divider" variant="fullWidth" />
               <FormControl className="report-name report-margin" required>
-                <InputLabel htmlFor="report-name">Report Name</InputLabel>
+                <InputLabel htmlFor="report-name">Survey Name</InputLabel>
                 <Input
                   id="report-name"
                   className="input-field"
@@ -230,14 +230,14 @@ class TemplateMaker extends Component {
                   type="text"
                   onChange={this.changeHandler}
                   name="reportName"
-                  placeholder="Report Name"
+                  placeholder="Survey Name"
                   value={this.state.reportName}
                 />
               </FormControl>
               <section>
                 <FormControl className="input-field" required>
                   <InputLabel htmlFor="report-message">
-                    Report Message
+                    Survey Message
                   </InputLabel>
                   <Input
                     required
@@ -246,7 +246,7 @@ class TemplateMaker extends Component {
                     type="textarea"
                     onChange={this.changeHandler}
                     name="message"
-                    placeholder="Message to be sent with each report"
+                    placeholder="Message to be sent with each survey"
                     value={this.state.message}
                   />
                 </FormControl>
@@ -377,7 +377,7 @@ class TemplateMaker extends Component {
             onClick={this.addReport}
             disabled={this.state.questions.length === 0 ? true : false}
           >
-            Create Report
+            Create Survey
           </Button>
         </form>
       </div>

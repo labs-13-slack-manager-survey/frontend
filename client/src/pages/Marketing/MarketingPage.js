@@ -57,7 +57,7 @@ class MarketingPage extends Component {
             <SectionTitle>Manage Your Team With Efficency</SectionTitle>
             <BodyText>
               Say goodbye to long stand-ups! Discover the blockers your team is
-              facing without all the commentary. Daily reports are customizable,
+              facing without all the commentary. Daily surveys are customizable,
               so you only ask the questions you care about, and only get the
               answers that matter.{" "}
             </BodyText>
@@ -78,7 +78,7 @@ class MarketingPage extends Component {
           <SectionDivider>
             <SectionTitle>Record Your Progress</SectionTitle>
             <BodyText>
-              Slackr allows you access your team's historical reports, so you
+              Slackr allows you access your team's historical surveys, so you
               can hold each other accountable.
             </BodyText>
           </SectionDivider>

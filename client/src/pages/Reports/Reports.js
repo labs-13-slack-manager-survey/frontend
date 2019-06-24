@@ -107,11 +107,11 @@ class Reports extends Component {
         <div>
           {/* passing reports from state to individual components */}
           <TableHeader 
-              column1 = "Report Name"
+              column1 = "Survey Name"
               column2 = "Date Created"
               column3 = "Schedule" 
               column4 = "Total Responses"/>
-                {activeReportsReverse.length == 0 ? <div> no reports yet! Add a report to get started </div> : null}
+                {activeReportsReverse.length == 0 ? <div> no surveys yet! Add a Survey to get started </div> : null}
           {activeReportsReverse.map(report => (
               <TableDisplay 
               content1 = {report.reportName}

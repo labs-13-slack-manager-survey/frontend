@@ -248,10 +248,10 @@ class EditReport extends Component {
         <form className="edit-report">
           <Card raised={true} className="schedule-card">
             <section className="schedule-card-content">
-              <h3 className="schedule-title">Report Information</h3>
+              <h3 className="schedule-title">Survey Information</h3>
               <Divider className="divider" variant="fullWidth" />
               <FormControl className="report-name report-margin" required>
-                <InputLabel htmlFor="edit-report-name">Report Name</InputLabel>
+                <InputLabel htmlFor="edit-report-name">Survey Name</InputLabel>
                 <Input
                   id="edit-report-name"
                   className="input-field top-input"
@@ -294,7 +294,7 @@ class EditReport extends Component {
             <section className="schedule-card-content">
               <FormControl className="input-field" required>
                 <InputLabel htmlFor="edit-report-message">
-                  Report Message
+                  Survey Message
                 </InputLabel>
                 <Input
                   required
@@ -303,7 +303,7 @@ class EditReport extends Component {
                   type="textarea"
                   onChange={this.changeHandler}
                   name="message"
-                  placeholder="Message to be sent with each report"
+                  placeholder="Message to be sent with each survey"
                   value={this.state.message}
                 />
               </FormControl>
@@ -452,7 +452,7 @@ class EditReport extends Component {
             color="primary"
             onClick={this.updateReport}
           >
-            Update Report
+            Update Survey
           </Button>
         </form>
       </div>
