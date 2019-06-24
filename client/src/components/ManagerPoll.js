@@ -196,7 +196,7 @@ class ManagerPoll extends React.Component {
                     color="primary"
                     onClick={this.submitAll}
                     >
-                    Submit Report
+                    Submit Survey
                 </Button>
 
           </div>

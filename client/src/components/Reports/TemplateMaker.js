@@ -230,7 +230,7 @@ class TemplateMaker extends Component {
                   type="text"
                   onChange={this.changeHandler}
                   name="reportName"
-                  placeholder="Report Name"
+                  placeholder="Survey Name"
                   value={this.state.reportName}
                 />
               </FormControl>
@@ -246,7 +246,7 @@ class TemplateMaker extends Component {
                     type="textarea"
                     onChange={this.changeHandler}
                     name="message"
-                    placeholder="Message to be sent with each report"
+                    placeholder="Message to be sent with each survey"
                     value={this.state.message}
                   />
                 </FormControl>
@@ -377,7 +377,7 @@ class TemplateMaker extends Component {
             onClick={this.addReport}
             disabled={this.state.questions.length === 0 ? true : false}
           >
-            Create Report
+            Create Survey
           </Button>
         </form>
       </div>
