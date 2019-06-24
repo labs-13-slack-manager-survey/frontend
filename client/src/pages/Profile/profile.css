@@ -20,10 +20,15 @@
 
 .top-user-card {
   margin: 24px;
+  outline: 1px solid #efefef;
+  display: flex;
+  flex-direction: column;
 }
 @media (max-width: 500px) {
   .top-user-card {
-    margin-top: 0;
+	margin-top: 20px;
+	outline: 1px solid #efefef;
+
   }
 }
 
@@ -75,6 +80,8 @@
   display: flex;
   align-content: center;
   justify-content: space-between;
+  flex-direction: column;
+  width: 100%;
 }
 
 @media (max-width: 810px) {
