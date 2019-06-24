@@ -11,13 +11,14 @@ import {
   Fab,
   Icon,
   TextField,
-  MenuItem,
   withStyles
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import { TimePicker } from "material-ui-pickers";
 import { getHours } from "date-fns";
 import { getMinutes } from "date-fns/esm";
+import PageTitle from "../../../components/PageTitle";
+
 
 // this edits reports - admin only
 // Parent component = ReportsDash.js in '/pages/Dashboard/ReportsDash'
@@ -237,46 +238,57 @@ class EditReport extends Component {
   };
 
   render() {
-    const { classes } = this.props;
     return (
       <div className="create-report">
-        <Fab onClick={() => this.props.history.goBack()} color="default">
-          <Icon>arrow_back</Icon>
-        </Fab>
-
+        <PageTitle 
+        title="Update Survey"
+        {...this.props}
+        secondaryPage={true}
+        />
           <div className="linebr" />
           <section className="response-card">
-              <h3 className="schedule-title">Survey Information</h3>
               <FormControl className="report-name report-margin" required>
-                <InputLabel htmlFor="edit-report-name">Survey Name</InputLabel>
-                <Input
-                  id="edit-report-name"
-                  className="input-field top-input"
-                  required
-                  type="text"
-                  onChange={this.changeHandler}
-                  name="reportName"
-                  value={this.state.reportName}
-                />
-              </FormControl>
+              <div
+                className={
+                  this.state.reportName ? "manager-poll-question" : "incomplete"
+                }
+              >
+                Survey Name
+              </div>
+              <TextField
+                fullWidth={true}
+                variant="outlined"
+                multiline={true}
+                id="report-name"
+                required
+                type="text"
+                onChange={this.changeHandler}
+                name="reportName"
+                placeholder="Report Name"
+                value={this.state.reportName}
+              />
+            </FormControl>
             </section>
 
           <div className="linebr" />
           <section className="response-card">
-              <FormControl className="input-field" required>
-                <InputLabel htmlFor="edit-report-message">
-                  Survey Message
-                </InputLabel>
-                <Input
-                  required
-                  className="input-field margin-fix"
-                  id="edit-report-message"
-                  type="textarea"
-                  onChange={this.changeHandler}
-                  name="message"
-                  placeholder="Message to be sent with each survey"
-                  value={this.state.message}
-                />
+          <FormControl className="input-field" required>
+                <div className="poll-answer-field">
+                  <div className="manager-poll-question">Description</div>
+                  <TextField
+                    fullWidth={true}
+                    variant="outlined"
+                    multiline={true}
+                    required
+                    className="input-field"
+                    id="report-message"
+                    type="textarea"
+                    onChange={this.changeHandler}
+                    name="message"
+                    placeholder="Message to be sent with each report"
+                    value={this.state.message}
+                  />
+                </div>
               </FormControl>
             </section>
 
