@@ -147,7 +147,7 @@ class StatsDashboard extends Component {
         <div className="dashboard-view">
           <div className="view">
             <PageTitle title="Stats Dashboard" />
-            <div className="dataSquares">
+            <div className="summary-boxes">
               <SummaryBox
                 title="no. of team members"
                 content={this.state.users.length}

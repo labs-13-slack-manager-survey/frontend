@@ -131,3 +131,10 @@
 #display-edit {
 	display: none;
 }
+
+
+@media (max-width: 500px) {
+	.reports-header {
+		margin-top: 0;
+	}
+}

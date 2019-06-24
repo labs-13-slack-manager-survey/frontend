@@ -49,7 +49,7 @@ class TableDisplay extends React.Component {
             <div className="table-display">
 
             <div className = "content">
-
+            
             <Link to={`/slackr/dashboard/reports/${this.props.report.id}`}
             style={{ textDecoration: 'none' }} className = "column1">
                 <div>{this.props.content1}
@@ -71,7 +71,9 @@ class TableDisplay extends React.Component {
                             </div>
                         ))}
                 </div>
-                <div className = "columnTR" >{this.state.totalResponses}</div> 
+
+                <div className = "columnTR" ><div className = "label-mobile">Total Responses: </div>{this.state.totalResponses}</div> 
+                
                 <Button>
                     <Link
                         to={`/slackr/dashboard/reports/${reportId}`}
@@ -80,6 +82,7 @@ class TableDisplay extends React.Component {
                     </Link>
                 </Button>
 
+                <div className="action-buttons-reports" > 
                 <div className = "action-icons">
                     <Link
                         to={`/slackr/dashboard/reports/${reportId}/edit`}
@@ -108,6 +111,39 @@ class TableDisplay extends React.Component {
                             this.setState({dialogOpen: false})
                             }}>No</Button>
                     </Dialog>
+                </div>
+
+
+                <div className = "edit-delete-mobile">
+                <Link className ="edit"
+                        to={`/slackr/dashboard/reports/${reportId}/edit`}
+                        id={this.props.role !== 'admin' ? 'display-link' : ''}
+                    >
+                        EDIT
+                    </Link>
+                    <div onClick={() => this.setState({dialogOpen: true})} id={this.props.role !== 'admin' ? 'display-link' : ''} className = "delete">
+                        DELETE
+                    {/* <img onClick={() => this.setState({dialogOpen: true})}  className ="delete" src={trashCan} /> */}
+                    </div>
+                    <Dialog
+                        open={this.state.dialogOpen}
+                        TransitionComponent={Transition}
+                        keepMounted
+                        onClose={this.props.clearError}
+                        aria-labelledby="alert-dialog-slide-title"
+                        aria-describedby="alert-dialog-slide-description"
+                    >
+                        <DialogTitle id="alert-dialog-slide-title">
+                            Are you sure you'd like to archive this report? 
+                        </DialogTitle>
+                        <Button onClick={() => this.props.archiveReport(reportId)}>
+                            Yes
+                        </Button>
+                        <Button onClick={() => {
+                            this.setState({dialogOpen: false})
+                            }}>No</Button>
+                    </Dialog>
+                </div>
                 </div>
             </div>
                             
