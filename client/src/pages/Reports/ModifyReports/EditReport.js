@@ -4,9 +4,8 @@ import { axiosWithAuth, baseURL } from "../../../config/axiosWithAuth";
 // style imports
 import "./Report.css";
 import {
-  Card,
   Button,
-  Divider,
+  PageTitle,
   Input,
   InputLabel,
   FormControl,
@@ -246,10 +245,10 @@ class EditReport extends Component {
           <Icon>arrow_back</Icon>
         </Fab>
         <form className="edit-report">
-          <Card raised={true} className="schedule-card">
-            <section className="schedule-card-content">
+
+          <div className="linebr" />
+          <section className="response-card">
               <h3 className="schedule-title">Survey Information</h3>
-              <Divider className="divider" variant="fullWidth" />
               <FormControl className="report-name report-margin" required>
                 <InputLabel htmlFor="edit-report-name">Survey Name</InputLabel>
                 <Input
@@ -291,7 +290,9 @@ class EditReport extends Component {
                 </div>
               ) : null}
             </section>
-            <section className="schedule-card-content">
+
+          <div className="linebr" />
+          <section className="response-card">
               <FormControl className="input-field" required>
                 <InputLabel htmlFor="edit-report-message">
                   Survey Message
@@ -308,11 +309,10 @@ class EditReport extends Component {
                 />
               </FormControl>
             </section>
-          </Card>
-          <Card raised={true} className="schedule-card">
-            <section className="schedule-card-content">
+
+          <div className="linebr" />
+          <section className="response-card">
               <h3 className="schedule-title">Schedule</h3>
-              <Divider className="divider" variant="fullWidth" />
               <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <p>Days to be Delivered</p>
                 <Button
@@ -349,14 +349,10 @@ class EditReport extends Component {
                 />
               </section>
             </section>
-          </Card>
-         
-         {/* Question card */}
 
-          <Card raised={true} className="schedule-card">
-            <section className="schedule-card-content">
+          <div className="linebr" />
+          <section className="response-card">
               <h3 className="schedule-title">Questions</h3>
-              <Divider className="divider" variant="fullWidth" />
 
               <section>
                 {this.state.questions.map(question => (
@@ -402,13 +398,10 @@ class EditReport extends Component {
                 </Fab>
               </section>
             </section>
-          </Card>
 
-          {/* Sentiment Card */}
-          <Card raised={true} className="schedule-card">
-            <section className="schedule-card-content">
+          <div className="linebr" />
+          <section className="response-card">
               <h3 className="schedule-title">Sentiment Questions</h3>
-              <Divider className="divider" variant="fullWidth" />
               <section>
                 {this.state.sentimentQuestions.map(question => (
                   <article className="question-flex" key={question}>
@@ -453,7 +446,6 @@ class EditReport extends Component {
                 </Fab>
               </section>
             </section>
-          </Card>
 
           <Button
             style={{ display: "block", marginTop: "30px" }}
