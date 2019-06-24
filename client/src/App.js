@@ -52,7 +52,7 @@ function App() {
       <Route path="/login" component={Login} />
 
       {/* Navigation */}
-      <Route path="/slackr" component={Navigation}/>
+      <PrivateRoute path="/slackr" component={Navigation}/>
                   {/* Onboarding */}
       <NewUserRoute exact path="/slackr/onboarding" component={Onboarding} />
 
