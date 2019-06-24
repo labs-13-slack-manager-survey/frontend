@@ -1,19 +1,14 @@
 import React, { Component } from "react";
 import { axiosWithAuth, baseURL } from "../../config/axiosWithAuth";
+import moment from "moment";
 
-import SentimentChart from "./SentimentChart";
 import PageTitle from "../../components/PageTitle";
-import TodayPoll from "./TodayPoll";
-import PollCalendar from "../../components/PollCalendar";
 import SummaryBox from "../../components/SummaryBox";
-import TableDisplay from "../../components/TableDisplay";
-import TableHeader from "../../components/TableHeader";
 
-import CircularProgress from "@material-ui/core/CircularProgress";
-
-import CircleProgress from "../../components/circleProgress.js";
+import { InputLabel, MenuItem, FormControl, Select } from "@material-ui/core";
 
 import "./StatsDashboard.css";
+import ChartOptions from "./ChartOptions";
 
 const URL = process.env.REACT_APP_BASE_URL;
 
@@ -22,11 +17,11 @@ class StatsDashboard extends Component {
     super();
     this.state = {
       reports: [],
-      responses: [],
-      barLabels: [],
-      barData: [],
-      recentResponseRate: null,
-      users: []
+      users: [],
+      data: [],
+      labels: [],
+      filterBy: "",
+      dataType: ""
     };
   }
 
@@ -34,18 +29,12 @@ class StatsDashboard extends Component {
     axiosWithAuth()
       .get(`${URL}/reports`)
       .then(res => {
-        // const sentimentReports = res.data.reports.filter(report => {
-        //   if (report.isSentiment) {
-        //     return report;
-        //   }
-        // });
         this.setState({
           reports: res.data.reports
         });
         this.setUsers();
       })
       .then(() => {
-        this.getResponseRate();
         this.setRecentResponse();
       })
       .catch(err => console.log(err));
@@ -63,24 +52,10 @@ class StatsDashboard extends Component {
       .catch(err => console.log(err));
   };
 
-  getResponseRate = () => {
-    this.state.reports.forEach(report => {
-      axiosWithAuth()
-        .get(`${URL}/reports/submissionRate/${report.id}`)
-        .then(res => {
-          this.setState({
-            barData: [...this.state.barData, res.data.historicalSubmissionRate]
-          });
-        })
-        .catch(err => console.log(err));
-    });
-  };
-
   setUsers = () => {
     axiosWithAuth()
       .get(`${baseURL}/users/team`)
       .then(res => {
-        console.log(res.data.users);
         this.setState({ users: res.data.users });
       })
       .catch(err => console.log(err));
@@ -100,11 +75,147 @@ class StatsDashboard extends Component {
       .catch(err => console.log(err));
   };
 
+  generateLabels = num => {
+    if (this.state.dataType === "responseRate") {
+      let generatedDates = [];
+      for (let i = num; i > 0; i--) {
+        let date = new Date();
+        date.setDate(date.getDate() - i);
+        date = moment(date).format("l");
+        generatedDates.push(date);
+      }
+      this.setState({
+        labels: generatedDates
+      });
+    } else if (this.state.dataType === "sentimentAverage") {
+      let reportNames = [];
+      this.state.reports.forEach(report => {
+        reportNames.push(report.reportName);
+      });
+      this.setState({
+        labels: reportNames
+      });
+    }
+  };
+
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
+  setLabels = e => {
+    e.preventDefault();
+    switch (this.state.filterBy) {
+      case "day":
+        if (this.state.dataType === "responseRate") {
+          let today = moment(Date.now()).format("l");
+          this.setState({
+            labels: [today]
+          });
+        } else if (this.state.dataType === "sentimentAverage") {
+          this.generateLabels(1);
+        }
+
+        break;
+      case "week":
+        this.generateLabels(7);
+        break;
+      case "month":
+        this.generateLabels(30);
+        break;
+      case "quarter":
+        this.generateLabels(90);
+        break;
+      case "year":
+        this.generateLabels(365);
+        break;
+    }
+  };
+
   render() {
     if (this.state.reports.length === 0) {
       return (
         <div>
-          <CircularProgress />
+          <p>No reports yet! Add a report to see stats.</p>
+        </div>
+      );
+    }
+    if (this.state.dataType === "") {
+      // REFACTOR TO BE DRY
+      return (
+        <div className="dashboard-view">
+          <div className="view">
+            <PageTitle title="Stats Dashboard" />
+            <div className="dataSquares">
+              <SummaryBox
+                title="no. of team members"
+                content={this.state.users.length}
+              />
+              <SummaryBox
+                title="total poll responses"
+                content={this.state.users.length}
+              />
+              <SummaryBox
+                title="total polls scheduled"
+                content={this.state.reports.length}
+              />
+            </div>
+            <form
+              autoComplete="off"
+              className="form"
+              style={{ display: "flex", flexWrap: "wrap" }}
+            >
+              <FormControl className="formControl">
+                <InputLabel
+                  className="inputLabel"
+                  style={{ marginBottom: "20px" }}
+                >
+                  Filter By
+                </InputLabel>
+
+                <Select
+                  value={this.state.filterBy}
+                  style={{ marginTop: "20px" }}
+                  name="filterBy"
+                  onChange={this.handleChange}
+                  className="select"
+                >
+                  <MenuItem value={"day"}>Day</MenuItem>
+                  <MenuItem value={"week"}>Week</MenuItem>
+                  <MenuItem value={"month"}>Month</MenuItem>
+                  <MenuItem value={"quarter"}>Quarter</MenuItem>
+                  <MenuItem value={"year"}>Year</MenuItem>
+                </Select>
+              </FormControl>
+              <FormControl className="formControl">
+                <InputLabel
+                  className="inputLabel"
+                  style={{ marginBottom: "20px" }}
+                >
+                  Pick Data
+                </InputLabel>
+
+                <Select
+                  value={this.state.dataType}
+                  style={{ marginTop: "20px" }}
+                  name="dataType"
+                  onChange={this.handleChange}
+                  className="select"
+                >
+                  <MenuItem value={"responseRate"}>Response Rate</MenuItem>
+                  <MenuItem value={"sentimentAverage"}>
+                    Sentiment Average
+                  </MenuItem>
+                </Select>
+              </FormControl>
+              <button onClick={this.setLabels} style={{ margin: "20px" }}>
+                Generate Graph
+              </button>
+            </form>
+            <p>Select options to see graph.</p>
+          </div>
+          <div className="sidebar" />
         </div>
       );
     }
@@ -118,54 +229,76 @@ class StatsDashboard extends Component {
               title="no. of team members"
               content={this.state.users.length}
             />
-
             <SummaryBox
               title="total poll responses"
               content={this.state.users.length}
             />
-
             <SummaryBox
               title="total polls scheduled"
               content={this.state.reports.length}
             />
           </div>
-          {this.state.barData.length === this.state.reports.length && (
-            <SentimentChart
-              reports={this.state.reports}
-              data={this.state.barData}
-            />
-          )}
+          <form
+            autoComplete="off"
+            className="form"
+            style={{ display: "flex", flexWrap: "wrap" }}
+          >
+            <FormControl className="formControl">
+              <InputLabel
+                className="inputLabel"
+                style={{ marginBottom: "20px" }}
+              >
+                Filter By
+              </InputLabel>
 
-          <div style={{ marginTop: "50px" }}>
-            <TableHeader
-              column1={"Report Name"}
-              column2={"Date Created"}
-              column3={"Schedule"}
-              column4={"Response Rate"}
-            />
-          </div>
-          {this.state.reports.map(report => (
-            <TableDisplay
-              key={report.id}
-              content1={report.reportName}
-              report={report}
-              role={"test"}
-              archiveReport={this.archiveReport}
-              archiveModal={false}
-            />
-          ))}
-        </div>
-        <div className="sidebar">
-          {/* <PollCalendar /> */}
+              <Select
+                value={this.state.filterBy}
+                style={{ marginTop: "20px" }}
+                name="filterBy"
+                onChange={this.handleChange}
+                className="select"
+              >
+                <MenuItem value={"day"}>Today</MenuItem>
+                <MenuItem value={"week"}>Last 7 Days</MenuItem>
+                <MenuItem value={"month"}>Last 30 Days</MenuItem>
+                <MenuItem value={"quarter"}>Last 90 Days</MenuItem>
+                <MenuItem value={"year"}>Last 365 Days</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl className="formControl">
+              <InputLabel
+                className="inputLabel"
+                style={{ marginBottom: "20px" }}
+              >
+                Pick Data
+              </InputLabel>
 
-          <CircleProgress
-            title={
-              "Recent Poll: " +
-              this.state.reports[this.state.reports.length - 1].reportName
-            }
-            percentComplete={this.state.recentResponseRate / 100}
+              <Select
+                value={this.state.dataType}
+                style={{ marginTop: "20px" }}
+                name="dataType"
+                onChange={this.handleChange}
+                className="select"
+              >
+                <MenuItem value={"responseRate"}>Response Rate</MenuItem>
+                <MenuItem value={"sentimentAverage"}>
+                  Sentiment Average
+                </MenuItem>
+              </Select>
+            </FormControl>
+            <button onClick={this.setLabels} style={{ margin: "20px" }}>
+              View Graph
+            </button>
+          </form>
+          <ChartOptions
+            reports={this.state.reports}
+            data={this.state.data}
+            labels={this.state.labels}
+            dataType={this.state.dataType}
+            filterBy={this.state.filterBy}
           />
         </div>
+        <div className="sidebar" />
       </div>
     );
   }

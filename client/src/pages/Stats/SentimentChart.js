@@ -1,32 +1,20 @@
 import React, { Component } from "react";
 import Chart from "chart.js";
-import { axiosWithAuth } from "../../config/axiosWithAuth";
 
-const URL = process.env.REACT_APP_BASE_URL;
-
-let barChart = {};
+import "./SentimentChart.css";
 
 class SentimentChart extends Component {
-  state = {
-    results: [],
-    labels: []
-  };
-
   componentDidMount() {
-    // Labels
-    this.props.reports.forEach(report => {
-      this.state.labels.push(report.reportName);
-    });
-
+    console.log(this.props);
     // Chart -------------------------
     const ctx = document.getElementById("chart").getContext("2d");
-    barChart = new Chart(ctx, {
+    new Chart(ctx, {
       type: "bar",
       data: {
-        labels: this.state.labels,
+        labels: this.props.labels,
         datasets: [
           {
-            label: "Response Rate",
+            label: this.props.label,
             data: this.props.data,
             backgroundColor: "#055EBE"
           }
@@ -38,7 +26,7 @@ class SentimentChart extends Component {
             {
               ticks: {
                 min: 0,
-                max: 100
+                max: this.props.max
               }
             }
           ]

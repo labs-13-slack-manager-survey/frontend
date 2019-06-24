@@ -12,6 +12,8 @@ import Slider from "@material-ui/lab/Slider";
 import { withStyles } from "@material-ui/core/styles";
 import CircleProgress from "../../../components/circleProgress.js";
 import { Card, Elevation } from "@blueprintjs/core";
+import ToggleOn from "../../../images/icons/chevron-down.png";
+import ToggleOff from "../../../images/icons/chevron-up.png";
 
 import "./ReportResults.css";
 
@@ -40,12 +42,37 @@ class ReportResults extends Component {
     clickedResponder: null,
     responders: [],
     completed: false,
+    managerCompleted: false,
+    isComplete:false,
     isSentiment: false,
     secondaryPage: true,
+    isManagerActivated: true,
     percentComplete: 0,
     historicalSubmissionRate: 0,
-    isComplete:false
+    managerQuestions: [],
+    managerResponses: [], 
+    managerSubmitted: [],
+    managerFeedback: [],
+    seeManagerQ: true,
+    seeManagerQList: false, 
   };
+
+  toggleManagerQ = () => {
+    this.setState({
+      seeManagerQ: !this.state.seeManagerQ
+    });
+  };
+
+  toggleManagerQList = () => {
+    this.setState({
+      seeManagerQList: !this.state.seeManagerQList
+    });
+  }; 
+
+  getDate = (date) => {
+    let formatted = moment(date).format('DD MMMM YYYY');
+    return formatted;
+  }
 
   render() {
     const options = {
@@ -54,108 +81,311 @@ class ReportResults extends Component {
       month: "long",
       day: "numeric"
     };
-    console.log("REPORT RESULT STATE",this.state)
+    
+    let managerPollDays = [];
+
+    for (let i = 0; i < this.state.managerFeedback.length; i++ ){
+        let managerQandA = {};
+        managerQandA.managerQuestions = JSON.parse(this.state.managerFeedback[i].managerQuestions);
+        managerQandA.managerResponses= JSON.parse(this.state.managerFeedback[i].managerResponses);
+        managerQandA.managerSubmitted = this.state.managerFeedback[i].submitted_date;
+        managerPollDays.push(managerQandA);
+    }
+
+    let filteredManagerAndResponsesDate = [];
+
+    if (this.state.responses) {
+      let userResponses = this.state.responses;
+      let dateUser = ""
+
+      managerPollDays.reverse().forEach(function(response) {
+        let dateManager = moment(response.managerSubmitted).format('DDMMMMYYYY')
+        let newManagerUserDay = []
+        console.log(response);
+        newManagerUserDay.push({managerResponse:response});
+        
+        for (let i = 0; i <userResponses.length; i++) {
+          dateUser = moment(userResponses[i].date).format('DDMMMMYYYY')
+
+          if( dateUser === dateManager ) {
+            newManagerUserDay.push({userResponse: userResponses[i]});
+            }
+          }
+
+        filteredManagerAndResponsesDate.push(newManagerUserDay)   
+        })
+        console.log("filteredmanagerqs")
+        console.log(filteredManagerAndResponsesDate)
+      }
+    
+      
+ 
+    console.log(managerPollDays)
+
+    console.log(this.state.managerQuestions)
+    
+    //calculating date of the manager report 
+    const token = jwt_decode(localStorage.getItem('token'));
+
+    let today = new Date();
+    today = moment(today).format('DD MMMM YYYY');
+
+    let today2 = new Date();
+    today2 = moment(today).format('DD MMMM YYYY');
+
+    
+    let managerToday = managerPollDays.length && managerPollDays[managerPollDays.length-1].managerSubmitted;
+    managerToday = moment(managerToday).format('DD MMMM YYYY');
+
+    console.log(managerToday)
+    console.log(today)
+    console.log(managerPollDays)
+
     return (
       <div className="dashboard-view">
         <main className="view">
+          
           <PageTitle
             title="Report"
             {...this.props}
             secondaryPage={this.state.secondaryPage}
           />
+          
+          {token.roles != "admin" && this.state.isManagerActivated ? 
+            <div className="confirm-response" >
+                {managerToday != today || this.state.filteredResponse.length > 0 ? <div> {this.state.filteredResponse.length > 0 ? "Your response has been recorded" :  "Poll unavailable: No manager response has been recorded for today" } </div> 
+                : 
+                  <>
+                  <div classname="manager-feedback-for-users" onClick = {this.toggleManagerQ}>
+                    <div className="poll-header">
+                      <div className = "toggle-manager-questions">
+                          <div className="member-form-title">Manager Comments</div>
+                          <img
+                          className="manager-toggle"
+                          src={this.state.seeMangerQ ? ToggleOff : ToggleOn }
+                        />
+                       </div>
+                    <p className="member-form-subtitle">
+                      View your manager's responses to his poll to guide your responses and goals for the day
+                    </p>
+                  </div>
+                    {this.state.seeManagerQ ? <> 
+                      <div className="vertical-line" />
+                    <div className= "manager-question">{managerPollDays[managerPollDays.length-1].managerQuestions[0]}</div> 
+                    <div className= "manager-response">{managerPollDays[managerPollDays.length-1].managerResponses[0]}</div> 
+                    <div className= "manager-question">{managerPollDays[managerPollDays.length-1].managerQuestions[1]}</div> 
+                    <div className= "manager-response">{managerPollDays[managerPollDays.length-1].managerResponses[1]}</div> 
+                    <div className= "manager-question">{managerPollDays[managerPollDays.length-1].managerQuestions[2]}</div> 
+                    <div className= "manager-response">{managerPollDays[managerPollDays.length-1].managerResponses[2]}</div> 
+                    {managerPollDays[managerPollDays.length-1].managerQuestions.length === 4 ? <>
+                      <div className= "manager-question">{managerPollDays[managerPollDays.length-1].managerQuestions[3]}</div> 
+                      <div className= "manager-response">{managerPollDays[managerPollDays.length-1].managerResponses[3]}</div></> : null }</> : null}
+
+                  </div>
+                    </> }
+                </div>
+            : 
+            
+            managerToday != today && token.roles === "admin" ?  <div
+            className="response-card"
+            interactive={false}
+            elevation={Elevation.TWO}
+          >
+            <MemberResponseForm
+              {...this.props}
+              updateWithUserResponse={this.updateWithManagerResponse}
+            /> 
+        </div> : null }
 
           {this.state.filteredResponse.length > 0 ||
-          this.state.completed === true ? (
+          this.state.managerCompleted === true ? (
             <>
               <div className="confirm-response">
-                Your response has been recorded
+                {managerToday != today ? "Your response has been recorded " : 
+                <>
+                <div classname="manager-feedback">
+                  <div className = "user-info">
+                    <div className="month-day">
+                      <div className="calendar-top">{moment(this.state.managerFeedback[this.state.managerFeedback.length-1].submitted_date).format("DD")}</div>
+                      <div className="calendar-bot">{moment(this.state.managerFeedback[this.state.managerFeedback.length-1].submitted_date).format("MMMM")}</div>
+                    </div>
+                    <div className = "manager-response-header-text">
+                      <div className = "response-container-main-name-manager">Manager Comments</div>
+                    </div>
+                  </div>
+                  <div className="linebr"/>
+                  <div className = "response-content" >
+                    <div className= "manager-question">{managerPollDays[managerPollDays.length-1].managerQuestions[0]}</div> 
+                    <div className= "manager-response">{managerPollDays[managerPollDays.length-1].managerResponses[0]}</div> 
+                    <div className= "manager-question">{managerPollDays[managerPollDays.length-1].managerQuestions[1]}</div> 
+                    <div className= "manager-response">{managerPollDays[managerPollDays.length-1].managerResponses[1]}</div> 
+                    <div className= "manager-question">{managerPollDays[managerPollDays.length-1].managerQuestions[2]}</div> 
+                    <div className= "manager-response">{managerPollDays[managerPollDays.length-1].managerResponses[2]}</div> 
+                    {managerPollDays[managerPollDays.length-1].managerQuestions.length === 4 ? <>
+                      <div className= "manager-question">{managerPollDays[managerPollDays.length-1].managerQuestions[3]}</div> 
+                      <div className= "manager-response">{managerPollDays[managerPollDays.length-1].managerResponses[3]}</div></> : null }
+                  </div>
+                </div>
+              </> 
+              }
+               
               </div>
               <div className="linebr" />
             </>
           ) : (
             <>
-              <div
-                className="response-card"
-                interactive={false}
-                elevation={Elevation.TWO}
-              >
-                <MemberResponseForm
-                  {...this.props}
-                  updateWithUserResponse={this.updateWithUserResponse}
-                />
-              </div>
+              {managerToday != today && this.state.filteredResponse.length !== 0 || token.roles != "admin" ?
+                <div
+                  className="response-card"
+                  interactive={false}
+                  elevation={Elevation.TWO}
+                >
+                  <MemberResponseForm
+                    {...this.props}
+                    updateWithUserResponse={this.updateWithManagerResponse}
+                  /> 
+              </div> : null} 
               <div className="linebr" />
             </>
           )}
 
           <section className="report-results-feed">
-            {this.state.responses.map(
-              batch =>
-                batch.responses.length > 0 && (
-                  <div key={batch.date}>
-                    {batch.responses.map(response => (
-                      <div key={response.userId}>
-                        <div className="response-container">
-                          <div className="user-info">
-                            <div className="month-day">
-                              <div className="calendar-top">
-                                {moment(batch.date).format("DD")}
-                              </div>
-                              <div className="calendar-bot">
-                                {moment(batch.date).format("MMMM")}
-                              </div>
-                            </div>
-                            <div className="response-container-main-name">
-                              {response.fullName}
-                            </div>
-                          </div>
-
-                          <div className="response-container-main">
-                            <div className="vertical-timeline" />
-                            <div className="response-content">
-                              <ol type="1">
-                                  {response.questions.map(
-                                    ({ question, answer, id, sentimentRange }) => (
-                                      <div key={id} className = "question-response">
-                                        <div className="response-container-main-question">
-                                        
-                                          <li className = "manager-poll-question">{question}</li>
-                                          
-                                        </div>
-                                        {this.state.isSentiment && 
-                                        <>
-                                            <StyledSlider
-                                              className="slider"
-                                              value={sentimentRange}
-                                              min={1}
-                                              max={5}
-                                              step={1}
-                                            />
-                                              <div className="slider-label">
-                                                <p className={sentimentRange !=1 ? "deselected" : null}>1</p>
-                                                <p className={sentimentRange !=2 ? "deselected" : null}>2</p>
-                                                <p className={sentimentRange !=3 ? "deselected" : null}>3</p>
-                                                <p className={sentimentRange !=4 ? "deselected" : null}>4</p>
-                                                <p className={sentimentRange !=5 ? "deselected" : null}>5</p>
-                                              </div>
-                                          </>
-                                        } 
-                                        <p className="response-container-main-answer">
-                                          <div className={ "regular-answer"}>{answer}</div>
-                                          <div className ="linebr" />
-                                        </p>
-                                    </div>
-                                  )
-                                )}{" "}
-                              </ol>
-                            </div>
-                          </div>
+              {managerPollDays.map(res => {
+                if (this.getDate(this.state.managerFeedback[this.state.managerFeedback.length-1].submitted_date) === today) {
+                  return null 
+                } else {return <>
+                    <div className="response-container-manager" onClick={this.toggleManagerQList}>
+                      <div className = "user-info">
+                        <div className="month-day">
+                          <div className="calendar-top">{moment(this.state.managerFeedback[this.state.managerFeedback.length-1].submitted_date).format("DD")}</div>
+                          <div className="calendar-bot">{moment(this.state.managerFeedback[this.state.managerFeedback.length-1].submitted_date).format("MMMM")}</div>
+                        </div>
+                        <div className = "manager-response-header-text">
+                          <div className = "response-container-main-name-manager">Manager Comments</div>
+                          <img className="manager-toggle-list" src={this.state.seeManagerQList ? ToggleOn : ToggleOff} />
                         </div>
                       </div>
-                    ))}
-                  </div>
-                )
-            )}
+                      {this.state.seeManagerQList ? <>
+                        
+                        <div className = "linebr" /><div className="response-container-main">
+                        
+                        <div className="response-content">
+                          <div className= "manager-question">{res.managerQuestions[0]}</div> 
+                          <div className= "manager-response ">{res.managerResponses[0]}</div> 
+                          <div className ="linebr" />
+
+                          <div className= "manager-question">{res.managerQuestions[1]}</div> 
+                          <div className= "manager-response ">{res.managerResponses[1]}</div> 
+                          <div className ="linebr" />
+
+                          <div className= "manager-question">{res.managerQuestions[2]}</div> 
+                          <div className= "manager-response ">{res.managerResponses[2]}</div> 
+                          {res.managerQuestions.length === 4 ? <>
+                            <div className ="linebr" />
+                            <div className= "manager-question">{res.managerQuestions[3]}</div> 
+                            <div className= "manager-response ">{res.managerResponses[3]}</div>
+                            </> : null }
+                        </div> 
+                      </div></> : null }
+                    </div>
+                    </>
+                  }
+                }
+             
+              )}
+      
+             
+      {filteredManagerAndResponsesDate ? filteredManagerAndResponsesDate.map(day => <>
+                          
+                          <div className="response-container-manager">
+                          <div className = "user-info">
+                            <div className="month-day">
+                              <div className="calendar-top">{moment(day[0].managerResponse.managerSubmitted).format("DD")}</div>
+                              <div className="calendar-bot">{moment(day[0].managerResponse.managerSubmitted).format("MMMM")}</div>
+                            </div>
+                            <div className = "manager-response-header-text" onClick={this.toggleManagerQList}>
+                              <div className = "response-container-main-name-manager">Manager Comments</div>
+                              <img className="manager-toggle-list" src={this.state.seeManagerQList ? ToggleOn : ToggleOff} />
+                            </div>
+                          </div>
+                          {this.state.seeManagerQList ? <>
+                            
+                            <div className = "linebr" />
+                            <div className="response-container-main">
+                            <div className="response-content">
+                              <div className= "manager-question">{day[0].managerResponse.managerQuestions[0]}</div> 
+                              <div className= "manager-response ">{day[0].managerResponse.managerResponses[0]}</div> 
+                              <div className ="linebr" />
+    
+                              <div className= "manager-question">{day[0].managerResponse.managerQuestions[1]}</div> 
+                              <div className= "manager-response ">{day[0].managerResponse.managerResponses[1]}</div> 
+                              <div className ="linebr" />
+    
+                              <div className= "manager-question">{day[0].managerResponse.managerQuestions[2]}</div> 
+                              <div className= "manager-response ">{day[0].managerResponse.managerResponses[2]}</div> 
+                              {day[0].managerResponse.managerQuestions.length === 4 ? <>
+                                <div className ="linebr" />
+                                <div className= "manager-question">{day[0].managerResponse.managerQuestions[3]}</div> 
+                                <div className= "manager-response ">{day[0].managerResponse.managerResponses[3]}</div>
+                                </> : null } 
+                                </div>
+                            </div></> : null}
+                            </div>
+                            
+
+                            <div className="response-container" onClick={this.toggleManagerQList}>
+                                <div className = "response-content">
+                                {day[1].userResponse.responses.map( userRes => <>
+                                <div className="response-container-main">
+                                  <div className="vertical-timeline" />
+                                  <div className="response-content">
+                                  
+                                  <div className = "user-response-header">
+                                    <div className= "user-info">
+                                        <img className = "response-container-profile-pic" src={userRes.profilePic} />
+                                        <div className = "response-container-main-name-user">{userRes.fullName}</div></div>
+                                    <div>
+                                      <div className="month-day">
+                                        <div className="calendar-top">{moment(day[1].userResponse.date).format("MMMM DD")}</div>
+                                      </div>
+                                    </div>
+                                  </div>
+                    
+                                    <ol> {userRes.questions.map(userQA => 
+                                      <> 
+                                      <li><div className= "response-container-main-question">{userQA.question}</div></li>
+                                      {userQA.sentimentRange ? null : <><div className= "response-container-main-answer "><em>A:</em> {userQA.answer}</div>  <div className ="linebr" /> </>}
+
+                                      {userQA.sentimentRange ? <>
+                                          <StyledSlider
+                                            className="slider"
+                                            value={userQA.sentimentRange}
+                                            min={1}
+                                            max={5}
+                                            step={1}
+                                          />
+                                            <div className="slider-label">
+                                              <p className={userQA.sentimentRange !=1 ? "deselected" : null}>1</p>
+                                              <p className={userQA.sentimentRange !=2 ? "deselected" : null}>2</p>
+                                              <p className={userQA.sentimentRange !=3 ? "deselected" : null}>3</p>
+                                              <p className={userQA.sentimentRange !=4 ? "deselected" : null}>4</p>
+                                              <p className={userQA.sentimentRange !=5 ? "deselected" : null}>5</p>
+                                            </div>
+                                            <div className ="linebr" />
+                                            {userQA.answer ? <><div className= "response-container-main-comment "><em>Comment:</em> {userQA.answer}</div>   <div className ="linebr" /> </>: null }
+                                            </> : null }
+                                      </> 
+                                  )}</ol>
+                                
+                                        </div>
+                                      </div></>
+                                  )}
+                               </div>
+                            </div>
+
+
+                            </>)
+                    : "none" }
           </section>
         </main>
 
@@ -166,27 +396,25 @@ class ReportResults extends Component {
             // minorFix
             percentComplete={this.state.historicalSubmissionRate}
           />
-          <Card
-            interactive={false}
-            elevation={Elevation.TWO}
-            style={{ marginTop: "30px" }}
-            className="report-results-filter-container"
-          >
-            <h1 className="report-results-filter">Filter by day</h1>
+          <div className="calendar">
+            <h1 className="title">Filter by day</h1>
             <DatePicker
-              // getByDate={this.getByDate}
               clickedDate={this.state.clickedDate}
               clickedResponder={this.state.clickedResponder}
               filter={this.filter}
             />
-            <h1 className="report-results-filter">Filter by team member</h1>
-            <Responders
+          </div>
+
+          <div className = "responders-component">
+            <h1 className="title">Filter by team member</h1>
+            {this.state.responders.length == 0 ? <div className="error-message"> no responses yet </div> : <Responders
               responders={this.state.responders}
               filter={this.filter}
               clickedDate={this.state.clickedDate}
               clickedResponder={this.state.clickedResponder}
-            />
-          </Card>
+            />}
+          </div>
+
         </div>
       </div>
     );
@@ -196,23 +424,40 @@ class ReportResults extends Component {
     try {
       const userId = jwt_decode(localStorage.getItem("token")).subject;
       // makes 3 api calls to get reports/responses and submission rate
-      const [reportRes, responsesRes, submissionRes] = await Promise.all([
+      const [reportRes, responsesRes, submissionRes, managerRes] = await Promise.all([
+  
         await axiosWithAuth().get(
           `${baseURL}/reports/${this.props.match.params.reportId}`
         ),
+
         await axiosWithAuth().get(
           `${baseURL}/responses/${this.props.match.params.reportId}`
         ),
+
         await axiosWithAuth().get(
           `${baseURL}/reports/submissionRate/${
             this.props.match.params.reportId
           }`
+        ),
+
+        await axiosWithAuth().get(
+          `${baseURL}/responses/managerQuestions/${this.props.match.params.reportId}`
         )
       ]);
+
       const { isSentiment } = reportRes.data.report;
       // format the submissionRate
       let { historicalSubmissionRate } = submissionRes.data;
       historicalSubmissionRate /= 100;
+      
+      const managerFeedback = [];
+      managerRes.data.forEach(feedback => {
+        managerFeedback.push({ managerQuestions: feedback.managerQuestions,
+           managerResponses: feedback.managerResponses, 
+           submitted_date: feedback.submitted_date }); 
+       
+      })
+      console.log(managerFeedback)
       const filtered = responsesRes.data[0].responses.filter(
         response => response.userId === userId
       );
@@ -229,13 +474,14 @@ class ReportResults extends Component {
           });
       });
       this.setState({
+        isManagerActivated: reportRes.data.report.managerQuestions,
         isSentiment,
         responses: responsesRes.data,
         filteredResponse: filtered,
         responders,
-        historicalSubmissionRate
+        historicalSubmissionRate,
+        managerFeedback: managerFeedback,
       });
-   
     } catch (err) {
       console.log(err);
     }
@@ -262,6 +508,13 @@ class ReportResults extends Component {
   updateWithUserResponse = res => {
     this.setState({ responses: res.data, 
                     completed: true,
+                    isComplete: true
+                  });
+  };
+
+  updateWithUserResponse = res => {
+    this.setState({ responses: res.data, 
+                    managerCompleted: true,
                     isComplete: true
                   });
   };

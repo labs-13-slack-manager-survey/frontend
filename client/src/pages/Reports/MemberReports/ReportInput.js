@@ -58,7 +58,7 @@ class ReportInput extends React.Component {
     return (
       <div className="member-report-input">
         <div className="question">
-          <div className = "poll-question">{this.props.question}</div>
+          <div className="poll-question">{this.props.question}</div>
         </div>
         {this.props.isSentiment ? (
           <>
@@ -68,20 +68,10 @@ class ReportInput extends React.Component {
               min={1}
               max={5}
               step={1}
-              // onChange={e => this.props.handleChange(e, this.props.question)}
               onChange={(e, v) =>
                 this.props.handleSentiment(e, v, this.props.question)
               }
             />
-
-            {/* <StyledSlider
-						className = "slider"
-						value = {this.props.sentimentRange} 
-						min={1}
-						max={5}
-						step={1}
-						onChange={(e, v) => this.props.handleChange(e, v)}
-          />  */}
             <div className="slider-label">
               <p>1</p>
               <p>2</p>
@@ -89,23 +79,31 @@ class ReportInput extends React.Component {
               <p>4</p>
               <p>5</p>
             </div>
-          <img
-          className="toggleComments"
-          src={this.state.userComment ? Cancel : Comment}
-          onClick={this.toggleComment}
-        /> 
 
-            {this.state.userComment ? (
-              <TextField
-                fullWidth={true}
-                onChange={e => this.props.handleChange(e, this.props.question)}
-                margin="normal"
-                multiline={true}
-                name="response"
-                value={this.props.response}
-                variant="outlined"
-              />
-            ) : null}
+            {!this.state.userComment ? (
+              <div className="comment-field">
+                <TextField
+                  fullWidth={true}
+                  onChange={e =>
+                    this.props.handleSentimentComment(e, this.props.question)
+                  }
+                  margin="normal"
+                  multiline={true}
+                  name="response"
+                  value={this.props.response}
+                  variant="outlined"
+                />
+                <img
+                  className="toggleComments"
+                  src={Cancel}
+                  onClick={this.toggleComment}
+                />
+              </div>
+            ) : (
+              <div onClick={this.toggleComment} className="toggleComments">
+                add a comment
+              </div>
+            )}
           </>
         ) : (
           <TextField
