@@ -97,12 +97,7 @@ span {
   padding-bottom: 20px;
 }
 
-/* @media (max-width: 800px) {
-  .verticalBar {
-    width: 100%;
-    height: 20px;
-  }
-} */
+
 .vert-buttons {
   width: 70px;
   display: flex;
@@ -180,68 +175,6 @@ span {
 .menu-bar-add-poll-mobile{
   display:none;
 }
-/* 2nd iteration */
-/* 
-@media (max-width: 500px) {
-  .horizontalMenuBar {
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    margin: 0 auto;
-    width: auto;
-  }
-  .logo {
-    padding: 0;
-  }
-  .left-horizontal {
-    justify-content: center;
-    width: auto;
-  }
-  .horizontal-buttons {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    display: none;
-  }
-  .logo-text {
-    display: none;
-  }
-  .verticalBar {
-    padding: 0;
-    flex-direction: column-reverse;
-    width: 100%;
-  }
-  .vert-buttons,
-  .vert-buttons2 {
-    flex-direction: row;
-    width: 100%;
-    padding-top: 0;
-    height: auto;
-  }
-
-  .vert-buttons {
-    justify-content: space-around;
-    border-top: 1px solid rgb(226, 226, 226);
-  }
-  .vert-buttons2 {
-    height: 71px;
-    padding: 0 25px;
-    justify-content: space-between;
-    border-bottom: 1px solid rgb(226, 226, 226);
-  }
-
-  .vert-buttons .menu-button {
-    margin: 15px 0;
-    transform: scale(1.2);
-  }
-  .vert-buttons .menu-button:nth-child(2) {
-    order: -1;
-  }
-  .vert-buttons2 .button-label,
-  .vert-buttons2 .button-label-logout {
-    display: none;
-  }
-} */
 
 /* 3rd iteration */
 @media (max-width: 500px) {

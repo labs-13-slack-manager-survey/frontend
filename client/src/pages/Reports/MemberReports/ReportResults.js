@@ -140,6 +140,7 @@ class ReportResults extends Component {
     console.log(managerToday)
     console.log(today)
     console.log(managerPollDays)
+ 
 
     return (
       <div className="dashboard-view">
@@ -186,7 +187,7 @@ class ReportResults extends Component {
                 </div>
             : 
             
-            managerToday != today && token.roles === "admin" ?  <div
+            managerToday !== today && token.roles === "admin" ?  <div
             className="response-card"
             interactive={false}
             elevation={Elevation.TWO}
@@ -234,7 +235,7 @@ class ReportResults extends Component {
             </>
           ) : (
             <>
-              {managerToday != today && this.state.filteredResponse.length !== 0 || token.roles != "admin" ?
+              {managerToday != today && this.state.filteredResponse.length !== 0 || token.roles != "admin" && managerToday === today  ?
                 <div
                   className="response-card"
                   interactive={false}
