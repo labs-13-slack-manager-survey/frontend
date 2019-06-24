@@ -350,6 +350,8 @@ class EditReport extends Component {
               </section>
             </section>
           </Card>
+         
+         
           <Card raised={true} className="schedule-card">
             <section className="schedule-card-content">
               <h3 className="schedule-title">Questions</h3>
@@ -400,16 +402,16 @@ class EditReport extends Component {
 
           <Card raised={true} className="schedule-card">
             <section className="schedule-card-content">
-              <h3 className="schedule-title">Sentiment Questions</h3>
+              <h3 className="schedule-title">sentiment Questions</h3>
               <Divider className="divider" variant="fullWidth" />
               <section>
-                {this.state.sentimentQuestions.map(sentimentQuestion => (
-                  <article className="question-flex" key={sentimentQuestion}>
-                    <p className="question">{sentimentQuestion}</p>
+                {this.state.sentimentQuestions.map(question => (
+                  <article className="question-flex" key={question}>
+                    <p className="question">{question}</p>
                     <Fab
                       size="small"
                       color="secondary"
-                      onClick={e => this.removeSentiment(e, sentimentQuestion)}
+                      onClick={e => this.removeSentiment(e, question)}
                     >
                       <Icon>delete_icon</Icon>
                     </Fab>
@@ -436,7 +438,6 @@ class EditReport extends Component {
                   style={{ display: "block", margin: "10px 0" }}
                   color="primary"
                   onClick={this.sentimentHandler}
-                // The questions need to be changed over to sentiment questions 
                   disabled={this.state.sentimentQuestion.length === 0 ? true : false}
                   type="submit"
                 >
@@ -444,7 +445,7 @@ class EditReport extends Component {
                 </Fab>
               </section>
             </section>
-          </Card> 
+          </Card>
 
           <Button
             style={{ display: "block", marginTop: "30px" }}
