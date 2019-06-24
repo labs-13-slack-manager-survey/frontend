@@ -219,7 +219,6 @@ class CreateReport extends Component {
     }));
   };
 
-
   removeQuestion = (e, question) => {
     e.preventDefault();
     this.setState(prevState => ({
@@ -550,7 +549,7 @@ class CreateReport extends Component {
         <div className="linebr" />
         <section className="response-card">
           <section className="manager-poll-responses">
-            <div className="member-form-title">Report Information</div>
+            <div className="member-form-title">Survey Information</div>
             <div className="poll-section-description">
               Name and describe your report
             </div>
@@ -560,7 +559,7 @@ class CreateReport extends Component {
                   this.state.reportName ? "manager-poll-question" : "incomplete"
                 }
               >
-                Report Name
+                Survey Name
               </div>
               <TextField
                 fullWidth={true}
@@ -702,6 +701,7 @@ class CreateReport extends Component {
                 <InputLabel htmlFor="report-question">
                   Enter a question...
                 </InputLabel>
+                <form onSubmit={this.questionsHandler}>
                 <Input
                   id="report-question"
                   required
@@ -711,6 +711,7 @@ class CreateReport extends Component {
                   value={this.state.question}
                   onChange={this.enterQuestionsHandler}
                 />
+                </form>
               </FormControl>
               <Fab
                 size="small"
@@ -772,8 +773,9 @@ class CreateReport extends Component {
             <section className="enter-question">
               <FormControl className="input-field" required>
                 <InputLabel htmlFor="report-question">
-                  On a scale of 1-5 how do you feel about....
+                  Enter a question...
                 </InputLabel>
+                <form onSubmit={this.sentimentQuestionsHandler}>
                 <Input
                   id="report-question"
                   required
@@ -783,6 +785,7 @@ class CreateReport extends Component {
                   value={this.state.sentimentQuestion}
                   onChange={this.enterSentimentQuestionsHandler}
                 />
+                </form>
               </FormControl>
               <Fab
                 size="small"

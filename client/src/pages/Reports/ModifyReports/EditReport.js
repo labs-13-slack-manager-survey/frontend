@@ -248,10 +248,10 @@ class EditReport extends Component {
         <form className="edit-report">
           <Card raised={true} className="schedule-card">
             <section className="schedule-card-content">
-              <h3 className="schedule-title">Report Information</h3>
+              <h3 className="schedule-title">Survey Information</h3>
               <Divider className="divider" variant="fullWidth" />
               <FormControl className="report-name report-margin" required>
-                <InputLabel htmlFor="edit-report-name">Report Name</InputLabel>
+                <InputLabel htmlFor="edit-report-name">Survey Name</InputLabel>
                 <Input
                   id="edit-report-name"
                   className="input-field top-input"
@@ -294,7 +294,7 @@ class EditReport extends Component {
             <section className="schedule-card-content">
               <FormControl className="input-field" required>
                 <InputLabel htmlFor="edit-report-message">
-                  Report Message
+                  Survey Message
                 </InputLabel>
                 <Input
                   required
@@ -303,7 +303,7 @@ class EditReport extends Component {
                   type="textarea"
                   onChange={this.changeHandler}
                   name="message"
-                  placeholder="Message to be sent with each report"
+                  placeholder="Message to be sent with each survey"
                   value={this.state.message}
                 />
               </FormControl>
@@ -350,10 +350,14 @@ class EditReport extends Component {
               </section>
             </section>
           </Card>
+         
+         {/* Question card */}
+
           <Card raised={true} className="schedule-card">
             <section className="schedule-card-content">
               <h3 className="schedule-title">Questions</h3>
               <Divider className="divider" variant="fullWidth" />
+
               <section>
                 {this.state.questions.map(question => (
                   <article className="question-flex" key={question}>
@@ -368,11 +372,13 @@ class EditReport extends Component {
                   </article>
                 ))}
               </section>
+
               <section className="enter-question">
                 <FormControl className="input-field" required>
                   <InputLabel htmlFor="edit-report-question">
                     Enter a question...
                   </InputLabel>
+                  <form onSubmit={this.questionsHandler}>
                   <Input
                     id="edit-report-question"
                     required
@@ -382,6 +388,7 @@ class EditReport extends Component {
                     value={this.state.question}
                     onChange={this.enterQuestionsHandler}
                   />
+                  </form>
                 </FormControl>
                 <Fab
                   size="small"
@@ -397,30 +404,32 @@ class EditReport extends Component {
             </section>
           </Card>
 
-
+          {/* Sentiment Card */}
           <Card raised={true} className="schedule-card">
             <section className="schedule-card-content">
               <h3 className="schedule-title">Sentiment Questions</h3>
               <Divider className="divider" variant="fullWidth" />
               <section>
-                {this.state.sentimentQuestions.map(sentimentQuestion => (
-                  <article className="question-flex" key={sentimentQuestion}>
-                    <p className="question">{sentimentQuestion}</p>
+                {this.state.sentimentQuestions.map(question => (
+                  <article className="question-flex" key={question}>
+                    <p className="question">{question}</p>
                     <Fab
                       size="small"
                       color="secondary"
-                      onClick={e => this.removeSentiment(e, sentimentQuestion)}
+                      onClick={e => this.removeSentiment(e, question)}
                     >
                       <Icon>delete_icon</Icon>
                     </Fab>
                   </article>
                 ))}
               </section>
+                  
               <section className="enter-question">
                 <FormControl className="input-field" required>
                   <InputLabel htmlFor="edit-report-question">
                     Enter a sentiment question...
                   </InputLabel>
+                  <form onSubmit={this.sentimentHandler}>
                   <Input
                     id="edit-report-question"
                     required
@@ -430,13 +439,13 @@ class EditReport extends Component {
                     value={this.state.sentimentQuestion}
                     onChange={this.enterSentimentHandler}
                   />
+                </form>
                 </FormControl>
                 <Fab
                   size="small"
                   style={{ display: "block", margin: "10px 0" }}
                   color="primary"
                   onClick={this.sentimentHandler}
-                // The questions need to be changed over to sentiment questions 
                   disabled={this.state.sentimentQuestion.length === 0 ? true : false}
                   type="submit"
                 >
@@ -444,7 +453,7 @@ class EditReport extends Component {
                 </Fab>
               </section>
             </section>
-          </Card> 
+          </Card>
 
           <Button
             style={{ display: "block", marginTop: "30px" }}
@@ -452,7 +461,7 @@ class EditReport extends Component {
             color="primary"
             onClick={this.updateReport}
           >
-            Update Report
+            Update Survey
           </Button>
         </form>
       </div>

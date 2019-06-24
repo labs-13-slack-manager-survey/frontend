@@ -137,7 +137,7 @@ class StatsDashboard extends Component {
     if (this.state.reports.length === 0) {
       return (
         <div>
-          <p>No reports yet! Add a report to see stats.</p>
+          <p>No surveys yet! Add a report to see stats.</p>
         </div>
       );
     }
@@ -153,11 +153,11 @@ class StatsDashboard extends Component {
                 content={this.state.users.length}
               />
               <SummaryBox
-                title="total poll responses"
+                title="total surveys responses"
                 content={this.state.users.length}
               />
               <SummaryBox
-                title="total polls scheduled"
+                title="total surveys scheduled"
                 content={this.state.reports.length}
               />
             </div>
@@ -224,17 +224,17 @@ class StatsDashboard extends Component {
       <div className="dashboard-view">
         <div className="view">
           <PageTitle title="Stats Dashboard" />
-          <div className="dataSquares">
+          <div className="summary-boxes">
             <SummaryBox
               title="no. of team members"
               content={this.state.users.length}
             />
             <SummaryBox
-              title="total poll responses"
+              title="total surveys responses"
               content={this.state.users.length}
             />
             <SummaryBox
-              title="total polls scheduled"
+              title="total surveys scheduled"
               content={this.state.reports.length}
             />
           </div>

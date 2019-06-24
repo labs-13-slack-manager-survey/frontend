@@ -102,7 +102,7 @@ class TableDisplay extends React.Component {
                         aria-describedby="alert-dialog-slide-description"
                     >
                         <DialogTitle id="alert-dialog-slide-title">
-                            Are you sure you'd like to archive this report? 
+                            Are you sure you'd like to archive this Survey? 
                         </DialogTitle>
                         <Button onClick={() => this.props.archiveReport(reportId)}>
                             Yes

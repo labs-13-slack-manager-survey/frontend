@@ -90,7 +90,7 @@ class SingleReport extends React.Component {
 						aria-describedby="alert-dialog-slide-description"
 					>
 						<DialogTitle id="alert-dialog-slide-title">
-							Are you sure you'd like to archive this report? {reportId}
+							Are you sure you'd like to archive this survey? {reportId}
 						</DialogTitle>
 
 						<Button onClick={() => this.props.archiveReport(this.props.report.id)}>
