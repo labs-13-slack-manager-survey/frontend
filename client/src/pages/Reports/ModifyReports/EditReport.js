@@ -5,7 +5,6 @@ import { axiosWithAuth, baseURL } from "../../../config/axiosWithAuth";
 import "./Report.css";
 import {
   Button,
-  PageTitle,
   Input,
   InputLabel,
   FormControl,
@@ -244,7 +243,6 @@ class EditReport extends Component {
         <Fab onClick={() => this.props.history.goBack()} color="default">
           <Icon>arrow_back</Icon>
         </Fab>
-        <form className="edit-report">
 
           <div className="linebr" />
           <section className="response-card">
@@ -261,34 +259,6 @@ class EditReport extends Component {
                   value={this.state.reportName}
                 />
               </FormControl>
-              {this.state.channels.length > 0 ? (
-                <div>
-                  <p>Slack Channel</p>
-                  <TextField
-                    id="select-currency"
-                    select
-                    label="Select"
-                    name="slackChannelId"
-                    className={classes.textField}
-                    value={this.state.slackChannelId}
-                    onChange={this.changeHandler}
-                    required
-                    SelectProps={{
-                      MenuProps: {
-                        className: classes.menu
-                      }
-                    }}
-                    helperText="Please select your slack channel"
-                    margin="normal"
-                  >
-                    {this.state.channels.map(channel => (
-                      <MenuItem key={channel.id} value={channel.id}>
-                        {channel.name}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                </div>
-              ) : null}
             </section>
 
           <div className="linebr" />
@@ -455,7 +425,7 @@ class EditReport extends Component {
           >
             Update Survey
           </Button>
-        </form>
+
       </div>
     );
   }
