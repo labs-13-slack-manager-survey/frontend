@@ -74,8 +74,8 @@ class Navigation extends React.Component {
               // if user is logged in, icon takes them to dashboard, otherwise go to marketing page
               to={loggedIn ? "/slackr/dashboard" : "/"}
               className={classes.logoLink}
-            >
-              <img className="logo" src={Logo} />
+            > 
+              <Link to={`/slackr/dashboard`}><img className="logo" src={Logo} /></Link>
             </NavLink>
             <div className="logo-text">slackr</div>
           </div>
