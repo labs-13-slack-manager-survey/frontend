@@ -454,7 +454,7 @@ class CreateSentiment extends Component {
             onClick={this.addReport}
             disabled={this.state.questions.length === 0 ? true : false}
           >
-            Create Report
+            Create Survey
           </Button>
 
       </div>

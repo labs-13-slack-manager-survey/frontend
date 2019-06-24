@@ -46,4 +46,9 @@
       margin-bottom: 30px;
       margin-top: 30px;
   }
+
+  .poll-description{
+      font-size: 12px;
+      margin-top: 10px;
+  }
 }
