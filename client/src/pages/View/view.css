@@ -28,6 +28,10 @@
   .view {
     align-items: stretch;
   }
+  .two{
+    width: 100%;
+    margin-bottom: 10px;
+  }
 }
 
 @media (max-width: 800px) {
@@ -85,6 +89,7 @@
   .sidebar {
     margin: 0;
     padding: 0;
+    width: 100%;
   }
   .inviteUserBox {
     margin-bottom: 20px;

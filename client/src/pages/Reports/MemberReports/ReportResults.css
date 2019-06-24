@@ -297,3 +297,17 @@ em {
 	margin-bottom: 30px;
 	margin-top: 20px;
 }
+
+@media (max-width: 500px) {
+	.calendar{
+		width: 87%;
+		box-shadow: none;
+        outline: 1px solid #efefef;
+	}
+
+	.responders-component {
+		width: 87%;
+		box-shadow: none;
+        outline: 1px solid #efefef;
+	}
+}

@@ -164,7 +164,7 @@
   .table-display {
     box-shadow: 0px 0px 10px rgb(240, 240, 240);
     padding: 0px 20px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
   }
 
   .vertical-line-header {
@@ -218,7 +218,7 @@
     font-size: 13px;
     margin-top: 20px;
     text-align: center;
-    padding-top: 5px;
+    padding-top: 8px;
     background-color: white;
     color: rgb(248, 147, 23);
     border: 1px solid rgb(248, 147, 23); 

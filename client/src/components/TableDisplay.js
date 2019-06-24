@@ -114,38 +114,42 @@ class TableDisplay extends React.Component {
                 </div>
 
 
-                <div className = "edit-delete-mobile">
-                <Link className ="edit"
-                        to={`/slackr/dashboard/reports/${reportId}/edit`}
-                        id={this.props.role !== 'admin' ? 'display-link' : ''}
-                    >
-                        EDIT
-                    </Link>
-                    <div onClick={() => this.setState({dialogOpen: true})} id={this.props.role !== 'admin' ? 'display-link' : ''} className = "delete">
-                        DELETE
-                    {/* <img onClick={() => this.setState({dialogOpen: true})}  className ="delete" src={trashCan} /> */}
+                <Link to={`/slackr/dashboard/reports/${this.props.report.id}`}
+                style={{ textDecoration: 'none' }} className = "column1">
+                    <div className = "edit-delete-mobile">
+                    <Link className ="edit"
+                            to={`/slackr/dashboard/reports/${reportId}/edit`}
+                            id={this.props.role !== 'admin' ? 'display-link' : ''}
+                        >
+                            EDIT
+                        </Link>
+                        <div onClick={() => this.setState({dialogOpen: true})} id={this.props.role !== 'admin' ? 'display-link' : ''} className = "delete">
+                            DELETE
+                        {/* <img onClick={() => this.setState({dialogOpen: true})}  className ="delete" src={trashCan} /> */}
+                        </div>
+                        <Dialog
+                            open={this.state.dialogOpen}
+                            TransitionComponent={Transition}
+                            keepMounted
+                            onClose={this.props.clearError}
+                            aria-labelledby="alert-dialog-slide-title"
+                            aria-describedby="alert-dialog-slide-description"
+                        >
+                            <DialogTitle id="alert-dialog-slide-title">
+                                Are you sure you'd like to archive this report? 
+                            </DialogTitle>
+                            <Button onClick={() => this.props.archiveReport(reportId)}>
+                                Yes
+                            </Button>
+                            <Button onClick={() => {
+                                this.setState({dialogOpen: false})
+                                }}>No</Button>
+                        </Dialog>
                     </div>
-                    <Dialog
-                        open={this.state.dialogOpen}
-                        TransitionComponent={Transition}
-                        keepMounted
-                        onClose={this.props.clearError}
-                        aria-labelledby="alert-dialog-slide-title"
-                        aria-describedby="alert-dialog-slide-description"
-                    >
-                        <DialogTitle id="alert-dialog-slide-title">
-                            Are you sure you'd like to archive this report? 
-                        </DialogTitle>
-                        <Button onClick={() => this.props.archiveReport(reportId)}>
-                            Yes
-                        </Button>
-                        <Button onClick={() => {
-                            this.setState({dialogOpen: false})
-                            }}>No</Button>
-                    </Dialog>
+
+                    </Link>
+                    </div>
                 </div>
-                </div>
-            </div>
                             
             </div> 
         )}
