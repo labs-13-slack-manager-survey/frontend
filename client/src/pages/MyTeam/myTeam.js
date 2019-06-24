@@ -24,7 +24,7 @@ class myTeam extends Component {
     users: [], 
     anchorEl: null,
     pollCompletion: 0,
-    lastAnswerPoll: "No polls Answered",
+    lastAnswerPoll: "No Surveys Answered",
 
   };
 
@@ -179,11 +179,11 @@ class myTeam extends Component {
         <PageTitle 
           title = "My Team"
         />
-        <PageDescription description= "Add individuals via email to your team. everyone on your team who is also in your slack workplace will recieve direct messages through the slackr bot, alerting them to fill out a poll when it becomes available. Team members will be prompted to create an account on Slackr and view and respond to polls in the browser application."/>
+        <PageDescription description= "Add individuals via email to your team. everyone on your team who is also in your slack workplace will recieve direct messages through the slackr bot, alerting them to fill out a survey when it becomes available. Team members will be prompted to create an account on Slackr and view and respond to surveys in the browser application."/>
         
         <TableHeader 
           column1 = "Member"
-          column3 = "Polls completed" 
+          column3 = "Surveys completed" 
           column4 = "Last poll answered"
         />
 

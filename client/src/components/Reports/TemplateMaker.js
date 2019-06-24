@@ -219,10 +219,10 @@ class TemplateMaker extends Component {
         <form className="create-report">
           <Card raised={true} className="schedule-card">
             <section className="schedule-card-content">
-              <h3 className="schedule-title">Report Information</h3>
+              <h3 className="schedule-title">Survey Information</h3>
               <Divider className="divider" variant="fullWidth" />
               <FormControl className="report-name report-margin" required>
-                <InputLabel htmlFor="report-name">Report Name</InputLabel>
+                <InputLabel htmlFor="report-name">Survey Name</InputLabel>
                 <Input
                   id="report-name"
                   className="input-field"
@@ -237,7 +237,7 @@ class TemplateMaker extends Component {
               <section>
                 <FormControl className="input-field" required>
                   <InputLabel htmlFor="report-message">
-                    Report Message
+                    Survey Message
                   </InputLabel>
                   <Input
                     required

@@ -38,7 +38,7 @@ export class Dashboard extends Component {
       onClick={this.optIn}
       >?</Button>
       <PageTitle 
-      title = "Reports Dashboard"
+      title = "Survey Dashboard"
       />
        {token.roles == "admin" ? <div className = "summary-boxes">
         <SummaryBox 

@@ -149,7 +149,7 @@ class Navigation extends React.Component {
                       : "button-label"
                   }
                 >
-                  reports
+                  Surveys
                 </div>
               </div>
               <div className="menu-button">
