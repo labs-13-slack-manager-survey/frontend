@@ -808,7 +808,7 @@ class CreateReport extends Component {
           type="submit"
           onClick={this.addReport}
         >
-          Create Report
+          Create Survey
         </Button>
       </div>
     );

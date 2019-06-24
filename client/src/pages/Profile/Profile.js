@@ -127,13 +127,12 @@ class Profile extends Component {
               </div>
             </div>
           </div>
-          <div className="sidebar" />
-        </div>
+			 {/* ADMIN VIEW STARTS HERE */}
 
-        {/* ADMIN VIEW STARTS HERE */}
+			 {this.state.profileInfo.roles === "admin" ? (
+          <div className="top-user-card">
 
-        {this.state.profileInfo.roles === "admin" ? (
-          <Card raised={true} className="top-user-card">
+
             <div className="profileForms">
               <h3>Admin Controls</h3>
               <div className="admin-controls">
@@ -151,7 +150,7 @@ class Profile extends Component {
                   >
                     {this.state.openInactiveUsers
                       ? "Hide Inactive Users"
-                      : "View Inactive Users"}
+                      : "Inactive Users"}
                   </Button>
                   <div>
                     <Collapse isOpen={this.state.openInactiveUsers}>
@@ -202,7 +201,7 @@ class Profile extends Component {
                   >
                     {this.state.openArchivedReports === false
                       ? "View Archived Reports"
-                      : "Hide Archived Reports"}
+                      : "Archived Reports"}
                   </Button>
                   <div>
                     <Collapse isOpen={this.state.openArchivedReports}>
@@ -233,8 +232,12 @@ class Profile extends Component {
                 </div>
               </div>
             </div>
-          </Card>
-        ) : null}
+
+
+          </div>
+		) : null}
+		
+        </div>
       </div>
     );
   }

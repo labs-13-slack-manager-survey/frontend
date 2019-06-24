@@ -153,7 +153,8 @@ textarea.bp3-input {
 }
 @media (max-width: 500px) {
   .summary-boxes {
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
   }
 }
 

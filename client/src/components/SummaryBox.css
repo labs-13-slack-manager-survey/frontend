@@ -22,5 +22,8 @@
 @media (max-width: 500px) {
   .summary-box {
     margin-right: 0;
+    width: 30%;
+    flex-direction: row-reverse;
+    align-items: center;
   }
 }

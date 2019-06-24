@@ -33,3 +33,22 @@
     letter-spacing: 0.5px;
     margin-bottom: 30px;
 }
+
+/* mobile view */
+@media (max-width: 500px) {
+  .page-title {
+      align-items: left;
+      font-weight: 40px;
+  }
+  .title-box{
+      padding-top: 20px;
+      font-size: 23px;
+      margin-bottom: 30px;
+      margin-top: 30px;
+  }
+
+  .poll-description{
+      font-size: 12px;
+      margin-top: 10px;
+  }
+}
