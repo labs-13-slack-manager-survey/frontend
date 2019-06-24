@@ -351,11 +351,13 @@ class EditReport extends Component {
             </section>
           </Card>
          
-         
+         {/* Question card */}
+
           <Card raised={true} className="schedule-card">
             <section className="schedule-card-content">
               <h3 className="schedule-title">Questions</h3>
               <Divider className="divider" variant="fullWidth" />
+
               <section>
                 {this.state.questions.map(question => (
                   <article className="question-flex" key={question}>
@@ -370,11 +372,13 @@ class EditReport extends Component {
                   </article>
                 ))}
               </section>
+
               <section className="enter-question">
                 <FormControl className="input-field" required>
                   <InputLabel htmlFor="edit-report-question">
                     Enter a question...
                   </InputLabel>
+                  <form onSubmit={this.questionsHandler}>
                   <Input
                     id="edit-report-question"
                     required
@@ -384,6 +388,7 @@ class EditReport extends Component {
                     value={this.state.question}
                     onChange={this.enterQuestionsHandler}
                   />
+                  </form>
                 </FormControl>
                 <Fab
                   size="small"
@@ -399,7 +404,7 @@ class EditReport extends Component {
             </section>
           </Card>
 
-
+          {/* Sentiment Card */}
           <Card raised={true} className="schedule-card">
             <section className="schedule-card-content">
               <h3 className="schedule-title">sentiment Questions</h3>
@@ -418,11 +423,13 @@ class EditReport extends Component {
                   </article>
                 ))}
               </section>
+                  
               <section className="enter-question">
                 <FormControl className="input-field" required>
                   <InputLabel htmlFor="edit-report-question">
                     Enter a sentiment question...
                   </InputLabel>
+                  <form onSubmit={this.sentimentHandler}>
                   <Input
                     id="edit-report-question"
                     required
@@ -432,6 +439,7 @@ class EditReport extends Component {
                     value={this.state.sentimentQuestion}
                     onChange={this.enterSentimentHandler}
                   />
+                </form>
                 </FormControl>
                 <Fab
                   size="small"

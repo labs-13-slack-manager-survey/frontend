@@ -219,7 +219,6 @@ class CreateReport extends Component {
     }));
   };
 
-
   removeQuestion = (e, question) => {
     e.preventDefault();
     this.setState(prevState => ({
@@ -702,6 +701,7 @@ class CreateReport extends Component {
                 <InputLabel htmlFor="report-question">
                   Enter a question...
                 </InputLabel>
+                <form onSubmit={this.questionsHandler}>
                 <Input
                   id="report-question"
                   required
@@ -711,6 +711,7 @@ class CreateReport extends Component {
                   value={this.state.question}
                   onChange={this.enterQuestionsHandler}
                 />
+                </form>
               </FormControl>
               <Fab
                 size="small"
@@ -774,6 +775,7 @@ class CreateReport extends Component {
                 <InputLabel htmlFor="report-question">
                   Enter a question...
                 </InputLabel>
+                <form onSubmit={this.sentimentQuestionsHandler}>
                 <Input
                   id="report-question"
                   required
@@ -783,6 +785,7 @@ class CreateReport extends Component {
                   value={this.state.sentimentQuestion}
                   onChange={this.enterSentimentQuestionsHandler}
                 />
+                </form>
               </FormControl>
               <Fab
                 size="small"
