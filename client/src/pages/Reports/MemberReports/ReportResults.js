@@ -146,7 +146,7 @@ class ReportResults extends Component {
         <main className="view">
           
           <PageTitle
-            title="Report"
+            title="Survey"
             {...this.props}
             secondaryPage={this.state.secondaryPage}
           />
@@ -392,7 +392,7 @@ class ReportResults extends Component {
         {/* The components below are the circle chart and calendar */}
         <div className="sidebar">
           <CircleProgress
-            title="Today's Poll"
+            title="Today's Survey"
             // minorFix
             percentComplete={this.state.historicalSubmissionRate}
           />
