@@ -5,7 +5,13 @@ import moment from "moment";
 import PageTitle from "../../components/PageTitle";
 import SummaryBox from "../../components/SummaryBox";
 
-import { InputLabel, MenuItem, FormControl, Select } from "@material-ui/core";
+import {
+  InputLabel,
+  MenuItem,
+  FormControl,
+  Select,
+  Button
+} from "@material-ui/core";
 
 import "./StatsDashboard.css";
 import ChartOptions from "./ChartOptions";
@@ -21,7 +27,8 @@ class StatsDashboard extends Component {
       data: [],
       labels: [],
       filterBy: "",
-      dataType: ""
+      dataType: "",
+      clicked: ""
     };
   }
 
@@ -80,7 +87,7 @@ class StatsDashboard extends Component {
       let generatedDates = [];
       for (let i = num; i > 0; i--) {
         let date = new Date();
-        date.setDate(date.getDate() - i);
+        date.setDate(date.getDate() - i + 1);
         date = moment(date).format("l");
         generatedDates.push(date);
       }
@@ -131,6 +138,10 @@ class StatsDashboard extends Component {
         this.generateLabels(365);
         break;
     }
+
+    this.setState({
+      clicked: "clicked"
+    });
   };
 
   render() {
@@ -181,11 +192,11 @@ class StatsDashboard extends Component {
                   onChange={this.handleChange}
                   className="select"
                 >
-                  <MenuItem value={"day"}>Day</MenuItem>
-                  <MenuItem value={"week"}>Week</MenuItem>
-                  <MenuItem value={"month"}>Month</MenuItem>
-                  <MenuItem value={"quarter"}>Quarter</MenuItem>
-                  <MenuItem value={"year"}>Year</MenuItem>
+                  <MenuItem value={"day"}>Today</MenuItem>
+                  <MenuItem value={"week"}>Last 7 Days</MenuItem>
+                  <MenuItem value={"month"}>Last 30 Days</MenuItem>
+                  <MenuItem value={"quarter"}>Last 90 Days</MenuItem>
+                  <MenuItem value={"year"}>Last 365 Days</MenuItem>
                 </Select>
               </FormControl>
               <FormControl className="formControl">
@@ -209,9 +220,14 @@ class StatsDashboard extends Component {
                   </MenuItem>
                 </Select>
               </FormControl>
-              <button onClick={this.setLabels} style={{ margin: "20px" }}>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={this.setLabels}
+                style={{ margin: "20px" }}
+              >
                 Generate Graph
-              </button>
+              </Button>
             </form>
             <p>Select options to see graph.</p>
           </div>
@@ -243,53 +259,72 @@ class StatsDashboard extends Component {
             className="form"
             style={{ display: "flex", flexWrap: "wrap" }}
           >
-            <FormControl className="formControl">
-              <InputLabel
-                className="inputLabel"
-                style={{ marginBottom: "20px" }}
-              >
-                Filter By
-              </InputLabel>
+            {this.state.clicked === "" ? (
+              <>
+                <FormControl className="formControl">
+                  <InputLabel
+                    className="inputLabel"
+                    style={{ marginBottom: "20px" }}
+                  >
+                    Filter By
+                  </InputLabel>
 
-              <Select
-                value={this.state.filterBy}
-                style={{ marginTop: "20px" }}
-                name="filterBy"
-                onChange={this.handleChange}
-                className="select"
-              >
-                <MenuItem value={"day"}>Today</MenuItem>
-                <MenuItem value={"week"}>Last 7 Days</MenuItem>
-                <MenuItem value={"month"}>Last 30 Days</MenuItem>
-                <MenuItem value={"quarter"}>Last 90 Days</MenuItem>
-                <MenuItem value={"year"}>Last 365 Days</MenuItem>
-              </Select>
-            </FormControl>
-            <FormControl className="formControl">
-              <InputLabel
-                className="inputLabel"
-                style={{ marginBottom: "20px" }}
-              >
-                Pick Data
-              </InputLabel>
+                  <Select
+                    value={this.state.filterBy}
+                    style={{ marginTop: "20px" }}
+                    name="filterBy"
+                    onChange={this.handleChange}
+                    className="select"
+                  >
+                    <MenuItem value={"day"}>Today</MenuItem>
+                    <MenuItem value={"week"}>Last 7 Days</MenuItem>
+                    <MenuItem value={"month"}>Last 30 Days</MenuItem>
+                    <MenuItem value={"quarter"}>Last 90 Days</MenuItem>
+                    <MenuItem value={"year"}>Last 365 Days</MenuItem>
+                  </Select>
+                </FormControl>
+                <FormControl className="formControl">
+                  <InputLabel
+                    className="inputLabel"
+                    style={{ marginBottom: "20px" }}
+                  >
+                    Pick Data
+                  </InputLabel>
 
-              <Select
-                value={this.state.dataType}
-                style={{ marginTop: "20px" }}
-                name="dataType"
-                onChange={this.handleChange}
-                className="select"
+                  <Select
+                    value={this.state.dataType}
+                    style={{ marginTop: "20px" }}
+                    name="dataType"
+                    onChange={this.handleChange}
+                    className="select"
+                  >
+                    <MenuItem value={"responseRate"}>Response Rate</MenuItem>
+                    <MenuItem value={"sentimentAverage"}>
+                      Sentiment Average
+                    </MenuItem>
+                  </Select>
+                </FormControl>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={this.setLabels}
+                  style={{ margin: "20px" }}
+                >
+                  Generate Graph
+                </Button>
+              </>
+            ) : (
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={e => window.location.reload()}
+                style={{ margin: "20px" }}
               >
-                <MenuItem value={"responseRate"}>Response Rate</MenuItem>
-                <MenuItem value={"sentimentAverage"}>
-                  Sentiment Average
-                </MenuItem>
-              </Select>
-            </FormControl>
-            <button onClick={this.setLabels} style={{ margin: "20px" }}>
-              View Graph
-            </button>
+                New Graph
+              </Button>
+            )}
           </form>
+
           <ChartOptions
             reports={this.state.reports}
             data={this.state.data}
