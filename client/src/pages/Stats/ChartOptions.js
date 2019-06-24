@@ -139,7 +139,6 @@ export default class ChartOptions extends Component {
       axiosWithAuth()
         .get(`${URL}/responses/sentimentAvg/${report.id}`)
         .then(res => {
-          console.log(res.data[0].average);
           avgs.push(res.data[0].average);
         })
         .catch(err => console.log(err));

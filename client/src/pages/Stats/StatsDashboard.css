@@ -24,6 +24,11 @@ h2 {
   display: flex;
 }
 
+.select {
+  width: 150px;
+  margin-right: 10px;
+}
+
 @media (max-width: 500px) {
   .dataSquares {
     display: flex;
