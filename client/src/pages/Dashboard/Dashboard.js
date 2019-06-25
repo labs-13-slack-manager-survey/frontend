@@ -8,6 +8,7 @@ import PageTitle from '../../components/PageTitle'
 import SummaryBox from '../../components/SummaryBox';
 import UserCard from '../../components/UserCard.js';
 import UserFeedback from '../../components/UserFeedback.js';
+import Question from '../../images/icons/question-circle-blue.png'
 
 // style imports
 import { Spinner, Intent, Button } from "@blueprintjs/core";
@@ -34,13 +35,12 @@ export class Dashboard extends Component {
     }
     return (
       <>
-      <Button 
-      className="tourButton"
-      onClick={this.optIn}
-      >?</Button>
-      <PageTitle 
-      title = "My Surveys"
-      />
+      <div className = "main-dashboard-header">
+          <PageTitle 
+          title = "My Surveys"
+          />
+          <img src={Question} onClick={this.optIn} className="tourButton"/>
+        </div>
        {token.roles == "admin" ? <div className = "summary-boxes">
         <SummaryBox 
             title = "no. of team members"
