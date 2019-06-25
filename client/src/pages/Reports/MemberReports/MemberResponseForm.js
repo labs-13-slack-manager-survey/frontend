@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { axiosWithAuth, baseURL } from "../../../config/axiosWithAuth";
 import jwt_decode from "jwt-decode";
 
-import CreateReport from "../ModifyReports/CreateReport";
+// import CreateReport from "../ModifyReports/CreateReport";
 import ReportInput from "./ReportInput";
-import ChevronUp from "../../../images/icons/chevron-up.png";
-import ChevronDown from "../../../images/icons/chevron-down.png";
+// import ChevronUp from "../../../images/icons/chevron-up.png";
+// import ChevronDown from "../../../images/icons/chevron-down.png";
 
 // style imports
 import Button from "@material-ui/core/Button";
@@ -46,7 +46,7 @@ class MemberResponseForm extends Component {
       <>
         <div>
           {/*conditional render based on user role and if the manager survey is set*/}
-          {token.roles == "admin" ? (
+          {token.roles === "admin" ? (
             this.state.managerQuestions &&
             this.state.managerQuestions.length > 0 ? (
               <>

@@ -1,19 +1,12 @@
 import React, { Component } from "react";
 import { axiosWithAuth, baseURL } from "../../config/axiosWithAuth";
 
-import {
-  Button,
-  Dialog,
-  DialogTitle,
-  Slide,
-} from "@material-ui/core";
+import { Button, Dialog, DialogTitle, Slide } from "@material-ui/core";
 
 import Slack from "../Slack/Slack.js";
 import "./reports.css";
-import TableHeader from '../../components/TableHeader'
-import TableDisplay from '../../components/TableDisplay'
-
-
+import TableHeader from "../../components/TableHeader";
+import TableDisplay from "../../components/TableDisplay";
 
 // Container for all reports including title
 // Parent component = ReportsDash.js in '/pages/Dashboard/ReportsDash'
@@ -25,7 +18,7 @@ function Transition(props) {
 class Reports extends Component {
   state = {
     slackModal: false,
-    archiveModal: false,
+    archiveModal: false
   };
 
   slackAuthCheck = e => {
@@ -51,7 +44,6 @@ class Reports extends Component {
       });
   };
 
-
   handleClose = () => {
     this.setState({
       slackModal: false
@@ -67,16 +59,15 @@ class Reports extends Component {
       .put(endpoint, updatedReport)
       .then(res => {
         this.props.getReports();
-        this.handleArchive(); 
+        this.handleArchive();
       })
       .catch(err => console.log(err));
   };
 
-
   render() {
     //const { stepsEnabled, steps, initialStep } = this.state;
     const activeReports = this.props.reports.filter(report => report.active);
-    const activeReportsReverse = activeReports.reverse(); 
+    const activeReportsReverse = activeReports.reverse();
 
     return (
       <div className="user-reports-container">
@@ -106,22 +97,24 @@ class Reports extends Component {
         </header>
         <div>
           {/* passing reports from state to individual components */}
-          <TableHeader 
-              column1 = "Survey Name"
-              column2 = "Date Created"
-              column3 = "Schedule" 
-              column4 = "Total Responses"/>
-                {activeReportsReverse.length == 0 ? <div> no surveys yet! Add a Survey to get started </div> : null}
+          <TableHeader
+            column1="Survey Name"
+            column2="Date Created"
+            column3="Schedule"
+            column4="Total Responses"
+          />
+          {activeReportsReverse.length === 0 ? (
+            <div> no surveys yet! Add a Survey to get started </div>
+          ) : null}
           {activeReportsReverse.map(report => (
-              <TableDisplay 
-              content1 = {report.reportName}
-              report = {report}
+            <TableDisplay
+              content1={report.reportName}
+              report={report}
               role={this.props.role}
               archiveReport={this.archiveReport}
               archiveModal={this.state.archiveModal}
-              ConsoleCheck = {this.ConsoleCheck}
-              />
-            
+              ConsoleCheck={this.ConsoleCheck}
+            />
           ))}
         </div>
       </div>

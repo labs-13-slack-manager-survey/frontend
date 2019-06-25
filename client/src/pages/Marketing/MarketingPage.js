@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 // styling imports
-import Button from "@material-ui/core/Button";
+// import Button from "@material-ui/core/Button";
 import { ArrowUpward } from "@material-ui/icons";
 import { scroller, animateScroll } from "react-scroll";
 import Typography from "@material-ui/core/Typography";

@@ -11,7 +11,7 @@ import PageTitle from "../../../components/PageTitle";
 import Slider from "@material-ui/lab/Slider";
 import { withStyles } from "@material-ui/core/styles";
 import CircleProgress from "../../../components/circleProgress.js";
-import { Card, Elevation } from "@blueprintjs/core";
+import { Elevation } from "@blueprintjs/core";
 import ToggleOn from "../../../images/icons/chevron-down.png";
 import ToggleOff from "../../../images/icons/chevron-up.png";
 
@@ -75,12 +75,12 @@ class ReportResults extends Component {
   }
 
   render() {
-    const options = {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric"
-    };
+    // const options = {
+    //   weekday: "long",
+    //   year: "numeric",
+    //   month: "long",
+    //   day: "numeric"
+    // };
     
     let managerPollDays = [];
 
@@ -130,8 +130,8 @@ class ReportResults extends Component {
     let today = new Date();
     today = moment(today).format('DD MMMM YYYY');
 
-    let today2 = new Date();
-    today2 = moment(today).format('DD MMMM YYYY');
+    // let today2 = new Date();
+    // today2 = moment(today).format('DD MMMM YYYY');
 
     
     let managerToday = managerPollDays.length && managerPollDays[managerPollDays.length-1].managerSubmitted;
@@ -152,9 +152,9 @@ class ReportResults extends Component {
             secondaryPage={this.state.secondaryPage}
           />
           
-          {token.roles != "admin" && this.state.isManagerActivated ? 
+          {token.roles !== "admin" && this.state.isManagerActivated ? 
             <div className="confirm-response" >
-                {managerToday != today || this.state.filteredResponse.length > 0 ? <div> {this.state.filteredResponse.length > 0 ? "Your response has been recorded" :  "Poll unavailable: No manager response has been recorded for today" } </div> 
+                {managerToday !== today || this.state.filteredResponse.length > 0 ? <div> {this.state.filteredResponse.length > 0 ? "Your response has been recorded" :  "Poll unavailable: No manager response has been recorded for today" } </div> 
                 : 
                   <>
                   <div classname="manager-feedback-for-users" onClick = {this.toggleManagerQ}>
@@ -164,6 +164,7 @@ class ReportResults extends Component {
                           <img
                           className="manager-toggle"
                           src={this.state.seeMangerQ ? ToggleOff : ToggleOn }
+                          alt=''
                         />
                        </div>
                     <p className="member-form-subtitle">
@@ -202,7 +203,7 @@ class ReportResults extends Component {
           this.state.managerCompleted === true ? (
             <>
               <div className="confirm-response">
-                {managerToday != today ? "Your response has been recorded " : 
+                {managerToday !== today ? "Your response has been recorded " : 
                 <>
                 <div classname="manager-feedback">
                   <div className = "user-info">
@@ -235,7 +236,7 @@ class ReportResults extends Component {
             </>
           ) : (
             <>
-              {managerToday != today && this.state.filteredResponse.length !== 0 || token.roles != "admin" && managerToday === today  ?
+              {(managerToday !== today && this.state.filteredResponse.length !== 0) || (token.roles !== "admin" && managerToday === today)  ?
                 <div
                   className="response-card"
                   interactive={false}
@@ -263,7 +264,7 @@ class ReportResults extends Component {
                         </div>
                         <div className = "manager-response-header-text">
                           <div className = "response-container-main-name-manager">Manager Comments</div>
-                          <img className="manager-toggle-list" src={this.state.seeManagerQList ? ToggleOn : ToggleOff} />
+                          <img className="manager-toggle-list" src={this.state.seeManagerQList ? ToggleOn : ToggleOff} alt="" />
                         </div>
                       </div>
                       {this.state.seeManagerQList ? <>
@@ -306,7 +307,7 @@ class ReportResults extends Component {
                             </div>
                             <div className = "manager-response-header-text" onClick={this.toggleManagerQList}>
                               <div className = "response-container-main-name-manager">Manager Comments</div>
-                              <img className="manager-toggle-list" src={this.state.seeManagerQList ? ToggleOn : ToggleOff} />
+                              <img className="manager-toggle-list" src={this.state.seeManagerQList ? ToggleOn : ToggleOff} alt="" />
                             </div>
                           </div>
                           {this.state.seeManagerQList ? <>
@@ -343,7 +344,7 @@ class ReportResults extends Component {
                                   
                                   <div className = "user-response-header">
                                     <div className= "user-info">
-                                        <img className = "response-container-profile-pic" src={userRes.profilePic} />
+                                        <img className = "response-container-profile-pic" src={userRes.profilePic} alt="" />
                                         <div className = "response-container-main-name-user">{userRes.fullName}</div></div>
                                     <div>
                                       <div className="month-day">
@@ -366,11 +367,11 @@ class ReportResults extends Component {
                                             step={1}
                                           />
                                             <div className="slider-label">
-                                              <p className={userQA.sentimentRange !=1 ? "deselected" : null}>1</p>
-                                              <p className={userQA.sentimentRange !=2 ? "deselected" : null}>2</p>
-                                              <p className={userQA.sentimentRange !=3 ? "deselected" : null}>3</p>
-                                              <p className={userQA.sentimentRange !=4 ? "deselected" : null}>4</p>
-                                              <p className={userQA.sentimentRange !=5 ? "deselected" : null}>5</p>
+                                              <p className={userQA.sentimentRange !==1 ? "deselected" : null}>1</p>
+                                              <p className={userQA.sentimentRange !==2 ? "deselected" : null}>2</p>
+                                              <p className={userQA.sentimentRange !==3 ? "deselected" : null}>3</p>
+                                              <p className={userQA.sentimentRange !==4 ? "deselected" : null}>4</p>
+                                              <p className={userQA.sentimentRange !==5 ? "deselected" : null}>5</p>
                                             </div>
                                             <div className ="linebr" />
                                             {userQA.answer ? <><div className= "response-container-main-comment "><em>Comment:</em> {userQA.answer}</div>   <div className ="linebr" /> </>: null }
@@ -408,7 +409,7 @@ class ReportResults extends Component {
 
           <div className = "responders-component">
             <h1 className="title">Filter by team member</h1>
-            {this.state.responders.length == 0 ? <div className="error-message"> no responses yet </div> : <Responders
+            {this.state.responders.length === 0 ? <div className="error-message"> no responses yet </div> : <Responders
               responders={this.state.responders}
               filter={this.filter}
               clickedDate={this.state.clickedDate}
