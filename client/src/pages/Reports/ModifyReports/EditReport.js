@@ -4,22 +4,21 @@ import { axiosWithAuth, baseURL } from "../../../config/axiosWithAuth";
 // style imports
 import "./Report.css";
 import {
-  Card,
   Button,
-  Divider,
   Input,
   InputLabel,
   FormControl,
   Fab,
   Icon,
   TextField,
-  MenuItem,
   withStyles
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import { TimePicker } from "material-ui-pickers";
 import { getHours } from "date-fns";
 import { getMinutes } from "date-fns/esm";
+import PageTitle from "../../../components/PageTitle";
+
 
 // this edits reports - admin only
 // Parent component = ReportsDash.js in '/pages/Dashboard/ReportsDash'
@@ -239,80 +238,69 @@ class EditReport extends Component {
   };
 
   render() {
-    const { classes } = this.props;
     return (
       <div className="create-report">
-        <Fab onClick={() => this.props.history.goBack()} color="default">
-          <Icon>arrow_back</Icon>
-        </Fab>
-        <form className="edit-report">
-          <Card raised={true} className="schedule-card">
-            <section className="schedule-card-content">
-              <h3 className="schedule-title">Survey Information</h3>
-              <Divider className="divider" variant="fullWidth" />
-              <FormControl className="report-name report-margin" required>
-                <InputLabel htmlFor="edit-report-name">Survey Name</InputLabel>
-                <Input
-                  id="edit-report-name"
-                  className="input-field top-input"
-                  required
-                  type="text"
-                  onChange={this.changeHandler}
-                  name="reportName"
-                  value={this.state.reportName}
-                />
-              </FormControl>
-              {this.state.channels.length > 0 ? (
-                <div>
-                  <p>Slack Channel</p>
-                  <TextField
-                    id="select-currency"
-                    select
-                    label="Select"
-                    name="slackChannelId"
-                    className={classes.textField}
-                    value={this.state.slackChannelId}
-                    onChange={this.changeHandler}
-                    required
-                    SelectProps={{
-                      MenuProps: {
-                        className: classes.menu
-                      }
-                    }}
-                    helperText="Please select your slack channel"
-                    margin="normal"
+        <PageTitle 
+        title="Update Survey"
+        {...this.props}
+        secondaryPage={true}
+        />
+          <div className="linebr" />
+          <section className="response-card">
+            <section className="manager-poll-responses">
+                <FormControl className="report-name report-margin" required>
+                  <div
+                    className={
+                      this.state.reportName ? "manager-poll-question" : "incomplete"
+                    }
                   >
-                    {this.state.channels.map(channel => (
-                      <MenuItem key={channel.id} value={channel.id}>
-                        {channel.name}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                </div>
-              ) : null}
+                    Survey Name
+                  </div>
+                  <TextField
+                    fullWidth={true}
+                    variant="outlined"
+                    multiline={true}
+                    id="report-name"
+                    required
+                    type="text"
+                    onChange={this.changeHandler}
+                    name="reportName"
+                    placeholder="Report Name"
+                    value={this.state.reportName}
+                  />
+                </FormControl>
+                <FormControl className="input-field" required>
+                  <div className="poll-answer-field">
+                  <div
+                className={
+                  this.state.reportName ? "manager-poll-question" : "incomplete"
+                }
+              >
+                Description
+              </div>
+                    <TextField
+                      fullWidth={true}
+                      variant="outlined"
+                      multiline={true}
+                      required
+                      className="input-field"
+                      id="report-message"
+                      type="textarea"
+                      onChange={this.changeHandler}
+                      name="message"
+                      placeholder="Message to be sent with each report"
+                      value={this.state.message}
+                    />
+                  </div>
+                </FormControl>
             </section>
-            <section className="schedule-card-content">
-              <FormControl className="input-field" required>
-                <InputLabel htmlFor="edit-report-message">
-                  Survey Message
-                </InputLabel>
-                <Input
-                  required
-                  className="input-field margin-fix"
-                  id="edit-report-message"
-                  type="textarea"
-                  onChange={this.changeHandler}
-                  name="message"
-                  placeholder="Message to be sent with each survey"
-                  value={this.state.message}
-                />
-              </FormControl>
-            </section>
-          </Card>
-          <Card raised={true} className="schedule-card">
-            <section className="schedule-card-content">
-              <h3 className="schedule-title">Schedule</h3>
-              <Divider className="divider" variant="fullWidth" />
+          </section>
+          
+        
+          <div className="linebr" />
+          <section className="response-card">
+              <section className="manager-poll-responses">
+              <h3 className="member-form-title">Delivery Schedule</h3>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <p>Days to be Delivered</p>
                 <Button
@@ -349,14 +337,12 @@ class EditReport extends Component {
                 />
               </section>
             </section>
-          </Card>
-         
-         {/* Question card */}
+          </section>
 
-          <Card raised={true} className="schedule-card">
-            <section className="schedule-card-content">
-              <h3 className="schedule-title">Questions</h3>
-              <Divider className="divider" variant="fullWidth" />
+          <div className="linebr" />
+          <section className="response-card">
+              <section className="manager-poll-responses">
+              <h3 className="member-form-title addingPadding">Survey Questions</h3>
 
               <section>
                 {this.state.questions.map(question => (
@@ -401,14 +387,13 @@ class EditReport extends Component {
                   <AddIcon />
                 </Fab>
               </section>
+              </section>
             </section>
-          </Card>
 
-          {/* Sentiment Card */}
-          <Card raised={true} className="schedule-card">
-            <section className="schedule-card-content">
-              <h3 className="schedule-title">Sentiment Questions</h3>
-              <Divider className="divider" variant="fullWidth" />
+          <div className="linebr" />
+          <section className="response-card">
+            <section className="manager-poll-responses">
+              <h3 className="member-form-title addingPadding">Sentiment Questions</h3>
               <section>
                 {this.state.sentimentQuestions.map(question => (
                   <article className="question-flex" key={question}>
@@ -452,8 +437,8 @@ class EditReport extends Component {
                   <AddIcon />
                 </Fab>
               </section>
+              </section>
             </section>
-          </Card>
 
           <Button
             style={{ display: "block", marginTop: "30px" }}
@@ -463,7 +448,7 @@ class EditReport extends Component {
           >
             Update Survey
           </Button>
-        </form>
+
       </div>
     );
   }
