@@ -38,13 +38,15 @@
 }
 
 .menu-bar-add-poll {
-  width: 200px;
-  height: 40px;
-  font-size: 13px;
+  width: 70px;
+  height: 70px;
+  font-size: 30px;
   border-radius: 0px;
-  color: #f67b28;
+  color: white;
+  background-color: #f67b28;
   font-weight: 500;
-  border: 1px solid #f67b28;
+  border: none;
+  margin-bottom: 20px;
 }
 
 .menu-bar-add-poll:hover {
@@ -93,7 +95,7 @@ span {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding-top: 90px;
+  padding-top: 70px;
   padding-bottom: 20px;
 }
 
@@ -104,8 +106,7 @@ span {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 235px;
-  padding-top: 30px;
+  height: 300px;
 }
 
 .vert-buttons2 {
@@ -159,6 +160,13 @@ span {
   color: #2076db;
   padding-top: 3px;
 }
+
+.button-label-survey {
+	font-size: 10px;
+	color: white;
+	padding-top: 3px;
+	padding-bottom: 10px;
+  }
 
 .logo {
   height: 50px;
