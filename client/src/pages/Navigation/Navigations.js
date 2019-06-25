@@ -125,19 +125,19 @@ class Navigation extends React.Component {
         </div>
         <div className="verticalBar">
           {loggedIn && token.teamId ? (
-            <div className="vert-buttons">
+            <div className={token.roles === "admin" ? "vert-buttons" : "vert-buttons-user"}>
               <div className="menu-button">
                 {token.roles === "admin" ? (
                   <NavLink to="/slackr/dashboard/reports/new">
 
-                    <button
+                    {/* <button
                       className="menu-bar-add-poll"
                       onClick={
                         token.roles !== "admin" ? this.slackAuthCheck : null
                       }
                     >
                       +<div className="button-label-survey">Surveys</div>
-                    </button>
+                    </button> */}
                   </NavLink>
                 ) : null}
 

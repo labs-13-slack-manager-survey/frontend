@@ -1,0 +1,139 @@
+.marketing-nav{
+    display: flex;
+    flex-direction: row; 
+    justify-content: flex-end;
+    padding-bottom: 40px;
+    align-items: center;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.nav-link-marketing {
+    color: #191919;
+}
+
+.get-started {
+    color: #F67B28;
+    margin-left: 50px;
+}
+
+.header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 60px;
+}
+
+.marketing-header-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 50px;
+}
+
+.marketing-header-title {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.marketing-header-description {
+    font-size: 15px;
+    color: #9C9C9C;
+    text-decoration: italic;
+}
+
+.circle{
+    height: 80px;
+    width: 80px;
+    margin-right: -40px;
+    margin-top: 25px;
+    position: relative;
+}
+
+.circle-green {
+    height: 80px;
+    width: 80px;
+    background-color: #2FB77E;
+    border-radius: 100px;
+    border: 10px solid white;
+    z-index: 3;
+    position: absolute;
+}
+
+.circle-white {
+    height: 40px;
+    width: 40px;
+    background-color: white;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    border-radius: 100px;
+}
+.circle-red {
+    height: 80px;
+    width: 80px;
+    background-color: #E01E5A;
+    border-radius: 100px;
+    border: 10px solid white;
+    z-index: 3;
+}
+
+.circle-yellow {
+    height: 80px;
+    width: 80px;
+    background-color: #ECB22E;
+    border-radius: 100px;
+    border: 10px solid white;
+    z-index: 3;
+}
+
+.circle-blue {
+    height: 80px;
+    width: 80px;
+    background-color: #36C5F0;
+    border-radius: 100px;
+    border: 10px solid white;
+    z-index: 3;
+}
+
+.body {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0px 40px;
+}
+
+.section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 45%;
+    margin: 20px;
+}
+
+
+.section-content{
+    text-align: left;
+    width: 95%;
+    border: 1px solid #e8e8e8;
+    padding: 20px;
+    padding-left: 50px;
+}
+
+.section-content:hover{
+    box-shadow: 0px 0px 10px rgb(240, 240, 240);
+}
+
+.section-text {
+    font-size: 15px;
+    line-height: 2;
+    padding-bottom: 20px;
+}
+
+.section-title{
+    font-size: 20px;
+    font-weight: 600;
+    padding-top: 30px;
+    margin-bottom: 20px;
+}
