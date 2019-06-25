@@ -298,6 +298,42 @@ em {
 	margin-top: 20px;
 }
 
+.username-profile-pic{
+	font-size: 12px;
+}
+
+
+@media (max-width: 1100px) {
+	.calendar {
+		width: 60%;
+		box-shadow: none;
+        outline: 1px solid #efefef;
+	}
+	.responders-component {
+		width: 35%;
+		height: 382px;
+		box-shadow: none;
+        outline: 1px solid #efefef;
+	}
+
+	.username-profile-pic{
+		margin-top: 20px;
+		margin-left: 5px;
+	}
+}
+
+@media (max-width: 800px) {
+
+	.title {
+		font-size: 15px;
+	}
+
+	.username-profile-pic{
+		margin-top: 20px;
+		margin-left: 5px;
+	}
+}
+
 @media (max-width: 500px) {
 	.calendar{
 		width: 87%;

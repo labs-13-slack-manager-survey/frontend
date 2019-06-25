@@ -57,23 +57,21 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 318px;
   height: 60px;
 }
 
 .add-to-slack {
-  border: 2px solid #E4E4E4;
-  width: 318px;
-  height: 60px;
+  margin-top: 15px;
   margin-bottom: 20px;
   border-radius: 100px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  box-shadow: 0px 0px 15px rgb(241, 241, 241);
+
 }
 
 .add-slackr-text {
-  margin-left: 10px;
+  margin-left: 8px;
+  font-size: 13px;
 }
