@@ -4,9 +4,10 @@ import jwt_decode from "jwt-decode";
 
 // component imports
 // import Slack from "../Slack/Slack";
-import PageTitle from "../../components/PageTitle";
-import SummaryBox from "../../components/SummaryBox";
-// import UserCard from '../../components/UserCard.js';
+import PageTitle from '../../components/PageTitle'
+import SummaryBox from '../../components/SummaryBox';
+import UserFeedback from '../../components/UserFeedback.js';
+import Question from '../../images/icons/question-circle-blue.png'
 
 // style imports
 import { Spinner, Intent, Button } from "@blueprintjs/core";
@@ -33,28 +34,27 @@ export class Dashboard extends Component {
     }
     return (
       <>
-        <Button className="tourButton" onClick={this.optIn}>
-          ?
-        </Button>
-        <PageTitle title="My Surveys" />
-        {token.roles === "admin" ? (
-          <div className="summary-boxes">
-            <SummaryBox
-              title="no. of team members"
-              content={this.state.users.length}
-            />
+      <div className = "main-dashboard-header">
+          <PageTitle 
+          title = "My Surveys"
+          />
+          <img src={Question} onClick={this.optIn} className="tourButton"/>
+        </div>
+       {token.roles == "admin" ? <div className = "summary-boxes">
+        <SummaryBox 
+            title = "no. of team members"
+            content = {this.state.users.length}/>
 
             <SummaryBox
               title="total survey responses"
               content={this.state.totalResponses}
             />
 
-            <SummaryBox
-              title="total surveys scheduled"
-              content={this.state.reports.length}
-            />
-          </div>
-        ) : null}
+        <SummaryBox 
+            title = "total surveys scheduled"
+            content = {this.state.reports.length}/>
+      </div> : null }
+
       </>
     );
   }

@@ -15,6 +15,12 @@ textarea.bp3-input {
   padding: 12px;
 }
 
+.main-dashboard-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .bp3-card .singleUserContainer {
   margin: 0.5rem;
 }
@@ -156,6 +162,10 @@ textarea.bp3-input {
     flex-direction: row;
     justify-content: space-between;
   }
+
+  .tourButton {
+    margin-top: 15px;
+  }
 }
 
 .into {
@@ -164,8 +174,8 @@ textarea.bp3-input {
 }
 
 .tourButton {
-  margin-top: 20px;
-  margin-bottom: -60px;
-  display: flex;
-  margin-left: 300px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    margin-left: 20px;
 }
