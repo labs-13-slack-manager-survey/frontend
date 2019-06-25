@@ -13,7 +13,7 @@ import SlackButton from "../Slack/Slack.js";
 // import jCircle from 'jquery-circle-progress';
 
 // style imports
-// import "./view.css";
+import "./myTeam.css";
 import { Card } from "@blueprintjs/core";
 
 // this is the container for ALL of '/dashboard'
@@ -179,7 +179,7 @@ class myTeam extends Component {
 
           {activeUsers.map(user => (
             <TableHeader
-              column1={<img src={user.profilePic} />}
+              column1={<img className="proPic" src={user.profilePic} />}
               column2={user.fullName}
               column3={this.state.pollCompletion}
               column4={this.state.lastAnswerPoll}
@@ -205,6 +205,5 @@ class myTeam extends Component {
     );
   }
 }
-
 
 export default myTeam;
