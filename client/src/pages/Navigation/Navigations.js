@@ -141,7 +141,7 @@ class Navigation extends React.Component {
                   </NavLink>
                 ) : null}
 
-              {token.roles == "admin" ? (
+              {/* {token.roles == "admin" ? (
               <NavLink to="/slackr/dashboard/reports/new">
                   <button
                   className="menu-bar-add-poll"
@@ -156,7 +156,7 @@ class Navigation extends React.Component {
                 </button>
               </NavLink>
 
-            ) : null}
+            ) : null} */}
 
 
                 <NavLink to="/slackr/dashboard">
