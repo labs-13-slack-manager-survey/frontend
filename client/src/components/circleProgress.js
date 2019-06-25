@@ -31,15 +31,17 @@ class circleProgress extends React.Component {
         return (
             <div className="circle-graph">
                 <div className="title">{this.props.title}</div>
-                <div className = "circle" id="circle"/>
-                <div className = "circle-background"></div>
-                <div className = "text-description">
-                    <div className = "percent-complete">
-                        <div className = "number">{numericPercent}</div>
-                        <div className = "percent">%</div>
-                    </div>
-                    <div className = "description">Completed</div>
-                    <div className = "today-date">{today}</div>
+                <div className ="circle-graph-contents">
+                    <div className = "circle" id="circle"/>
+                    <div className = "circle-background"></div>
+                    <div className = "text-description">
+                        <div className = "percent-complete">
+                            <div className = "number">{numericPercent}</div>
+                            <div className = "percent">%</div>
+                        </div>
+                        <div className = "description">Completed</div>
+                        <div className = "today-date">{today}</div>
+                </div>
                 </div>
                 
             </div>
