@@ -127,6 +127,7 @@ class Profile extends Component {
               </div>
             </div>
           </div>
+		  
 			 {/* ADMIN VIEW STARTS HERE */}
 
 			 {this.state.profileInfo.roles === "admin" ? (
@@ -237,6 +238,7 @@ class Profile extends Component {
           </div>
 		) : null}
 		
+
         </div>
       </div>
     );

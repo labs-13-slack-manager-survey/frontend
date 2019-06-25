@@ -24,26 +24,35 @@
   width: 70%;
 }
 
-@media(max-width: 500px) {
-  .view {
-    align-items: stretch;
+
+
+@media (max-width: 1100px){
+  .dashboard-view {
+    flex-direction: column;
+    margin-top: 25px;
+    align-items: center;
+    width: 80%;
   }
-  .two{
+  
+  .view {
+    margin: auto;
     width: 100%;
-    margin-bottom: 10px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .sidebar {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    justify-content: space-between;
+    flex-wrap: wrap;
   }
 }
 
-@media (max-width: 800px) {
-  .dashboard-view {
-    flex-direction: column;
-  }
 
-  .view {
-    flex-direction: column;
-    /* align-items: center; */
-    padding: 12px;
-  }
+@media (max-width: 500px) {
+
   .view .reportsDash {
     width: 100%;
     padding-bottom: 1rem;
@@ -55,6 +64,20 @@
   }
 }
 
+@media(max-width: 1100px) {
+  .two{
+    width: 100%;
+  }
+}
+
+@media(max-width: 800px) {
+  .sidebar {
+    width: 100%;
+    padding-left: 80px;
+  }
+}
+
+
 @media (max-width: 500px) {
   .dashboard-view {
     width: 100%;
@@ -62,7 +85,13 @@
     margin-top: 25px;
     align-items: center;
   }
+
+  .two{
+    margin-bottom: 10px;
+  }
+
   .view {
+    align-items: stretch;
     margin: auto;
     width: 100%;
     padding: 2rem;
@@ -90,6 +119,7 @@
     margin: 0;
     padding: 0;
     width: 100%;
+    flex-direction: column;
   }
   .inviteUserBox {
     margin-bottom: 20px;

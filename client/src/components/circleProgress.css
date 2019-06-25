@@ -18,15 +18,14 @@
     position: absolute;
     margin: 0 auto;
     z-index: 1;
-    top: 25%;
-    left: 27%;
+    
 }
 .circle-background {
     width: 130px;
     height: 130px;
     border-radius: 100px;
-    top: 28.25%;
-    left: 30%;
+    top: 7%;
+    left: 7%;
     z-index: 2;
     position: absolute;
     /* box-shadow: 0px 0px 10px rgb(255,255,255);  */
@@ -47,8 +46,8 @@
 }
 
 .text-description {
-    top: 38%;
-    left: 40%;
+    top: 27%;
+    left: 25%;
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -65,6 +64,32 @@
     color: #9C9C9C;
 }
 
+.circle-graph-contents {
+    width: 150px;
+    height: 150px;
+    left: 28%;
+    top: 8%;
+    position: relative; 
+}
+
+@media (max-width: 1100px) {
+    .circle-graph {
+        width: 100%;
+        box-shadow: none;
+        outline: 1px solid #efefef;
+        margin-bottom: 30px;
+    }
+    
+    .circle-graph-contents{
+        margin: 0 auto;
+        left: 0%;
+        top: 10%;
+    }
+}
+
+@media (max-width: 800px) {
+
+}
 @media (max-width: 500px) {
     .circle-graph {
         width: 87%;
