@@ -52,7 +52,7 @@ const styles = theme => ({
   }
 });
 
-//slider 
+//slider
 const StyledSlider = withStyles({
   thumb: {
     height: 24,
@@ -110,7 +110,7 @@ class CreateReport extends Component {
     channels: [],
     question: "",
     sentimentQuestion: "",
-    exampleSentiment: 3, 
+    exampleSentiment: 3,
     week: [
       "Monday",
       "Tuesday",
@@ -193,7 +193,10 @@ class CreateReport extends Component {
     const code = e.keyCode || e.which;
     if (code === 13) {
       this.setState(prevState => ({
-        sentimentQuestions: [...prevState.sentimentQuestions, this.state.sentimentQuestion],
+        sentimentQuestions: [
+          ...prevState.sentimentQuestions,
+          this.state.sentimentQuestion
+        ],
         sentimentQuestion: ""
       }));
     } else {
@@ -214,7 +217,10 @@ class CreateReport extends Component {
   sentimentQuestionsHandler = e => {
     e.preventDefault();
     this.setState(prevState => ({
-      sentimentQuestions: [...prevState.sentimentQuestions, this.state.sentimentQuestion],
+      sentimentQuestions: [
+        ...prevState.sentimentQuestions,
+        this.state.sentimentQuestion
+      ],
       sentimentQuestion: ""
     }));
   };
@@ -229,7 +235,9 @@ class CreateReport extends Component {
   removeSentimentQuestion = (e, question) => {
     e.preventDefault();
     this.setState(prevState => ({
-      sentimentQuestions: prevState.sentimentQuestions.filter(q => q !== question)
+      sentimentQuestions: prevState.sentimentQuestions.filter(
+        q => q !== question
+      )
     }));
   };
   updateSchedule = day => {
@@ -296,12 +304,17 @@ class CreateReport extends Component {
       slackChannelName,
       created_at: new Date()
     };
-    if (this.state.managerQuestions) {{this.state.managerType === 0
-      ? (report["managerQuestions"] = JSON.stringify(
-          EngineeringManagerQuestions
-        ))
-      : (report["managerQuestions"] = JSON.stringify(ProjectManagerQuestions))}}
-      
+
+    {
+      this.state.managerType === 0
+        ? (report["managerQuestions"] = JSON.stringify(
+            EngineeringManagerQuestions
+          ))
+        : (report["managerQuestions"] = JSON.stringify(
+            ProjectManagerQuestions
+          ));
+    }
+
     console.log("mres after", report.managerResponses);
     const endpoint = `${baseURL}/reports`;
 
@@ -346,8 +359,6 @@ class CreateReport extends Component {
     }));
   };
 
-
-
   addQuestions = e => {
     e.preventDefault();
 
@@ -377,11 +388,11 @@ class CreateReport extends Component {
     });
   };
 
-  //handle changes for sentiment report example 
+  //handle changes for sentiment report example
   handleSentimentExample = (event, value) => {
     this.setState(prevState => ({
       ...prevState,
-      exampleSentiment: value,
+      exampleSentiment: value
     }));
   };
 
@@ -418,59 +429,54 @@ class CreateReport extends Component {
                   <div>
                     <ol>
                       <div className="linebr" />
-                        <li>
-                          <div className="manager-poll-question">
-                            {this.state.EngineeringManagerQuestions[0]}
-                          </div>
-                        </li>
-      
-                        <li>
-                          <div className="manager-poll-question">
-                            {this.state.EngineeringManagerQuestions[1]}
-                          </div>
-                        </li>
-         
-        
-                        <li>
-                          <div className="manager-poll-question">
-                            {this.state.EngineeringManagerQuestions[2]}
-                          </div>
-                        </li>
-     
+                      <li>
+                        <div className="manager-poll-question">
+                          {this.state.EngineeringManagerQuestions[0]}
+                        </div>
+                      </li>
+
+                      <li>
+                        <div className="manager-poll-question">
+                          {this.state.EngineeringManagerQuestions[1]}
+                        </div>
+                      </li>
+
+                      <li>
+                        <div className="manager-poll-question">
+                          {this.state.EngineeringManagerQuestions[2]}
+                        </div>
+                      </li>
                     </ol>
                   </div>
                 ) : (
                   //questions for marketing manager
                   <ol>
                     <div>
-                    <div className="linebr" />
+                      <div className="linebr" />
 
-                        <li>
-                          <div className="manager-poll-question">
-                            {this.state.ProjectManagerQuestions[0]}
-                          </div>
-                        </li>
+                      <li>
+                        <div className="manager-poll-question">
+                          {this.state.ProjectManagerQuestions[0]}
+                        </div>
+                      </li>
 
+                      <li>
+                        <div className="manager-poll-question">
+                          {this.state.ProjectManagerQuestions[1]}
+                        </div>
+                      </li>
 
-                        <li>
-                          <div className="manager-poll-question">
-                            {this.state.ProjectManagerQuestions[1]}
-                          </div>
-                        </li>
-                        
+                      <li>
+                        <div className="manager-poll-question">
+                          {this.state.ProjectManagerQuestions[2]}
+                        </div>
+                      </li>
 
-                        <li>
-                          <div className="manager-poll-question">
-                            {this.state.ProjectManagerQuestions[2]}
-                          </div>
-                        </li>
-
-                        <li>
-                          <div className="manager-poll-question">
-                            {this.state.ProjectManagerQuestions[3]}
-                          </div>
-                        </li>
-    
+                      <li>
+                        <div className="manager-poll-question">
+                          {this.state.ProjectManagerQuestions[3]}
+                        </div>
+                      </li>
                     </div>
                   </ol>
                 )}
@@ -521,7 +527,7 @@ class CreateReport extends Component {
           secondaryPage={true}
         />
         <PollDescription description="Create your own standup survey with custom questions to be sent out to your team at a scheduled time." />
-        <section className="response-card"> 
+        <section className="response-card">
           {/* Checks if admin wants manager questions answered */}
           <div className="manager-poll-responses">
             <FormControl>
@@ -533,12 +539,14 @@ class CreateReport extends Component {
                   <img
                     className="manager-toggle"
                     src={this.state.managerQuestions ? ToggleOn : ToggleOff}
+                    alt=""
                   />
                 </div>
                 <div className="poll-section-description">
-                  Toggle manager questions on to fill out your own daily survey with prescribed questions about your goals for the team to help
-                  them prioritize their tasks. These will be displayed at the
-                  top of the survey sent out to them each day. 
+                  Toggle manager questions on to fill out your own daily survey
+                  with prescribed questions about your goals for the team to
+                  help them prioritize their tasks. These will be displayed at
+                  the top of the survey sent out to them each day.
                 </div>
               </div>
               {this.renderManagerQuestions()}
@@ -548,9 +556,7 @@ class CreateReport extends Component {
 
         <div className="linebr" />
         <section className="response-card">
-
           <section className="manager-poll-responses">
-
             <div className="member-form-title">Survey Information</div>
             <div className="poll-section-description">
               Name and describe your report
@@ -580,17 +586,19 @@ class CreateReport extends Component {
                 value={this.state.reportName}
               />
             </FormControl>
-            
+
             <section>
               <FormControl className="input-field" required>
                 <div className="poll-answer-field">
-                <div
-                className={
-                  this.state.reportName ? "manager-poll-question" : "incomplete"
-                }
-              >
-                Description
-              </div>
+                  <div
+                    className={
+                      this.state.reportName
+                        ? "manager-poll-question"
+                        : "incomplete"
+                    }
+                  >
+                    Description
+                  </div>
                   <TextField
                     fullWidth={true}
                     variant="outlined"
@@ -607,9 +615,6 @@ class CreateReport extends Component {
                 </div>
               </FormControl>
             </section>
-
-
-
 
             <section>
               {this.state.channels.length > 0 ? (
@@ -715,15 +720,15 @@ class CreateReport extends Component {
                   Enter a question...
                 </InputLabel>
                 <form onSubmit={this.questionsHandler}>
-                <Input
-                  id="report-question"
-                  required
-                  className="input-field"
-                  type="text"
-                  name="question"
-                  value={this.state.question}
-                  onChange={this.enterQuestionsHandler}
-                />
+                  <Input
+                    id="report-question"
+                    required
+                    className="input-field"
+                    type="text"
+                    name="question"
+                    value={this.state.question}
+                    onChange={this.enterQuestionsHandler}
+                  />
                 </form>
               </FormControl>
               <Fab
@@ -743,31 +748,36 @@ class CreateReport extends Component {
         <div className="linebr" />
         <section className="response-card">
           <section className="manager-poll-responses">
-
             <div className="member-form-title">Sentiment Questions</div>
 
-            <div className= "poll-section-description">Add optional sentiment questions to capture how your team feels about their work on a scale of 1-5. Respondents will also have the option of including additional comments to accompany their response.</div>
-            <div className = "response-card-example">
-                <div className = "response-question">Example:  On a scale of 1-5 how do you feel about how confident are you feeling about completing the tasks assigned to you today?</div>
-                <StyledSlider
-                  className="slider"
-                  value={this.state.exampleSentiment}
-                  min={1}
-                  max={5}
-                  step={1}
-                  // onChange={e => this.props.handleChange(e, this.props.question)}
-                  onChange={(e, v) =>
-                    this.handleSentimentExample(e, v)
-                  }
-                />
-                <div className="slider-label">
-                  <p>1</p>
-                  <p>2</p>
-                  <p>3</p>
-                  <p>4</p>
-                  <p>5</p>
-                </div>
-
+            <div className="poll-section-description">
+              Add optional sentiment questions to capture how your team feels
+              about their work on a scale of 1-5. Respondents will also have the
+              option of including additional comments to accompany their
+              response.
+            </div>
+            <div className="response-card-example">
+              <div className="response-question">
+                Example: On a scale of 1-5 how do you feel about how confident
+                are you feeling about completing the tasks assigned to you
+                today?
+              </div>
+              <StyledSlider
+                className="slider"
+                value={this.state.exampleSentiment}
+                min={1}
+                max={5}
+                step={1}
+                // onChange={e => this.props.handleChange(e, this.props.question)}
+                onChange={(e, v) => this.handleSentimentExample(e, v)}
+              />
+              <div className="slider-label">
+                <p>1</p>
+                <p>2</p>
+                <p>3</p>
+                <p>4</p>
+                <p>5</p>
+              </div>
             </div>
             <section>
               {this.state.sentimentQuestions.map(sentimentQuestion => (
@@ -776,7 +786,9 @@ class CreateReport extends Component {
                   <Fab
                     size="small"
                     color="secondary"
-                    onClick={e => this.removeSentimentQuestion(e, sentimentQuestion)}
+                    onClick={e =>
+                      this.removeSentimentQuestion(e, sentimentQuestion)
+                    }
                   >
                     <Icon>delete_icon</Icon>
                   </Fab>
@@ -789,15 +801,15 @@ class CreateReport extends Component {
                   Enter a question...
                 </InputLabel>
                 <form onSubmit={this.sentimentQuestionsHandler}>
-                <Input
-                  id="report-question"
-                  required
-                  className="input-field"
-                  type="text"
-                  name="sentimentQuestion"
-                  value={this.state.sentimentQuestion}
-                  onChange={this.enterSentimentQuestionsHandler}
-                />
+                  <Input
+                    id="report-question"
+                    required
+                    className="input-field"
+                    type="text"
+                    name="sentimentQuestion"
+                    value={this.state.sentimentQuestion}
+                    onChange={this.enterSentimentQuestionsHandler}
+                  />
                 </form>
               </FormControl>
               <Fab
@@ -805,7 +817,9 @@ class CreateReport extends Component {
                 style={{ display: "block", margin: "10px 0" }}
                 color="primary"
                 onClick={this.sentimentQuestionsHandler}
-                disabled={this.state.sentimentQuestion.length === 0 ? true : false}
+                disabled={
+                  this.state.sentimentQuestion.length === 0 ? true : false
+                }
                 type="submit"
               >
                 <AddIcon />

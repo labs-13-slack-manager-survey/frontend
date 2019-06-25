@@ -137,6 +137,8 @@ class StatsDashboard extends Component {
       case "year":
         this.generateLabels(365);
         break;
+      default:
+        console.log("default");
     }
 
     this.setState({
