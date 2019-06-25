@@ -104,6 +104,8 @@ export default class ChartOptions extends Component {
           this.getSentimentAvgByDate(365);
         }
         break;
+      default:
+        console.log("default");
     }
   };
 

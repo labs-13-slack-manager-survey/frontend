@@ -4,9 +4,9 @@ import jwt_decode from "jwt-decode";
 
 // component imports
 // import Slack from "../Slack/Slack";
-import PageTitle from '../../components/PageTitle'
-import SummaryBox from '../../components/SummaryBox';
-import UserCard from '../../components/UserCard.js';
+import PageTitle from "../../components/PageTitle";
+import SummaryBox from "../../components/SummaryBox";
+// import UserCard from '../../components/UserCard.js';
 
 // style imports
 import { Spinner, Intent, Button } from "@blueprintjs/core";
@@ -23,9 +23,9 @@ export class Dashboard extends Component {
     anchorEl: null,
     joinCode: "",
     reports: [],
-    totalResponses: 0,
+    totalResponses: 0
   };
-  
+
   render() {
     const token = jwt_decode(localStorage.getItem("token"));
     if (this.state.isLoading) {
@@ -33,30 +33,32 @@ export class Dashboard extends Component {
     }
     return (
       <>
-      <Button 
-      className="tourButton"
-      onClick={this.optIn}
-      >?</Button>
-      <PageTitle 
-      title = "My Surveys"
-      />
-       {token.roles == "admin" ? <div className = "summary-boxes">
-        <SummaryBox 
-            title = "no. of team members"
-            content = {this.state.users.length}/>
+        <Button className="tourButton" onClick={this.optIn}>
+          ?
+        </Button>
+        <PageTitle title="My Surveys" />
+        {token.roles === "admin" ? (
+          <div className="summary-boxes">
+            <SummaryBox
+              title="no. of team members"
+              content={this.state.users.length}
+            />
 
-        <SummaryBox 
-            title = "total survey responses" 
-            content = {this.state.totalResponses}/>
+            <SummaryBox
+              title="total survey responses"
+              content={this.state.totalResponses}
+            />
 
-        <SummaryBox 
-            title = "total surveys scheduled"
-            content = {this.state.reports.length}/>
-      </div> : null }
+            <SummaryBox
+              title="total surveys scheduled"
+              content={this.state.reports.length}
+            />
+          </div>
+        ) : null}
       </>
     );
   }
-  
+
   componentDidMount() {
     // get user's joinCode from token and setState accordingly. Necessary to invite new team members.
     const joinCode = jwt_decode(localStorage.getItem("token")).joinCode;
@@ -74,39 +76,38 @@ export class Dashboard extends Component {
       })
       .catch(err => console.log(err));
 
-      //get total submission rate for team
-      axiosWithAuth()
+    //get total submission rate for team
+    axiosWithAuth()
       .get(`${baseURL}/reports/submissionRate`)
       .then(res => {
         this.setState({
-          totalResponses: res.data.totalResponses,
-        })
+          totalResponses: res.data.totalResponses
+        });
       })
-      .catch(err => console.log(err))
+      .catch(err => console.log(err));
 
-
-    //get Reports    
+    //get Reports
     const endpoint = `${baseURL}/reports`;
     axiosWithAuth()
-    .get(endpoint)
-    .then(res => {
-      this.setState({
-        message: res.data.message,
-        reports: res.data.reports
-      });
-      this.setState({ isLoading: false });
-    })
-    .catch(err => console.log(err));
+      .get(endpoint)
+      .then(res => {
+        this.setState({
+          message: res.data.message,
+          reports: res.data.reports
+        });
+        this.setState({ isLoading: false });
+      })
+      .catch(err => console.log(err));
   }
 
   getTotalPolls = () => {
     axiosWithAuth()
-    .get(`${baseURL}/reports/submissionRate`)
-    .then(res => {
-      console.log(res);
-    })
-    .catch(err => console.log(err))
-  }
+      .get(`${baseURL}/reports/submissionRate`)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => console.log(err));
+  };
   updateUser = () => {
     const endpoint = `${baseURL}/users/`;
     const editedUser = {
@@ -171,11 +172,10 @@ export class Dashboard extends Component {
     this.setState({ anchorEl: null });
   };
 
-  optIn = () =>{
+  optIn = () => {
     localStorage.removeItem("doneTour");
     window.location.reload(true);
-  }
-
+  };
 }
 
 export default Dashboard;

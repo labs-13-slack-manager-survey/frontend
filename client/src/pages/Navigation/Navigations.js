@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import { axiosWithAuth, baseURL } from "../../config/axiosWithAuth";
 
@@ -16,7 +16,7 @@ import UserActive from "../../images/icons/user-active.png";
 import Stats from "../../images/icons/stats.png";
 import StatsActive from "../../images/icons/stats_active.png";
 import Logout from "../../images/icons/logout.png";
-import SlackButton from '../Slack/Slack.js'
+import SlackButton from "../Slack/Slack.js";
 
 const styles = {
   navLinks: {
@@ -33,7 +33,7 @@ class Navigation extends React.Component {
   };
 
   slackAuthCheck = e => {
-    const token = jwt_decode(localStorage.getItem("token"));
+    // const token = jwt_decode(localStorage.getItem("token"));
 
     e.preventDefault();
     const endpoint = `${baseURL}/slack/channels`;
@@ -75,20 +75,23 @@ class Navigation extends React.Component {
               // if user is logged in, icon takes them to dashboard, otherwise go to marketing page
               to={loggedIn ? "/slackr/dashboard" : "/"}
               className={classes.logoLink}
-            > 
-              <Link to={`/slackr/dashboard`}><img className="logo" src={Logo} /></Link>
+            >
+              {/* <Link to={`/slackr/dashboard`}> */}
+              <img className="logo" src={Logo} alt="" />
+              {/* </Link> */}
             </NavLink>
             <div className="logo-text">slackr</div>
           </div>
-          
+
           <div className="horizontal-buttons mobile-add-poll">
-          <SlackButton/>
+            <SlackButton />
           </div>
           <>
             <div className="vert-buttons2 mobile-nav">
               <NavLink to="/slackr/dashboard/profile" className="menu-button">
                 <img
                   className="menu-icon"
+                  alt=""
                   src={
                     this.props.history.location.pathname ===
                     "/slackr/dashboard/profile"
@@ -112,7 +115,7 @@ class Navigation extends React.Component {
                 onClick={this.handleLogout}
                 className="menu-button"
               >
-                <img className="menu-icon" src={Logout} />
+                <img className="menu-icon" src={Logout} alt="" />
                 <div className="button-label-logout">logout</div>
               </NavLink>{" "}
             </div>{" "}
@@ -122,30 +125,37 @@ class Navigation extends React.Component {
           {loggedIn && token.teamId ? (
             <div className="vert-buttons">
               <div className="menu-button">
-
-              {token.roles == "admin" ? (
-              <NavLink to="/slackr/dashboard/reports/new">
-                <svg onClick={token.roles!=='admin' ? this.slackAuthCheck: null}className='menu-bar-add-poll-mobile' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7zm-1-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
-                <button
-                  className="menu-bar-add-poll"
-                  onClick={token.roles !== "admin" ? this.slackAuthCheck : null}
-                >
-                  +
-
-                  <div className="button-label-survey">
-                  Surveys
-                </div>
-                
-                </button>
-              </NavLink>
-
-            ) : null}
-
+                {token.roles === "admin" ? (
+                  <NavLink to="/slackr/dashboard/reports/new">
+                    <svg
+                      onClick={
+                        token.roles !== "admin" ? this.slackAuthCheck : null
+                      }
+                      className="menu-bar-add-poll-mobile"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                    >
+                      <path fill="none" d="M0 0h24v24H0V0z" />
+                      <path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7zm-1-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
+                    </svg>
+                    <button
+                      className="menu-bar-add-poll"
+                      onClick={
+                        token.roles !== "admin" ? this.slackAuthCheck : null
+                      }
+                    >
+                      +<div className="button-label-survey">Surveys</div>
+                    </button>
+                  </NavLink>
+                ) : null}
 
                 <NavLink to="/slackr/dashboard">
                   {" "}
                   <img
                     className="menu-icon"
+                    alt=""
                     src={
                       this.props.history.location.pathname ===
                       "/slackr/dashboard"
@@ -168,6 +178,7 @@ class Navigation extends React.Component {
                 <NavLink to="/slackr/dashboard/stats">
                   <img
                     className="menu-icon"
+                    alt=""
                     src={
                       this.props.history.location.pathname ===
                       "/slackr/dashboard/stats"
@@ -191,6 +202,7 @@ class Navigation extends React.Component {
                 <NavLink to="/slackr/dashboard/myteam">
                   <img
                     className="menu-icon"
+                    alt=""
                     src={
                       this.props.history.location.pathname ===
                       "/slackr/dashboard/myteam"
@@ -220,6 +232,7 @@ class Navigation extends React.Component {
                 <NavLink to="/slackr/dashboard/profile" className="menu-button">
                   <img
                     className="menu-icon"
+                    alt=""
                     src={
                       this.props.history.location.pathname ===
                       "/slackr/dashboard/profile"
@@ -243,7 +256,7 @@ class Navigation extends React.Component {
                   onClick={this.handleLogout}
                   className="menu-button"
                 >
-                  <img className="menu-icon" src={Logout} />
+                  <img className="menu-icon" src={Logout} alt="" />
                   <div className="button-label-logout">logout</div>
                 </NavLink>{" "}
               </div>{" "}
@@ -254,7 +267,7 @@ class Navigation extends React.Component {
               onClick={this.handleLogout}
               className="menu-button"
             >
-              <img className="menu-icon" src={Logout} />
+              <img className="menu-icon" src={Logout} alt="" />
               <div className="button-label-logout">login</div>
             </NavLink>
           )}
