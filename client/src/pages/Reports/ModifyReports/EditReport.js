@@ -247,54 +247,60 @@ class EditReport extends Component {
         />
           <div className="linebr" />
           <section className="response-card">
-              <FormControl className="report-name report-margin" required>
-              <div
-                className={
-                  this.state.reportName ? "manager-poll-question" : "incomplete"
-                }
-              >
-                Survey Name
-              </div>
-              <TextField
-                fullWidth={true}
-                variant="outlined"
-                multiline={true}
-                id="report-name"
-                required
-                type="text"
-                onChange={this.changeHandler}
-                name="reportName"
-                placeholder="Report Name"
-                value={this.state.reportName}
-              />
-            </FormControl>
-            </section>
-
-          <div className="linebr" />
-          <section className="response-card">
-          <FormControl className="input-field" required>
-                <div className="poll-answer-field">
-                  <div className="manager-poll-question">Description</div>
+            <section className="manager-poll-responses">
+                <FormControl className="report-name report-margin" required>
+                  <div
+                    className={
+                      this.state.reportName ? "manager-poll-question" : "incomplete"
+                    }
+                  >
+                    Survey Name
+                  </div>
                   <TextField
                     fullWidth={true}
                     variant="outlined"
                     multiline={true}
+                    id="report-name"
                     required
-                    className="input-field"
-                    id="report-message"
-                    type="textarea"
+                    type="text"
                     onChange={this.changeHandler}
-                    name="message"
-                    placeholder="Message to be sent with each report"
-                    value={this.state.message}
+                    name="reportName"
+                    placeholder="Report Name"
+                    value={this.state.reportName}
                   />
-                </div>
-              </FormControl>
+                </FormControl>
+                <FormControl className="input-field" required>
+                  <div className="poll-answer-field">
+                  <div
+                className={
+                  this.state.reportName ? "manager-poll-question" : "incomplete"
+                }
+              >
+                Description
+              </div>
+                    <TextField
+                      fullWidth={true}
+                      variant="outlined"
+                      multiline={true}
+                      required
+                      className="input-field"
+                      id="report-message"
+                      type="textarea"
+                      onChange={this.changeHandler}
+                      name="message"
+                      placeholder="Message to be sent with each report"
+                      value={this.state.message}
+                    />
+                  </div>
+                </FormControl>
             </section>
-
+          </section>
+          
+        
           <div className="linebr" />
           <section className="response-card">
-              <h3 className="schedule-title">Schedule</h3>
+              <section className="manager-poll-responses">
+              <h3 className="member-form-title">Delivery Schedule</h3>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <p>Days to be Delivered</p>
                 <Button
@@ -331,10 +337,12 @@ class EditReport extends Component {
                 />
               </section>
             </section>
+          </section>
 
           <div className="linebr" />
           <section className="response-card">
-              <h3 className="schedule-title">Questions</h3>
+              <section className="manager-poll-responses">
+              <h3 className="member-form-title addingPadding">Survey Questions</h3>
 
               <section>
                 {this.state.questions.map(question => (
@@ -379,11 +387,13 @@ class EditReport extends Component {
                   <AddIcon />
                 </Fab>
               </section>
+              </section>
             </section>
 
           <div className="linebr" />
           <section className="response-card">
-              <h3 className="schedule-title">Sentiment Questions</h3>
+            <section className="manager-poll-responses">
+              <h3 className="member-form-title addingPadding">Sentiment Questions</h3>
               <section>
                 {this.state.sentimentQuestions.map(question => (
                   <article className="question-flex" key={question}>
@@ -426,6 +436,7 @@ class EditReport extends Component {
                 >
                   <AddIcon />
                 </Fab>
+              </section>
               </section>
             </section>
 
