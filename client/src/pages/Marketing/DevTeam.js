@@ -33,7 +33,7 @@ class DevTeam extends Component {
 				<TeamMember>
 						<MemberImage src={Gannon} alt="Gannon Darcy" />
 						<Typography variant="h4">Gannon Darcy</Typography>
-						<p>Project Manager</p>
+						<p>Team Lead</p>
 						<MemberLinks>
 							<a target="blank" href="https://github.com/GannonDetroit">
 								<FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
