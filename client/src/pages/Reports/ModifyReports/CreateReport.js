@@ -521,7 +521,7 @@ class CreateReport extends Component {
           secondaryPage={true}
         />
         <PollDescription description="Create your own standup survey with custom questions to be sent out to your team at a scheduled time." />
-        <section className="response-card">
+        <section className="response-card"> 
           {/* Checks if admin wants manager questions answered */}
           <div className="manager-poll-responses">
             <FormControl>
@@ -548,11 +548,14 @@ class CreateReport extends Component {
 
         <div className="linebr" />
         <section className="response-card">
+
           <section className="manager-poll-responses">
+
             <div className="member-form-title">Survey Information</div>
             <div className="poll-section-description">
               Name and describe your report
             </div>
+
             <FormControl className="report-name report-margin" required>
               <div
                 className={
@@ -577,10 +580,17 @@ class CreateReport extends Component {
                 value={this.state.reportName}
               />
             </FormControl>
+            
             <section>
               <FormControl className="input-field" required>
                 <div className="poll-answer-field">
-                  <div className="manager-poll-question">Description</div>
+                <div
+                className={
+                  this.state.reportName ? "manager-poll-question" : "incomplete"
+                }
+              >
+                Description
+              </div>
                   <TextField
                     fullWidth={true}
                     variant="outlined"
@@ -597,6 +607,9 @@ class CreateReport extends Component {
                 </div>
               </FormControl>
             </section>
+
+
+
 
             <section>
               {this.state.channels.length > 0 ? (
