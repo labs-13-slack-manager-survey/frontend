@@ -146,27 +146,27 @@ class myTeam extends Component {
       .catch(err => {
         console.log("ERR WITH LAST POLL", err);
       });
-  };
-
-  archiveReport = id => {
-    const endpoint = `${baseURL}/reports/${id}`;
-    const updatedReport = {
-      active: false
     };
-    axiosWithAuth()
+    
+    archiveReport = id => {
+      const endpoint = `${baseURL}/reports/${id}`;
+      const updatedReport = {
+        active: false
+      };
+      axiosWithAuth()
       .put(endpoint, updatedReport)
       .then(res => {
         this.props.getReports();
         this.handleArchive();
       })
       .catch(err => console.log(err));
-  };
-
-  render() {
-    //If user's account is inactive, they cannot see the dashboard
-    const activeUsers = this.state.users.filter(user => user.active);
-    return this.state.active ? (
-      <div className="dashboard-view">
+    };
+    
+    render() {
+      //If user's account is inactive, they cannot see the dashboard
+      const activeUsers = this.state.users.filter(user => user.active);
+      return this.state.active ? (
+        <div className="dashboard-view">
         <div className="view">
           <PageTitle title="My Team" />
           <PageDescription description="Add individuals via email to your team. everyone on your team who is also in your slack workplace will recieve direct messages through the slackr bot, alerting them to fill out a survey when it becomes available. Team members will be prompted to create an account on Slackr and view and respond to surveys in the browser application." />
@@ -175,11 +175,12 @@ class myTeam extends Component {
             column1="Member"
             column3="Surveys completed"
             column4="Last poll answered"
-          />
+            />
 
           {activeUsers.map(user => (
             <TableHeader
-              column1={user.fullName}
+              column1={<img src={user.profilePic} />}
+              column2={user.fullName}
               column3={this.state.pollCompletion}
               column4={this.state.lastAnswerPoll}
               // report = {report}
@@ -188,7 +189,7 @@ class myTeam extends Component {
               // archiveModal={this.state.archiveModal}
               // ConsoleCheck = {this.ConsoleCheck}
             />
-          ))}
+            ))}
         </div>
 
         <div className="sidebar">
@@ -204,5 +205,6 @@ class myTeam extends Component {
     );
   }
 }
+
 
 export default myTeam;
