@@ -27,6 +27,7 @@ import DevTeam from "./pages/Marketing/DevTeam";
 // Nav and Footer
 import Navigation from "./pages/Navigation/Navigations";
 import Footer from "./pages/Navigation/Footer";
+import UserFeedback from "./components/UserFeedback.js";
 
 // Slack Routes
 import Slack from "./pages/Slack/Slack";
@@ -53,6 +54,8 @@ function App() {
 
       {/* Navigation */}
       <PrivateRoute path="/slackr" component={Navigation}/>
+
+      {/* <PrivateRoute path="/slackr" component={UserFeedback} /> */}
                   {/* Onboarding */}
       <NewUserRoute exact path="/slackr/onboarding" component={Onboarding} />
 

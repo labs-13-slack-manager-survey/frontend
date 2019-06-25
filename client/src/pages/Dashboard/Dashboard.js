@@ -7,6 +7,7 @@ import jwt_decode from "jwt-decode";
 import PageTitle from '../../components/PageTitle'
 import SummaryBox from '../../components/SummaryBox';
 import UserCard from '../../components/UserCard.js';
+import UserFeedback from '../../components/UserFeedback.js';
 
 // style imports
 import { Spinner, Intent, Button } from "@blueprintjs/core";
@@ -53,6 +54,7 @@ export class Dashboard extends Component {
             title = "total surveys scheduled"
             content = {this.state.reports.length}/>
       </div> : null }
+
       </>
     );
   }

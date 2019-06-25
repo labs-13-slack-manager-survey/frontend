@@ -82,7 +82,7 @@ class Navigation extends React.Component {
           </div>
           
           <div className="horizontal-buttons mobile-add-poll">
-          <SlackButton/>
+          <div className = "add-to-slack"><SlackButton/></div>
           </div>
           <>
             <div className="vert-buttons2 mobile-nav">
@@ -133,7 +133,7 @@ class Navigation extends React.Component {
                   +
 
                   <div className="button-label-survey">
-                  Surveys
+                  Survey
                 </div>
                 
                 </button>

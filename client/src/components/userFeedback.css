@@ -1,0 +1,49 @@
+.feedback-button {
+    background-color: #4A90E2;
+    height: 60px;
+    width: 60px;
+    border-radius: 100px;
+    position: sticky;
+    bottom: 30px;
+    right: 30px;
+    box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.speech-bubble {
+    width: 30px;
+    height: 30px;
+    margin-top: 12px;
+}
+
+.feedback-description {
+    color: black;
+    position: sticky;
+    bottom: 30px;
+    right: 30px;
+    color: white;
+    height: 60px;
+    z-index: 2;
+    padding-right: 70px;
+    padding-top: 20px;
+    font-size: 13px;
+}
+
+.feedback-description:hover {
+    color: black;
+}
+
+.user-feedback{
+    position: sticky;
+    bottom: 0px;
+}
+
+@media (max-width: 500px) {
+    .feedback-description{
+        bottom: 100px;
+    }
+
+    .feedback-button {
+        bottom: 100px;
+    }
+}
