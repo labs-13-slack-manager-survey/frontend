@@ -160,7 +160,7 @@
 
 
 /* mobile view */
-@media (max-width: 500px) {
+@media (max-width: 800px) {
   .table-display {
     box-shadow: 0px 0px 10px rgb(240, 240, 240);
     padding: 0px 20px;
