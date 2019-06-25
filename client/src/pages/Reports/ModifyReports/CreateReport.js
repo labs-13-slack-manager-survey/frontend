@@ -415,6 +415,7 @@ class CreateReport extends Component {
                       key={index}
                       onClick={popupState.close}
                       value={index}
+                      class="menuItem"
                     >
                       {" "}
                       {type}{" "}
@@ -495,7 +496,7 @@ class CreateReport extends Component {
         <PopupState variant="popover" popupId="demoMenu">
           {popupState => (
             <React.Fragment>
-              <Button variant="contained" {...bindTrigger(popupState)}>
+              <Button variant="outlined" {...bindTrigger(popupState)}>
                 Select Survey Template
               </Button>
               <Menu {...bindMenu(popupState)} onClick={this.addQuestion}>
