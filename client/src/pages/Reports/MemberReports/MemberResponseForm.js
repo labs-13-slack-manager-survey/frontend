@@ -43,6 +43,7 @@ class MemberResponseForm extends Component {
   render() {
     console.log("test", this.state);
     const token = jwt_decode(localStorage.getItem("token"));
+    console.log(token);
     return this.state.clientInfo.length > 0 ? (
       <>
         <div>{this.state.clientInfo}</div>
@@ -192,7 +193,8 @@ class MemberResponseForm extends Component {
         scheduledHrAndMin = scheduledHrAndMin.join("");
         const withinTimeFrame =
           Number(currentHrAndMin) - Number(scheduledHrAndMin) > 0;
-        if (schedule.includes(dayOfWeek) && false) {
+
+        if (schedule.includes(dayOfWeek) && withinTimeFrame) {
           this.setState({
             reportName,
             reportMessage: message,
@@ -213,7 +215,21 @@ class MemberResponseForm extends Component {
           });
         } else {
           this.setState({
-            ...this.state,
+            reportName,
+            reportMessage: message,
+            questions: questions.map(q => ({
+              question: q,
+              response: "",
+              sentimentRange: 3
+            })),
+            managerQuestions,
+            managerResponses: JSON.parse(managerResponses),
+            isSentiment: isSentiment,
+            sentimentQuestions: JSON.parse(sentimentQuestions).map(q => ({
+              question: q,
+              response: "",
+              sentimentRange: 3
+            })),
             scheduledTimeMet: false,
             schedule: {
               ...this.state.schedule,
