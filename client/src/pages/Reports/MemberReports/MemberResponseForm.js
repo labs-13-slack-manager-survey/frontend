@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { axiosWithAuth, baseURL } from "../../../config/axiosWithAuth";
 import jwt_decode from "jwt-decode";
 
-import getDay from "date-fns/get_day";
-import getHours from "date-fns/get_hours";
-import getMinutes from "date-fns/get_minutes";
+// import getDay from "date-fns/get_day";
+// import getHours from "date-fns/get_hours";
+// import getMinutes from "date-fns/get_minutes";
 // import CreateReport from "../ModifyReports/CreateReport";
 import ReportInput from "./ReportInput";
 // import ChevronUp from "../../../images/icons/chevron-up.png";
@@ -182,47 +182,47 @@ class MemberResponseForm extends Component {
         console.log("axios call", questions);
         console.log(res.data.report);
         // calculate the time to make sure the reports aren't submitted if it is not scheduled
-        const currentDate = new Date();
-        const dayOfWeek = daysToNumbers[getDay(currentDate)];
-        const currentHrAndMin = `${getHours(currentDate)}${getMinutes(
-          currentDate
-        )}`;
-        let scheduledHrAndMin = scheduleTime.split(":");
-        scheduledHrAndMin.pop();
-        scheduledHrAndMin = scheduledHrAndMin.join("");
-        const withinTimeFrame =
-          Number(currentHrAndMin) - Number(scheduledHrAndMin) > 0;
-        if (schedule.includes(dayOfWeek) && false) {
-          this.setState({
-            reportName,
-            reportMessage: message,
-            questions: questions.map(q => ({
-              question: q,
-              response: "",
-              sentimentRange: 3
-            })),
-            scheduledTimeMet: true,
-            managerQuestions,
-            managerResponses: JSON.parse(managerResponses),
-            isSentiment: isSentiment,
-            sentimentQuestions: JSON.parse(sentimentQuestions).map(q => ({
-              question: q,
-              response: "",
-              sentimentRange: 3
-            }))
-          });
-        } else {
-          this.setState({
-            ...this.state,
-            scheduledTimeMet: false,
-            schedule: {
-              ...this.state.schedule,
-              day: schedule,
-              time: scheduleTime
-            }
-          });
-        }
-        console.log(this.state);
+        // const currentDate = new Date();
+        // const dayOfWeek = daysToNumbers[getDay(currentDate)];
+        // const currentHrAndMin = `${getHours(currentDate)}${getMinutes(
+        //   currentDate
+        // )}`;
+        // let scheduledHrAndMin = scheduleTime.split(":");
+        // scheduledHrAndMin.pop();
+        // scheduledHrAndMin = scheduledHrAndMin.join("");
+        // const withinTimeFrame =
+        //   Number(currentHrAndMin) - Number(scheduledHrAndMin) > 0;
+        // if (schedule.includes(dayOfWeek) && false) {
+        this.setState({
+          reportName,
+          reportMessage: message,
+          questions: questions.map(q => ({
+            question: q,
+            response: "",
+            sentimentRange: 3
+          })),
+          scheduledTimeMet: true,
+          managerQuestions,
+          managerResponses: JSON.parse(managerResponses),
+          isSentiment: isSentiment,
+          sentimentQuestions: JSON.parse(sentimentQuestions).map(q => ({
+            question: q,
+            response: "",
+            sentimentRange: 3
+          }))
+        });
+        // } else {
+        //   this.setState({
+        //     ...this.state,
+        //     scheduledTimeMet: false,
+        //     // schedule: {
+        //     //   ...this.state.schedule,
+        //     //   day: schedule,
+        //     //   time: scheduleTime
+        //     // }
+        //   });
+        // }
+        // console.log(this.state);
       })
       .catch(err => console.log(err));
   }
