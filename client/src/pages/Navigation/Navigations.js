@@ -130,14 +130,17 @@ class Navigation extends React.Component {
                 {token.roles === "admin" ? (
                   <NavLink to="/slackr/dashboard/reports/new">
 
-                    {/* <button
+                     <button
+
                       className="menu-bar-add-poll"
                       onClick={
                         token.roles !== "admin" ? this.slackAuthCheck : null
                       }
                     >
                       +<div className="button-label-survey">Surveys</div>
-                    </button> */}
+
+                    </button> 
+
                   </NavLink>
                 ) : null}
 
