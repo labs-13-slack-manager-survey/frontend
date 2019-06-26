@@ -262,7 +262,6 @@ class CreateReport extends Component {
       this.setState({
         errorMessage: "Please enter your report name"
       });
-      console.log(this.state.errorMessage);
       return this.state.errorMessage;
     }
 
@@ -270,8 +269,6 @@ class CreateReport extends Component {
       this.setState({
         errorMessage: "Please choose at least one day to send out your report"
       });
-      console.log(this.state.errorMessage);
-      console.log(this.state.managerQuestions);
       return this.state.errorMessage;
     }
 
@@ -290,7 +287,8 @@ class CreateReport extends Component {
       sentimentQuestions,
       slackChannelId,
       EngineeringManagerQuestions,
-      ProjectManagerQuestions
+      ProjectManagerQuestions,
+      managerQuestions
     } = this.state;
 
     let report = {
@@ -304,8 +302,7 @@ class CreateReport extends Component {
       slackChannelName,
       created_at: new Date()
     };
-
-    {
+    if (managerQuestions) {
       this.state.managerType === 0
         ? (report["managerQuestions"] = JSON.stringify(
             EngineeringManagerQuestions
@@ -315,7 +312,6 @@ class CreateReport extends Component {
           ));
     }
 
-    console.log("mres after", report.managerResponses);
     const endpoint = `${baseURL}/reports`;
 
     axiosWithAuth()
