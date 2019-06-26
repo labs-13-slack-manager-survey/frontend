@@ -183,6 +183,12 @@ em {
 
 }
 
+.no-report-error {
+	padding-top: 20px;
+	font-style: italic;
+	color: #9B9B9B;
+}
+
 
 .transparent {
 	opacity: 1;
