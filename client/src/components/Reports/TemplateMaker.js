@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 
-
 // imports for time schedule
-import { getHours } from "date-fns";
-import { getMinutes } from "date-fns/esm";
+import { getHours, getMinutes } from "date-fns";
 
 // style imports
 import {
@@ -131,7 +129,7 @@ class TemplateMaker extends Component {
     }));
   };
 
-    //function for questions
+  //function for questions
   removeQuestion = (e, question) => {
     e.preventDefault();
     this.setState(prevState => ({

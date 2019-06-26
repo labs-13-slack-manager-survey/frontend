@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { axiosWithAuth, baseURL } from "../../../config/axiosWithAuth";
 import jwt_decode from "jwt-decode";
 
-import { getDay } from "date-fns";
-import { getHours } from "date-fns";
-import { getMinutes } from "date-fns";
+import { getDay, getHours, getMinutes } from "date-fns";
+// import { getHours } from "date-fns";
+// import { getMinutes } from "date-fns";
 // import CreateReport from "../ModifyReports/CreateReport";
 import ReportInput from "./ReportInput";
 // import ChevronUp from "../../../images/icons/chevron-up.png";

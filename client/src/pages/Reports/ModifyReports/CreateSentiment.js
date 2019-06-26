@@ -4,8 +4,7 @@ import Slider from "@material-ui/lab/Slider";
 import { fade } from "@material-ui/core/styles/colorManipulator";
 
 // imports for time schedule
-import { getHours } from "date-fns";
-import { getMinutes } from "date-fns/esm";
+import { getHours, getMinutes } from "date-fns";
 
 // style imports
 import {

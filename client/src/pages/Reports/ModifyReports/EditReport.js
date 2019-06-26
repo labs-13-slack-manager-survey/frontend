@@ -15,10 +15,8 @@ import {
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import { TimePicker } from "material-ui-pickers";
-import { getHours } from "date-fns";
-import { getMinutes } from "date-fns/esm";
+import { getHours, getMinutes } from "date-fns";
 import PageTitle from "../../../components/PageTitle";
-
 
 // this edits reports - admin only
 // Parent component = ReportsDash.js in '/pages/Dashboard/ReportsDash'
@@ -47,12 +45,12 @@ class EditReport extends Component {
     timePickDate: new Date("2000-01-01T18:00:00"),
     message: "",
     questions: [],
-    sentimentQuestions:[],
+    sentimentQuestions: [],
     slackChannelId: null,
     // Temporary State
     channels: [],
     question: "",
-    sentimentQuestion:"",
+    sentimentQuestion: "",
     week: [
       "Monday",
       "Tuesday",
@@ -61,7 +59,7 @@ class EditReport extends Component {
       "Friday",
       "Saturday",
       "Sunday"
-    ],
+    ]
   };
 
   componentDidMount() {
@@ -70,7 +68,7 @@ class EditReport extends Component {
     axiosWithAuth()
       .get(endpoint)
       .then(res => {
-        let parseSentiment = JSON.parse(res.data.report.sentimentQuestions)
+        let parseSentiment = JSON.parse(res.data.report.sentimentQuestions);
 
         const {
           reportName,
@@ -161,7 +159,10 @@ class EditReport extends Component {
     const code = e.keyCode || e.which;
     if (code === 13) {
       this.setState(prevState => ({
-        sentimentQuestions: [...prevState.sentimentQuestions, this.state.sentimentQuestion],
+        sentimentQuestions: [
+          ...prevState.sentimentQuestions,
+          this.state.sentimentQuestion
+        ],
         sentimentQuestion: ""
       }));
     } else {
@@ -174,7 +175,10 @@ class EditReport extends Component {
   sentimentHandler = e => {
     e.preventDefault();
     this.setState(prevState => ({
-      sentimentQuestions: [...prevState.sentimentQuestions, this.state.sentimentQuestion],
+      sentimentQuestions: [
+        ...prevState.sentimentQuestions,
+        this.state.sentimentQuestion
+      ],
       sentimentQuestion: ""
     }));
   };
@@ -182,10 +186,11 @@ class EditReport extends Component {
   removeSentiment = (e, sentimentQuestion) => {
     e.preventDefault();
     this.setState(prevState => ({
-      sentimentQuestions: prevState.sentimentQuestions.filter(q => q !== sentimentQuestion)
+      sentimentQuestions: prevState.sentimentQuestions.filter(
+        q => q !== sentimentQuestion
+      )
     }));
   };
-
 
   updateSchedule = day => {
     const { schedule } = this.state;
@@ -240,131 +245,130 @@ class EditReport extends Component {
   render() {
     return (
       <div className="create-report">
-        <PageTitle 
-        title="Update Survey"
-        {...this.props}
-        secondaryPage={true}
-        />
-          <div className="linebr" />
-          <section className="response-card">
-            <section className="manager-poll-responses">
-                <FormControl className="report-name report-margin" required>
-                  <div
-                    className={
-                      this.state.reportName ? "manager-poll-question" : "incomplete"
-                    }
-                  >
-                    Survey Name
-                  </div>
-                  <TextField
-                    fullWidth={true}
-                    variant="outlined"
-                    multiline={true}
-                    id="report-name"
-                    required
-                    type="text"
-                    onChange={this.changeHandler}
-                    name="reportName"
-                    placeholder="Report Name"
-                    value={this.state.reportName}
-                  />
-                </FormControl>
-                <FormControl className="input-field" required>
-                  <div className="poll-answer-field">
-                  <div
+        <PageTitle title="Update Survey" {...this.props} secondaryPage={true} />
+        <div className="linebr" />
+        <section className="response-card">
+          <section className="manager-poll-responses">
+            <FormControl className="report-name report-margin" required>
+              <div
                 className={
                   this.state.reportName ? "manager-poll-question" : "incomplete"
                 }
               >
-                Description
+                Survey Name
               </div>
-                    <TextField
-                      fullWidth={true}
-                      variant="outlined"
-                      multiline={true}
-                      required
-                      className="input-field"
-                      id="report-message"
-                      type="textarea"
-                      onChange={this.changeHandler}
-                      name="message"
-                      placeholder="Message to be sent with each report"
-                      value={this.state.message}
-                    />
-                  </div>
-                </FormControl>
-            </section>
-          </section>
-          
-        
-          <div className="linebr" />
-          <section className="response-card">
-              <section className="manager-poll-responses">
-              <h3 className="member-form-title">Delivery Schedule</h3>
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <p>Days to be Delivered</p>
-                <Button
-                  style={{ marginTop: "20px" }}
-                  variant="outlined"
-                  onClick={() => this.selectWeekdays()}
+              <TextField
+                fullWidth={true}
+                variant="outlined"
+                multiline={true}
+                id="report-name"
+                required
+                type="text"
+                onChange={this.changeHandler}
+                name="reportName"
+                placeholder="Report Name"
+                value={this.state.reportName}
+              />
+            </FormControl>
+            <FormControl className="input-field" required>
+              <div className="poll-answer-field">
+                <div
+                  className={
+                    this.state.reportName
+                      ? "manager-poll-question"
+                      : "incomplete"
+                  }
                 >
-                  Select Weekdays
-                </Button>
-              </div>
-              <section className="days-flex">
-                {this.state.week.map((day, idx) => (
-                  <div
-                    key={day}
-                    onClick={e => this.updateSchedule(day)}
-                    className={`day ${
-                      this.state.schedule.includes(day) ? "selected" : ""
-                    }`}
-                  >
-                    {/* if M/W/F, only show first letter, otherwise first 2 */}
-                    {idx === 0 || idx === 2 || idx === 4
-                      ? day.charAt(0)
-                      : day.charAt(0) + day.charAt(1)}
-                  </div>
-                ))}
-              </section>
-              <p>Time</p>
-              <section>
-                <TimePicker
-                  name="scheduleTime"
-                  value={this.state.timePickDate}
-                  minutesStep={30}
-                  onChange={this.timeChangeHandler}
+                  Description
+                </div>
+                <TextField
+                  fullWidth={true}
+                  variant="outlined"
+                  multiline={true}
+                  required
+                  className="input-field"
+                  id="report-message"
+                  type="textarea"
+                  onChange={this.changeHandler}
+                  name="message"
+                  placeholder="Message to be sent with each report"
+                  value={this.state.message}
                 />
-              </section>
+              </div>
+            </FormControl>
+          </section>
+        </section>
+
+        <div className="linebr" />
+        <section className="response-card">
+          <section className="manager-poll-responses">
+            <h3 className="member-form-title">Delivery Schedule</h3>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <p>Days to be Delivered</p>
+              <Button
+                style={{ marginTop: "20px" }}
+                variant="outlined"
+                onClick={() => this.selectWeekdays()}
+              >
+                Select Weekdays
+              </Button>
+            </div>
+            <section className="days-flex">
+              {this.state.week.map((day, idx) => (
+                <div
+                  key={day}
+                  onClick={e => this.updateSchedule(day)}
+                  className={`day ${
+                    this.state.schedule.includes(day) ? "selected" : ""
+                  }`}
+                >
+                  {/* if M/W/F, only show first letter, otherwise first 2 */}
+                  {idx === 0 || idx === 2 || idx === 4
+                    ? day.charAt(0)
+                    : day.charAt(0) + day.charAt(1)}
+                </div>
+              ))}
+            </section>
+            <p>Time</p>
+            <section>
+              <TimePicker
+                name="scheduleTime"
+                value={this.state.timePickDate}
+                minutesStep={30}
+                onChange={this.timeChangeHandler}
+              />
             </section>
           </section>
+        </section>
 
-          <div className="linebr" />
-          <section className="response-card">
-              <section className="manager-poll-responses">
-              <h3 className="member-form-title addingPadding">Survey Questions</h3>
+        <div className="linebr" />
+        <section className="response-card">
+          <section className="manager-poll-responses">
+            <h3 className="member-form-title addingPadding">
+              Survey Questions
+            </h3>
 
-              <section>
-                {this.state.questions.map(question => (
-                  <article className="question-flex" key={question}>
-                    <p className="question">{question}</p>
-                    <Fab
-                      size="small"
-                      color="secondary"
-                      onClick={e => this.removeQuestion(e, question)}
-                    >
-                      <Icon>delete_icon</Icon>
-                    </Fab>
-                  </article>
-                ))}
-              </section>
+            <section>
+              {this.state.questions.map(question => (
+                <article className="question-flex" key={question}>
+                  <p className="question">{question}</p>
+                  <Fab
+                    size="small"
+                    color="secondary"
+                    onClick={e => this.removeQuestion(e, question)}
+                  >
+                    <Icon>delete_icon</Icon>
+                  </Fab>
+                </article>
+              ))}
+            </section>
 
-              <section className="enter-question">
-                <FormControl className="input-field" required>
-                  <InputLabel htmlFor="edit-report-question">
-                    Enter a question...
-                  </InputLabel>
-                  <form onSubmit={this.questionsHandler}>
+            <section className="enter-question">
+              <FormControl className="input-field" required>
+                <InputLabel htmlFor="edit-report-question">
+                  Enter a question...
+                </InputLabel>
+                <form onSubmit={this.questionsHandler}>
                   <Input
                     id="edit-report-question"
                     required
@@ -374,47 +378,49 @@ class EditReport extends Component {
                     value={this.state.question}
                     onChange={this.enterQuestionsHandler}
                   />
-                  </form>
-                </FormControl>
-                <Fab
-                  size="small"
-                  style={{ display: "block", margin: "10px 0" }}
-                  color="primary"
-                  onClick={this.questionsHandler}
-                  disabled={this.state.question.length === 0 ? true : false}
-                  type="submit"
-                >
-                  <AddIcon />
-                </Fab>
-              </section>
-              </section>
+                </form>
+              </FormControl>
+              <Fab
+                size="small"
+                style={{ display: "block", margin: "10px 0" }}
+                color="primary"
+                onClick={this.questionsHandler}
+                disabled={this.state.question.length === 0 ? true : false}
+                type="submit"
+              >
+                <AddIcon />
+              </Fab>
+            </section>
+          </section>
+        </section>
+
+        <div className="linebr" />
+        <section className="response-card">
+          <section className="manager-poll-responses">
+            <h3 className="member-form-title addingPadding">
+              Sentiment Questions
+            </h3>
+            <section>
+              {this.state.sentimentQuestions.map(question => (
+                <article className="question-flex" key={question}>
+                  <p className="question">{question}</p>
+                  <Fab
+                    size="small"
+                    color="secondary"
+                    onClick={e => this.removeSentiment(e, question)}
+                  >
+                    <Icon>delete_icon</Icon>
+                  </Fab>
+                </article>
+              ))}
             </section>
 
-          <div className="linebr" />
-          <section className="response-card">
-            <section className="manager-poll-responses">
-              <h3 className="member-form-title addingPadding">Sentiment Questions</h3>
-              <section>
-                {this.state.sentimentQuestions.map(question => (
-                  <article className="question-flex" key={question}>
-                    <p className="question">{question}</p>
-                    <Fab
-                      size="small"
-                      color="secondary"
-                      onClick={e => this.removeSentiment(e, question)}
-                    >
-                      <Icon>delete_icon</Icon>
-                    </Fab>
-                  </article>
-                ))}
-              </section>
-                  
-              <section className="enter-question">
-                <FormControl className="input-field" required>
-                  <InputLabel htmlFor="edit-report-question">
-                    Enter a sentiment question...
-                  </InputLabel>
-                  <form onSubmit={this.sentimentHandler}>
+            <section className="enter-question">
+              <FormControl className="input-field" required>
+                <InputLabel htmlFor="edit-report-question">
+                  Enter a sentiment question...
+                </InputLabel>
+                <form onSubmit={this.sentimentHandler}>
                   <Input
                     id="edit-report-question"
                     required
@@ -425,30 +431,31 @@ class EditReport extends Component {
                     onChange={this.enterSentimentHandler}
                   />
                 </form>
-                </FormControl>
-                <Fab
-                  size="small"
-                  style={{ display: "block", margin: "10px 0" }}
-                  color="primary"
-                  onClick={this.sentimentHandler}
-                  disabled={this.state.sentimentQuestion.length === 0 ? true : false}
-                  type="submit"
-                >
-                  <AddIcon />
-                </Fab>
-              </section>
-              </section>
+              </FormControl>
+              <Fab
+                size="small"
+                style={{ display: "block", margin: "10px 0" }}
+                color="primary"
+                onClick={this.sentimentHandler}
+                disabled={
+                  this.state.sentimentQuestion.length === 0 ? true : false
+                }
+                type="submit"
+              >
+                <AddIcon />
+              </Fab>
             </section>
+          </section>
+        </section>
 
-          <Button
-            style={{ display: "block", marginTop: "30px" }}
-            variant="contained"
-            color="primary"
-            onClick={this.updateReport}
-          >
-            Update Survey
-          </Button>
-
+        <Button
+          style={{ display: "block", marginTop: "30px" }}
+          variant="contained"
+          color="primary"
+          onClick={this.updateReport}
+        >
+          Update Survey
+        </Button>
       </div>
     );
   }
