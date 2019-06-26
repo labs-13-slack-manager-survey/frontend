@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { axiosWithAuth, baseURL } from "../../../config/axiosWithAuth";
 
 // imports for time schedule
-import { getHours } from "date-fns";
-import { getMinutes } from "date-fns/esm";
+import { getHours, getMinutes } from "date-fns";
 
 // style imports
 import {
