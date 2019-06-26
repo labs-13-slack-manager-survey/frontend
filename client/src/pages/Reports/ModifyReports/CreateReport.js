@@ -415,6 +415,7 @@ class CreateReport extends Component {
                       key={index}
                       onClick={popupState.close}
                       value={index}
+                      class="menuItem"
                     >
                       {" "}
                       {type}{" "}

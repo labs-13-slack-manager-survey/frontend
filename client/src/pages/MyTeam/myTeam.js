@@ -193,6 +193,7 @@ class myTeam extends Component {
         </div>
 
         <div className="sidebar">
+          <SlackButton />
           <InviteUser />
         </div>
       </div>

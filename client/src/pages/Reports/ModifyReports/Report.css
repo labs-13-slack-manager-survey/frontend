@@ -251,3 +251,21 @@ p {
 .addingPadding{
   margin-bottom: 30px;
 }
+
+.menuItem{
+  width:690px;
+  padding:10px;
+  text-align: center;
+}
+.menuItem:hover{
+  background-color: rgb(235, 235, 235);
+  cursor: pointer;
+}
+
+@media(max-width:500px){
+  .menuItem{
+    width:430px;
+    padding:10px;
+    text-align: center;
+  }
+}
