@@ -23,7 +23,8 @@ class InviteUser extends React.Component {
     users: [],
     message: "",
     joinCode: "",
-    modal: false
+    modal: false,
+    newMemberEmail:""
   };
 
   componentDidMount() {
@@ -50,14 +51,14 @@ class InviteUser extends React.Component {
     const mailObject = {
       email: this.state.newMemberEmail,
       joinCode: this.state.joinCode
-    };
+    }
     //sendgrid endpoint on our back end
     const endpoint = `${baseURL}/email`;
 
     axiosWithAuth()
       .post(endpoint, mailObject)
       .then(res => {
-        this.setState({ message: "Email sent!", modal: true });
+        this.setState({ message: "Email sent!", modal: true, newMemberEmail:"" });
       })
       .catch(err => {
         this.setState({
@@ -69,13 +70,17 @@ class InviteUser extends React.Component {
   };
 
   changeHandler = e => {
-    this.setState({ newMemberEmail: e.target.value });
+    this.setState({ newMemberEmail: e.target.value});
   };
   clearMessage = () => {
-    this.setState({ message: "", modal: false });
+    this.setState({ message: "",
+                    modal: false,
+                  });
+    
   };
 
   render() {
+    console.log("++__++",this.state.message)
     return (
       <div className="inviteUserBox">
         <div className="invite">Invite a new team member</div>
@@ -90,6 +95,7 @@ class InviteUser extends React.Component {
             margin="normal"
             variant="outlined"
             placeholder="add email"
+            value={this.state.newMemberEmail}
           />
           <br />
           <Button variant="outlined" type="submit" onClick={this.addUser}>
