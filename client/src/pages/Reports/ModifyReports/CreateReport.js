@@ -450,7 +450,7 @@ class CreateReport extends Component {
                     </ol>
                   </div>
                 ) : (
-                  //questions for marketing manager
+                  //questions for product manager
                   <ol>
                     <div>
                       <div className="linebr" />
