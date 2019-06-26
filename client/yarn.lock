@@ -3620,10 +3620,10 @@ data-urls@^1.0.0, data-urls@^1.1.0:
     whatwg-mimetype "^2.2.0"
     whatwg-url "^7.0.0"
 
-date-fns@^2.0.0-alpha.27:
-  version "2.0.0-alpha.29"
-  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.0.0-alpha.29.tgz#9d4a36e3ebba63d009e957fea8fdfef7921bc6cb"
-  integrity sha512-AIFZ0hG/1fdb7HZHTDyiEJdNiaFyZxXcx/kF8z3I9wxbhkN678KrrLSneKcsb0Xy5KqCA4wCIxmGpdVWSNZnpA==
+date-fns@^1.30.1:
+  version "1.30.1"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.30.1.tgz#2e71bf0b119153dbb4cc4e88d9ea5acfb50dc05c"
+  integrity sha512-hBSVCvSmWC+QypYObzwGOd9wqdDpOt+0wl0KbU+R+uuZBS1jN8VsD1ss3irQDknRj5NvxiTF6oj/nDRnN/UQNw==
 
 date-now@^0.1.4:
   version "0.1.4"
