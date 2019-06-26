@@ -415,6 +415,7 @@ class CreateReport extends Component {
                       key={index}
                       onClick={popupState.close}
                       value={index}
+                      class="menuItem"
                     >
                       {" "}
                       {type}{" "}
@@ -449,7 +450,7 @@ class CreateReport extends Component {
                     </ol>
                   </div>
                 ) : (
-                  //questions for marketing manager
+                  //questions for product manager
                   <ol>
                     <div>
                       <div className="linebr" />

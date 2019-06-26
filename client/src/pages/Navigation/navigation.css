@@ -109,6 +109,16 @@ span {
   height: 300px;
 }
 
+.vert-buttons-user {
+	width: 70px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	height: 220px;
+	margin-top: 35px;
+  }
+
 .vert-buttons2 {
   width: 70px;
   display: flex;
@@ -180,6 +190,7 @@ span {
 .mobile-nav {
   display: none;
 }
+
 .menu-bar-add-poll-mobile{
   display:none;
 }
