@@ -5,6 +5,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import "./Report_Input.css";
 import Cancel from "../../../images/icons/cancel.png";
+import Comment from "../../../images/icons/comment.png";
 // import Comment from "../../../images/icons/comment.png";
 
 // this component handles the response inputs for individual questions
@@ -101,9 +102,13 @@ class ReportInput extends React.Component {
                 />
               </div>
             ) : (
-              <div onClick={this.toggleComment} className="toggleComments">
-                add a comment
-              </div>
+
+              <img
+              className="toggleComments"
+              alt=""
+              src={Comment}
+              onClick={this.toggleComment}
+            />
             )}
           </>
         ) : (
