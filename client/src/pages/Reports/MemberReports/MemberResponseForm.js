@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { axiosWithAuth, baseURL } from "../../../config/axiosWithAuth";
 import jwt_decode from "jwt-decode";
 
+import getDay from "date-fns/get_day";
+import getHours from "date-fns/get_hours";
+import getMinutes from "date-fns/get_minutes";
 // import CreateReport from "../ModifyReports/CreateReport";
 import ReportInput from "./ReportInput";
 // import ChevronUp from "../../../images/icons/chevron-up.png";
@@ -24,7 +27,8 @@ class MemberResponseForm extends Component {
     managerResponses: [],
     toggleManager: true,
     isComplete: false,
-    sentimentQuestions: []
+    sentimentQuestions: [],
+    scheduledTimeMet: false
   };
 
   toggleManagerQ = () => {
@@ -37,6 +41,7 @@ class MemberResponseForm extends Component {
     this.setState({ isComplete: true });
   };
   render() {
+    console.log("test", this.state);
     const token = jwt_decode(localStorage.getItem("token"));
     return this.state.clientInfo.length > 0 ? (
       <>
@@ -55,7 +60,7 @@ class MemberResponseForm extends Component {
             ) : (
               <div className="member-form-subtitle">manager survey not set</div>
             )
-          ) : (
+          ) : this.state.scheduledTimeMet ? (
             <section>
               {/* {this.state.isSentiment ? null : (
               <div className = "manager-poll-responses">
@@ -134,6 +139,13 @@ class MemberResponseForm extends Component {
                 Submit Survey
               </Button>
             </section>
+          ) : (
+            <>
+              <h5>
+                Apologies! Report is scheduled but not yet sent.Please wait
+                until the scheduled time is met!
+              </h5>
+            </>
           )}
         </div>
       </>
@@ -145,6 +157,7 @@ class MemberResponseForm extends Component {
     axiosWithAuth()
       .get(endpoint)
       .then(res => {
+        console.log(res.data);
         const {
           reportName,
           message,
@@ -152,27 +165,64 @@ class MemberResponseForm extends Component {
           sentimentQuestions,
           isSentiment,
           managerResponses,
-          managerQuestions
+          managerQuestions,
+          schedule,
+          scheduleTime
         } = res.data.report;
+        // required for date-fns
+        const daysToNumbers = {
+          0: "Sunday",
+          1: "Monday",
+          2: "Tuesday",
+          3: "Wednesday",
+          4: "Thursday",
+          5: "Friday",
+          6: "Saturday"
+        };
         console.log("axios call", questions);
         console.log(res.data.report);
-        this.setState({
-          reportName,
-          reportMessage: message,
-          questions: questions.map(q => ({
-            question: q,
-            response: "",
-            sentimentRange: 3
-          })),
-          managerQuestions,
-          managerResponses: JSON.parse(managerResponses),
-          isSentiment: isSentiment,
-          sentimentQuestions: JSON.parse(sentimentQuestions).map(q => ({
-            question: q,
-            response: "",
-            sentimentRange: 3
-          }))
-        });
+        // calculate the time to make sure the reports aren't submitted if it is not scheduled
+        const currentDate = new Date();
+        const dayOfWeek = daysToNumbers[getDay(currentDate)];
+        const currentHrAndMin = `${getHours(currentDate)}${getMinutes(
+          currentDate
+        )}`;
+        let scheduledHrAndMin = scheduleTime.split(":");
+        scheduledHrAndMin.pop();
+        scheduledHrAndMin = scheduledHrAndMin.join("");
+        const withinTimeFrame =
+          Number(currentHrAndMin) - Number(scheduledHrAndMin) > 0;
+        if (schedule.includes(dayOfWeek) && false) {
+          this.setState({
+            reportName,
+            reportMessage: message,
+            questions: questions.map(q => ({
+              question: q,
+              response: "",
+              sentimentRange: 3
+            })),
+            scheduledTimeMet: true,
+            managerQuestions,
+            managerResponses: JSON.parse(managerResponses),
+            isSentiment: isSentiment,
+            sentimentQuestions: JSON.parse(sentimentQuestions).map(q => ({
+              question: q,
+              response: "",
+              sentimentRange: 3
+            }))
+          });
+        } else {
+          this.setState({
+            ...this.state,
+            scheduledTimeMet: false,
+            schedule: {
+              ...this.state.schedule,
+              day: schedule,
+              time: scheduleTime
+            }
+          });
+        }
+        console.log(this.state);
       })
       .catch(err => console.log(err));
   }
@@ -189,7 +239,6 @@ class MemberResponseForm extends Component {
   };
 
   handleChange = (e, question) => {
-    console.log("sq", e.target.value);
     const qObj = {
       question,
       response: e.target.value
