@@ -58,6 +58,7 @@ class ReportResults extends Component {
 
     allReportQuestions: [],
     search: '',
+    dropdown: false,
   };
 
   toggleManagerQ = () => {
@@ -77,8 +78,9 @@ class ReportResults extends Component {
     return formatted;
   }
 
-  filterQuestion = (question) => {
-    console.log(question)
+  filterQuestion = (question, index) => {
+    console.log("i was clicked")
+    console.log(index)
   }
 
 
@@ -88,7 +90,12 @@ class ReportResults extends Component {
     });
   };
 
-
+  dropDown = () => {
+    console.log("clicked")
+    this.setState({
+      dropdown: !this.state.dropdown
+    })
+  }
   render() {
     // const options = {
     //   weekday: "long",
@@ -169,14 +176,18 @@ class ReportResults extends Component {
             secondaryPage={this.state.secondaryPage}
           />
 
-{/* 
-          {this.state.allReportQuestions.length> 0  ? this.state.allReportQuestions.map(question => {
-            
-          }) : null}
-           */}
-
-           <div>{this.state.allReportQuestions[0]}</div>
-           <div>{this.state.allReportQuestions[1]}</div>
+     
+          <div class="dropdown">
+            <button class="dropbtn" onClick={this.dropDown}>Dropdown</button>
+            {this.state.dropdown ? <>
+              <button onClick= {this.filterQuestion}>{this.state.allReportQuestions[0]}</button>
+            <div>
+              {this.state.allReportQuestions.length> 0  ? this.state.allReportQuestions.map((question, index) => 
+            <button key={index} onClick= {this.filterQuestion(question, index)}>{question}</button>
+          ) : null }</div> </>
+          
+          : null } 
+          </div>
 
 
           {token.roles !== "admin" && this.state.isManagerActivated ? 
