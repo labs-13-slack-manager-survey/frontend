@@ -55,6 +55,9 @@ class ReportResults extends Component {
     managerFeedback: [],
     seeManagerQ: true,
     seeManagerQList: false, 
+
+    allReportQuestions: [],
+    search: '',
   };
 
   toggleManagerQ = () => {
@@ -73,6 +76,18 @@ class ReportResults extends Component {
     let formatted = moment(date).format('DD MMMM YYYY');
     return formatted;
   }
+
+  filterQuestion = (question) => {
+    console.log(question)
+  }
+
+
+  changeHandler = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
 
   render() {
     // const options = {
@@ -118,7 +133,6 @@ class ReportResults extends Component {
         })
         console.log("filteredmanagerqs")
         console.log(filteredManagerAndResponsesDate)
-        console.log(allDates)
       }
     
       
@@ -142,7 +156,7 @@ class ReportResults extends Component {
 
     console.log(managerToday)
     console.log(today)
-    console.log(managerPollDays)
+    console.log(this.state.allReportQuestions)
  
 
     return (
@@ -154,7 +168,17 @@ class ReportResults extends Component {
             {...this.props}
             secondaryPage={this.state.secondaryPage}
           />
-          
+
+{/* 
+          {this.state.allReportQuestions.length> 0  ? this.state.allReportQuestions.map(question => {
+            
+          }) : null}
+           */}
+
+           <div>{this.state.allReportQuestions[0]}</div>
+           <div>{this.state.allReportQuestions[1]}</div>
+
+
           {token.roles !== "admin" && this.state.isManagerActivated ? 
             <div className="confirm-response" >
                 {managerToday !== today || this.state.filteredResponse.length > 0 ? <div> {this.state.filteredResponse.length > 0 ? "Your response has been recorded" :  "Poll unavailable: No manager response has been recorded for today" } </div> 
@@ -302,7 +326,7 @@ class ReportResults extends Component {
              
       {filteredManagerAndResponsesDate ? filteredManagerAndResponsesDate.map(day => <>
                           
-                          <div className="response-container-manager">
+                          <div className="response-container-manager" onClick={this.toggleManagerQList}>
                           <div className = "user-info">
                             <div className="month-day">
                               <div className="calendar-top">{moment(day[0].managerResponse.managerSubmitted).format("DD")}</div>
@@ -338,7 +362,7 @@ class ReportResults extends Component {
                             </div>
                             
 
-                            <div className="response-container" onClick={this.toggleManagerQList}>
+                            <div className="response-container">
                                 <div className = "response-content">
                                 {day[1] && day[1].userResponse.responses.length > 0 ? day[1].userResponse.responses.map( userRes => <>
                                 <div className="response-container-main">
@@ -358,7 +382,7 @@ class ReportResults extends Component {
                     
                                     <ol> {userRes.questions.map(userQA => 
                                       <> 
-                                      <li><div className= "response-container-main-question">{userQA.question}</div></li>
+                                      <li><div onClick = {this.filterQuestion(userQA.question)} className= "response-container-main-question">{userQA.question}</div></li>
                                       {userQA.sentimentRange ? null : <><div className= "response-container-main-answer "><em>A:</em> {userQA.answer}</div>  <div className ="linebr" /> </>}
 
                                       {userQA.sentimentRange ? <>
@@ -460,9 +484,21 @@ class ReportResults extends Component {
         managerFeedback.push({ managerQuestions: feedback.managerQuestions,
            managerResponses: feedback.managerResponses, 
            submitted_date: feedback.submitted_date }); 
-       
       })
-      console.log(managerFeedback)
+      console.log(reportRes.data.report)
+
+      let allQuestions = [] 
+      reportRes.data.report.questions.forEach(question => {
+        allQuestions.push(question)
+      })
+      let sentimentQuestionsparsed = JSON.parse(reportRes.data.report.sentimentQuestions)
+      if(sentimentQuestionsparsed.length > 0){
+        sentimentQuestionsparsed.forEach(question => {
+          allQuestions.push(question)
+        })
+      } 
+
+      console.log(allQuestions)
       const filtered = responsesRes.data[0].responses.filter(
         response => response.userId === userId
       );
@@ -486,6 +522,7 @@ class ReportResults extends Component {
         responders,
         historicalSubmissionRate,
         managerFeedback: managerFeedback,
+        allReportQuestions: allQuestions,
       });
     } catch (err) {
       console.log(err);
