@@ -93,7 +93,9 @@ class ReportResults extends Component {
     }
 
     let filteredManagerAndResponsesDate = [];
+    let allDates =[]
 
+    console.log(this.state.responses)
     if (this.state.responses) {
       let userResponses = this.state.responses;
       let dateUser = ""
@@ -101,12 +103,12 @@ class ReportResults extends Component {
       managerPollDays.reverse().forEach(function(response) {
         let dateManager = moment(response.managerSubmitted).format('DDMMMMYYYY')
         let newManagerUserDay = []
-        console.log(response);
+        console.log(userResponses);
         newManagerUserDay.push({managerResponse:response});
         
         for (let i = 0; i <userResponses.length; i++) {
           dateUser = moment(userResponses[i].date).format('DDMMMMYYYY')
-
+          allDates.push(dateUser)
           if( dateUser === dateManager ) {
             newManagerUserDay.push({userResponse: userResponses[i]});
             }
@@ -116,6 +118,7 @@ class ReportResults extends Component {
         })
         console.log("filteredmanagerqs")
         console.log(filteredManagerAndResponsesDate)
+        console.log(allDates)
       }
     
       
@@ -337,7 +340,7 @@ class ReportResults extends Component {
 
                             <div className="response-container" onClick={this.toggleManagerQList}>
                                 <div className = "response-content">
-                                {day[1].userResponse.responses.map( userRes => <>
+                                {day[1] && day[1].userResponse.responses.length > 0 ? day[1].userResponse.responses.map( userRes => <>
                                 <div className="response-container-main">
                                   <div className="vertical-timeline" />
                                   <div className="response-content">
@@ -375,13 +378,13 @@ class ReportResults extends Component {
                                             </div>
                                             <div className ="linebr" />
                                             {userQA.answer ? <><div className= "response-container-main-comment "><em>Comment:</em> {userQA.answer}</div>   <div className ="linebr" /> </>: null }
-                                            </> : null }
+                                            </> : null}
                                       </> 
                                   )}</ol>
                                 
                                         </div>
                                       </div></>
-                                  )}
+                                  ) : <div className="no-report-error">no reports for this day</div> }
                                </div>
                             </div>
 
