@@ -24,6 +24,14 @@
     padding: 60px;
 }
 
+.footer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px;
+}
+
 .marketing-header-text {
     display: flex;
     flex-direction: column;
@@ -36,13 +44,14 @@
     margin-bottom: 15px;
 }
 
+
 .marketing-header-description {
     font-size: 15px;
     color: #9C9C9C;
     text-decoration: italic;
 }
 
-.circle{
+.circle-marketing{
     height: 80px;
     width: 80px;
     margin-right: -40px;
@@ -56,7 +65,6 @@
     background-color: #2FB77E;
     border-radius: 100px;
     border: 10px solid white;
-    z-index: 3;
     position: absolute;
 }
 
@@ -136,4 +144,25 @@
     font-weight: 600;
     padding-top: 30px;
     margin-bottom: 20px;
+}
+
+.get-started-button {
+    font-size: 30px;
+    padding: 20px;
+    border-radius: 100px;
+    margin-top: 30px;
+    color: white;
+    background-color: #005389;
+    box-shadow: 0px 0px 10px rgb(240, 240, 240);
+}
+
+.get-started-button:hover {
+    margin-top: 25px;
+    text-decoration: none;
+    color: white;
+}
+
+.marketing-footer-description {
+    font-size: 15px;
+    padding-top: 20px;
 }
