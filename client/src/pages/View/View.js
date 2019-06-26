@@ -53,7 +53,7 @@ class View extends Component {
       },
       {
         intro:
-          "To create your first report click on the + button on top right of the screen."
+          "Managers can use the + button on the side bar to create their first survey!"
       }
     ]
   };
