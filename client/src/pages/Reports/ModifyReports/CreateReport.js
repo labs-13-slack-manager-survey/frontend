@@ -496,7 +496,7 @@ class CreateReport extends Component {
         <PopupState variant="popover" popupId="demoMenu">
           {popupState => (
             <React.Fragment>
-              <Button variant="outlined" {...bindTrigger(popupState)}>
+              <Button variant="contained" {...bindTrigger(popupState)}>
                 Select Survey Template
               </Button>
               <Menu {...bindMenu(popupState)} onClick={this.addQuestion}>
