@@ -42,7 +42,7 @@ const ResponseCard = ({ day, toggleManagerQList, seeManagerQList }) => {
             </div>
             <img
               className="manager-toggle-list"
-              src={seeManagerQList ? ToggleOn : ToggleOff}
+              src={seeManagerQList ? ToggleOff : ToggleOn}
               alt=""
             />
           </div>
