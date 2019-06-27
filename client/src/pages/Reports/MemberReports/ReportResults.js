@@ -61,6 +61,7 @@ class ReportResults extends Component {
     dropdown: false,
     filteredQuestionResponses: [],
     isSearchFilter: false,
+    toggleDropdown: false,
   };
 
   toggleManagerQ = () => {
@@ -104,6 +105,7 @@ class ReportResults extends Component {
     })
     this.setState({
       filteredQuestionResponses: filteredQs,
+      isSearchFilter: !this.state.isSearchFilter
     })
     console.log(this.state.filteredQuestionResponses)
   }
@@ -118,6 +120,7 @@ class ReportResults extends Component {
   dropDown = () => {
     console.log("clicked")
     this.setState({
+
       dropdown: !this.state.dropdown
     })
   }
@@ -211,11 +214,11 @@ class ReportResults extends Component {
 
      
           <div class="dropdown">
-            <button class="dropbtn" onClick={this.dropDown}>Dropdown</button>
+            <button class="dropbtn" onClick={this.dropDown}>Filter by Question</button>
             {this.state.dropdown ? <>
             <div>
               {this.state.allReportQuestions.length> 0  ? this.state.allReportQuestions.map((question, index) => {
-            return <button key={index} onClick = {() => this.filterQuestionSearch(question, index)}>{question}</button>
+            return <div className ="dropdown-column"><button className="dropdown-selection" key={index} onClick = {() => this.filterQuestionSearch(question, index)}>{question}</button></div>
               }) : null }</div> </>
           
           : null } 

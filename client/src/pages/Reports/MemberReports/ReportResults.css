@@ -353,3 +353,34 @@ em {
         outline: 1px solid #efefef;
 	}
 }
+
+.dropbtn {
+	background-color: white;
+	color: black;
+}
+
+.dropbtn:hover { 
+	background-color: white; 
+}
+
+.dropbtn:focus {
+	background-color: white;
+	outline: none;
+}
+
+.dropdown {
+	position: absolute; 
+	border: 1px solid red;
+	right: 0;
+}
+.dropdown-selection {
+	width: 50px;
+	overflow-wrap: break-word;
+	width: 100%;
+}
+
+.dropdown-column{
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}

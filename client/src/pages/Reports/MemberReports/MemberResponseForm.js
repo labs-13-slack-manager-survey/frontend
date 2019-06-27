@@ -333,7 +333,7 @@ class MemberResponseForm extends Component {
             }))
           }));
         }
-      })
+        window.location.reload();})
       .catch(err => {
         console.log(err.response.data);
       });
@@ -346,7 +346,7 @@ class MemberResponseForm extends Component {
     console.log("submitted");
     this.completeSurvey();
     this.submitReport();
-    this.reload();
+    // this.reload();
   };
 }
 
