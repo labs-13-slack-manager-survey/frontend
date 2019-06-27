@@ -22,31 +22,27 @@ class DevTeam extends Component {
   }
   render() {
     return (
-      <div>
+      <>
+        <MarketingContainer>
+          <div className="marketing-nav">
+            <Link to="/" className="nav-link-home">
+              Home
+            </Link>
+            <Link to="/team" className="nav-link-marketing">
+              About Us
+            </Link>
+
+            <Link to="/login" className="get-started">
+              Get Started{" "}
+            </Link>
+          </div>
+        </MarketingContainer>
         <Typography
           variant="h2"
           style={{ textAlign: "center", margin: "50px 0" }}
         >
           Meet The Developers
         </Typography>
-        <TeamContainer>
-          <TeamMember>
-            <MemberImage src={Gannon} alt="Gannon Darcy" />
-            <Typography variant="h4">Gannon Darcy</Typography>
-            <p>Team Lead</p>
-            <MemberLinks>
-              <a target="blank" href="https://github.com/GannonDetroit">
-                <FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
-              </a>
-              <a
-                target="blank"
-                href="https://www.linkedin.com/in/gannon-darcy/"
-              >
-                <FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
-              </a>
-            </MemberLinks>
-          </TeamMember>
-        </TeamContainer>
         <TeamContainer>
           <TeamMember>
             <MemberImage src={Ben} alt="Ben Tsao" />
@@ -123,20 +119,25 @@ class DevTeam extends Component {
               </a>
             </MemberLinks>
           </TeamMember>
+          <TeamMember>
+            <MemberImage src={Gannon} alt="Gannon Darcy" />
+            <Typography variant="h4">Gannon Darcy</Typography>
+            <p>Team Lead</p>
+            <MemberLinks>
+              <a target="blank" href="https://github.com/GannonDetroit">
+                <FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
+              </a>
+              <a
+                target="blank"
+                href="https://www.linkedin.com/in/gannon-darcy/"
+              >
+                <FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
+              </a>
+            </MemberLinks>
+          </TeamMember>
         </TeamContainer>
-        <MarketingFooter>
-          <Link to="/" style={{ color: "#FFFFFF", fontSize: "1.4rem" }}>
-            Home
-          </Link>
-          <Link to="/team" style={{ color: "#FFFFFF", fontSize: "1.4rem" }}>
-            Team
-          </Link>
-          <ArrowUpward
-            onClick={() => this.scrollToTop()}
-            style={{ width: "50px", height: "50px" }}
-          />
-        </MarketingFooter>
-      </div>
+        <TeamContainer />
+      </>
     );
   }
 }
@@ -186,4 +187,11 @@ const MarketingFooter = styled.footer`
   height: 100px;
   color: white;
   align-items: center;
+`;
+
+// Styles
+
+const MarketingContainer = styled.div`
+  background-color: white;
+  margin: 50px 20px;
 `;
