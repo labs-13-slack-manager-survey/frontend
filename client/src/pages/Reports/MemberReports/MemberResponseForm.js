@@ -170,11 +170,12 @@ class MemberResponseForm extends Component {
           Number(currentHrAndMin) - Number(scheduledHrAndMin) > 0;
         // check if user has received the poll from the token
         const receivedAtLeastOnce = pollsReceived && pollsReceived.includes(id);
+
         if (roles === "member") {
           if (
             receivedAtLeastOnce &&
-            schedule.includes(dayOfWeek) &&
-            withinTimeFrame
+            schedule.includes(dayOfWeek)
+            // && withinTimeFrame
           ) {
             this.setState({
               reportName,
