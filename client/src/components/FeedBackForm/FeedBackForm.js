@@ -4,6 +4,7 @@ import FormQuestionaires from "./FormQuestionaires";
 import ThankYou from "./ThankYou";
 import Confirm from "./Confirm";
 import { axiosWithAuth, baseURL } from "../../config/axiosWithAuth";
+import "./feedback.css"
 export class FeedBackForm extends Component {
   state = {
     step: 1,
