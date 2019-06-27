@@ -9,7 +9,6 @@ import {
   DialogTitle,
   Slide
 } from "@material-ui/core";
-import ChipInput from "material-ui-chip-input";
 
 import "./onboarding.css";
 
@@ -23,14 +22,6 @@ class CreateTeam extends Component {
       <div className="onboarding">
         <Card raised={true} className="onboardingCard">
           <div className="onboarding-card-content">
-            <h3>Add Team Members by Email</h3>
-            <ChipInput
-              label="Email"
-              variant="outlined"
-              defaultValue={[]}
-              onChange={chips => this.props.handleChipChange(chips)}
-              placeholder="Press 'Enter' after each email"
-            />
             <Button
               color="primary"
               variant="contained"
