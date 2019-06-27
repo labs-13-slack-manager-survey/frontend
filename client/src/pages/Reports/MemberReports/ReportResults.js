@@ -59,6 +59,7 @@ class ReportResults extends Component {
     allReportQuestions: [],
     search: '',
     dropdown: false,
+    filteredQuestionResponses: [],
   };
 
   toggleManagerQ = () => {
@@ -80,7 +81,7 @@ class ReportResults extends Component {
 
   filterQuestion = (question, index) => {
     console.log("i was clicked")
-    console.log(index)
+    console.log(question)
   }
 
 
@@ -139,7 +140,7 @@ class ReportResults extends Component {
         filteredManagerAndResponsesDate.push(newManagerUserDay)   
         })
         console.log("filteredmanagerqs")
-        console.log(filteredManagerAndResponsesDate)
+        console.log(this.state.responses)
       }
     
       
@@ -182,9 +183,9 @@ class ReportResults extends Component {
             {this.state.dropdown ? <>
               <button onClick= {this.filterQuestion}>{this.state.allReportQuestions[0]}</button>
             <div>
-              {this.state.allReportQuestions.length> 0  ? this.state.allReportQuestions.map((question, index) => 
-            <button key={index} onClick= {this.filterQuestion(question, index)}>{question}</button>
-          ) : null }</div> </>
+              {this.state.allReportQuestions.length> 0  ? this.state.allReportQuestions.map((question, index) => {
+            return <button key={index} onClick = {() => this.filterQuestion(question, index)}>{question}</button>
+              }) : null }</div> </>
           
           : null } 
           </div>
