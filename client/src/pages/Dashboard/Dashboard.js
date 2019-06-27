@@ -10,7 +10,7 @@ import UserFeedback from '../../components/UserFeedback.js';
 import Question from '../../images/icons/question-circle-blue.png'
 
 // style imports
-import { Spinner, Intent, Button } from "@blueprintjs/core";
+import { Spinner, Intent} from "@blueprintjs/core";
 import "./dashboard.css";
 
 export class Dashboard extends Component {
@@ -38,9 +38,9 @@ export class Dashboard extends Component {
           <PageTitle 
           title = "My Surveys"
           />
-          <img src={Question} onClick={this.optIn} className="tourButton"/>
+          <img src={Question} onClick={this.optIn} alt="app tour" className="tourButton"/>
         </div>
-       {token.roles == "admin" ? <div className = "summary-boxes">
+      {token.roles === "admin" ? <div className = "summary-boxes">
         <SummaryBox 
             title = "no. of team members"
             content = {this.state.users.length}/>

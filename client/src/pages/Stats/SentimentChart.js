@@ -5,7 +5,6 @@ import "./SentimentChart.css";
 
 class SentimentChart extends Component {
   componentDidMount() {
-    console.log(this.props);
     // Chart -------------------------
     const ctx = document.getElementById("chart").getContext("2d");
     new Chart(ctx, {

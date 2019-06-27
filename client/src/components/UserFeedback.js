@@ -6,7 +6,7 @@ const UserFeedback = props => (
     <div className = "user-feedback">  
         <div className= "feedback-description">send feedback</div>
         <div className="feedback-button">
-            <img className = "speech-bubble" src = {Comment} />
+            <img className = "speech-bubble" src = {Comment} alt="Comment" />
         </div> 
     </div>
 );

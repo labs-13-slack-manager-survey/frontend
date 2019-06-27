@@ -7,7 +7,6 @@ import InviteUser from "../../components/InviteUser.js";
 import PageTitle from "../../components/PageTitle";
 import PageDescription from "../../components/PageDescription";
 import TableHeader from "../../components/TableHeader";
-import SlackButton from "../Slack/Slack.js";
 // import CircleProgress from '../../components/circleProgress.js';
 // import $ from 'jquery';
 // import jCircle from 'jquery-circle-progress';
@@ -50,7 +49,6 @@ class myTeam extends Component {
     axiosWithAuth()
       .get(`${baseURL}/users/team`)
       .then(res => {
-        console.log("TESTING", res);
         this.setState({ users: res.data.users });
 
         if (this.state.users.length > 0) {
@@ -65,9 +63,6 @@ class myTeam extends Component {
       .get(pollEndpoint)
       .then(res => {
         const lastReport = res.data.reports.length - 1;
-
-        console.log("POLLS COMPLETED", res.data);
-
         this.setState({
           pollCompletion: res.data.reports.length,
           lastAnswerPoll: res.data.reports[lastReport].reportName
@@ -181,7 +176,7 @@ class myTeam extends Component {
 
           {activeUsers.map(user => (
             <TableHeader
-              column1={<img className="proPic" src={user.profilePic} />}
+              column1={<img className="proPic" src={user.profilePic} alt="Not Found" />}
               column2={user.fullName}
               column3={this.state.pollCompletion}
               column4={this.state.lastAnswerPoll}
