@@ -173,8 +173,10 @@ class myTeam extends Component {
 
           <TableHeader
             column1="Member"
+            column2="Name"
             column3="Surveys completed"
             column4="Last poll answered"
+            column5=""
             />
 
           {activeUsers.map(user => (

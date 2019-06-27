@@ -80,7 +80,7 @@ class Navigation extends React.Component {
               <img className="logo" src={Logo} alt="" />
               {/* </Link> */}
             </NavLink>
-            <div className="logo-text">slackr</div>
+            <div className="logo-text">Slackr</div>
           </div>
 
           <div className="horizontal-buttons mobile-add-poll">
@@ -193,7 +193,7 @@ class Navigation extends React.Component {
                         : "button-label"
                     }
                   >
-                    stats
+                    Stats
                   </div>
                 </NavLink>
               </div>
@@ -217,7 +217,7 @@ class Navigation extends React.Component {
                         : "button-label"
                     }
                   >
-                    my team
+                    My Team
                   </div>
                 </NavLink>
               </div>
@@ -247,7 +247,7 @@ class Navigation extends React.Component {
                         : "button-label"
                     }
                   >
-                    user
+                    User
                   </div>
                 </NavLink>
                 <NavLink
@@ -256,7 +256,7 @@ class Navigation extends React.Component {
                   className="menu-button"
                 >
                   <img className="menu-icon" src={Logout} alt="" />
-                  <div className="button-label-logout">logout</div>
+                  <div className="button-label-logout">Logout</div>
                 </NavLink>{" "}
               </div>{" "}
             </>
