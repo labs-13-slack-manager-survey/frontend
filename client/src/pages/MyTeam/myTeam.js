@@ -172,11 +172,11 @@ class myTeam extends Component {
           <PageDescription description="Add individuals via email to your team. everyone on your team who is also in your slack workplace will recieve direct messages through the slackr bot, alerting them to fill out a survey when it becomes available. Team members will be prompted to create an account on Slackr and view and respond to surveys in the browser application." />
 
           <TableHeader
-            column1="Member"
+            column1=""
             column2="Name"
             column3="Surveys completed"
             column4="Last poll answered"
-            column5=""
+            column5=" "
             />
 
           {activeUsers.map(user => (
@@ -185,8 +185,8 @@ class myTeam extends Component {
               column2={user.fullName}
               column3={this.state.pollCompletion}
               column4={this.state.lastAnswerPoll}
+              column5={user.roles === 'admin' ? 'Team Leader' : 'Team Member'}
               // report = {report}
-              // role={this.props.role}
               // archiveReport={this.archiveReport}
               // archiveModal={this.state.archiveModal}
               // ConsoleCheck = {this.ConsoleCheck}

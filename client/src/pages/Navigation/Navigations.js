@@ -135,7 +135,7 @@ class Navigation extends React.Component {
                 {token.roles === "admin" ? (
                   <NavLink to="/slackr/dashboard/reports/new">
 
-                     <button
+                    <button
 
                       className="menu-bar-add-poll"
                       onClick={
