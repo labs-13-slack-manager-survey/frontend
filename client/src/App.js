@@ -13,12 +13,13 @@ import ReportsDash from "./pages/Dashboard/ReportsDash";
 
 // Stats Dashboard
 import StatsDashboard from "./pages/Stats/StatsDashboard";
-
+//  Feedback Form
+import FeedBackForm from "./components/FeedBackForm/FeedBackForm";
 // Profile Page
 import Profile from "./pages/Profile/Profile";
 
 // Team Page
-import Team from './pages/MyTeam/myTeam'
+import Team from "./pages/MyTeam/myTeam";
 
 // Marketing Page
 import MarketingPage from "./pages/Marketing/MarketingPage";
@@ -42,9 +43,7 @@ import "./App.css";
 
 function App() {
   return (
-    <div className = "App">
-
-
+    <div className="App">
       {/* Marketing Pages*/}
       <Route exact path="/" component={MarketingPage} />
       <Route exact path="/team" component={DevTeam} />
@@ -53,35 +52,39 @@ function App() {
       <Route path="/login" component={Login} />
 
       {/* Navigation */}
-      <PrivateRoute path="/slackr" component={Navigation}/>
+      <PrivateRoute path="/slackr" component={Navigation} />
 
       {/* <PrivateRoute path="/slackr" component={UserFeedback} /> */}
-                  {/* Onboarding */}
+      <PrivateRoute path="/slackr/feedback" component={FeedBackForm} />
+
+      {/* Onboarding */}
       <NewUserRoute exact path="/slackr/onboarding" component={Onboarding} />
 
-          {/* Dashboard */}
+      {/* Dashboard */}
       <PrivateRoute exact path="/slackr/dashboard" component={View} />
 
-          {/* Stats Dashboard */}
+      {/* Stats Dashboard */}
       <PrivateRoute path="/slackr/dashboard/stats" component={StatsDashboard} />
 
-          {/* Reports */}
+      {/* Reports */}
       <PrivateRoute path="/slackr/dashboard/reports" component={ReportsDash} />
 
-          {/* Profile */}
-      <PrivateRoute exact path="/slackr/dashboard/profile" component={Profile} />
-
+      {/* Profile */}
+      <PrivateRoute
+        exact
+        path="/slackr/dashboard/profile"
+        component={Profile}
+      />
 
       {/* Profile */}
       <PrivateRoute exact path="/slackr/dashboard/myteam" component={Team} />
 
-          {/* Slack Connection */}
+      {/* Slack Connection */}
       <Route exact path="/slackr/slack" component={Slack} />
       <Route exact path="/slackr/slack/auth" component={SlackRedirect} />
 
-          {/* Footer */}
+      {/* Footer */}
       <Route path="/slackr" component={Footer} />
-     
     </div>
   );
 }

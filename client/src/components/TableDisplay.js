@@ -143,7 +143,6 @@ class TableDisplay extends React.Component {
                   className="delete"
                 >
                   DELETE
-                  {/* <img onClick={() => this.setState({dialogOpen: true})}  className ="delete" src={trashCan} /> */}
                 </div>
                 <Dialog
                   open={this.state.dialogOpen}
@@ -156,16 +155,19 @@ class TableDisplay extends React.Component {
                   <DialogTitle id="alert-dialog-slide-title">
                     Are you sure you'd like to archive this report?
                   </DialogTitle>
-                  <Button onClick={() => this.props.archiveReport(reportId)}>
-                    Yes
-                  </Button>
-                  <Button
-                    onClick={() => {
-                      this.setState({ dialogOpen: false });
-                    }}
-                  >
-                    No
-                  </Button>
+                  <Link to="/slackr/dashboard/" className="archiveButton">
+                    <Button onClick={() =>{this.props.archiveReport(reportId)  
+                                          this.setState({ dialogOpen: false })
+                      }}>
+                      Yes
+                    </Button>
+                  </Link>
+                  <Link className="archiveButton">
+                    <Button
+                        onClick={() => {this.setState({ dialogOpen: false })}}>
+                      No
+                    </Button>
+                  </Link>
                 </Dialog>
               </div>
             </Link>
