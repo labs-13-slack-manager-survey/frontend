@@ -82,10 +82,10 @@ class ReportResults extends Component {
 
   filterQuestionSearch = (question, index) => {
 
-    this.setState({
-      filteredQuestionResponses: [],
-    })
-
+    // this.setState({
+    //   filteredQuestionResponses: [],
+    // })
+    let filteredQs = []; 
     console.log("i was clicked")
     console.log(question)
     this.state.responses.map(response => {
@@ -96,11 +96,14 @@ class ReportResults extends Component {
               answer.questions.forEach(q => {
                 console.log(q)
                 if (q.question === question) {
-                  this.state.filteredQuestionResponses.push(q)
+                  filteredQs.push(q)
                 }
               })
           })
         }
+    })
+    this.setState({
+      filteredQuestionResponses: filteredQs,
     })
     console.log(this.state.filteredQuestionResponses)
   }
@@ -118,6 +121,14 @@ class ReportResults extends Component {
       dropdown: !this.state.dropdown
     })
   }
+
+  filterSearch = () => {
+    this.setState({
+      isSearchFilter: !this.state.isSearchFilter
+    })
+    console.log(this.state.filteredQuestionResponses)
+  }
+
   render() {
     // const options = {
     //   weekday: "long",
@@ -208,7 +219,7 @@ class ReportResults extends Component {
               }) : null }</div> </>
           
           : null } 
-          </div>
+          </div><button class="filter" onClick={this.filterSearch}>Filter</button>
 
 
           {token.roles !== "admin" && this.state.isManagerActivated ? 
