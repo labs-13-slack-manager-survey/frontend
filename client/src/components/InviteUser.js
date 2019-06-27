@@ -80,7 +80,6 @@ class InviteUser extends React.Component {
   };
 
   render() {
-    console.log("++__++",this.state.message)
     return (
       <div className="inviteUserBox">
         <div className="invite">Invite a new team member</div>

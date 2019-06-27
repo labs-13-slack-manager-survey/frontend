@@ -17,6 +17,7 @@ import Stats from "../../images/icons/stats.png";
 import StatsActive from "../../images/icons/stats_active.png";
 import Logout from "../../images/icons/logout.png";
 import SlackButton from "../Slack/Slack.js";
+import feedback from "../../images/icons/bug.png"
 
 const styles = {
   navLinks: {
@@ -80,14 +81,14 @@ class Navigation extends React.Component {
               <img className="logo" src={Logo} alt="" />
               {/* </Link> */}
             </NavLink>
-            <div className="logo-text">slackr</div>
+            <div className="logo-text">Slackr</div>
           </div>
 
           <div className="horizontal-buttons mobile-add-poll">
 
           <NavLink to="/slackr/dashboard/reports/new">
             <svg onClick={token.roles!=='admin' ? this.slackAuthCheck: null}className='menu-bar-add-poll-mobile' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-               <path fill="none" d="M0 0h24v24H0V0z"/><path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7zm-1-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+              <path fill="none" d="M0 0h24v24H0V0z"/><path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7zm-1-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
             </svg>
           </NavLink>
 
@@ -135,7 +136,7 @@ class Navigation extends React.Component {
                 {token.roles === "admin" ? (
                   <NavLink to="/slackr/dashboard/reports/new">
 
-                     <button
+                    <button
 
                       className="menu-bar-add-poll"
                       onClick={
@@ -193,7 +194,7 @@ class Navigation extends React.Component {
                         : "button-label"
                     }
                   >
-                    stats
+                    Stats
                   </div>
                 </NavLink>
               </div>
@@ -217,7 +218,7 @@ class Navigation extends React.Component {
                         : "button-label"
                     }
                   >
-                    my team
+                    My Team
                   </div>
                 </NavLink>
               </div>
@@ -228,6 +229,20 @@ class Navigation extends React.Component {
           {loggedIn ? (
             <>
               <div className="vert-buttons2">
+                <NavLink to="/slackr/feedback" className="menu-button">
+                  <img 
+                  className="menu-icon"
+                  alt=""
+                  src={feedback}/>
+                  <div
+                  className={
+                    this.props.history.location.pathname ===
+                    "/slackr/dashboard/profile"
+                      ? "button-label-active"
+                      : "button-label"}>
+                  Feedback
+                  </div>
+                </NavLink>
                 <NavLink to="/slackr/dashboard/profile" className="menu-button">
                   <img
                     className="menu-icon"
@@ -247,7 +262,7 @@ class Navigation extends React.Component {
                         : "button-label"
                     }
                   >
-                    user
+                    User
                   </div>
                 </NavLink>
                 <NavLink
@@ -256,7 +271,7 @@ class Navigation extends React.Component {
                   className="menu-button"
                 >
                   <img className="menu-icon" src={Logout} alt="" />
-                  <div className="button-label-logout">logout</div>
+                  <div className="button-label-logout">Logout</div>
                 </NavLink>{" "}
               </div>{" "}
             </>
@@ -267,7 +282,7 @@ class Navigation extends React.Component {
               className="menu-button"
             >
               <img className="menu-icon" src={Logout} alt="" />
-              <div className="button-label-logout">login</div>
+              <div className="button-label-logout">Login</div>
             </NavLink>
           )}
         </div>

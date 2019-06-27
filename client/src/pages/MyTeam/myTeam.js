@@ -7,7 +7,6 @@ import InviteUser from "../../components/InviteUser.js";
 import PageTitle from "../../components/PageTitle";
 import PageDescription from "../../components/PageDescription";
 import TableHeader from "../../components/TableHeader";
-import SlackButton from "../Slack/Slack.js";
 // import CircleProgress from '../../components/circleProgress.js';
 // import $ from 'jquery';
 // import jCircle from 'jquery-circle-progress';
@@ -50,7 +49,6 @@ class myTeam extends Component {
     axiosWithAuth()
       .get(`${baseURL}/users/team`)
       .then(res => {
-        console.log("TESTING", res);
         this.setState({ users: res.data.users });
 
         if (this.state.users.length > 0) {
@@ -65,9 +63,6 @@ class myTeam extends Component {
       .get(pollEndpoint)
       .then(res => {
         const lastReport = res.data.reports.length - 1;
-
-        console.log("POLLS COMPLETED", res.data);
-
         this.setState({
           pollCompletion: res.data.reports.length,
           lastAnswerPoll: res.data.reports[lastReport].reportName
@@ -172,19 +167,21 @@ class myTeam extends Component {
           <PageDescription description="Add individuals via email to your team. everyone on your team who is also in your slack workplace will recieve direct messages through the slackr bot, alerting them to fill out a survey when it becomes available. Team members will be prompted to create an account on Slackr and view and respond to surveys in the browser application." />
 
           <TableHeader
-            column1="Member"
+            column1=""
+            column2="Name"
             column3="Surveys completed"
             column4="Last poll answered"
+            column5=" "
             />
 
           {activeUsers.map(user => (
             <TableHeader
-              column1={<img className="proPic" src={user.profilePic} />}
+              column1={<img className="proPic" src={user.profilePic} alt="Not Found" />}
               column2={user.fullName}
               column3={this.state.pollCompletion}
               column4={this.state.lastAnswerPoll}
+              column5={user.roles === 'admin' ? 'Team Leader' : 'Team Member'}
               // report = {report}
-              // role={this.props.role}
               // archiveReport={this.archiveReport}
               // archiveModal={this.state.archiveModal}
               // ConsoleCheck = {this.ConsoleCheck}

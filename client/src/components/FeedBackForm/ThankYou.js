@@ -19,7 +19,7 @@ const ThankYou = ({ backToSurvey }) => {
     <>
       <h1 className={classes.title}>Thank You!</h1>
       <Button className={classes.button} onClick={backToSurvey}>
-        Back to Survey
+        Back to Dashboard
       </Button>
     </>
   );
