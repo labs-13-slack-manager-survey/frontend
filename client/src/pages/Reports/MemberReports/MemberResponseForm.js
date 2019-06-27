@@ -35,15 +35,13 @@ class MemberResponseForm extends Component {
     this.setState({
       toggleManager: !this.state.toggleManager
     });
-    console.log(this.state.toggleManager);
   };
   completeSurvey = () => {
     this.setState({ isComplete: true });
   };
   render() {
-    console.log("test", this.state);
     const token = jwt_decode(localStorage.getItem("token"));
-    console.log(token);
+
     return this.state.clientInfo.length > 0 ? (
       <>
         <div>{this.state.clientInfo}</div>
@@ -63,30 +61,6 @@ class MemberResponseForm extends Component {
             )
           ) : this.state.scheduledTimeMet ? (
             <section>
-              {/* {this.state.isSentiment ? null : (
-              <div className = "manager-poll-responses">
-                <div className = "poll-header-toggle"  onClick={this.toggleManagerQ}>
-                  <div className="member-form-title">Managers Thoughts</div>
-                  <img className = "thoughts-toggle" src={this.state.toggleManager ? ChevronDown : ChevronUp} />
-                </div>
-                {this.state.toggleManager ? null : <p className="member-form-subtitle">click to view your manager's goals for the week</p> }
-                <div className = "vertical-line" />
-                {this.state.toggleManager ? 
-                <> 
-                <div className = "manager-poll-question">{this.state.managerQuestions[0]}</div>
-                <div className = "manager-poll-response">{this.state.managerResponses[0]}</div>
-                <div className = "manager-poll-question">{this.state.managerQuestions[1]}</div>
-                <div className = "manager-poll-response">{this.state.managerResponses[1]}</div>
-                <div className = "manager-poll-question">{this.state.managerQuestions[2]}</div>
-                <div className = "manager-poll-response">{this.state.managerResponses[2]}</div>
-                <div className = "manager-poll-question">{this.state.managerQuestions[3]}</div>
-                <div className = "manager-poll-response">{this.state.managerResponses[3]}</div>
-                <div className = "vertical-line" />
-                </> : null }
-              
-              </div>
-            )} */}
-
               <div className="poll-header">
                 <div className="member-form-title">{this.state.reportName}</div>
                 <p className="member-form-subtitle">
@@ -155,11 +129,13 @@ class MemberResponseForm extends Component {
 
   componentDidMount() {
     const endpoint = `${baseURL}/reports/${this.props.match.params.reportId}`;
+    const { roles } = jwt_decode(localStorage.getItem("token"));
     axiosWithAuth()
       .get(endpoint)
       .then(res => {
-        console.log(res.data);
+        console.log("res", res);
         const {
+          id,
           reportName,
           message,
           questions,
@@ -170,6 +146,7 @@ class MemberResponseForm extends Component {
           schedule,
           scheduleTime
         } = res.data.report;
+        const { pollsReceived } = res.data;
         // required for date-fns
         const daysToNumbers = {
           0: "Sunday",
@@ -180,8 +157,6 @@ class MemberResponseForm extends Component {
           5: "Friday",
           6: "Saturday"
         };
-        console.log("axios call", questions);
-        console.log(res.data.report);
         // calculate the time to make sure the reports aren't submitted if it is not scheduled
         const currentDate = new Date();
         const dayOfWeek = daysToNumbers[getDay(currentDate)];
@@ -193,8 +168,59 @@ class MemberResponseForm extends Component {
         scheduledHrAndMin = scheduledHrAndMin.join("");
         const withinTimeFrame =
           Number(currentHrAndMin) - Number(scheduledHrAndMin) > 0;
+        // check if user has received the poll from the token
+        const receivedAtLeastOnce = pollsReceived && pollsReceived.includes(id);
 
-        if (schedule.includes(dayOfWeek) && withinTimeFrame) {
+        if (roles === "member") {
+          if (
+            receivedAtLeastOnce &&
+            schedule.includes(dayOfWeek)
+            // && withinTimeFrame
+          ) {
+            this.setState({
+              reportName,
+              reportMessage: message,
+              questions: questions.map(q => ({
+                question: q,
+                response: "",
+                sentimentRange: 3
+              })),
+              scheduledTimeMet: true,
+              managerQuestions,
+              managerResponses: JSON.parse(managerResponses),
+              isSentiment: isSentiment,
+              sentimentQuestions: JSON.parse(sentimentQuestions).map(q => ({
+                question: q,
+                response: "",
+                sentimentRange: 3
+              }))
+            });
+          } else {
+            this.setState({
+              reportName,
+              reportMessage: message,
+              questions: questions.map(q => ({
+                question: q,
+                response: "",
+                sentimentRange: 3
+              })),
+              managerQuestions,
+              managerResponses: JSON.parse(managerResponses),
+              isSentiment: isSentiment,
+              sentimentQuestions: JSON.parse(sentimentQuestions).map(q => ({
+                question: q,
+                response: "",
+                sentimentRange: 3
+              })),
+              scheduledTimeMet: false,
+              schedule: {
+                ...this.state.schedule,
+                day: schedule,
+                time: scheduleTime
+              }
+            });
+          }
+        } else {
           this.setState({
             reportName,
             reportMessage: message,
@@ -213,32 +239,7 @@ class MemberResponseForm extends Component {
               sentimentRange: 3
             }))
           });
-        } else {
-          this.setState({
-            reportName,
-            reportMessage: message,
-            questions: questions.map(q => ({
-              question: q,
-              response: "",
-              sentimentRange: 3
-            })),
-            managerQuestions,
-            managerResponses: JSON.parse(managerResponses),
-            isSentiment: isSentiment,
-            sentimentQuestions: JSON.parse(sentimentQuestions).map(q => ({
-              question: q,
-              response: "",
-              sentimentRange: 3
-            })),
-            scheduledTimeMet: false,
-            schedule: {
-              ...this.state.schedule,
-              day: schedule,
-              time: scheduleTime
-            }
-          });
         }
-        console.log(this.state);
       })
       .catch(err => console.log(err));
   }
