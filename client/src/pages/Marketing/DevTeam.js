@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-import { ArrowUpward } from "@material-ui/icons";
 import { animateScroll } from "react-scroll";
 import Typography from "@material-ui/core/Typography";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -176,18 +175,6 @@ const MemberLinks = styled.div`
   justify-content: space-around;
 `;
 
-const MarketingFooter = styled.footer`
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #616df6;
-  display: flex;
-  justify-content: space-around;
-  height: 100px;
-  color: white;
-  align-items: center;
-`;
 
 // Styles
 

@@ -270,6 +270,8 @@ span {
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    margin-top: 15px;
+    margin-bottom: 10px;
   }
   .vert-buttons .menu-button {
     width: 100%;

@@ -2,3 +2,15 @@
     max-width: 45px;
     border-radius: 50px;
 }
+
+.slack-button-team-page{
+    visibility: hidden
+}
+
+@media (max-width: 700px) {
+    .slack-button-team-page{
+       visibility: visible;
+        width: 10%;
+        z-index: 10;
+    }
+}

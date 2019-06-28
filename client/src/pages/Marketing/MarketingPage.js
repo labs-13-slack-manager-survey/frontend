@@ -5,15 +5,10 @@ import "./marketingPage.css"
 
 // styling imports
 // import Button from "@material-ui/core/Button";
-import { ArrowUpward } from "@material-ui/icons";
 import { scroller, animateScroll } from "react-scroll";
-import Typography from "@material-ui/core/Typography";
-import Fab from "@material-ui/core/Fab";
 
 // images
-import undrawCollab from "../../images/undraw_collab_8oes.svg";
-import undrawStatus from "../../images/undraw_status_update_jjgk.svg";
-import undrawDeveloper from "../../images/undraw_developer_activity_bv83.svg";
+
 import Icon from "../../images/slackr_icon.png";
 
 

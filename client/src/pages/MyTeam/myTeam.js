@@ -7,6 +7,7 @@ import InviteUser from "../../components/InviteUser.js";
 import PageTitle from "../../components/PageTitle";
 import PageDescription from "../../components/PageDescription";
 import TableHeader from "../../components/TableHeader";
+import SlackButton from "../Slack/Slack.js";
 // import CircleProgress from '../../components/circleProgress.js';
 // import $ from 'jquery';
 // import jCircle from 'jquery-circle-progress';
@@ -191,6 +192,7 @@ class myTeam extends Component {
 
         <div className="sidebar">
           <InviteUser />
+          <div className="slack-button-team-page"><SlackButton /></div>
         </div>
       </div>
     ) : (

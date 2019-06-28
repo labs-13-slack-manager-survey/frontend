@@ -17,7 +17,6 @@ import ToggleOff from "../../../images/icons/chevron-up.png";
 
 import "./ReportResults.css";
 import ConfirmResponse from "../../../components/ConfirmResponse";
-import ManagerFeedbackForManagers from "../../../components/ManagerFeedbackForManagers";
 import ResponseCard from "../../../components/ResponseCard";
 
 const StyledSlider = withStyles({
