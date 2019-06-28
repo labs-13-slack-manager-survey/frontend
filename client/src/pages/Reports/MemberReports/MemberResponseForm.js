@@ -72,8 +72,7 @@ class MemberResponseForm extends Component {
                 {this.state.questions &&
                   this.state.questions.map((q, i) => (
                     <li>
-                      <ReportInput
-                        question={q.question}
+                      <ReportInput                        question={q.question}
                         response={q.response}
                         sentimentRange={q.sentimentRange}
                         handleChange={this.handleChange}
@@ -312,7 +311,6 @@ class MemberResponseForm extends Component {
     axiosWithAuth()
       .post(endpoint, allQuestions)
       .then(res => {
-        console.log("test");
         if (this.state.isSentiment) {
           this.props.updateWithUserResponse(res);
           this.setState(prevState => ({
@@ -342,7 +340,6 @@ class MemberResponseForm extends Component {
   };
 
   submitAll = () => {
-    console.log("submitted");
     this.completeSurvey();
     this.submitReport();
   };

@@ -196,6 +196,17 @@ p {
   color: #9c9c9c;
 }
 
+.poll-section-description-view {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 22px;
+  margin-top: 10px;
+  font-style: italic;
+  color: #9c9c9c;
+  text-align: left;
+  cursor: pointer;
+}
+
 .toggle-manager-questions {
   display: flex;
   flex-direction: row;

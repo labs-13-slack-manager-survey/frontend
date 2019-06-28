@@ -2,18 +2,15 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import "./marketingPage.css"
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 // styling imports
 // import Button from "@material-ui/core/Button";
-import { ArrowUpward } from "@material-ui/icons";
 import { scroller, animateScroll } from "react-scroll";
-import Typography from "@material-ui/core/Typography";
-import Fab from "@material-ui/core/Fab";
 
 // images
-import undrawCollab from "../../images/undraw_collab_8oes.svg";
-import undrawStatus from "../../images/undraw_status_update_jjgk.svg";
-import undrawDeveloper from "../../images/undraw_developer_activity_bv83.svg";
+
 import Icon from "../../images/slackr_icon.png";
 
 
@@ -29,6 +26,7 @@ class MarketingPage extends Component {
     animateScroll.scrollToTop();
   }
   render() {
+    AOS.init();
     return (
       
       <MarketingContainer>
@@ -40,7 +38,8 @@ class MarketingPage extends Component {
           <Link to="/login" className = "get-started">Get Started </Link>
         </div>
 
-        <div className = "header">
+        <div className = "header" data-aos="fade-up"
+     data-aos-anchor-placement="center-bottom" data-aos-duration="1500">
           <img src={Icon} />
           <div className="marketing-header-text">
             <div className = "marketing-header-title">Slackr</div>
@@ -50,7 +49,7 @@ class MarketingPage extends Component {
 
         <section className = "body">
 
-          <div className = "section">
+          <div className = "section" data-aos="fade-right" data-aos-delay="300" data-aos-duration="1500">
           <div className= "circle-marketing">
               <div className="circle-blue"/>
               <div className="circle-white"/>
@@ -64,7 +63,7 @@ class MarketingPage extends Component {
             </div>
           </div>
 
-          <div className = "section">
+          <div className = "section" data-aos="fade-left" data-aos-delay="300" data-aos-duration="1500">
             <div className= "circle-marketing">
               <div className="circle-red"/>
               <div className="circle-white"/>
@@ -75,7 +74,7 @@ class MarketingPage extends Component {
             </div>
           </div>
 
-          <div className = "section">
+          <div className = "section" data-aos="fade-right" data-aos-delay="300" data-aos-duration="1500">
           <div className= "circle-marketing">
               <div className="circle-green"/>
               <div className="circle-white"/>
@@ -86,7 +85,7 @@ class MarketingPage extends Component {
             </div>
           </div>
 
-          <div className = "section">
+          <div className = "section" data-aos="fade-left" data-aos-delay="300" data-aos-duration="1500">
           <div className= "circle-marketing">
               <div className="circle-yellow"/>
               <div className="circle-white"/>
@@ -102,7 +101,7 @@ class MarketingPage extends Component {
         <div className = "footer">
           <div className="vertical-line" />
           <div className = "marketing-footer-description">Let Slackr optimize your team's valuable time. Help us help you.</div>
-            <Link to="/login" className = "get-started-button">Get Started</Link>
+            <Link to="/login" className = "get-started-button" data-aos="fade-up">Get Started</Link>
         </div>
         
       </MarketingContainer>

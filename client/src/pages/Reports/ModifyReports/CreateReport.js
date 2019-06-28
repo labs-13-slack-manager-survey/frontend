@@ -96,6 +96,7 @@ class CreateReport extends Component {
     slackChannelId: null,
     slackAuthorized: false,
     managerQuestions: false,
+    seeSampleSentiment: false, 
 
     isSentiment: false,
     //array for listing manager questions
@@ -383,6 +384,12 @@ class CreateReport extends Component {
       [e.target.name]: e.target.value
     });
   };
+
+  toggleExample = () => {
+    this.setState({
+      seeSampleSentiment: !this.state.seeSampleSentiment
+    })
+  }
 
   //handle changes for sentiment report example
   handleSentimentExample = (event, value) => {
@@ -695,7 +702,7 @@ class CreateReport extends Component {
         <div className="linebr" />
         <section className="response-card">
           <section className="manager-poll-responses">
-            <div className="member-form-title">Survey Questions</div>
+            <div className="member-form-title">Survey Questions*</div>
             <div className="linebr" />
             <section>
               {this.state.questions.map(question => (
@@ -730,7 +737,7 @@ class CreateReport extends Component {
               </FormControl>
               <Fab
                 size="small"
-                style={{ display: "block", margin: "10px 0" }}
+                style={{ display: "block", margin: "10px 0", paddingTop: "5px", marginLeft: "10px"}}
                 color="primary"
                 onClick={this.questionsHandler}
                 disabled={this.state.question.length === 0 ? true : false}
@@ -752,29 +759,6 @@ class CreateReport extends Component {
               about their work on a scale of 1-5. Respondents will also have the
               option of including additional comments to accompany their
               response.
-            </div>
-            <div className="response-card-example">
-              <div className="response-question">
-                Example: On a scale of 1-5 how do you feel about how confident
-                are you feeling about completing the tasks assigned to you
-                today?
-              </div>
-              <StyledSlider
-                className="slider"
-                value={this.state.exampleSentiment}
-                min={1}
-                max={5}
-                step={1}
-                // onChange={e => this.props.handleChange(e, this.props.question)}
-                onChange={(e, v) => this.handleSentimentExample(e, v)}
-              />
-              <div className="slider-label">
-                <p>1</p>
-                <p>2</p>
-                <p>3</p>
-                <p>4</p>
-                <p>5</p>
-              </div>
             </div>
             <section>
               {this.state.sentimentQuestions.map(sentimentQuestion => (
@@ -811,7 +795,7 @@ class CreateReport extends Component {
               </FormControl>
               <Fab
                 size="small"
-                style={{ display: "block", margin: "10px 0" }}
+                style={{ display: "block", margin: "10px 0", paddingTop: "5px", marginLeft: "10px" }}
                 color="primary"
                 onClick={this.sentimentQuestionsHandler}
                 disabled={
@@ -822,6 +806,32 @@ class CreateReport extends Component {
                 <AddIcon />
               </Fab>
             </section>
+
+            {this.state.seeSampleSentiment ? 
+            <div className="response-card-example" onClick = {this.toggleExample}>
+              <div className="response-question">
+                Example: On a scale of 1-5 how do you feel about how confident
+                are you feeling about completing the tasks assigned to you
+                today?
+              </div>
+              <StyledSlider
+                className="slider"
+                value={this.state.exampleSentiment}
+                min={1}
+                max={5}
+                step={1}
+                // onChange={e => this.props.handleChange(e, this.props.question)}
+                onChange={(e, v) => this.handleSentimentExample(e, v)}
+              />
+              <div className="slider-label">
+                <p>1</p>
+                <p>2</p>
+                <p>3</p>
+                <p>4</p>
+                <p>5</p>
+              </div>
+            </div>  : <div onClick = {this.toggleExample} className="poll-section-description-view">view sample sentiment question</div> }
+
           </section>
         </section>
 

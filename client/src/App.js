@@ -41,6 +41,7 @@ import NewUserRoute from "./auth/NewUserRoute";
 import "./App.css";
 
 function App() {
+  
   return (
     <div className="App">
       {/* Marketing Pages*/}

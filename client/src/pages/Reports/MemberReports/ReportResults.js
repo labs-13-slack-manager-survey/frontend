@@ -17,7 +17,6 @@ import ToggleOff from "../../../images/icons/chevron-up.png";
 
 import "./ReportResults.css";
 import ConfirmResponse from "../../../components/ConfirmResponse";
-import ManagerFeedbackForManagers from "../../../components/ManagerFeedbackForManagers";
 import ResponseCard from "../../../components/ResponseCard";
 
 const StyledSlider = withStyles({
@@ -189,6 +188,9 @@ class ReportResults extends Component {
     if (this.state.responses) {
       let userResponses = this.state.responses;
       let dateUser = "";
+
+      console.log(this.state.responses)
+
 
       managerPollDays.reverse().forEach(function(response) {
         let dateManager = moment(response.managerSubmitted).format(

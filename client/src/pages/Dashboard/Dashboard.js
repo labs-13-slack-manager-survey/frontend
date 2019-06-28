@@ -6,7 +6,6 @@ import jwt_decode from "jwt-decode";
 // import Slack from "../Slack/Slack";
 import PageTitle from '../../components/PageTitle'
 import SummaryBox from '../../components/SummaryBox';
-import UserFeedback from '../../components/UserFeedback.js';
 import Question from '../../images/icons/question-circle-blue.png'
 
 // style imports

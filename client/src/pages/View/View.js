@@ -5,12 +5,11 @@ import jwt_decode from "jwt-decode";
 //components
 import Dashboard from "../Dashboard/Dashboard";
 import ReportsDash from "../Dashboard/ReportsDash";
-// import SummaryBox from "../../components/SummaryBox";
-// import PollCalendar from "../../components/PollCalendar";
 import CircleProgress from "../../components/circleProgress.js";
 
 
 // style imports
+
 import "./view.css";
 import { Card } from "@blueprintjs/core";
 
@@ -55,6 +54,7 @@ class View extends Component {
     ]
   };
 
+
   componentDidMount() {
     this.getData();
   }
@@ -78,6 +78,7 @@ class View extends Component {
       console.log(err.response);
     }
   };
+
   render() {
     const { stepsEnabled, steps, initialStep } = this.state;
     return this.state.active ? (

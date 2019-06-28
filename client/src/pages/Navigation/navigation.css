@@ -13,7 +13,6 @@
   justify-content: space-between;
   width: 95%;
 }
-
 .horizontalMenuBar {
   height: 70px;
   background-color: white;
@@ -29,6 +28,10 @@
   z-index: 4;
 }
 
+
+.darkmode--activated .horizontalMenuBar {
+  
+}
 .left-horizontal {
   display: flex;
   flex-direction: row;
@@ -262,6 +265,16 @@ span {
     flex-direction: row;
     width: 100%;
     justify-content: space-around;
+  }
+  .vert-buttons-user {
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 15px;
+    margin-bottom: 10px;
   }
   .vert-buttons .menu-button {
     width: 100%;
