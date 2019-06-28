@@ -1,5 +1,6 @@
 import React from "react";
 import $ from "jquery";
+import jCircle from "jquery-circle-progress";
 import "./circleProgress.css";
 
 class circleProgress extends React.Component {
