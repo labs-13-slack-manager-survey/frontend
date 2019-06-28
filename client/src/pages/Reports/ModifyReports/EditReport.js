@@ -332,7 +332,7 @@ class EditReport extends Component {
                 <TimePicker
                   name="scheduleTime"
                   value={this.state.timePickDate}
-                  minutesStep={30}
+                  minutesStep={1}
                   onChange={this.timeChangeHandler}
                 />
               </section>
