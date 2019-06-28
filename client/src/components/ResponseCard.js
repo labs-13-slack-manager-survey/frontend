@@ -4,6 +4,7 @@ import ToggleOff from "../images/icons/chevron-up.png";
 import moment from "moment";
 import Slider from "@material-ui/lab/Slider";
 import { withStyles } from "@material-ui/core/styles";
+
 const StyledSlider = withStyles({
   thumb: {
     height: 24,
@@ -20,6 +21,7 @@ const StyledSlider = withStyles({
     backgroundColor: "#d0d7dc"
   }
 })(Slider);
+
 const ResponseCard = ({ day, toggleManagerQList, seeManagerQList }) => {
   return (
     <>
