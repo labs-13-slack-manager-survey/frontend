@@ -20,7 +20,6 @@ class ManagerPoll extends React.Component {
       .get(endpoint)
       .then(res => {
         const { managerQuestions, managerResponses } = res.data.report;
-        console.log(managerQuestions);
 
         this.setState({
           managerQuestions,
@@ -28,7 +27,6 @@ class ManagerPoll extends React.Component {
         });
       })
       .catch(err => console.log(err));
-    console.log(this.state);
   }
 
   handleChange = e => {
@@ -62,8 +60,6 @@ class ManagerPoll extends React.Component {
     ];
     let managerQuestions = this.state.managerQuestions;
     const managerQuestionResponse = { managerQuestions, managerResponses };
-    console.log(managerResponses);
-    console.log(managerQuestionResponse);
     const endpoint = `${baseURL}/responses/managerQuestions/${
       this.props.reportId
     }`;
