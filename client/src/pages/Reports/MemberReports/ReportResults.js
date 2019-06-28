@@ -375,7 +375,7 @@ class ReportResults extends Component {
              
               )}
 
-            <div className= "filter-by-question">
+            {this.state.responses.length && this.state.responses[0].responses.length > 0 ? <div className= "filter-by-question">
               <div className="dropdown">
               {this.state.isSearchFilter ? <button className="cancel-filter" onClick={this.cancelFilter}>Show All</button> : <button class="dropbtn" onClick={this.dropDown}>Filter by Question</button> }
               {this.state.dropdown ? <>
@@ -386,7 +386,7 @@ class ReportResults extends Component {
             
             : null } 
             </div>
-          </div>
+          </div> : null}
 
       
       {this.state.isSearchFilter ?  <div className="response-container">
