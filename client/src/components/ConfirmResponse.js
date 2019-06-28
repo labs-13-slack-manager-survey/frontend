@@ -8,7 +8,7 @@ const ConfirmResponse = ({
   managerResponsesAnswered
 }) => {
   return (
-    <div className="confirm-response res1">
+    <div className="confirm-response">
       {/* renders if user has responded to it today or if manager has not responded to the manager questions yet */}
       {!managerResponsesAnswered || filteredResponse.length > 0 ? (
         <div>
