@@ -10,6 +10,9 @@ const useStyles = makeStyles(theme => ({
   input: {
     width: "100%",
     maxWidth: 500
+  },
+  feedbackQuestion: {
+    backgroundColor: "black",
   }
 }));
 const FormQuestionaires = ({ nextStep, prevStep, values, handleChange }) => {
@@ -25,10 +28,11 @@ const FormQuestionaires = ({ nextStep, prevStep, values, handleChange }) => {
   return (
     <>
       <TextField
+      className={classes.feedbackQuestion}
         margin="normal"
         className={classes.input}
         name="like"
-        label="What did you like the most?"
+        label="What errors or issues did you encounter using the app?"
         onChange={handleChange}
         variant="outlined"
         multiline
@@ -36,15 +40,29 @@ const FormQuestionaires = ({ nextStep, prevStep, values, handleChange }) => {
         value={values.like}
       />
       <TextField
-        margin="normal"
+      className={classes.feedbackQuestion}
+      margin="normal"
         className={classes.input}
         name="dislike"
-        label="What did you dislike the most?"
+        label="What are some features you'd like improved upon?"
         onChange={handleChange}
         variant="outlined"
         multiline
         rowsMax="4"
         value={values.dislike}
+      />
+
+      <TextField
+      className={classes.feedbackQuestion}
+      margin="normal"
+        className={classes.input}
+        name="additional"
+        label="Ideas for aditional features and functionality?"
+        onChange={handleChange}
+        variant="outlined"
+        multiline
+        rowsMax="4"
+        value={values.additional}
       />
       <Button color="primary" onClick={continueNext}>
         Next

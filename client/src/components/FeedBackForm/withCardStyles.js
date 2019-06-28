@@ -9,7 +9,8 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    padding: 20
+    padding: 20,
+    boxShadow: "0px 0px 10px rgb(240, 240, 240)",
   }
 }));
 const withCardStyles = Component => props => {

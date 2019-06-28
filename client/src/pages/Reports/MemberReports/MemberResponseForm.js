@@ -334,20 +334,17 @@ class MemberResponseForm extends Component {
             }))
           }));
         }
+        window.location.reload();
       })
       .catch(err => {
         console.log(err.response.data);
       });
   };
 
-  reload = () => {
-    window.location.reload();
-  };
   submitAll = () => {
     console.log("submitted");
     this.completeSurvey();
     this.submitReport();
-    // this.reload();
   };
 }
 

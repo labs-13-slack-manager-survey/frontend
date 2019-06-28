@@ -229,20 +229,6 @@ class Navigation extends React.Component {
           {loggedIn ? (
             <>
               <div className="vert-buttons2">
-                <NavLink to="/slackr/feedback" className="menu-button">
-                  <img 
-                  className="menu-icon"
-                  alt=""
-                  src={feedback}/>
-                  <div
-                  className={
-                    this.props.history.location.pathname ===
-                    "/slackr/dashboard/profile"
-                      ? "button-label-active"
-                      : "button-label"}>
-                  Feedback
-                  </div>
-                </NavLink>
                 <NavLink to="/slackr/dashboard/profile" className="menu-button">
                   <img
                     className="menu-icon"
@@ -265,6 +251,20 @@ class Navigation extends React.Component {
                     User
                   </div>
                 </NavLink>
+                <NavLink to="/slackr/feedback" className="menu-button">
+                  <img 
+                  className="menu-icon"
+                  alt=""
+                  src={feedback}/>
+                  <div
+                  className={
+                    this.props.history.location.pathname ===
+                    "/slackr/dashboard/profile"
+                      ? "button-label-active"
+                      : "button-label"}>
+                  Feedback
+                  </div>
+                </NavLink>
                 <NavLink
                   to="/login"
                   onClick={this.handleLogout}
@@ -272,7 +272,8 @@ class Navigation extends React.Component {
                 >
                   <img className="menu-icon" src={Logout} alt="" />
                   <div className="button-label-logout">Logout</div>
-                </NavLink>{" "}
+                </NavLink>
+                {" "}
               </div>{" "}
             </>
           ) : (
