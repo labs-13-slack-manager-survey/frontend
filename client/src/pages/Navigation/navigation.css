@@ -263,6 +263,14 @@ span {
     width: 100%;
     justify-content: space-around;
   }
+  .vert-buttons-user {
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
   .vert-buttons .menu-button {
     width: 100%;
     transform: scale(1.1);

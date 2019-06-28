@@ -171,10 +171,12 @@ class ReportResults extends Component {
     let filteredManagerAndResponsesDate = [];
     let allDates =[]
 
-    console.log(this.state.responses)
     if (this.state.responses) {
       let userResponses = this.state.responses;
       let dateUser = ""
+
+      console.log(this.state.responses)
+
 
       managerPollDays.reverse().forEach(function(response) {
         let dateManager = moment(response.managerSubmitted).format('DDMMMMYYYY')
@@ -267,7 +269,7 @@ class ReportResults extends Component {
                 </div>
             : 
             
-            managerToday !== today && token.roles === "admin" ?  <div
+            managerToday !== today && token.roles === "admin" || token.roles == "member" ?  <div
             className="response-card"
             interactive={false}
             elevation={Elevation.TWO}
@@ -542,7 +544,7 @@ class ReportResults extends Component {
                             </>)
                     : "none" }</> }
 
-
+                    <div>{this.state.responses[0] && this.state.responses[0].responses && filteredManagerAndResponsesDate.length<1 ? this.state.responses[0].responses.map(q => q.fullName): null }</div>
 
           </section>
         </main>

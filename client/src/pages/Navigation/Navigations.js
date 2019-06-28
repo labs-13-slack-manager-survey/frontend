@@ -251,6 +251,7 @@ class Navigation extends React.Component {
                     User
                   </div>
                 </NavLink>
+                
                 <NavLink to="/slackr/feedback" className="menu-button">
                   <img 
                   className="menu-icon"
@@ -265,6 +266,7 @@ class Navigation extends React.Component {
                   Feedback
                   </div>
                 </NavLink>
+
                 <NavLink
                   to="/login"
                   onClick={this.handleLogout}
