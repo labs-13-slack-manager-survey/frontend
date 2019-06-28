@@ -139,7 +139,11 @@
 
 .response-content {
 	width: 90%;
-	
+}
+
+.response-content-filtered {
+	width: 90%;
+	margin-left: 40px;
 }
 
 em {
@@ -357,10 +361,15 @@ em {
 .dropbtn {
 	background-color: white;
 	color: black;
+	font-size: 15px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
 
 .dropbtn:hover { 
 	background-color: white; 
+	text-decoration: underline;
 }
 
 .dropbtn:focus {
@@ -370,8 +379,8 @@ em {
 
 .dropdown {
 	position: absolute; 
-	left: 120px;
 	text-align: left;
+	right: 37%;
 }
 .dropdown-selection {
 	width: 50px;
@@ -400,5 +409,18 @@ em {
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 20px;
-	height: 100px;
+	height: 40px;
+}
+
+.cancel-filter {
+	border: none; 
+	color: red; 
+	text-align: right; 
+	font-size: 15px;
+}
+
+.filter-toggle {
+	width: 25px;
+	height: 25px;
+	margin-left: 5px;
 }

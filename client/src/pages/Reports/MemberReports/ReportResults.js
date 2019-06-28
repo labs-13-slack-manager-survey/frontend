@@ -143,9 +143,11 @@ class ReportResults extends Component {
   }
   
   cancelFilter = () => {
+    console.log("clicked")
     this.setState({
       isSearchFilter: false,
     })
+    console.log(this.state.isSearchFilter)
   }
 
   render() {
@@ -309,7 +311,7 @@ class ReportResults extends Component {
               }
                
               </div>
-              <div className="linebr" />
+
             </>
           ) : (
             <>
@@ -324,7 +326,7 @@ class ReportResults extends Component {
                     updateWithUserResponse={this.updateWithManagerResponse}
                   /> 
               </div> : null} 
-              <div className="linebr" />
+
             </>
           )}
 
@@ -375,7 +377,7 @@ class ReportResults extends Component {
 
             <div className= "filter-by-question">
               <div className="dropdown">
-              <button class="dropbtn" onClick={this.dropDown}>Filter by Question</button>
+              {this.state.isSearchFilter ? <button className="cancel-filter" onClick={this.cancelFilter}>Cancel Filter</button> : <button class="dropbtn" onClick={this.dropDown}>Filter by Question</button> }
               {this.state.dropdown ? <>
               <div>
                 {this.state.allReportQuestions.length> 0  ? this.state.allReportQuestions.map((question, index) => {
@@ -384,7 +386,6 @@ class ReportResults extends Component {
             
             : null } 
             </div>
-            {this.state.isSearchFilter ? <div><button class="filter" onClick={this.cancelFilter}>Cancel</button></div> : null}
           </div>
 
       
@@ -392,10 +393,60 @@ class ReportResults extends Component {
         
                               {this.state.filteredQuestionResponses.map(object =>{
                                 if (object.user) {
-                                  return object.user[0]
+                                  return(
+                                  <div className="response-container">
+                                    <div className="response-content">
+                                      <div className="response-container-main">
+                                        <div className="vertical-timeline"/>
+                                        <div className="response-content">
+
+                                        <div className = "user-response-header">
+                                          <div className= "user-info">
+                                            <img className = "response-container-profile-pic" src={object.user[1]} />
+                                            <div className = "response-container-main-name-user">{object.user[0]}</div>
+                                          </div>  
+                                        </div>  
+                                        </div>
+
+                                      </div>
+                                    </div>
+                                  </div>)
+
+
                                 } else {
-                                  console.log(object.question)
-                                  return object.question[0].question
+                                  return (
+                                    <div className="response-container">
+                                    <div className="response-content">
+                                      <div className="response-container-main">
+                                        <div className="vertical-timeline"/>
+                                        <div className="response-content-filtered"> 
+
+                                        <div className="response-container-main-question">{object.question[0].question}</div>
+                                        {object.question[0].sentimentRange ? null : <><div className= "response-container-main-answer "><em>A:</em> {object.question[0].answer}</div>  <div className ="linebr" /> </>}
+
+                                        {object.question[0].sentimentRange ? <>
+                                        <StyledSlider
+                                            className="slider"
+                                            value={object.question[0].sentimentRange}
+                                            min={1}
+                                            max={5}
+                                            step={1}
+                                          />
+                                            <div className="slider-label">
+                                              <p className={object.question[0].sentimentRange !==1 ? "deselected" : null}>1</p>
+                                              <p className={object.question[0].sentimentRange !==2 ? "deselected" : null}>2</p>
+                                              <p className={object.question[0].sentimentRange !==3 ? "deselected" : null}>3</p>
+                                              <p className={object.question[0].sentimentRange !==4 ? "deselected" : null}>4</p>
+                                              <p className={object.question[0].sentimentRange !==5 ? "deselected" : null}>5</p>
+                                            </div>
+                                            <div className ="linebr" />
+                                            {object.question[0].answer ? <><div className= "response-container-main-comment "><em>Comment:</em> {object.question[0].answer}</div>   <div className ="linebr" /> </>: null }
+                                            </> : null}
+                                      </div>
+                                    </div>
+                                  </div>
+                                  </div>)
+                    
                                 }})}
                             </div> : 
              
