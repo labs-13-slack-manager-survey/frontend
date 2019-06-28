@@ -5,6 +5,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Button from "@material-ui/core/Button";
 import withCardStyles from "./withCardStyles";
+import "./feedback.css"
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -13,6 +14,12 @@ const useStyles = makeStyles(theme => ({
   input: {
     width: "100%",
     maxWidth: 500
+  },
+  listItem: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
   }
 }));
 const Confirm = ({ nextStep, prevStep, values, handleSubmit }) => {
@@ -25,28 +32,35 @@ const Confirm = ({ nextStep, prevStep, values, handleSubmit }) => {
   };
   const classes = useStyles();
   return (
-    <>
-      <List>
-        <ListItem>
-          <ListItemText>Name:{values.name}</ListItemText>
-        </ListItem>
-        <ListItem>
-          <ListItemText>Email:{values.email}</ListItemText>
-        </ListItem>
-        <ListItem>
-          <ListItemText>Likes:{values.like}</ListItemText>
-        </ListItem>
-        <ListItem>
-          <ListItemText>Dislikes:{values.dislike}</ListItemText>
-        </ListItem>
-      </List>
+    <ol className = "feedback-list">
+      <li className = "listItem">
+        <div className="feedback-label">Name: </div>
+        <div className = "feedback-content">{values.name}</div>
+      </li>
+      <li className = "listItem">
+        <div className="feedback-label">Email:</div>
+        <div className = "feedback-content">{values.email}</div>
+      </li>
+      <li className = "listItem">
+       <div className="feedback-label">Errors and Issues:</div>
+       <div className = "feedback-content">{values.like}</div>
+      </li>
+      <li className = "listItem">
+        <div className="feedback-label">Improvements:</div>
+        <div className = "feedback-content">{values.dislike}</div>
+      </li>
+      <li className = "listItem">
+        <div className="feedback-label">Additional Features:</div>
+        <div className = "feedback-content">{values.dislike}</div>
+      </li>
+
       <Button color="primary" onClick={continueNext}>
         Submit
       </Button>
       <Button color="primary" onClick={goback}>
         Back
       </Button>
-    </>
+    </ol>
   );
 };
 
