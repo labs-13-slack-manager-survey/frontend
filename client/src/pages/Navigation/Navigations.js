@@ -19,6 +19,7 @@ import Logout from "../../images/icons/logout.png";
 import SlackButton from "../Slack/Slack.js";
 import feedback from "../../images/icons/bug.png"
 
+
 const styles = {
   navLinks: {
     display: "flex"
@@ -58,6 +59,7 @@ class Navigation extends React.Component {
   };
 
   render() {
+
     const token = jwt_decode(localStorage.getItem("token"));
     const appToken = localStorage.getItem("token");
     const firebaseToken = localStorage.getItem(
@@ -251,7 +253,7 @@ class Navigation extends React.Component {
                     User
                   </div>
                 </NavLink>
-                
+
                 <NavLink to="/slackr/feedback" className="menu-button">
                   <img 
                   className="menu-icon"

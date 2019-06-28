@@ -13,7 +13,6 @@
   justify-content: space-between;
   width: 95%;
 }
-
 .horizontalMenuBar {
   height: 70px;
   background-color: white;
@@ -29,6 +28,10 @@
   z-index: 4;
 }
 
+
+.darkmode--activated .horizontalMenuBar {
+  
+}
 .left-horizontal {
   display: flex;
   flex-direction: row;
