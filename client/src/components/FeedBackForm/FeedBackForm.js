@@ -92,7 +92,7 @@ export class FeedBackForm extends Component {
       <div className="dashboard-view">
         <div className="view">
           <h1 className="title-box">
-            We would like your feedback to improve our website!
+            We would like your feedback to improve our application!
           </h1>
           {this.renderSwitch(step, values)}
         </div>

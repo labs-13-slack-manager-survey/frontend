@@ -3,3 +3,25 @@
     margin-top: 4%;
     justify-content: center;
 }
+
+.listItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom:40px;
+    margin-top: 10px;
+}
+
+.feedback-list {
+    width: 100%;
+}
+
+.feedback-label{
+    font-size: 18px; 
+    font-weight: 400;
+}
+
+.feedback-content{
+    font-size: 18px;
+    margin-right: 30px;
+}
