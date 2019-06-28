@@ -86,6 +86,7 @@ class ReportResults extends Component {
     // this.setState({
     //   filteredQuestionResponses: [],
     // })
+    let filteredUserQuestion = [];
     let filteredQs = []; 
     console.log("i was clicked")
     console.log(question)
@@ -93,20 +94,30 @@ class ReportResults extends Component {
       console.log(response)
         if (response.responses.length > 0) {
           response.responses.map(answer => {
-              console.log("answer" + answer.questions)
+              console.log(answer)
+              filteredQs.push({user: [answer.fullName, answer.profilePic, answer.userId]})
               answer.questions.forEach(q => {
                 console.log(q)
                 if (q.question === question) {
-                  filteredQs.push(q)
+                  filteredQs.push({question: [q]})
+
                 }
               })
           })
         }
     })
+
+    for (let i = 0; i < filteredQs.length; i+2){
+      filteredUserQuestion.push({userRes: [filteredQs[i], filteredQs[i+1]]})
+    }
+
+    console.log(filteredUserQuestion)
     this.setState({
-      filteredQuestionResponses: filteredQs,
-      isSearchFilter: !this.state.isSearchFilter
+      filteredQuestionResponses: filteredUserQuestion,
     })
+    this.filterSearch();
+    this.dropDown(); 
+
     console.log(this.state.filteredQuestionResponses)
   }
 
@@ -120,16 +131,21 @@ class ReportResults extends Component {
   dropDown = () => {
     console.log("clicked")
     this.setState({
-
       dropdown: !this.state.dropdown
     })
   }
 
   filterSearch = () => {
     this.setState({
-      isSearchFilter: !this.state.isSearchFilter
+      isSearchFilter: true,
     })
     console.log(this.state.filteredQuestionResponses)
+  }
+  
+  cancelFilter = () => {
+    this.setState({
+      isSearchFilter: false,
+    })
   }
 
   render() {
@@ -211,18 +227,6 @@ class ReportResults extends Component {
             {...this.props}
             secondaryPage={this.state.secondaryPage}
           />
-
-     
-          <div class="dropdown">
-            <button class="dropbtn" onClick={this.dropDown}>Filter by Question</button>
-            {this.state.dropdown ? <>
-            <div>
-              {this.state.allReportQuestions.length> 0  ? this.state.allReportQuestions.map((question, index) => {
-            return <div className ="dropdown-column"><button className="dropdown-selection" key={index} onClick = {() => this.filterQuestionSearch(question, index)}>{question}</button></div>
-              }) : null }</div> </>
-          
-          : null } 
-          </div><button class="filter" onClick={this.filterSearch}>Filter</button>
 
 
           {token.roles !== "admin" && this.state.isManagerActivated ? 
@@ -368,6 +372,21 @@ class ReportResults extends Component {
                 }
              
               )}
+
+            <div className= "filter-by-question">
+              <div className="dropdown">
+              <button class="dropbtn" onClick={this.dropDown}>Filter by Question</button>
+              {this.state.dropdown ? <>
+              <div>
+                {this.state.allReportQuestions.length> 0  ? this.state.allReportQuestions.map((question, index) => {
+              return <div className ="dropdown-column"><button className="dropdown-selection" key={index} onClick = {() => this.filterQuestionSearch(question, index)}>{question}</button></div>
+                }) : null }</div> </>
+            
+            : null } 
+            </div>
+            {this.state.isSearchFilter ? <div><button class="filter" onClick={this.cancelFilter}>Cancel</button></div> : null}
+          </div>
+
       
       {this.state.isSearchFilter ?  <div className="response-container">
                               {this.state.filteredQuestionResponses.map(questions =>

@@ -339,14 +339,10 @@ class MemberResponseForm extends Component {
       });
   };
 
-  reload = () => {
-    window.location.reload();
-  };
   submitAll = () => {
     console.log("submitted");
     this.completeSurvey();
     this.submitReport();
-    // this.reload();
   };
 }
 

@@ -370,17 +370,35 @@ em {
 
 .dropdown {
 	position: absolute; 
-	border: 1px solid red;
-	right: 0;
+	left: 120px;
+	text-align: left;
 }
 .dropdown-selection {
 	width: 50px;
 	overflow-wrap: break-word;
-	width: 100%;
+	width: 70%;
+	background-color: white;
+	margin-left: 20px;
+	border: none;
+	border: 1px solid#efefef;
+	padding: 10px;
+	margin-bottom: -1px;
+}
+
+.dropdown-selection:hover {
+	background-color: #efefef;
 }
 
 .dropdown-column{
 	width: 100%;
 	display: flex;
 	flex-direction: column;
+	align-content: flex-start;
+}
+
+.filter-by-question {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 20px;
+	height: 100px;
 }
