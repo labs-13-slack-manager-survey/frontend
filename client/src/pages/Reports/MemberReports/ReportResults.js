@@ -107,13 +107,13 @@ class ReportResults extends Component {
         }
     })
 
-    for (let i = 0; i < filteredQs.length; i+2){
-      filteredUserQuestion.push({userRes: [filteredQs[i], filteredQs[i+1]]})
-    }
+    // for (let i = 0; i < filteredQs.length; i+2){
+    //   filteredUserQuestion.push({userRes: [filteredQs[i], filteredQs[i+1]]})
+    // }
 
-    console.log(filteredUserQuestion)
+    console.log(filteredQs)
     this.setState({
-      filteredQuestionResponses: filteredUserQuestion,
+      filteredQuestionResponses: filteredQs,
     })
     this.filterSearch();
     this.dropDown(); 
@@ -389,8 +389,14 @@ class ReportResults extends Component {
 
       
       {this.state.isSearchFilter ?  <div className="response-container">
-                              {this.state.filteredQuestionResponses.map(questions =>
-                                  <div>{questions.question}</div>)}
+        
+                              {this.state.filteredQuestionResponses.map(object =>{
+                                if (object.user) {
+                                  return object.user[0]
+                                } else {
+                                  console.log(object.question)
+                                  return object.question[0].question
+                                }})}
                             </div> : 
              
        <>{filteredManagerAndResponsesDate ? filteredManagerAndResponsesDate.map(day => <>
