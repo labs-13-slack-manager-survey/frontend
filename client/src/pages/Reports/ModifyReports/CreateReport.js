@@ -692,7 +692,7 @@ class CreateReport extends Component {
               <TimePicker
                 name="scheduleTime"
                 value={this.state.timePickDate}
-                minutesStep={5}
+                minutesStep={1}
                 onChange={this.timeChangeHandler}
               />
             </section>
