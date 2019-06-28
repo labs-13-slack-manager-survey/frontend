@@ -702,7 +702,7 @@ class CreateReport extends Component {
         <div className="linebr" />
         <section className="response-card">
           <section className="manager-poll-responses">
-            <div className="member-form-title">Survey Questions</div>
+            <div className="member-form-title">Survey Questions*</div>
             <div className="linebr" />
             <section>
               {this.state.questions.map(question => (
@@ -737,7 +737,7 @@ class CreateReport extends Component {
               </FormControl>
               <Fab
                 size="small"
-                style={{ display: "block", margin: "10px 0" }}
+                style={{ display: "block", margin: "10px 0", paddingTop: "5px", marginLeft: "10px"}}
                 color="primary"
                 onClick={this.questionsHandler}
                 disabled={this.state.question.length === 0 ? true : false}
@@ -795,7 +795,7 @@ class CreateReport extends Component {
               </FormControl>
               <Fab
                 size="small"
-                style={{ display: "block", margin: "10px 0" }}
+                style={{ display: "block", margin: "10px 0", paddingTop: "5px", marginLeft: "10px" }}
                 color="primary"
                 onClick={this.sentimentQuestionsHandler}
                 disabled={
@@ -831,6 +831,7 @@ class CreateReport extends Component {
                 <p>5</p>
               </div>
             </div>  : <div onClick = {this.toggleExample} className="poll-section-description-view">view sample sentiment question</div> }
+
           </section>
         </section>
 
