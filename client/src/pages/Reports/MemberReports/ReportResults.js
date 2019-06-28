@@ -16,6 +16,8 @@ import ToggleOff from "../../../images/icons/chevron-up.png";
 import ResponseCard from "../../../components/ResponseCard";
 
 import "./ReportResults.css";
+import ConfirmResponse from "../../../components/ConfirmResponse";
+import ManagerFeedbackForManagers from "../../../components/ManagerFeedbackForManagers";
 
 class ReportResults extends Component {
   state = {
@@ -64,6 +66,7 @@ class ReportResults extends Component {
     //   month: "long",
     //   day: "numeric"
     // };
+    const { filteredResponse, seeManagerQ, managerFeedback } = this.state;
 
     let managerPollDays = [];
 
@@ -126,12 +129,12 @@ class ReportResults extends Component {
       day => day.responses.length
     );
     memberResponse = memberResponse.map(res => {
-      return {
-        managerResponse: { managerSubmitted: res.date },
-        userResponse: { ...res }
-      };
+      return [
+        { managerResponse: { managerSubmitted: res.date } },
+        { userResponse: { ...res } }
+      ];
     });
-    console.log(memberResponse);
+    const managerResponsesAnswered = managerToday === today;
     return (
       <div className="dashboard-view">
         <main className="view">
@@ -142,100 +145,14 @@ class ReportResults extends Component {
           />
 
           {token.roles === "member" && this.state.managerQuestionsActivated ? (
-            <div className="confirm-response">
-              {managerToday !== today ||
-              this.state.filteredResponse.length > 0 ? (
-                <div>
-                  {" "}
-                  {this.state.filteredResponse.length > 0
-                    ? "Your response has been recorded"
-                    : "Poll unavailable: No manager response has been recorded for today"}{" "}
-                </div>
-              ) : (
-                <>
-                  <div
-                    classname="manager-feedback-for-users"
-                    onClick={this.toggleManagerQ}
-                  >
-                    <div className="poll-header">
-                      <div className="toggle-manager-questions">
-                        <div className="member-form-title">
-                          Manager Comments
-                        </div>
-                        <img
-                          className="manager-toggle"
-                          src={this.state.seeMangerQ ? ToggleOff : ToggleOn}
-                          alt=""
-                        />
-                      </div>
-                      <p className="member-form-subtitle">
-                        View your manager's responses to his poll to guide your
-                        responses and goals for the day
-                      </p>
-                    </div>
-                    {this.state.seeManagerQ ? (
-                      <>
-                        <div className="vertical-line" />
-                        <div className="manager-question">
-                          {
-                            managerPollDays[managerPollDays.length - 1]
-                              .managerQuestions[0]
-                          }
-                        </div>
-                        <div className="manager-response">
-                          {
-                            managerPollDays[managerPollDays.length - 1]
-                              .managerResponses[0]
-                          }
-                        </div>
-                        <div className="manager-question">
-                          {
-                            managerPollDays[managerPollDays.length - 1]
-                              .managerQuestions[1]
-                          }
-                        </div>
-                        <div className="manager-response">
-                          {
-                            managerPollDays[managerPollDays.length - 1]
-                              .managerResponses[1]
-                          }
-                        </div>
-                        <div className="manager-question">
-                          {
-                            managerPollDays[managerPollDays.length - 1]
-                              .managerQuestions[2]
-                          }
-                        </div>
-                        <div className="manager-response">
-                          {
-                            managerPollDays[managerPollDays.length - 1]
-                              .managerResponses[2]
-                          }
-                        </div>
-                        {managerPollDays[managerPollDays.length - 1]
-                          .managerQuestions.length === 4 ? (
-                          <>
-                            <div className="manager-question">
-                              {
-                                managerPollDays[managerPollDays.length - 1]
-                                  .managerQuestions[3]
-                              }
-                            </div>
-                            <div className="manager-response">
-                              {
-                                managerPollDays[managerPollDays.length - 1]
-                                  .managerResponses[3]
-                              }
-                            </div>
-                          </>
-                        ) : null}
-                      </>
-                    ) : null}
-                  </div>
-                </>
-              )}
-            </div>
-          ) : managerToday !== today && token.roles === "admin" ? (
+            <ConfirmResponse
+              filteredResponse={filteredResponse}
+              seeManagerQ={seeManagerQ}
+              toggleManagerQ={this.toggleManagerQ}
+              managerPollDays={managerPollDays}
+              managerResponsesAnswered={managerResponsesAnswered}
+            />
+          ) : !managerResponsesAnswered ? (
             <div
               className="response-card"
               interactive="false"
@@ -252,101 +169,24 @@ class ReportResults extends Component {
           this.state.managerCompleted === true ? (
             <>
               <div className="confirm-response">
-                {managerToday !== today ? (
+                {!managerResponsesAnswered ? (
                   "Your response has been recorded "
                 ) : (
-                  <>
-                    <div classname="manager-feedback">
-                      <div className="user-info">
-                        <div className="month-day">
-                          <div className="calendar-top">
-                            {moment(
-                              this.state.managerFeedback[
-                                this.state.managerFeedback.length - 1
-                              ].submitted_date
-                            ).format("DD")}
-                          </div>
-                          <div className="calendar-bot">
-                            {moment(
-                              this.state.managerFeedback[
-                                this.state.managerFeedback.length - 1
-                              ].submitted_date
-                            ).format("MMMM")}
-                          </div>
-                        </div>
-                        <div className="manager-response-header-text">
-                          <div className="response-container-main-name-manager">
-                            Manager Comments
-                          </div>
-                        </div>
-                      </div>
-                      <div className="linebr" />
-                      <div className="response-content">
-                        <div className="manager-question">
-                          {
-                            managerPollDays[managerPollDays.length - 1]
-                              .managerQuestions[0]
-                          }
-                        </div>
-                        <div className="manager-response">
-                          {
-                            managerPollDays[managerPollDays.length - 1]
-                              .managerResponses[0]
-                          }
-                        </div>
-                        <div className="manager-question">
-                          {
-                            managerPollDays[managerPollDays.length - 1]
-                              .managerQuestions[1]
-                          }
-                        </div>
-                        <div className="manager-response">
-                          {
-                            managerPollDays[managerPollDays.length - 1]
-                              .managerResponses[1]
-                          }
-                        </div>
-                        <div className="manager-question">
-                          {
-                            managerPollDays[managerPollDays.length - 1]
-                              .managerQuestions[2]
-                          }
-                        </div>
-                        <div className="manager-response">
-                          {
-                            managerPollDays[managerPollDays.length - 1]
-                              .managerResponses[2]
-                          }
-                        </div>
-                        {managerPollDays[managerPollDays.length - 1]
-                          .managerQuestions.length === 4 ? (
-                          <>
-                            <div className="manager-question">
-                              {
-                                managerPollDays[managerPollDays.length - 1]
-                                  .managerQuestions[3]
-                              }
-                            </div>
-                            <div className="manager-response">
-                              {
-                                managerPollDays[managerPollDays.length - 1]
-                                  .managerResponses[3]
-                              }
-                            </div>
-                          </>
-                        ) : null}
-                      </div>
-                    </div>
-                  </>
+                  <managerFeedbackForManagers
+                    managerFeedback={managerFeedback}
+                    managerPollDays={managerPollDays}
+                  />
                 )}
               </div>
               <div className="linebr" />
             </>
           ) : (
             <>
-              {(managerToday !== today &&
+              {/* managerToday ===today means the manager has responded to the questions today and vice versa */}
+              {(!managerResponsesAnswered &&
                 this.state.filteredResponse.length !== 0) ||
-              (token.roles !== "admin" && managerToday === today) ? (
+              (token.roles === "member" && managerResponsesAnswered) ||
+              !this.state.managerQuestions.length ? (
                 <div
                   className="response-card"
                   interactive="false"
@@ -456,8 +296,8 @@ class ReportResults extends Component {
                 );
               }
             })}
-
-            {filteredManagerAndResponsesDate
+            {console.log("mres111", memberResponse)}
+            {filteredManagerAndResponsesDate.length && token.roles === "member"
               ? filteredManagerAndResponsesDate.map(day => {
                   console.log("manager res", day);
                   return (
@@ -469,11 +309,11 @@ class ReportResults extends Component {
                     />
                   );
                 })
-              : memberResponse.map(day => {
-                  console.log("memberresponse", day);
+              : memberResponse.map(res => {
+                  console.log("day", res);
                   return (
                     <ResponseCard
-                      day={day}
+                      day={res}
                       toggleManagerQ={this.toggleManagerQ}
                       toggleManagerQList={this.toggleManagerQList}
                       seeManagerQList={this.state.seeManagerQList}
@@ -547,7 +387,9 @@ class ReportResults extends Component {
           }`
         )
       ]);
-
+      console.log(reportRes.data);
+      console.log(responsesRes.data);
+      console.log(managerRes.data);
       const { isSentiment } = reportRes.data.report;
       // format the submissionRate
       let { historicalSubmissionRate } = submissionRes.data;
@@ -561,11 +403,9 @@ class ReportResults extends Component {
           submitted_date: feedback.submitted_date
         });
       });
-      console.log(managerRes.data);
       const filtered = responsesRes.data[0].responses.filter(
         response => response.userId === userId
       );
-      console.log(responsesRes.data);
       console.log(filtered);
       // Filter all unique responders and push to state
       const user = [];

@@ -312,6 +312,7 @@ class MemberResponseForm extends Component {
     axiosWithAuth()
       .post(endpoint, allQuestions)
       .then(res => {
+        console.log("test");
         if (this.state.isSentiment) {
           this.props.updateWithUserResponse(res);
           this.setState(prevState => ({
@@ -346,7 +347,7 @@ class MemberResponseForm extends Component {
     console.log("submitted");
     this.completeSurvey();
     this.submitReport();
-    this.reload();
+    // this.reload();
   };
 }
 
