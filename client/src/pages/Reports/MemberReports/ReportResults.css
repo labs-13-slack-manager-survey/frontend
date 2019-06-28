@@ -365,6 +365,7 @@ em {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	margin-right: 0;
 }
 
 .dropbtn:hover { 
@@ -387,11 +388,11 @@ em {
 	overflow-wrap: break-word;
 	width: 70%;
 	background-color: white;
-	margin-left: 20px;
 	border: none;
 	border: 1px solid#efefef;
 	padding: 10px;
 	margin-bottom: -1px;
+	margin-right: 0px;
 }
 
 .dropdown-selection:hover {
@@ -402,7 +403,7 @@ em {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-	align-content: flex-start;
+	align-content: flex-end;
 }
 
 .filter-by-question {
@@ -423,4 +424,8 @@ em {
 	width: 25px;
 	height: 25px;
 	margin-left: 5px;
+}
+
+.dropdown-menu {
+	margin-right: 0;
 }

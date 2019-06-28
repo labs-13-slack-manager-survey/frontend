@@ -377,9 +377,9 @@ class ReportResults extends Component {
 
             <div className= "filter-by-question">
               <div className="dropdown">
-              {this.state.isSearchFilter ? <button className="cancel-filter" onClick={this.cancelFilter}>Cancel Filter</button> : <button class="dropbtn" onClick={this.dropDown}>Filter by Question</button> }
+              {this.state.isSearchFilter ? <button className="cancel-filter" onClick={this.cancelFilter}>Show All</button> : <button class="dropbtn" onClick={this.dropDown}>Filter by Question</button> }
               {this.state.dropdown ? <>
-              <div>
+              <div className = "dropdown-menu">
                 {this.state.allReportQuestions.length> 0  ? this.state.allReportQuestions.map((question, index) => {
               return <div className ="dropdown-column"><button className="dropdown-selection" key={index} onClick = {() => this.filterQuestionSearch(question, index)}>{question}</button></div>
                 }) : null }</div> </>
