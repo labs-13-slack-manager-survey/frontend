@@ -15,7 +15,7 @@
 ## Project Overview
 Slackr is an application that helps managers run their daily standup reports asynchronously to help maximize efficiency and let team members submit their reports any time during the day. Our application will help the whole team and best of all, it is completely free to start!
 
-You can find the project at [https://stand-em-ups.netlify.com](https://stand-em-ups.netlify.com).
+You can find the project at [https://slackrs-app.netlify.com/](https://slackrs-app.netlify.com/).
 ### Key Features
     * Create teams and have admin controls
     * Sending out Daily Standup reports to team members
